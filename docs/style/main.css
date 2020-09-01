@@ -7,14 +7,30 @@ body {
   }
 
   #content {
-    width: 920px;
+    width: 800px;
     margin: auto;
+  }
+  
+  #header {
+    width: 100%;
+    margin: auto;
+    margin-top: 36px;
+    font-size: 20px;
   }
 
   hr {
     border: 1px solid #555555;
-    width: 90%;
+    width: 100%;
     margin: auto;
+  }
+
+  #navigation {
+    width: 100%;
+    margin: auto;
+  }
+
+  #navigation span {
+    float:right;
   }
 
   .article {

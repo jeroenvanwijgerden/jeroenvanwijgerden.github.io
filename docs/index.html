@@ -3,28 +3,60 @@
 <head>
   <link rel="stylesheet" href="style/main.css">
   <style>
-    
-    #header {
-      width: 90%;
-      margin: auto;
-      margin-top: 36px;
-      font-size: 20px;
-    }
-
     #header .email {
       color: #999999;
       font-size: 16px;
     }
 
-    #navigation {
-      width: 90%;
-      margin: auto;
+    .toc {
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+      border-collapse: separate;
+      border-spacing: 0px 20px;
     }
 
-    #navigation span {
-      float:right;
+    .toc tr {
+      width: 100%;
     }
 
+    .toc tr:not(:first-child) {
+      margin-top: 16px;
+    }
+
+    .toc td:first-child {
+      width: 100px;
+    }
+
+    .toc td:nth-child(2) {
+      width: 500px;
+    }
+
+    .toc td:nth-child(2) div:not(:first-child) {
+      margin-top: 4px;
+    }
+
+    .toc td:nth-child(3) {
+      width: 200px;
+    }
+
+    .toc .title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .toc .subtitle {
+      font-weight: lighter;
+      font-size: 14px;
+    }
+
+    .toc .tags span:before {
+      content: '#';
+    }
+
+    .toc .tags span:not(:first-child) {
+      margin-left: 16px;
+    }
   </style>
 </head>
 
@@ -45,16 +77,256 @@
     <div id="navigation">
       <span><a href="./about.html">About</a></span>
     </div>
-    
-    <h3 style="width: 300; margin:auto; margin-top: 100px;">Coming soon</h3>
-    <table>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
 
+    <div style="width: 100%; text-align: center; margin-top:32px;">Under construction</div>
+    <table class="toc">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Improving Programming Education
+            </div>
+            <div class="subtitle">
+              Why programming education is not successful and what can be done about it.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Programming for the General Public
+            </div>
+            <div class="subtitle">
+              A discussion of the (un)usefulness of programming and its future place in society.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              'Coding' and the image of programming
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              In favor of theory
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Anvil
+            </div>
+            <div class="subtitle">
+              The design of a programming language for thorough programming education.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Plan & Action
+            </div>
+            <div class="subtitle">
+              On decomplecting programs and how programming itself is an act of decomplecting.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Some fundamentals of education
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              How declarative?
+            </div>
+            <div class="subtitle">
+              Finding balance between expressivity and generality.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Musing on Religion
+            </div>
+            <div class="subtitle">
+              ...and the birth of one.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Some fundamentals of information theory
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Musing on Externalisation
+            </div>
+            <div class="subtitle">
+              ...and the purpose of software.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Fantasy Literature and Programming: A Common Theme
+            </div>
+            <div class="subtitle">
+              Spoiler: it's naming.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              'Informatics' in Secondary Education
+            </div>
+            <div class="subtitle">
+              A tale of unused potential.
+            </div>
+          </td>
+          <tr>
+            <td></td>
+            <td>
+              <div class="title">
+                The boring this about art
+              </div>
+              <div class="subtitle">
+                ...is that it's made by artists.
+              </div>
+            </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              The Struggles of Eating Healthy
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Giving new meaning to Absolutism & Self-centrism
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              The Last Argument of Kings
+            </div>
+            <div class="subtitle">
+              A discussion of virtuality and physicality.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              The Blade Itself
+            </div>
+            <div class="subtitle">
+              Some musings on options and desire.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Science & Balance
+            </div>
+            <div class="subtitle">
+              A tale of overratedness.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Preventing the Root of all Evil
+            </div>
+            <div class="subtitle">
+              An exercise to optimize less prematurely.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Experimenting with Three Lines per Function
+            </div>
+            <div class="subtitle">
+              A discussion of Uncle Bob's rule & lessons learned.
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              Musing on Simplicity
+            </div>
+            <div class="subtitle">
+              Especially What & Why
+            </div>
+          </td>
+          <td style="text-align:right;"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 
