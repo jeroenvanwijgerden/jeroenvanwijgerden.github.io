@@ -29,5 +29,5 @@ body {
   }
 
 .article h3:not(:first-child) {
-    margin-top: 72px;
+    margin-top: 48px;
 }
