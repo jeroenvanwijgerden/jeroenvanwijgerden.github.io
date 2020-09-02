@@ -3,13 +3,6 @@
 <head>
   <link rel="stylesheet" href="style/main.css">
   <style>
-    #header .email {
-      opacity: 0.4;
-      position: absolute;
-      bottom: 0px;
-      margin: 0px;
-    }
-
     .toc {
       width: 100%;
       padding: 0px;
@@ -42,16 +35,6 @@
       width: 200px;
     }
 
-    .toc .title {
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .toc .subtitle {
-      font-weight: lighter;
-      font-size: 14px;
-    }
-
     .toc .tags span:before {
       content: '#';
     }
@@ -68,7 +51,7 @@
 
     <div id="header">
       <div>
-        <img width=155 height=188 src="./resources/about/me.png" style="float:right; margin-left: 16px;">
+        <img width=155 height=188 src="./resources/me.png" style="float:right; margin-left: 16px;">
         <div id="header-text">
           <p>
             I am Jeroen van Wijgerden. Welcome to my corner of the web.
@@ -92,7 +75,22 @@
     </div>
 
 
-
+    <table class="toc">
+      <tbody>
+        <tr style="cursor: pointer" onclick="window.location.href='articles/vision_and_mission.html'">
+          <td></td>
+          <td>
+            <div class="article-title">
+              Vision & Mission
+            </div>
+            <div class="article-subtitle">
+              Why programming education is unsuccessful and a solution.
+            </div>
+          </td>
+          <td style="text-align:right;">2020 / sep / 02</td>
+        </tr>
+      </tbody>
+    </table>
 
     <div style="width: 100%; text-align: center;">Under construction</div>
     <table class="toc">
@@ -100,10 +98,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
-              Improving Programming Education
+            <div class="article-title">
+              My Mission
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               Why programming education is not successful and what can be done about it.
             </div>
           </td>
@@ -112,10 +110,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Programming for the General Public
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               A discussion of the (un)usefulness of programming and its future place in society.
             </div>
           </td>
@@ -124,7 +122,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               'Coding' and the image of programming
             </div>
           </td>
@@ -133,7 +131,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               In favor of theory
             </div>
           </td>
@@ -142,11 +140,11 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Anvil
             </div>
-            <div class="subtitle">
-              The design of a programming language for thorough programming education.
+            <div class="article-subtitle">
+              The design of a programming language for thorough novice level programming education.
             </div>
           </td>
           <td style="text-align:right;"></td>
@@ -154,10 +152,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Plan & Action
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               On decomplecting programs and how programming itself is an act of decomplecting.
             </div>
           </td>
@@ -166,7 +164,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Some fundamentals of education
             </div>
           </td>
@@ -175,10 +173,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               How declarative?
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               Finding balance between expressivity and generality.
             </div>
           </td>
@@ -187,10 +185,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Musing on Religion
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               ...and the birth of one.
             </div>
           </td>
@@ -199,7 +197,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Some fundamentals of information theory
             </div>
           </td>
@@ -208,10 +206,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Musing on Externalisation
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               ...and the purpose of software.
             </div>
           </td>
@@ -220,10 +218,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Fantasy Literature and Programming: A Common Theme
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               Spoiler: it's naming.
             </div>
           </td>
@@ -232,20 +230,20 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               'Informatics' in Secondary Education
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               A tale of unused potential.
             </div>
           </td>
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               The boring thing about art
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               ...is that it's made by artists.
             </div>
           </td>
@@ -254,7 +252,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               The Struggles of Eating Healthy
             </div>
           </td>
@@ -263,7 +261,7 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Giving new meaning to Absolutism & Self-centrism
             </div>
           </td>
@@ -272,10 +270,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               The Last Argument of Kings
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               A discussion of virtuality and physicality.
             </div>
           </td>
@@ -284,10 +282,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               The Blade Itself
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               Some musings on options and desire.
             </div>
           </td>
@@ -296,10 +294,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Science & Balance
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               A tale of overratedness.
             </div>
           </td>
@@ -308,10 +306,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Preventing the Root of all Evil
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               An exercise to optimize less prematurely.
             </div>
           </td>
@@ -320,10 +318,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Experimenting with Three Lines per Function
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               A discussion of Uncle Bob's rule & lessons learned.
             </div>
           </td>
@@ -332,10 +330,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Musing on Simplicity
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               Especially What & Why
             </div>
           </td>
@@ -344,10 +342,10 @@
         <tr>
           <td></td>
           <td>
-            <div class="title">
+            <div class="article-title">
               Programming Life Lesson: Disregard Context
             </div>
-            <div class="subtitle">
+            <div class="article-subtitle">
               The thing my mother is still talking about.
             </div>
           </td>
