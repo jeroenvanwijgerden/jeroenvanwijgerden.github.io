@@ -6,6 +6,16 @@ body {
     color: black;
   }
 
+  a:link {
+    -webkit-text-decoration-color: rgba(0, 0, 0, 0.9); /* Safari */   
+    text-decoration-color: rgba(0, 0, 0, 0.9);
+  }
+
+  a:visited {
+    -webkit-text-decoration-color: rgba(0, 0, 0, 0.6); /* Safari */   
+    text-decoration-color: rgba(0, 0, 0, 0.6);
+  }
+
   #content {
     width: 800px;
     margin: auto;
@@ -25,9 +35,11 @@ body {
   }
 
   #header hr {
-    border: 1px solid #555555;
+    border: 1px solid black;
+    opacity: 0.9;
     width: 100%;
     margin: 0px;
+
   }
 
   #header-text {
