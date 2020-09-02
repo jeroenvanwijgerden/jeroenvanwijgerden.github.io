@@ -4,8 +4,10 @@
   <link rel="stylesheet" href="style/main.css">
   <style>
     #header .email {
-      color: #999999;
-      font-size: 16px;
+      opacity: 0.4;
+      position: absolute;
+      bottom: 0px;
+      margin: 0px;
     }
 
     .toc {
@@ -65,20 +67,34 @@
 
 
     <div id="header">
-      <p>I am Jeroen van Wijgerden. Welcome to my corner of the web.
-      </p>
-      <p></p>Here I share some thoughts on programming, education, and life.
-      </p>
-      <p>Feel free to share your thoughts with me as well.
-      </p>
-      <p class="email">contact@jeroenvanwijgerden.me</p>
-    </div>
-    <hr>
-    <div id="navigation">
-      <span><a href="./about.html">About</a></span>
+      <div>
+        <img width=155 height=188 src="./resources/about/me.png" style="float:right; margin-left: 16px;">
+        <div id="header-text">
+          <p>
+            I am Jeroen van Wijgerden. Welcome to my corner of the web.
+          </p>
+          <p>
+            Here I share some thoughts on programming, education, and life.
+          </p>
+          <p>
+            Feel free to share your thoughts with me as well.
+          </p>
+        </div>
+
+        <span class="email">contact@jeroenvanwijgerden.me</span>
+      </div>
+
+      <hr>
+
+      <div id="navigation">
+        <span><a href="./about.html">About</a></span>
+      </div>
     </div>
 
-    <div style="width: 100%; text-align: center; margin-top:32px;">Under construction</div>
+
+
+
+    <div style="width: 100%; text-align: center;">Under construction</div>
     <table class="toc">
       <tbody>
         <tr>
@@ -223,16 +239,16 @@
               A tale of unused potential.
             </div>
           </td>
-          <tr>
-            <td></td>
-            <td>
-              <div class="title">
-                The boring thing about art
-              </div>
-              <div class="subtitle">
-                ...is that it's made by artists.
-              </div>
-            </td>
+        <tr>
+          <td></td>
+          <td>
+            <div class="title">
+              The boring thing about art
+            </div>
+            <div class="subtitle">
+              ...is that it's made by artists.
+            </div>
+          </td>
           <td style="text-align:right;"></td>
         </tr>
         <tr>

@@ -4,8 +4,10 @@
     <link rel="stylesheet" href="style/main.css">
     <style>
         #header .email {
-            color: #999999;
-            font-size: 16px;
+            opacity: 0.4;
+            position: absolute;
+            bottom: 0px;
+            margin: 0px;
         }
     </style>
 </head>
@@ -15,23 +17,33 @@
 
 
         <div id="header">
-            <p>I am Jeroen van Wijgerden. Welcome to my corner of the web.
-            </p>
-            <p></p>Here I share some thoughts on programming, education, and life.
-            </p>
-            <p>Feel free to share your thoughts with me as well.
-            </p>
-            <p class="email">contact@jeroenvanwijgerden.me</p>
-        </div>
-        <hr>
-        <div id="navigation">
-            <span><a href="./index.html">Home</a></span>
+            <div>
+                <img width=155 height=188 src="./resources/about/me.png" style="float:right; margin-left: 16px;">
+                <div id="header-text">
+                    <p>
+                        I am Jeroen van Wijgerden. Welcome to my corner of the web.
+                    </p>
+                    <p>
+                        Here I share some thoughts on programming, education, and life.
+                    </p>
+                    <p>
+                        Feel free to share your thoughts with me as well.
+                    </p>
+                </div>
+
+                <span class="email">contact@jeroenvanwijgerden.me</span>
+            </div>
+
+            <hr>
+
+            <div id="navigation">
+                <span><a href="./index.html">Home</a></span>
+            </div>
         </div>
 
         <div class="article">
             <h3>About me</h3>
 
-            <img width=155 height=188 src="./resources/about/me.png" style="float:right; margin-left: 16px; margin-bottom: 16px;">
             <p>
                 I was born (in 1993), raised and currently live in the south of the Netherlands, near the city of
                 Eindhoven.

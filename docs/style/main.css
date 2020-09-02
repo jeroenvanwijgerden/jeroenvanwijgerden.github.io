@@ -9,19 +9,32 @@ body {
   #content {
     width: 800px;
     margin: auto;
+    margin-top: 16px;
   }
   
   #header {
     width: 100%;
-    margin: auto;
-    margin-top: 36px;
-    font-size: 20px;
+    font-size: 16px;
+    overflow: auto;
   }
 
-  hr {
+  #header > div:first-child {
+      position:relative;
+      height:188px;
+      margin-bottom:16px;
+  }
+
+  #header hr {
     border: 1px solid #555555;
     width: 100%;
-    margin: auto;
+    margin: 0px;
+  }
+
+  #header-text {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   #navigation {
@@ -31,6 +44,7 @@ body {
 
   #navigation span {
     float:right;
+    margin-bottom:16px;
   }
 
   .article {
@@ -40,8 +54,13 @@ body {
       text-align: justify;
   }
 
+  .article > * {
+      margin-top: 0px;
+  }
+
   .article h3 {
       text-decoration: underline;
+      margin-bottom: 16px;
   }
 
 .article h3:not(:first-child) {
