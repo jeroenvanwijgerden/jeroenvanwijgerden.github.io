@@ -59,11 +59,11 @@ body {
   #navigation {
     width: 100%;
     margin: auto;
+    margin-bottom:48px;
   }
 
   #navigation span {
     float:right;
-    margin-bottom:16px;
   }
 
   .article {
