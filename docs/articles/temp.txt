@@ -1,0 +1,124 @@
+
+
+Programming is about solving problems with the aid of a computer.
+You can tell the computer a limited set of things to do.
+The challenge is to tell it the right things to do, such that the result
+of doing these things is helpful towards solving the problem.
+
+# In short
+
+You become better at programming by composing two or more
+solutions of your repertoire into a new, higher order solution.
+
+You should start with the first order solutions, which are
+the instructions of the programming language you're using.
+
+# Tool
+
+The computer is a tool.
+To be able to use a tool well, you must understand
+1) the things the tool can do
+2) how to make the tool do these things.
+
+Consider a compass.
+What the tool can do is indicate North.
+How to make the tool do this thing is by holding it flat and still and looking at the direction in which
+the arrow points.
+
+Once you understand the tool (the things it can do and how to make it do these things), your inherent human creativity will start seeing opportunities to use it.
+
+Or maybe you recognize a situation and remember that in this situation the tool was helpful.
+By practising, you build up a memory of situations in which the tool is helpful.
+
+My vision:
+Learning how to program must start with understanding how computers can be used as a tool via programs.
+Only with some understanding of this are students able to actually solve problems.
+However, many people have great difficulty understanding how computers can be used as a tool via programs.
+The field of programming education at large does not know exactly why or how to solve it.
+I believe to have found out why and my solutions have promising results. I discuss this further in this article:...
+
+# Problem solving
+
+Sometimes the usefulness of a tool is not directly obvious.
+Let's say you want to know where South is.
+The compass is not directly helpful in this situation, as the only thing it can do is indicate North.
+However, if you know where North is, you know where South is.
+Indirectly, the tool is useful. You know how to make use of the compass and find South.
+So what happened in this situation?
+
+Your brain decomposed the problem 'Find South' into two subproblems
+1) Find North
+2) Derive South from North
+
+and knew the solution to both subproblems:
+1) use your compass
+2) take the opposite direction of North.
+
+Your brain was able to solve the problem only because it
+knew of the existance of the subproblems.
+
+If you are stuck on a problem, that means your brain is unable to find
+fitting subproblems. It means you should spend more time
+building a larger collection of known subproblems.
+
+You do this by practising in a smart way. Good education helps you with that.
+<scaffolding><focus tunnel>
+
+For in depth/more detail, check out article on problem decomposition.
+<for article about solution composition: sometimes you know the subproblem but not the solution.
+for instance, you want to print something to console but don't know how to do it in this specific language. >
+
+# Building blocks
+
+We can also look at it from the opposite direction. Instead of seeing problem solving as decomposing problems, we can see it as composing solutions.
+
+Consider a box of lego bricks.
+By composing some bricks, you build a wall.
+By composing some other bricks, you build a roof.
+By composing some walls and a roof, you build a house.
+
+In this example, the bricks are first order building blocks.
+First order, because we see the bricks as atomic: they cannot be decomposed further.
+Composing building blocks results in a new building block of a higher order.
+Walls and roofs are second order building blocks. A house is a third order building block.
+
+In programming, the first order building blocks are the individual instructions of the programming language
+we're using. By composing two or more instructions, you create a second order building block.
+You can keep on composing building blocks to create ever higher order building blocks.
+
+To increase one's programming skill is to add solutions to one's solution tree.
+A student is only able to turn a problem into a solution and add it to their tree
+if their current tree already contains the solutions the problem must be decomposed into.
+In other words: in order to progress, a problem must be only minimally more advanced
+than the current skill level of the student.
+
+My vision:
+Existing programming education often presents to students problems that are
+too advanced for their current skill level. Students often feel stuck and do not know where to start.
+I aim to meticiluously build up a student's solution tree (skill) by
+starting with the absolute basics - the instructions of the programming language -
+and having a carefully crafted, vast collection of problems that allow the student to
+always find problems that are right for them, at that moment.
+
+
+# Languages
+
+Most programming languages have very similar first order building blocks.
+Besides some nuances that become important only when you start specializing,
+the only difference is the exact text (code) that describes the first order building block.
+
+Also, in programming there are only a few dozen first order building blocks,
+whereas there are thousands and thousands of higher order building blocks.
+
+Because of this, learning programming is highly transferable between languages.
+Many of the thousands and thousands of higher order building blocks an experienced programmer knows will work in every language. When you switch to a new language, the only thing you have to do is, for the few first order building blocks, find out how to express them in code.
+
+My vision:
+Beginners should not start with programming languages designed for professional use because
+these languages are optimized for power and convenience, not learning. Such languages hinder learning.
+Beginners should start with a programming language that is optimized for learning.
+Only after beginners have learned a sufficient fundamental programming competencies of programming should they switch to a language designed for professional use.
+
+I discuss my design for a language optimized for learning here:...
+
+I discuss what fundamental programming competencies are here: <same article as 'the new stuff I found'> 
