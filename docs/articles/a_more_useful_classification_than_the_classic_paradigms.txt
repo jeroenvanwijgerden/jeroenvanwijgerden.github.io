@@ -1,0 +1,59 @@
+2021/01/04
+
+# Priority-oriented programming-orientation
+
+I enjoy listening to both Rich Hickey and Johnathan Blow.
+Both Rich and John felt that the available tools, specifically the available programming languages, were causing much friction while creating 
+what they considered to be quality software. For Rich this meant building large, highly concurrent systems with that model an irregular domain
+("the real world is full of 'tofer-tuesays'" *) https://www.youtube.com/watch?v=rI8tNMsozo0. For John this meant building videogames that are stable and squeeze every drop of performance out of
+the machine it runs on.
+They both decided to create their own language . In 2008 Rich released Clojure. John's language, Jai, is currently in closed beta.
+
+What's interesting
+
+* In one of his hour-or-so long talks (I couldn't quickly find which one) he chronicles how he used to write scheduling software for a radio station.
+There were business rules that ensured no two songs of the same artist would play consequtively. Except on twofer-tuesdays, when the gimmick was that they would only pairs
+of songs with the same artist. Some time ago, while writing a software implementation of the board game Gaia Project I experienced how indeed Clojure (rather, a weakly typed language) causes minimal friction when modeling a highly irregular domain.
+
+
+
+I remember a frequent collaborator of John's, Casey Muratori, saying: "Computers are machines that fill memory". 
+
+
+classic paradigms, object oriented, functional, logic, say something about the how.
+
+I find more informative to classify by 'what do we optimize for'.
+
+Perhaps a class is a sequence of all the (major) things we could optimize for;
+earlier is more important.
+This would indicate that generally, your approach will sacrifice a later thing for an earlier thing.
+
+Of course all of these items are important, and all engineers value them to some degree;
+it's the relative value that makes the difference.
+Engineering is about imperfection, about inconventient limitations and having choose; making carefully considered trade-offs (off-trading? trade-offing?)
+
+
+
+performance
+
+
+
+
+
+
+Like Rich and John, I also have found that existing languages cause major friction to achieve my goal.
+My goal is to teach fundamental programming competencies to people who, unlike virtually all people who write software professionally,
+need to specifically target these competencies in their training in order to improve.
+
+In terms of things we can optimize for: all languages used for software products prioritize power (what the the language can do) and
+development speed over aspects beneficial for learning these fundamental competencies.
+This includes many of the languages people use when they first start learning how to program: Python, JavaScript, Java, C, C++.
+
+In the process of learning how to ride a motorcycle, you do not begin by riding a motorcycle.
+You start with a training tool that allows you to focus only on the most fundamental things you currently have not yet sufficiently mastered.
+Initially you use a tricycle or training wheels to isolate steering and and using your body to move forwards and backwards.
+Next, you use a regular bicycle to isolate keeping balance (and integrate it with your previously acquired skills).
+Only then you to a motorcycle to isolate dealing with more powerful, external (from the engine) force. Not to mention all the configuration and maintenance headaches
+that come with riding a motorcycle. You don't want to worry about tire tension and oil levels when you can't even keep your balance yet.
+
+
