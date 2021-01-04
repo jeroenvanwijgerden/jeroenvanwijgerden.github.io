@@ -54,6 +54,8 @@ You start with a training tool that allows you to focus only on the most fundame
 Initially you use a tricycle or training wheels to isolate steering and and using your body to move forwards and backwards.
 Next, you use a regular bicycle to isolate keeping balance (and integrate it with your previously acquired skills).
 Only then you to a motorcycle to isolate dealing with more powerful, external (from the engine) force. Not to mention all the configuration and maintenance headaches
-that come with riding a motorcycle. You don't want to worry about tire tension and oil levels when you can't even keep your balance yet.
+that come with riding a motorcycle. You don't want to worry about tire tension and oil levels when you can't yet keep your balance.
 
+So too with learning how to program. When you can't yet see every single smallest element in a piece of code and know what they mean,  can't yet go through a program step by step and mentally keep track of the program state, can't yet read a problem statement and clearly understand it, then
+you don't want to worry about things like scope, type errors and installing the right versions of the right tools.
 
