@@ -57,5 +57,10 @@ Only then you to a motorcycle to isolate dealing with more powerful, external (f
 that come with riding a motorcycle. You don't want to worry about tire tension and oil levels when you can't yet keep your balance.
 
 So too with learning how to program. When you can't yet see every single smallest element in a piece of code and know what they mean,  can't yet go through a program step by step and mentally keep track of the program state, can't yet read a problem statement and clearly understand it, then
-you don't want to worry about things like scope, type errors and installing the right versions of the right tools.
+you don't want to worry about things like type errors, scope and installing the right versions of the right tools.
 
+I have identified multiple fundamental competencies that are not targetted by the conventional programming education that is being and has been offered by academic institutions, bootcamps or online courses. How is this possible? -> Other blog post about unconscious competence of educators.
+Not all people will need education that focusses on these fundamental competencies; for them, conventional programming education gives satisfying results.
+Some people do not get satisfying results from conventional programming education; for them, education that does focus on these fundamentals might be what they need.
+
+Like going from tricycle to bicycle to motorcycle, at each stage you will use a different programming language, designed to optimize learning. Ultimately you will be using 'real world' programming languages.
