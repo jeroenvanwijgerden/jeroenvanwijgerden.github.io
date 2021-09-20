@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Let slip the dice of war - jvw blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Jeroen van Wijgerden" /><meta name="description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK" /><meta name="keywords" content="blog, programming, education" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://jeroenvanwijgerden.me/post/dice-of-war/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2505092c4d3227e18e57c6ea9d5624b367b43efd59d713d76753445dc3a7a753.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Let slip the dice of war" />
+<meta property="og:description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/dice-of-war/" />
+<meta property="article:published_time" content="2021-09-17T13:37:31+02:00" />
+<meta property="article:modified_time" content="2021-09-17T13:37:31+02:00" />
+<meta itemprop="name" content="Let slip the dice of war">
+<meta itemprop="description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK">
+<meta itemprop="datePublished" content="2021-09-17T13:37:31+02:00" />
+<meta itemprop="dateModified" content="2021-09-17T13:37:31+02:00" />
+<meta itemprop="wordCount" content="2519">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Let slip the dice of war"/>
+<meta name="twitter:description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">jvw@blog:~$</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">jvw@blog:~$</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Let slip the dice of war</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021 Sep 17 </span>
+        
+          <span class="more-meta"> 2519 words </span>
+          <span class="more-meta"> 12 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#approach">Approach</a>
+      <ul>
+        <li><a href="#obtaining-the-probability-tree">Obtaining the probability tree</a></li>
+        <li><a href="#calculating-end-state-p">Calculating <code>end-state-&gt;p</code></a></li>
+        <li><a href="#calculating-win-percentages">Calculating win percentages</a></li>
+        <li><a href="#no-path-traversal-needed">No path traversal needed</a></li>
+        <li><a href="#capitals">Capitals</a></li>
+      </ul>
+    </li>
+    <li><a href="#previous-work">Previous work</a></li>
+    <li><a href="#closing-words">Closing words</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Over the years there has been ample work done and shared in calculating win percentages for battles in <em>RISK</em>. However, what I find more useful while playing is knowing how many troops I need, against a given amount of opposing troops, to win with a certain probability. Sometimes I need to take a lot of risk (low probability), other times I want a lot of certainty (high probability). Additionally, I usually play with a non-standard way to throw dice (some territories, called capitals, can defend with up to three), for which I could find no numbers.</p>
+<p>I had to do some work myself. In this article I share my findings and discuss how I obtained them. Only basic knowledge of probability theory is required to follow along. I also share the code I wrote that did the heavy lifting, to be adapted by anyone who wants to calculate results for their variation of <em>RISK</em>.</p>
+<p>After I completed my calculations and analysis, I did find an article that tries to answer the same questions as I do. However, it is much more difficult to understand (elite level mathematics) and I daresay the results in said article are erroneous. I discuss this some more later in the article.</p>
+<h1 id="results">Results</h1>
+<p>These graphs show the minimal amount of attacking troops (<strong>A</strong>) required on the territory from which the attack is launched to conquer a territory defended by <strong>D</strong> troops, with a probability of at least <strong>p</strong>.</p>
+<p>The graphs serve to sharpen your intuitive understanding of the game. If you want to look up exact numbers (is this cheating?), consult these csv files. Although the graphs can still serve as a less accurate but more consise portrayal.</p>
+<p>Note that winning with a probability of 100% is impossible. If you&rsquo;re extremely unlucky, with any amount of attacking troops there is always a chance of losing against a single defending troop.</p>
+<p>Standard territories (defending with up to two dice) on the left, capitals (up to three) on the right.</p>
+<p><img src="/static/post/dice-of-war/final-non-capital.svg" alt="">
+<img src="/static/post/dice-of-war/final-capital.svg" alt=""></p>
+<p>What is more useful to create rules of thumb from is the relative amount of attacking troops required.</p>
+<p><img src="/static/post/dice-of-war/final-ratio-non-capital-200.svg" alt="">
+<img src="/static/post/dice-of-war/final-ratio-capital-200.svg" alt=""></p>
+<p>Although these up-to-and-including-200-defending-troops graphs are still more to get a feel for the numbers. Let&rsquo;s zoom in to 50 troops.</p>
+<p><img src="/static/post/dice-of-war/final-ratio-non-capital-50.svg" alt="">
+<img src="/static/post/dice-of-war/final-ratio-capital-50.svg" alt=""></p>
+<p>Now we can read more clearly. E.g. to conquer a standard territory with 10 defending troops with a probability of at least 95%, you need about twice as many troops.</p>
+<p>The spikes at the beginning of the lines in the capital graph make sense, because they occur at <strong>D</strong>=3, when capitals start making use of their unique advantage.</p>
+<p>Personally, I mostly use the 99%, 75% and 25% lines. The 99% for obtaining a card (to be almost guaranteed to obtain a card, have 6 troops on a territory to attack a single defender). I usually try to attack with a 75% probability of conquering. If I want to take extra care to hold a territory, I put so many defending troop in it that any attacker has less than 25% chance of conquering it.</p>
+<p>What originally set me on the path of calculating all of this was that I wanted to understand just how much better capitals were at defending than standard territories. The juxtaposition of graphs above clearly shows that for the same <strong>D</strong> and <strong>p</strong>, capitals require a significantly higher <strong>A</strong>. However, to paint a clearer picture I divided the data for capitals by the data for standard territories:</p>
+<p><img src="/static/post/dice-of-war/final-rel-def-str-cap.svg" alt=""></p>
+<p>Roughly, to conquer a capital you need 1.5 to 2 times as many troops as you would need to conquer a non-capital.</p>
+<h1 id="approach">Approach</h1>
+<p>How to mathematically calculate the probability of winning has been described in detail. To calculate it with a computer program has been somewhat documented here. However, to get to my results I need to extend that programming approach.</p>
+<p>I show the approach from the point of view of standard <em>RISK</em>. Afterwards I briefly discuss the small adaptations needed for capitals.</p>
+<p>We create a network (also known as a graph, but I&rsquo;ll stick with &lsquo;network&rsquo; to avoid any confusion) of battle states <code>[A D]</code> (how many attacking and defending troops are left). Two states can be connected by a probability: when starting in one state, the probability that after one round of rolling dice the battle is in the other state. Effectively, the network is a probability tree.</p>
+<p>Note that the <code>A</code> in the network is one less than the <strong>A</strong> in the graphs you saw earlier. One attacking troop must always stay behind and cannot participate in the battle. <code>D</code> and <strong>D</strong> are equal.</p>
+<p>We can use the probability tree to calculate for any state (e.g. <code>[11 9]</code>) which end states it can reach and for each of these end states what the probability is of reaching it. An end state is any state in which the battle is over, so either side has 0 troops left. In other words, for a state we can create a mapping from end state to the probabilty of reaching that end state, or <code>end-state-&gt;p</code> (&lsquo;end state arrow p&rsquo;, &lsquo;end state to p&rsquo;).</p>
+<p>Given an <code>end-state-&gt;p</code> we can calculate the probability of winning.</p>
+<p>To find the minimal amount of attacking troops needed to conquer <code>D</code> defending troops with a probability of at least <strong>p</strong>, we increase <code>A</code> until the probability of the attacking side winning is at least <strong>p</strong>.</p>
+<p>To obtain the resulting graphs, do this for all combinations of <code>D</code> (1, 2, .., 200) and <strong>p</strong> (0.01, 0.05, &hellip;, 0.99). Don&rsquo;t forget to add 1 to <code>A</code> to obtain <strong>A</strong>. Lucky for my CPU we have to calculate the <code>end-state-&gt;p</code> for a state only once and can then reuse it for each different <strong>p</strong>.</p>
+<p>Being able to calculate an <code>end-state-&gt;p</code> for any state can be used to answer more detailed questions such as <em>&ldquo;How many attacking troops do I need to conquer <strong>D</strong> defending troops with a probability of at least <strong>p</strong> such that I have <strong>T</strong> troops remaining?&quot;</em>. I left the answer to this question in the code but decided it was out of scope for this article.</p>
+<h2 id="obtaining-the-probability-tree">Obtaining the probability tree</h2>
+<p>Before we look at probabilties, let&rsquo;s look at the transitions from one state to another.</p>
+<p><img src="/static/post/dice-of-war/state-space-1-1.svg" alt=""></p>
+<p>In state <code>[1 1]</code>, each side throws with a single die. Either the attacking side suffers one loss (the loss is <code>[1 0]</code>) or the defending side suffers one loss (the loss is <code>[0 1]</code>). Loss <code>[1 0]</code> leads to end state <code>[0 1]</code>, loss <code>[0 1]</code> leads to end state <code>[1 0]</code>.</p>
+<p>Here is the losses network for more states:</p>
+<p><img src="/static/post/dice-of-war/state-space-3-3.svg" alt=""></p>
+<p>Note that some states have different losses than others. E.g. unlike state <code>[1 1]</code>, state <code>[3 2]</code> can have losses <code>[0 2]</code>, <code>[1 1]</code> and <code>[2 0]</code>.</p>
+<p>To obtain a probability tree we want to replace each loss with its associated probability, resulting in something like this:</p>
+<p><img src="/static/post/dice-of-war/state-space-p-1-1.svg" alt=""></p>
+<p>First we need to find out, for a state, how many dice each side will use. As the literature shows and is widely known, for both sides it is best to throw with as many dice as possible.</p>
+<p>The amount of dice rolled by the attacker is whichever is lowest: 3 or <code>A</code>. For the defender, whichever is lowest: 2 or <code>D</code>.</p>
+<p>Both sides roll their dice. The highest roll of the attacker is compared to the highest roll of the defender; the second highest roll of the attacker is compared to the second highest roll of defender.</p>
+<p>Let&rsquo;s look at <code>[3 2]</code> dice (3 dice for the attacker, 2 for the defender) where the attacker rolls <code>[3 2 6]</code> and the defender rolls <code>[4 3]</code>.</p>
+<p>6 is compared to 4, resulting in a loss for the defender, denoted as loss <code>[0 1]</code>.
+3 is compared to 3, resulting in a loss for the attacker, denoted as loss <code>[1 0]</code>. Summing these two losses, overall the losses are <code>[1 1]</code>.</p>
+<p>With <code>[3 2]</code> dice, <code>[[3 2 6] [4 3]]</code> is just one of the possible roll outcomes.Using <code>[3 2]</code> dice, there are many equally likely roll outcomes (assuming all dice are fair): <code>6 * 6 * 6 * 6 * 6 = 7776</code>.</p>
+<p>Each roll outcome corresponds to a loss:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[[1 1 1] [1 1]] -&gt; [2 0]
+[[1 1 1] [1 2]] -&gt; [2 0]
+...
+[[1 1 2] [1 1]] -&gt; [1 1]
+...
+[[4 1 5] [2 4]] -&gt; [0 2]
+...
+[[6 6 6] [6 6]] -&gt; [2 0]
+</code></pre></td></tr></table>
+</div>
+</div><p>Resulting in 7776 losses. However, there are ducplicates. We can count how many time each loss occurs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">2890</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">2611</span>
+ <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">2275</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>So when throwing with <code>[3 2]</code> dice, 2890 of 7760 equally likely occurrences result in the loss <code>[0 2]</code>. We can now say that when throwing with <code>[3 2]</code> dice, the probability of the loss <code>[0 2]</code> is <code>2890/7760</code>.</p>
+<p>We can similarly obtain the possible losses and their probabilities for all relevant amounts of dice:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">dice-&gt;losses-&gt;p</span>
+  <span class="p">{[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">15</span><span class="nv">/36</span>     <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">21</span><span class="nv">/36</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">55</span><span class="nv">/216</span>    <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">161</span><span class="nv">/216</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">125</span><span class="nv">/216</span>   <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">91</span><span class="nv">/216</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">2</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">295</span><span class="nv">/1296</span>  <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">420</span><span class="nv">/1296</span>  <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">581</span><span class="nv">/1296</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">855</span><span class="nv">/1296</span>  <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">441</span><span class="nv">/1296</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">3</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">2890</span><span class="nv">/7776</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">2611</span><span class="nv">/7776</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">2275</span><span class="nv">/7776</span><span class="p">}})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Putting together what we have so far: by calculating the used dice for a state we can determine the losses and associated probabilties that lead to its child states. If we start building the probability tree at the biggest state we want with so called depth-first recursion, we end up with an almost complete probability tree. Here is an example for starting at state `[2 2]:</p>
+<p><img src="/static/post/dice-of-war/state-space-2-2-dfs-animation.svg" alt=""></p>
+<p>However, because states <code>[1 2]</code> and <code>[2 1]</code> are not reachable from <code>[2 2]</code> they aren&rsquo;t included in the tree. To include them, we can restart the recursion from these states. Now when the recursion reaches state <code>[1 1]</code>, we can stop because the tree from <code>[1 1]</code> onwards has already been constructed.</p>
+<p>The full probability tree for all states up to and including <code>[3 3]</code> looks as follows:</p>
+<p><img src="/static/post/dice-of-war/state-space-3-3-non-capital-p.svg" alt=""></p>
+<h2 id="calculating-end-state-p">Calculating <code>end-state-&gt;p</code></h2>
+<p>What we&rsquo;re after is to calculate for a state, for each reachable end state the probability of reaching that end state. We can do that by looking at each path from the state to an end state. The probability of reaching an end state is the product of the probabilities that make up the path.</p>
+<p><img src="/static/post/dice-of-war/state-space-3-3-path-1.svg" alt=""></p>
+<p>The probability of reaching end state <code>[2 0]</code> from state <code>[3 2]</code> is <code>2611/7776 * 125/216 = 326375/1679616</code>.</p>
+<p>If there are multiple paths to an end-state, the probability of reaching the end-state is the sum of each path&rsquo;s probability.</p>
+<p><img src="/static/post/dice-of-war/state-space-3-3-path-2.svg" alt=""></p>
+<p>The probability of reaching end state <code>[1 0]</code> from state <code>[3 2]</code> is the sum of the probability of the blue-and-green path (<code>2275/7776 * 55/216 * 15/36</code>) and the probability of the yellow-and-green path (<code>2611/7776 * 91/216 * 15/36</code>): <code>625625/20155392 + 1188005/20155392 = 906815/10077696</code>, roughly <code>0.09</code> or 9%.</p>
+<p>By traversing all paths starting at state <code>[3 2]</code> (7 paths in total) we can obtain <code>end-state-&gt;p</code> for state <code>[3 2]</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1269541</span><span class="nv">/10077696</span> <span class="c1">; ~0.126</span>
+ <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">366275</span><span class="nv">/1679616</span>   <span class="c1">; ~0.218</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">906815</span><span class="nv">/10077696</span>  <span class="c1">; ~0.09</span>
+ <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">326375</span><span class="nv">/1679616</span>   <span class="c1">; ~0.194</span>
+ <span class="p">[</span><span class="mi">3</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">1445</span><span class="nv">/3888</span><span class="p">}</span>       <span class="c1">; ~0.372</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that these probabilities should and indeed do sum to exactly 1.</p>
+<h2 id="calculating-win-percentages">Calculating win percentages</h2>
+<p>The probability of the attacker winning a battle between 3 attacking troops (so 4 attacking troops on the territory from which the attack is launched) and 2 defending troops is the probabilty of reaching end state <code>[1 0]</code>, <code>[2 0]</code> or <code>[3 0]</code>. We calculate this by taking the sum of the probabilities of reaching these end states: <code>906815/10077696 + 326375/1679616 + 1445/3888 = 6610505/10077696</code>, roughly <code>0.656</code> or 65.6%.</p>
+<h2 id="no-path-traversal-needed">No path traversal needed</h2>
+<p>To obtain <code>state-&gt;end-state-&gt;p</code>, one implementation of this probability tree approach is to calculate the probability tree and afterwards traverse all paths. However, with low effort we can construct the tree and calculate the probabilities at the same time.</p>
+<p>An end state can reach exactly one end state, itself, with a probability of 1. E.g. the <code>end-state-&gt;p</code> for state <code>[0 1]</code> is <code>{[0 1] 1}</code>.</p>
+<p>We can calculate <code>end-state-&gt;p</code> for a state using, for each child of the state, the probability of reaching that child and the child&rsquo;s <code>end-state-&gt;p</code>. This is possible only if we calculate the <code>end-state-&gt;p</code> for each state in the right order. Whenever we start the calculating for a state, the calculations for all of its children should have already been completed. We can do this with a depth-first approach as shown before.</p>
+<p>By multiplying the probability of reaching a child with the probability of the child reaching an end state, we obtain the probability of the current state reaching that end state. E.g. the probability of <code>[1 1]</code> reaching its child <code>[0 1]</code> is <code>21/36</code>; <code>[0 1]</code> reaches a single end state, <code>[0 1]</code> with a probability of <code>1</code>. So <code>[1 1]</code> reaches end states <code>[0 1]</code> with a probability of <code>21/36 * 1 = 21/36</code>. Through child <code>[1 0]</code>, <code>[1 1]</code> reaches end state <code>[1 0]</code> with a probability of <code>15/36</code>.</p>
+<p>With <code>[1 1]</code> and <code>[2 0]</code> done we can calculate for <code>[2 1]</code>. Via child <code>[2 0]</code> it can reach end state <code>[2 0]</code> with a probability of <code>161/216 * 1 = 161/216</code>. Via child <code>[1 1]</code> it can reach end states <code>[0 1]</code> and <code>[1 0]</code>, respectively with probabilities <code>55/216 * 21/36 = 385/2592</code> and <code>55/216 * 15/36 = 275/2592</code>.</p>
+<p>Similar to the path traversal approach, when two children can reach the same end state, the probabilities should be added. The probability of the current state reaching the end state is the probability of reaching it via the first child added to the probability of reaching it via the second child.</p>
+<p>This approach is indeed just a short-cut version of the path traversal approach. The underlying mathematical idea is the same.</p>
+<h2 id="capitals">Capitals</h2>
+<p>The only difference a capital brings to the table is the possibility for an extra defending die, changing the maximum allowed dice for defenders from 2 to 3. This results in three new amounts of dice: <code>[1 3]</code>, <code>[2 3]</code> and <code>[3 3]</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="hl"><span class="lnt"> 4
+</span></span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="hl"><span class="lnt"> 7
+</span></span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="hl"><span class="lnt">10
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">dice-&gt;losses-&gt;p</span>
+  <span class="p">{[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">15</span><span class="nv">/36</span>      <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">21</span><span class="nv">/36</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">55</span><span class="nv">/216</span>     <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">161</span><span class="nv">/216</span><span class="p">}</span>
+<span class="hl">   <span class="p">[</span><span class="mi">1</span> <span class="mi">3</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">225</span><span class="nv">/1296</span>   <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">1071</span><span class="nv">/1296</span><span class="p">}</span>
+</span>   <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">125</span><span class="nv">/216</span>    <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">91</span><span class="nv">/216</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">2</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">295</span><span class="nv">/1296</span>   <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">420</span><span class="nv">/1296</span>    <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">581</span><span class="nv">/1296</span><span class="p">}</span>
+<span class="hl">   <span class="p">[</span><span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">979</span><span class="nv">/7776</span>   <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">1981</span><span class="nv">/7776</span>   <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">4816</span><span class="nv">/7776</span><span class="p">}</span>
+</span>   <span class="p">[</span><span class="mi">3</span> <span class="mi">1</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">855</span><span class="nv">/1296</span>   <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">441</span><span class="nv">/1296</span><span class="p">}</span>
+   <span class="p">[</span><span class="mi">3</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">2890</span><span class="nv">/7776</span>  <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">2611</span><span class="nv">/7776</span>   <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">2275</span><span class="nv">/7776</span><span class="p">}</span>
+<span class="hl">   <span class="p">[</span><span class="mi">3</span> <span class="mi">3</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">3</span><span class="p">]</span> <span class="mi">6420</span><span class="nv">/46656</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">10017</span><span class="nv">/46656</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">12348</span><span class="nv">/46656</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">17871</span><span class="nv">/46656</span><span class="p">}})</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Unfortunately, this means capitals have an entirely different state space. Compare the following transitions to the previous state space of standard territories:</p>
+<p><img src="/static/post/dice-of-war/state-space-3-3-capital.svg" alt=""></p>
+<p>So for capitals we have to redo all calculations with this new way of deciding how many dice to use.</p>
+<h1 id="previous-work">Previous work</h1>
+<h1 id="closing-words">Closing words</h1>
+
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://jeroenvanwijgerden.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span> - </span>
+    <span>Jeroen van Wijgerden</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
