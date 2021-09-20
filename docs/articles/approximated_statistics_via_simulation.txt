@@ -1,9 +1,0 @@
-https://www.youtube.com/watch?v=f8TlTaTHgzo&ab_channel=KarlJobst
-
-statistics is correct (exact, at least), but is very difficult to understand. Statistics CAN be correct, but only if you apply the correct formulae and draw conclusions correctly.
-At some point ( 1) let's look at some cases to plot how much mathematical skill you need in order to evaluate them) you don't have the ability to use statistics.
-
-Simulations are not exact but rather an approximation. However, they are a straightforward mirror of the reality you are trying to evaluate, so
-the intepretation can't really go wrong (knock on wood).
-The difficulty of simulating lies in modeling. Is the model sound and complete?
-For the same cases as 2), let's also plot how difficult it would be to model and simulate them.
