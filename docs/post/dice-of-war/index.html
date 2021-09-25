@@ -35,7 +35,7 @@
 
 
 
-<link href="/sass/main.min.2505092c4d3227e18e57c6ea9d5624b367b43efd59d713d76753445dc3a7a753.css" rel="stylesheet">
+<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK">
 <meta itemprop="datePublished" content="2021-09-17T13:37:31+02:00" />
 <meta itemprop="dateModified" content="2021-09-17T13:37:31+02:00" />
-<meta itemprop="wordCount" content="2519">
+<meta itemprop="wordCount" content="3317">
 
 
 
@@ -130,12 +130,12 @@
     
     <header class="post-header">
       <h1 class="post-title">Let slip the dice of war</h1>
-
+      <h3 class="post-summary">A computer-aided analysis of the probabilities of battle outcomes in the game <em>RISK</em></h3>
       <div class="post-meta">
         <span class="post-time"> 2021 Sep 17 </span>
         
-          <span class="more-meta"> 2519 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 3317 words </span>
+          <span class="more-meta"> 16 mins read </span>
         
       </div>
     </header>
@@ -148,57 +148,57 @@
     <li><a href="#results">Results</a></li>
     <li><a href="#approach">Approach</a>
       <ul>
-        <li><a href="#obtaining-the-probability-tree">Obtaining the probability tree</a></li>
+        <li><a href="#creating-a-probability-tree">Creating a probability tree</a></li>
         <li><a href="#calculating-end-state-p">Calculating <code>end-state-&gt;p</code></a></li>
         <li><a href="#calculating-win-percentages">Calculating win percentages</a></li>
         <li><a href="#no-path-traversal-needed">No path traversal needed</a></li>
         <li><a href="#capitals">Capitals</a></li>
+        <li><a href="#calculating-the-results">Calculating the results</a></li>
+        <li><a href="#correctness">Correctness</a>
+          <ul>
+            <li><a href="#compared-to-previous-work">Compared to previous work</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#previous-work">Previous work</a></li>
     <li><a href="#closing-words">Closing words</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>Over the years there has been ample work done and shared in calculating win percentages for battles in <em>RISK</em>. However, what I find more useful while playing is knowing how many troops I need, against a given amount of opposing troops, to win with a certain probability. Sometimes I need to take a lot of risk (low probability), other times I want a lot of certainty (high probability). Additionally, I usually play with a non-standard way to throw dice (some territories, called capitals, can defend with up to three), for which I could find no numbers.</p>
-<p>I had to do some work myself. In this article I share my findings and discuss how I obtained them. Only basic knowledge of probability theory is required to follow along. I also share the code I wrote that did the heavy lifting, to be adapted by anyone who wants to calculate results for their variation of <em>RISK</em>.</p>
-<p>After I completed my calculations and analysis, I did find an article that tries to answer the same questions as I do. However, it is much more difficult to understand (elite level mathematics) and I daresay the results in said article are erroneous. I discuss this some more later in the article.</p>
+      <p>Over the years there has been ample work done and shared on calculating win percentages for battles in <em>RISK</em>. However, what I find more useful while playing is knowing how many troops I need, against a given amount of opposing troops, to win with a certain probability. Sometimes I need to take a lot of risk, other times I want a lot of certainty. Additionally, I usually play with a non-standard rule. Some territories, called capitals, can defend with up to three dice. I couldn&rsquo;t find any data on capitals.</p>
+<p>So I had to do some work myself. In this article I share my findings and discuss how I obtained them. With some knowledge of basic probability theory you can follow most of it. I also share <a href="https://github.com/jeroenvanwijgerden/dice-of-war">the code</a> I wrote that did the heavy lifting, to be adapted by anyone who wants to calculate results for their variation of <em>RISK</em>. I won&rsquo;t discuss the code in this article so if you have any questions, send me a message.</p>
+<p>After I completed my calculations and analysis, I did find an article that tries to answer the same questions as I do. However, it is much more difficult to understand (elite level mathematics) and I daresay the results in said article are erroneous. I discuss this some more later in this article.</p>
 <h1 id="results">Results</h1>
-<p>These graphs show the minimal amount of attacking troops (<strong>A</strong>) required on the territory from which the attack is launched to conquer a territory defended by <strong>D</strong> troops, with a probability of at least <strong>p</strong>.</p>
-<p>The graphs serve to sharpen your intuitive understanding of the game. If you want to look up exact numbers (is this cheating?), consult these csv files. Although the graphs can still serve as a less accurate but more consise portrayal.</p>
+<p>The graphs below show the minimal amount of attacking troops (<strong>A</strong>) required on the territory from which the attack is launched to conquer a territory defended by <strong>D</strong> troops, with a probability of at least <strong>p</strong>.</p>
+<p>The graphs serve to sharpen your intuitive understanding of the game. If you want to look up exact numbers, consult these csv files (is this cheating?).</p>
 <p>Note that winning with a probability of 100% is impossible. If you&rsquo;re extremely unlucky, with any amount of attacking troops there is always a chance of losing against a single defending troop.</p>
-<p>Standard territories (defending with up to two dice) on the left, capitals (up to three) on the right.</p>
+<p>The graphs on the left show data for standard territories (which defend with up to two dice), the graphs on the right for capitals (up to three).</p>
 <p><img src="/static/post/dice-of-war/final-non-capital.svg" alt="">
 <img src="/static/post/dice-of-war/final-capital.svg" alt=""></p>
-<p>What is more useful to create rules of thumb from is the relative amount of attacking troops required.</p>
+<p>However, it is easier to create rules of thumb from the relative amount of attacking troops required. We obtain these by dividing <strong>A</strong> by <strong>D</strong>.</p>
 <p><img src="/static/post/dice-of-war/final-ratio-non-capital-200.svg" alt="">
 <img src="/static/post/dice-of-war/final-ratio-capital-200.svg" alt=""></p>
-<p>Although these up-to-and-including-200-defending-troops graphs are still more to get a feel for the numbers. Let&rsquo;s zoom in to 50 troops.</p>
+<p>Although these up-to-and-including-200-defending-troops graphs are still mostly to get a feel for the numbers. Let&rsquo;s zoom in on up to 50 troops.</p>
 <p><img src="/static/post/dice-of-war/final-ratio-non-capital-50.svg" alt="">
 <img src="/static/post/dice-of-war/final-ratio-capital-50.svg" alt=""></p>
-<p>Now we can read more clearly. E.g. to conquer a standard territory with 10 defending troops with a probability of at least 95%, you need about twice as many troops.</p>
+<p>Now we can read more clearly. For example, to conquer a standard territory with 10 defending troops with a probability of at least 95%, you need about twice as many troops.</p>
 <p>The spikes at the beginning of the lines in the capital graph make sense, because they occur at <strong>D</strong>=3, when capitals start making use of their unique advantage.</p>
-<p>Personally, I mostly use the 99%, 75% and 25% lines. The 99% for obtaining a card (to be almost guaranteed to obtain a card, have 6 troops on a territory to attack a single defender). I usually try to attack with a 75% probability of conquering. If I want to take extra care to hold a territory, I put so many defending troop in it that any attacker has less than 25% chance of conquering it.</p>
-<p>What originally set me on the path of calculating all of this was that I wanted to understand just how much better capitals were at defending than standard territories. The juxtaposition of graphs above clearly shows that for the same <strong>D</strong> and <strong>p</strong>, capitals require a significantly higher <strong>A</strong>. However, to paint a clearer picture I divided the data for capitals by the data for standard territories:</p>
+<p>Personally, I mostly use the 99%, 75% and 25% lines. To acquire a card I must conquer at least one territory in my turn, which I want to do with 99% certainty. Otherwise, I usually try to attack with a 75% probability of conquering. If I want to take extra care to hold a territory, I put so many defending troops in it that the attacker will have only a 25% chance of victory.</p>
+<p>What originally set me on the path of calculating all of this was that I wanted to understand just how much better capitals were at defending than standard territories. The juxtaposed graphs above clearly show that for the same <strong>D</strong> and <strong>p</strong>, it takes signfinicantly more troops to conquer a capital. To show the relative defensive strength of a capital, I divided the capital graph by the standard territory graph.</p>
 <p><img src="/static/post/dice-of-war/final-rel-def-str-cap.svg" alt=""></p>
-<p>Roughly, to conquer a capital you need 1.5 to 2 times as many troops as you would need to conquer a non-capital.</p>
+<p>Roughly, to conquer a capital you need 1.5 to 2 times as many troops as you would need to conquer a standard territory.</p>
 <h1 id="approach">Approach</h1>
-<p>How to mathematically calculate the probability of winning has been described in detail. To calculate it with a computer program has been somewhat documented here. However, to get to my results I need to extend that programming approach.</p>
-<p>I show the approach from the point of view of standard <em>RISK</em>. Afterwards I briefly discuss the small adaptations needed for capitals.</p>
-<p>We create a network (also known as a graph, but I&rsquo;ll stick with &lsquo;network&rsquo; to avoid any confusion) of battle states <code>[A D]</code> (how many attacking and defending troops are left). Two states can be connected by a probability: when starting in one state, the probability that after one round of rolling dice the battle is in the other state. Effectively, the network is a probability tree.</p>
-<p>Note that the <code>A</code> in the network is one less than the <strong>A</strong> in the graphs you saw earlier. One attacking troop must always stay behind and cannot participate in the battle. <code>D</code> and <strong>D</strong> are equal.</p>
-<p>We can use the probability tree to calculate for any state (e.g. <code>[11 9]</code>) which end states it can reach and for each of these end states what the probability is of reaching it. An end state is any state in which the battle is over, so either side has 0 troops left. In other words, for a state we can create a mapping from end state to the probabilty of reaching that end state, or <code>end-state-&gt;p</code> (&lsquo;end state arrow p&rsquo;, &lsquo;end state to p&rsquo;).</p>
-<p>Given an <code>end-state-&gt;p</code> we can calculate the probability of winning.</p>
-<p>To find the minimal amount of attacking troops needed to conquer <code>D</code> defending troops with a probability of at least <strong>p</strong>, we increase <code>A</code> until the probability of the attacking side winning is at least <strong>p</strong>.</p>
-<p>To obtain the resulting graphs, do this for all combinations of <code>D</code> (1, 2, .., 200) and <strong>p</strong> (0.01, 0.05, &hellip;, 0.99). Don&rsquo;t forget to add 1 to <code>A</code> to obtain <strong>A</strong>. Lucky for my CPU we have to calculate the <code>end-state-&gt;p</code> for a state only once and can then reuse it for each different <strong>p</strong>.</p>
-<p>Being able to calculate an <code>end-state-&gt;p</code> for any state can be used to answer more detailed questions such as <em>&ldquo;How many attacking troops do I need to conquer <strong>D</strong> defending troops with a probability of at least <strong>p</strong> such that I have <strong>T</strong> troops remaining?&quot;</em>. I left the answer to this question in the code but decided it was out of scope for this article.</p>
-<h2 id="obtaining-the-probability-tree">Obtaining the probability tree</h2>
-<p>Before we look at probabilties, let&rsquo;s look at the transitions from one state to another.</p>
+<p>How to mathematically calculate the probability of winning has been described in detail [0] [1]. To calculate it with computer programming has been somewhat documented here [2] [3]. My goal is to give a more thorough explanation.</p>
+<p>From here on I switch from &lsquo;I&rsquo; to &lsquo;we&rsquo;, because when I write an explanation I always feel like a wizard guiding a traveler through a foggy swamp.</p>
+<h2 id="creating-a-probability-tree">Creating a probability tree</h2>
+<p>In our calculations we work with battle states, which look like <code>[A D]</code>, representing the amount of troops each side has left. <code>A</code> is exactly one less than the <strong>A</strong> of the resulting graphs, because one troop must always remain in the territory from which the attack was launched.</p>
+<p>Before we look at probabilties, let&rsquo;s first look at the transitions from one state to another, a so called &lsquo;state space&rsquo;.</p>
 <p><img src="/static/post/dice-of-war/state-space-1-1.svg" alt=""></p>
-<p>In state <code>[1 1]</code>, each side throws with a single die. Either the attacking side suffers one loss (the loss is <code>[1 0]</code>) or the defending side suffers one loss (the loss is <code>[0 1]</code>). Loss <code>[1 0]</code> leads to end state <code>[0 1]</code>, loss <code>[0 1]</code> leads to end state <code>[1 0]</code>.</p>
-<p>Here is the losses network for more states:</p>
+<p>In state <code>[1 1]</code>, each side has a single troop and throws with a single die. Either the attacking side suffers one loss (the loss is <code>[1 0]</code>) or the defending side suffers one loss (the loss is <code>[0 1]</code>). Loss <code>[1 0]</code> leads to end state <code>[0 1]</code>, loss <code>[0 1]</code> leads to end state <code>[1 0]</code>. An end state is a state in which the battle has ended: one side has 0 troops remaining.</p>
+<p>Here is a bigger state space:</p>
 <p><img src="/static/post/dice-of-war/state-space-3-3.svg" alt=""></p>
 <p>Note that some states have different losses than others. E.g. unlike state <code>[1 1]</code>, state <code>[3 2]</code> can have losses <code>[0 2]</code>, <code>[1 1]</code> and <code>[2 0]</code>.</p>
 <p>To obtain a probability tree we want to replace each loss with its associated probability, resulting in something like this:</p>
@@ -301,13 +301,12 @@
 <h2 id="calculating-win-percentages">Calculating win percentages</h2>
 <p>The probability of the attacker winning a battle between 3 attacking troops (so 4 attacking troops on the territory from which the attack is launched) and 2 defending troops is the probabilty of reaching end state <code>[1 0]</code>, <code>[2 0]</code> or <code>[3 0]</code>. We calculate this by taking the sum of the probabilities of reaching these end states: <code>906815/10077696 + 326375/1679616 + 1445/3888 = 6610505/10077696</code>, roughly <code>0.656</code> or 65.6%.</p>
 <h2 id="no-path-traversal-needed">No path traversal needed</h2>
-<p>To obtain <code>state-&gt;end-state-&gt;p</code>, one implementation of this probability tree approach is to calculate the probability tree and afterwards traverse all paths. However, with low effort we can construct the tree and calculate the probabilities at the same time.</p>
+<p>To obtain <code>state-&gt;end-state-&gt;p</code>, one implementation of this probability tree approach is to calculate the probability tree and afterwards traverse all paths. However, with low effort we can construct the tree and calculate the probabilities at the same time. This approach is just a short-cut version of the path traversal approach. The underlying mathematical idea is the same.</p>
 <p>An end state can reach exactly one end state, itself, with a probability of 1. E.g. the <code>end-state-&gt;p</code> for state <code>[0 1]</code> is <code>{[0 1] 1}</code>.</p>
 <p>We can calculate <code>end-state-&gt;p</code> for a state using, for each child of the state, the probability of reaching that child and the child&rsquo;s <code>end-state-&gt;p</code>. This is possible only if we calculate the <code>end-state-&gt;p</code> for each state in the right order. Whenever we start the calculating for a state, the calculations for all of its children should have already been completed. We can do this with a depth-first approach as shown before.</p>
 <p>By multiplying the probability of reaching a child with the probability of the child reaching an end state, we obtain the probability of the current state reaching that end state. E.g. the probability of <code>[1 1]</code> reaching its child <code>[0 1]</code> is <code>21/36</code>; <code>[0 1]</code> reaches a single end state, <code>[0 1]</code> with a probability of <code>1</code>. So <code>[1 1]</code> reaches end states <code>[0 1]</code> with a probability of <code>21/36 * 1 = 21/36</code>. Through child <code>[1 0]</code>, <code>[1 1]</code> reaches end state <code>[1 0]</code> with a probability of <code>15/36</code>.</p>
 <p>With <code>[1 1]</code> and <code>[2 0]</code> done we can calculate for <code>[2 1]</code>. Via child <code>[2 0]</code> it can reach end state <code>[2 0]</code> with a probability of <code>161/216 * 1 = 161/216</code>. Via child <code>[1 1]</code> it can reach end states <code>[0 1]</code> and <code>[1 0]</code>, respectively with probabilities <code>55/216 * 21/36 = 385/2592</code> and <code>55/216 * 15/36 = 275/2592</code>.</p>
 <p>Similar to the path traversal approach, when two children can reach the same end state, the probabilities should be added. The probability of the current state reaching the end state is the probability of reaching it via the first child added to the probability of reaching it via the second child.</p>
-<p>This approach is indeed just a short-cut version of the path traversal approach. The underlying mathematical idea is the same.</p>
 <h2 id="capitals">Capitals</h2>
 <p>The only difference a capital brings to the table is the possibility for an extra defending die, changing the maximum allowed dice for defenders from 2 to 3. This results in three new amounts of dice: <code>[1 3]</code>, <code>[2 3]</code> and <code>[3 3]</code>.</p>
 <div class="highlight"><div class="chroma">
@@ -338,9 +337,97 @@
 </div>
 </div><p>Unfortunately, this means capitals have an entirely different state space. Compare the following transitions to the previous state space of standard territories:</p>
 <p><img src="/static/post/dice-of-war/state-space-3-3-capital.svg" alt=""></p>
-<p>So for capitals we have to redo all calculations with this new way of deciding how many dice to use.</p>
-<h1 id="previous-work">Previous work</h1>
+<p>Not only do some states suddenly lead to different states (such as <code>[3 3]</code> now leading to <code>[0 3]</code>), the probability of transitions can also be different. The loss <code>[1 0]</code> from state <code>[1 3]</code> to state <code>[0 3]</code> for capitals has an associated probability of <code>225/1296</code>, whereas the same transition for standard territories has an associated probability of <code>55/216</code>.</p>
+<p>So for capitals we have to recalculate the <code>end-state-&gt;p</code> for all states. Calculating win percentages and minimum required amounts of troops stays the same.</p>
+<h2 id="calculating-the-results">Calculating the results</h2>
+<p>To find the minimal amount of attacking troops needed to conquer <code>D</code> defending troops with a probability of at least <strong>p</strong>, we increase <code>A</code> until the probability of the attacking side winning is at least <strong>p</strong>.</p>
+<p>To obtain the resulting graphs, do this for all combinations of <code>D</code> (1, 2, .., 200) and <strong>p</strong> (0.01, 0.05, &hellip;, 0.99). Don&rsquo;t forget to add 1 to <code>A</code> to obtain <strong>A</strong>. Luckily we have to calculate the <code>end-state-&gt;p</code> for a state <code>[A D]</code> only once and can then reuse it for each different <strong>p</strong>.</p>
+<h2 id="correctness">Correctness</h2>
+<p>I tested the code that computes <code>end-state-&gt;p</code> by comparing the results to semi-manually calculated results via the path traversal method.</p>
+<p>To test the code that calculates win percentages, I compared my results to the ones of Table 1 in 1. Note that my results are exact (e.g. <code>1/3</code>) whereas theirs are rounded (<code>0.333</code>), so I had to round down my results as well.</p>
+<p>Working with exact numbers by using ratios demands much more computing power, but completely removes the problems caused by rounding, mainly loss of information. Using ratios made the computation take many hours, whereas the rounded numbers version took mere minutes.</p>
+<p>With all of the complicated and tested code neatly tucked away, the code that is responsible for finding the lowest <strong>A</strong> given a <strong>D</strong> and <strong>p</strong> remains so simple I found no value in writing automated tests for it. Still, I had it peer reviewed and we find it falls in the category &lsquo;obviously correct&rsquo;. Yet another form of quality assurance is making the code publicly available.</p>
+<h3 id="compared-to-previous-work">Compared to previous work</h3>
+<p>Atfter I completed my work I found an article [4] that, like this article, tries to answer the question <em>&ldquo;What is the minimal amount of attacking troops (<strong>A</strong>) required on the territory from which the attack is launched to conquer a territory defended by <strong>D</strong> troops, with a probability of at least <strong>p</strong>?&quot;</em>.</p>
+<p>Actually, the semantics of their reported results are communicated ambiguously: <em>&ldquo;the minimum number of attacking armies A required to have an n% chance of conquering D defenders.&quot;</em> (description of Table 1). Is it supposed to mean <em>exactly an n% chance</em>,<em>closest to n%</em> or <em>at least n%</em>?</p>
+<p>They report in Table 1 (the AC rows) that <strong>A</strong>=3 for <strong>D</strong>=2 and <strong>p</strong>=0.2 (n=20%). According to my calculations the probability of the attacking side winning against 3 defending troops is around 0.106 for 2 attacking troops and 0.363 for 3 attacking troops. This suggests that indeed the authors' intent is <em>at least n%</em>, the same as mine.</p>
+<p>I compared their reported results to mine, and out of 98 results 17 were different. In all 17 cases, their result is one less than mine.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">p-&gt;D-&gt;A</span>
+  <span class="p">{</span><span class="mf">0.2</span> <span class="p">{</span> <span class="mi">7</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">5</span> <span class="ss">:mine</span>  <span class="mi">6</span><span class="p">}</span>
+        <span class="mi">10</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">7</span> <span class="ss">:mine</span>  <span class="mi">8</span><span class="p">}</span>
+        <span class="mi">13</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">9</span> <span class="ss">:mine</span> <span class="mi">10</span><span class="p">}}</span>
+   <span class="mf">0.3</span> <span class="p">{</span> <span class="mi">3</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">3</span> <span class="ss">:mine</span>  <span class="mi">4</span><span class="p">}</span>
+         <span class="mi">7</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">6</span> <span class="ss">:mine</span>  <span class="mi">7</span><span class="p">}</span>
+        <span class="mi">10</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">8</span> <span class="ss">:mine</span>  <span class="mi">9</span><span class="p">}</span>
+        <span class="mi">14</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">11</span> <span class="ss">:mine</span> <span class="mi">12</span><span class="p">}}</span>
+   <span class="mf">0.4</span> <span class="p">{</span> <span class="mi">5</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">5</span> <span class="ss">:mine</span>  <span class="mi">6</span><span class="p">}</span>
+         <span class="mi">6</span> <span class="p">{</span><span class="ss">:theirs</span>  <span class="mi">6</span> <span class="ss">:mine</span>  <span class="mi">7</span><span class="p">}</span>
+        <span class="mi">11</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">10</span> <span class="ss">:mine</span> <span class="mi">11</span><span class="p">}</span>
+        <span class="mi">15</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">13</span> <span class="ss">:mine</span> <span class="mi">14</span><span class="p">}}</span>
+   <span class="mf">0.5</span> <span class="p">{</span><span class="mi">10</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">10</span> <span class="ss">:mine</span> <span class="mi">11</span><span class="p">}</span>
+        <span class="mi">11</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">11</span> <span class="ss">:mine</span> <span class="mi">12</span><span class="p">}}</span>
+   <span class="mf">0.6</span> <span class="p">{</span><span class="mi">14</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">15</span> <span class="ss">:mine</span> <span class="mi">16</span><span class="p">}}</span>
+   <span class="mf">0.7</span> <span class="p">{}</span>
+   <span class="mf">0.8</span> <span class="p">{</span> <span class="mi">7</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">11</span> <span class="ss">:mine</span> <span class="mi">12</span><span class="p">}</span>
+         <span class="mi">8</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">12</span> <span class="ss">:mine</span> <span class="mi">13</span><span class="p">}</span>
+         <span class="mi">9</span> <span class="p">{</span><span class="ss">:theirs</span> <span class="mi">13</span> <span class="ss">:mine</span> <span class="mi">14</span><span class="p">}}})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Assuming my results are correct, something in the other article is incorrect. Is their mathematical reasoning flawed or did they make a mistake putting numbers into their formulas? I can&rsquo;t say.</p>
+<p>The authors never explicitly express the formulas they used to calculate these results. They discuss at length how to approximate the results and add that &ldquo;one could easily adapt the virtual formulas to obtain exact formulas&rdquo;. I, for one, am unable to do so and hence can&rsquo;t reproduce their results.</p>
 <h1 id="closing-words">Closing words</h1>
+<p>Early on I planned to release an actual tool that players could use to look up information while playing. After a while I realized such a thing has no place in the playing of <em>RISK</em>. Apart from questionable ethics, using a tool is too slow. Players have to rely on their knowledge and intuition.</p>
+<p>I hope my colorful graphs made you understand the odds of battles in <em>RISK</em> a little better. Certainly, the process of doing this project has greatly improved my understanding, something which reading an article could never hope to rival. Programming will give you a deep, intimate understanding of the thing you&rsquo;re modeling.</p>
+<p>One reason why mathematics is useful is that it exchanges labor, which takes time, for abstract models. The downside is that as an approach becomes more abstract, fewer people are able to understand it and correct mistakes. A programmatic approach tends to lean more towards the labor side (such as collecting data and counting it in some way) which can make it easier to understand. This topic warrants its own article. Stay tuned!</p>
+<p>With the <code>end-state-&gt;p</code> for all states we could answer more detailed questions such as <em>&ldquo;How many attacking troops do I need to conquer <strong>D</strong> defending troops with a probability of at least <strong>p</strong> such that I have at least <strong>T</strong> troops remaining?&quot;</em>. When calculating a win percentage, instead of looking at all states <code>[A 0]</code>, only look at the ones where <code>T &lt;= A</code>&hellip; Out of scope for this article, but feel free to investigate.</p>
+<h1 id="references">References</h1>
+<dl>
+<dt>[0] Blatt, 2002</dt>
+<dd><a href="https://scholar.rose-hulman.edu/cgi/viewcontent.cgi?article=1310&amp;context=rhumj">RISKy Business: An In-Depth Look at the Game <em>RISK</em></a>
+<p><a href="https://web.archive.org/web/20200320093349/https://scholar.rose-hulman.edu/cgi/viewcontent.cgi?article=1310&amp;context=rhumj">archived</a></p>
+</dd>
+<dt>[1] Osborne, 2003</dt>
+<dd><a href="https://www4.stat.ncsu.edu/~jaosborn/research/osborne.mathmag.pdf">Markov Chains for the RISK Board Game Revisited</a>
+<p><a href="https://web.archive.org/web/20210507005426/https://www4.stat.ncsu.edu/~jaosborn/research/osborne.mathmag.pdf">archived</a></p>
+<p>Erratum: in Table 3, D and A are swapped.</p>
+</dd>
+<dt>[2] Berry, 2011</dt>
+<dd><a href="https://datagenetics.com/blog/november22011/">RISK Analysis</a>
+<p><a href="https://web.archive.org/web/20201108091211/http://www.datagenetics.com/blog/november22011/">archived</a></p>
+</dd>
+<dt>[3] McLoone, 2017</dt>
+<dd><a href="https://blog.wolfram.com/2017/11/20/how-to-win-at-risk-exact-probabilities/">How to Win at Risk: Exact Probabilities</a>
+<p><a href="https://web.archive.org/web/20210303110525/https://blog.wolfram.com/2017/11/20/how-to-win-at-risk-exact-probabilities/">archived</a></p>
+</dd>
+<dt>[4] Hendel, Hoffman, Manack, Wagaman, 2014</dt>
+<dd><a href="https://web.williams.edu/Mathematics/sjmiller/public_html/cm/HendelHoffManackWagaman021014.pdf">Taking the risk out of RISK: Conquer odds in the board game RISK</a>
+<p><a href="https://web.archive.org/web/20210819152856/https://web.williams.edu/Mathematics/sjmiller/public_html/cm/HendelHoffManackWagaman021014.pdf">archived</a></p>
+<p>Erratum: &lsquo;table 4&rsquo; in mentioned in the text is actually Table 1.</p>
+</dd>
+</dl>
 
     </div>
 
@@ -365,9 +452,8 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="https://github.com/jeroenvanwijgerden/" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.linkedin.com/in/jeroen-van-wijgerden-0168ab7a/" class="iconfont icon-linkedin" title="linkedin"></a>
   <a href="https://jeroenvanwijgerden.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
