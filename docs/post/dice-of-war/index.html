@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A computer-aided analysis of the probabilities of battle outcomes in the game RISK">
 <meta itemprop="datePublished" content="2021-09-17T13:37:31+02:00" />
 <meta itemprop="dateModified" content="2021-09-17T13:37:31+02:00" />
-<meta itemprop="wordCount" content="3320">
+<meta itemprop="wordCount" content="3346">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2021 Sep 17 </span>
         
-          <span class="more-meta"> 3320 words </span>
+          <span class="more-meta"> 3346 words </span>
           <span class="more-meta"> 16 mins read </span>
         
       </div>
@@ -191,7 +191,7 @@
 <p><img src="/static/post/dice-of-war/final-rel-def-str-cap.svg" alt=""></p>
 <p>Roughly, to conquer a capital you need 1.5 to 2 times as many troops as you would need to conquer a standard territory.</p>
 <h1 id="approach">Approach</h1>
-<p>How to mathematically calculate the probability of winning has been described in detail [0] [1]. To calculate it with computer programming has been somewhat documented here [2] [3]. My goal is to give a more thorough explanation.</p>
+<p>How to mathematically calculate the probability of winning has been described in detail [0] [1]. To calculate it with computer programming has been somewhat documented to a lesser extent [2] [3]. My approach is to calculate win percentages for an ever increasing amount of attacking troops versus a fixed amount of defending troops until the probability of the attacking side winning is high enough.</p>
 <p>From here on I switch from &lsquo;I&rsquo; to &lsquo;we&rsquo;, because when I write an explanation I always feel like a wizard guiding a traveler through a foggy swamp.</p>
 <h2 id="creating-a-probability-tree">Creating a probability tree</h2>
 <p>In our calculations we work with battle states, which look like <code>[A D]</code>, representing the amount of troops each side has left. <code>A</code> is exactly one less than the <strong>A</strong> of the resulting graphs, because one troop must always remain in the territory from which the attack was launched.</p>
@@ -268,7 +268,7 @@
    <span class="p">[</span><span class="mi">3</span> <span class="mi">2</span><span class="p">]</span> <span class="p">{[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span> <span class="mi">2890</span><span class="nv">/7776</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="mi">2611</span><span class="nv">/7776</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span><span class="p">]</span> <span class="mi">2275</span><span class="nv">/7776</span><span class="p">}})</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Putting together what we have so far: by calculating the used dice for a state we can determine the losses and associated probabilties that lead to its child states. If we start building the probability tree at the biggest state we want with so called depth-first recursion, we end up with an almost complete probability tree. Here is an example for starting at state `[2 2]:</p>
+</div><p>Putting together what we have so far: by calculating the used dice for a state we can determine the losses and associated probabilties that lead to its child states. If we start building the probability tree at the largest state we want with so called depth-first recursion, we end up with an almost complete probability tree. Here is an example, starting at state <code>[2 2]</code>:</p>
 <p><img src="/static/post/dice-of-war/state-space-2-2-dfs-animation.svg" alt=""></p>
 <p>However, because states <code>[1 2]</code> and <code>[2 1]</code> are not reachable from <code>[2 2]</code> they aren&rsquo;t included in the tree. To include them, we can restart the recursion from these states. Now when the recursion reaches state <code>[1 1]</code>, we can stop because the tree from <code>[1 1]</code> onwards has already been constructed.</p>
 <p>The full probability tree for all states up to and including <code>[3 3]</code> looks as follows:</p>
