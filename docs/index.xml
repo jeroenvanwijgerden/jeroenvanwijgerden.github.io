@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Jeroen van Wijgerden</copyright>
-    <lastBuildDate>Fri, 17 Sep 2021 13:37:31 +0200</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Sep 2021 16:53:00 +0200</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Squid Game, game 5</title>
+      <link>https://jeroenvanwijgerden.me/post/squid-game-5/</link>
+      <pubDate>Wed, 29 Sep 2021 16:53:00 +0200</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/squid-game-5/</guid>
+      <description>The survivals odds for each player &amp;amp; a primer on calculating probabilities with programming</description>
+    </item>
+    
     <item>
       <title>Let slip the dice of war</title>
       <link>https://jeroenvanwijgerden.me/post/dice-of-war/</link>
