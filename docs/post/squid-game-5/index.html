@@ -49,7 +49,7 @@
 <meta itemprop="description" content="The survivals odds for each player &amp; a primer on calculating probabilities with programming">
 <meta itemprop="datePublished" content="2021-09-29T16:53:00+02:00" />
 <meta itemprop="dateModified" content="2021-09-29T16:53:00+02:00" />
-<meta itemprop="wordCount" content="2897">
+<meta itemprop="wordCount" content="3000">
 
 
 
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2021 Sep 29 </span>
         
-          <span class="more-meta"> 2897 words </span>
-          <span class="more-meta"> 14 mins read </span>
+          <span class="more-meta"> 3000 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -169,7 +169,7 @@
 <p>Surely, players in the back have better odds. But how much better? Although human factors weigh in, there is a basis of probability theory that will give a better insight in each player&rsquo;s odds of survival.</p>
 <p>Looking at this problem from a purely mathematical point of view, what is each player&rsquo;s probability of reaching the eighteenth pane alive and well? This is not entirely straightforward because the odds of a player&rsquo;s success depend on the successes of the players in front.</p>
 <p>In case you&rsquo;re only interested in the actual probabilities, I put them before the bulk of this article.</p>
-<p>My goal of this article is to provide an informal reference to my programming students and anyone interested in calculating probabilities leaning more on programming than on mathematics.</p>
+<p>The goal of this article is to provide an informal reference to my programming students and anyone interested in calculating probabilities leaning more on programming than on mathematics. I discuss a general approach using the brigde problem as a concrete example.</p>
 <p>Yes, this particular example can be calculated more efficiently and elegantly. I use this particular example from popular media to to discuss a general approach which can be applied more broadly.</p>
 <p>This approach can be implemented in many different ways. You can find my implementation, including the code that generated the results, <img src="https://github.com/jeroenvanwijgerden/squid-game-5" alt="here">.</p>
 <p>Now let&rsquo;s get started!</p>
@@ -399,7 +399,7 @@ player 1 succesfully reached pane 3
 <p>I can feel the skepticism radiating from your visage. For this small example, the probabilities were trivial indeed. We could have easily come to these results with straightforward mathematics. But lo! a is less obvious example is abound!</p>
 <h2 id="writing-a-program">Writing a program</h2>
 <p><img src="/static/post/squid-game-5/squid-game-5-3p.drawio.svg" alt=""></p>
-<p>For the situation 3 players, 3 panes, spend a minute or so trying to calculate the probability of event &lsquo;player 3 successfully reached pane 3&rsquo; with conventional mathematics. Trivial no longer.</p>
+<p>For the situation 3 players, 3 panes, spend a minute or so trying to calculate the probability of event &lsquo;player 3 successfully reached pane 3&rsquo; with conventional mathematics. Not so trivial anymore.</p>
 <p>Not to mention the sheer labor required to calculate the results for 16 players and 18 panes. 288 events! 262,125 end states! 75,492,000 cross-checks!</p>
 <p>Time to write a program. This will be its general structure:</p>
 <p>(All code in this article is pseudocode, definitely not JavaScript. The code blocks say &lsquo;JavaScript&rsquo; for syntax highlighting.)</p>
@@ -453,7 +453,8 @@ player 1 succesfully reached pane 3
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>The main component is a state. How to model a state? Modeling is an iterative process. You start somewhere and add or change things as you introduce more ways in which you want to use your model.</p>
+</div><p>Starting with the initial state, by iteratively taking a state from a stack and putting its children back on the stack, we create all states in a depth-first order.</p>
+<p>The main component is a state. How to model a state? Modeling is an iterative process. You start somewhere and add or change things as you introduce more ways in which you want to use your model.</p>
 <p>Ultimately a state needs to contain enough information to:</p>
 <ul>
 <li>Decide if it&rsquo;s an end state</li>
@@ -639,9 +640,12 @@ player 1 succesfully reached pane 3
 </code></pre></td></tr></table>
 </div>
 </div><p>We have our end states (outcomes), but what about probabilities? We didn&rsquo;t store any transitions!</p>
-<p>Instead of storing transitions and traversing paths, we could store the probability of the path that reaches a state in the state itself. For the initial state, this probability defaults to 1. When we create a state&rsquo;s child, we multiply the state&rsquo;s probability by the probability of the transition to that child. Effectively, this extends the path to the parent state by that transition. The probability of the extended path is stored in the child.</p>
-<p><strong>Be aware!</strong> If states are reachable via multiple paths, each time you encounter a state you should add to the probability stored in it. Also, in such a case an optimal algorithm has to be breadth-first. If it&rsquo;s not, a state&rsquo;s incomplete probability might be used to calculate the probabilities for its children. I won&rsquo;t go into more detail, but if you spend some time sketching an example on paper you&rsquo;ll see.</p>
-<p>For our bridge problem all states are reached by a single path only, so we can get away with immediately calculating each state&rsquo;s final probability in a depth-first order.</p>
+<p>Instead of storing transitions and traversing paths, we could store the probability of the path that reaches a state in the state itself. For the initial state, this probability defaults to 1.</p>
+<p><img src="/static/post/squid-game-5/squid-game-5-1p-probs-all.drawio.svg" alt=""></p>
+<p>When we create a state&rsquo;s child, we multiply the state&rsquo;s probability by the probability of the transition to that child. This extends the path to the parent state by that transition, effectively creating the path to the child. The probability of the extended path is stored in the child.</p>
+<p><strong>Beware!</strong> If states are reachable via multiple paths we have to be more careful. Each time a path comes to a state, there might already be a probability for that state. The probability of the extended path should be added to any existing probability, not override it.</p>
+<p>Also in case of multiple paths reaching a state, before a state can be processed all of its parents must be processed. If not all parents have been processed yet, the state&rsquo;s probability is incomplete and can&rsquo;t be used to calculate the probability of its children. Processing the states in a breadth-first order will ensure all parents are processed first. I won&rsquo;t go into more detail, but if you spend some time sketching an example on paper you&rsquo;ll see.</p>
+<p>However, for our bridge problem all states are reached by a single path only. We can get away with immediately calculating each state&rsquo;s final probability in a depth-first order.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
