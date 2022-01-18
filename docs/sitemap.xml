@@ -2,15 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jeroenvanwijgerden.me/post/avoiding-naming/</loc>
+    <lastmod>2022-01-17T14:59:47+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://jeroenvanwijgerden.me/</loc>
-    <lastmod>2021-09-29T16:53:00+02:00</lastmod>
+    <lastmod>2022-01-17T14:59:47+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://jeroenvanwijgerden.me/post/</loc>
-    <lastmod>2021-09-29T16:53:00+02:00</lastmod>
+    <lastmod>2022-01-17T14:59:47+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
