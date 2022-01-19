@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Naming is difficult so avoid it where possible.">
 <meta itemprop="datePublished" content="2022-01-17T14:59:47+01:00" />
 <meta itemprop="dateModified" content="2022-01-17T14:59:47+01:00" />
-<meta itemprop="wordCount" content="825">
+<meta itemprop="wordCount" content="826">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 17 </span>
         
-          <span class="more-meta"> 825 words </span>
+          <span class="more-meta"> 826 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -160,19 +160,19 @@
       <p>This is one of the points Zachary Tellman makes in his book <em>Elements of Clojure</em>. In this article I elaborate on this idea and give an example of how I applied it in practise.</p>
 <p>Many sources discuss <em>how</em> to choose a new name. Tellman made me think of when <em>not</em> to choose a new name.</p>
 <p>Names are very useful. They provide a summary of a complex idea, or they serve as a guide to start understanding a complex idea. I would like to elaborate on this further in a future article.</p>
-<p>The downside of names is that they introduce something new to be understood and remembered. On top of that, there are only so many names and even fewer good ones. Introducing names with zeal and alactrity will lead to clashes and confusion.</p>
+<p>The downside of names is that they introduce something new to be understood and remembered. On top of that, there are only so many names and even fewer good ones. Introducing names with zeal and alacrity will lead to clashes and confusion.</p>
 <p>In this article I only discuss non-naming for small compound data. However, Tellman mentions a few more situations where it can be applied. I think most valuable to you, dear reader, is the general notion that perhaps you don&rsquo;t always need a new name. With this awareness you will discover situations where you find this notion applicable.</p>
 <h2 id="small-compound-data">Small compound data</h2>
 <p>Let&rsquo;s say we have pairs of tutors and students. You could introduce a new name for such a pairing, e.g. a <em>tutelage</em>. Tellman suggests in his book to instead just call it <em>tutor+student</em>. The latter name makes it immadelately clear what it is, because it is just that: a pair of a tutor and a student. A good name, without introducing a new name.</p>
 <p>If your language doesn&rsquo;t allow <em>+</em> in a name, think of something else such as <em>tutor_and_student</em>. Although admittedly a large part of why <em>tutor+student</em> is acceptable is because it&rsquo;s still short; the more characters you need, the sooner you might find it unacceptable.</p>
 <p>I once worked in the codebase for a server with the concept of a <em>context</em>. A context is a compound of an <em>alias</em>, a <em>urn</em> and a <em>param</em>. However, in that same codebase there were four(!) different notions of <em>context</em>. Context is such a nice and generic term that it sort of fits in many places. Indeed, that codebase was quite difficult for new employees to grasp.</p>
-<p>I got rid of this particular notion of <em>context</em> by changing the name to <em>alias+urn+param</em>. My colleagues thought that part of the code had become much clearer, thanks in part to the necessity of understanding and remembering what a <em>context</em> is in that particular context (ha).</p>
-<p>Let&rsquo;s look at an alternative. I could have thought of a new name. Perhaps elaborated more on what sort of context this is. An <em>enricher-context</em>, perhaps? But is that name really better than <em>alias+urn+param</em>? For typing and reading it&rsquo;s about as much effort, but the <em>+</em> style name does a better job of being self-explanatory.</p>
-<p>Admittedly in verbal communication it was a bit awkward to say &lsquo;alias urn param&rsquo;.</p>
+<p>I got rid of this particular notion of <em>context</em> by changing the name to <em>alias+uri+param</em>. My colleagues thought that part of the code had become much clearer, thanks in part to the necessity of understanding and remembering what a <em>context</em> is in that particular context (ha).</p>
+<p>Let&rsquo;s look at an alternative. I could have thought of a new name. Maybe elaborated more on what sort of context this is. An <em>enricher-context</em>, perhaps? But is that name really better than <em>alias+uri+param</em>? For typing and reading it&rsquo;s about as much effort, but the <em>+</em> style name does a better job of being self-explanatory.</p>
+<p>Admittedly in verbal communication it was a bit awkward to say &lsquo;alias uri param&rsquo;.</p>
 <p>My take is that naming small compound data in this <em>+</em> way works up to about 2.5 elements that are compounded. By that I mean that it works for sure with two elements but is questionable for three. Four is definitely too many and sadly requires a new name.</p>
 <h2 id="another-example">Another example</h2>
 <p>In <a href="https://adventofcode.com/2016/day/1">this advent of code puzzle</a> you are tasked to walk on a grid by following a sequence of instructions: rotate clockwise 90 degrees, rotate counter-clockwise 90 degrees, or take n steps.</p>
-<p>When you take steps, your new location will depend on your old location and which way you  (your orientation). In my implementation I make use of location-orientation pairs. I could introduce a new name for such a pair. A <em>placement</em>, perhaps?</p>
+<p>When you take steps, your new location will depend on your old location and which way you face (your orientation). In my implementation I make use of location-orientation pairs. I could introduce a new name for such a pair. A <em>placement</em>, perhaps?</p>
 <p>No need to ponder on a good name: just call it <em>location+orientation</em>.</p>
 <h2 id="clojure-specific">Clojure specific</h2>
 <p>So what about not a single compound, but a collection of compounds? How to name, let&rsquo;s say, a big list of tutor-student pairs? Tellman suggests <em>tutor+students</em>, admitting there is ambiguity whether what is meant is <em>(tutor+student)s</em> or tutor+(students). If the ambiguity is not cleared by context, he writes, then do introduce new names such as <em>tutelage</em> and <em>tutelages</em>.</p>
@@ -184,7 +184,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">tutor</span> <span class="nv">student</span><span class="p">]]</span> <span class="p">(</span><span class="nb">first </span><span class="nv">tutor+student</span><span class="p">)])</span>
+<pre class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">tutor</span> <span class="nv">student</span><span class="p">]</span> <span class="p">(</span><span class="nb">first </span><span class="nv">tutor+student</span><span class="p">)])</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>I don&rsquo;t have a single word that names the single pair, but the pair is described by <code>[tutor student]</code>. This has its own pros and cons, but overall I like it.</p>
