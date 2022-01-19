@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Naming is difficult so avoid it where possible.">
 <meta itemprop="datePublished" content="2022-01-17T14:59:47+01:00" />
 <meta itemprop="dateModified" content="2022-01-17T14:59:47+01:00" />
-<meta itemprop="wordCount" content="826">
+<meta itemprop="wordCount" content="816">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 17 </span>
         
-          <span class="more-meta"> 826 words </span>
+          <span class="more-meta"> 816 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -165,8 +165,8 @@
 <h2 id="small-compound-data">Small compound data</h2>
 <p>Let&rsquo;s say we have pairs of tutors and students. You could introduce a new name for such a pairing, e.g. a <em>tutelage</em>. Tellman suggests in his book to instead just call it <em>tutor+student</em>. The latter name makes it immadelately clear what it is, because it is just that: a pair of a tutor and a student. A good name, without introducing a new name.</p>
 <p>If your language doesn&rsquo;t allow <em>+</em> in a name, think of something else such as <em>tutor_and_student</em>. Although admittedly a large part of why <em>tutor+student</em> is acceptable is because it&rsquo;s still short; the more characters you need, the sooner you might find it unacceptable.</p>
-<p>I once worked in the codebase for a server with the concept of a <em>context</em>. A context is a compound of an <em>alias</em>, a <em>urn</em> and a <em>param</em>. However, in that same codebase there were four(!) different notions of <em>context</em>. Context is such a nice and generic term that it sort of fits in many places. Indeed, that codebase was quite difficult for new employees to grasp.</p>
-<p>I got rid of this particular notion of <em>context</em> by changing the name to <em>alias+uri+param</em>. My colleagues thought that part of the code had become much clearer, thanks in part to the necessity of understanding and remembering what a <em>context</em> is in that particular context (ha).</p>
+<p>I once worked in the codebase for a server with the concept of a <em>context</em>. A context is a compound of an <em>alias</em>, a <em>urn</em> and a <em>param</em>. However, in that same codebase there were four(!) different notions of <em>context</em>. <em>Context</em> is so nice and generic term that it&rsquo;s an easy name to fall back to.</p>
+<p>I got rid of that one particular notion of <em>context</em> by changing the name to <em>alias+uri+param</em>. My colleagues thought that part of the code had become much clearer, thanks in part to the necessity of understanding and remembering what a <em>context</em> is in that particular context (ha).</p>
 <p>Let&rsquo;s look at an alternative. I could have thought of a new name. Maybe elaborated more on what sort of context this is. An <em>enricher-context</em>, perhaps? But is that name really better than <em>alias+uri+param</em>? For typing and reading it&rsquo;s about as much effort, but the <em>+</em> style name does a better job of being self-explanatory.</p>
 <p>Admittedly in verbal communication it was a bit awkward to say &lsquo;alias uri param&rsquo;.</p>
 <p>My take is that naming small compound data in this <em>+</em> way works up to about 2.5 elements that are compounded. By that I mean that it works for sure with two elements but is questionable for three. Four is definitely too many and sadly requires a new name.</p>
