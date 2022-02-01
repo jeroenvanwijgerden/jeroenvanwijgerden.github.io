@@ -2,21 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jeroenvanwijgerden.me/post/avoiding-naming/</loc>
-    <lastmod>2022-01-17T14:59:47+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://jeroenvanwijgerden.me/</loc>
-    <lastmod>2022-01-17T14:59:47+01:00</lastmod>
+    <lastmod>2022-01-31T12:51:04+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://jeroenvanwijgerden.me/post/</loc>
+    <lastmod>2022-01-31T12:51:04+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeroenvanwijgerden.me/post/testing-input-output/</loc>
+    <lastmod>2022-01-31T12:51:04+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://jeroenvanwijgerden.me/post/avoiding-naming/</loc>
     <lastmod>2022-01-17T14:59:47+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
