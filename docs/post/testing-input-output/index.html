@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Using functions to write advanced tests.">
 <meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
-<meta itemprop="wordCount" content="4219">
+<meta itemprop="wordCount" content="4229">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 31 </span>
         
-          <span class="more-meta"> 4219 words </span>
+          <span class="more-meta"> 4229 words </span>
           <span class="more-meta"> 20 mins read </span>
         
       </div>
@@ -1245,6 +1245,8 @@ Game over. Your secret number was: 37
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
@@ -1253,7 +1255,9 @@ Game over. Your secret number was: 37
 
     <span class="k">return</span> <span class="n">get_input</span>
 
-<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;a&#34;</span><span class="p">])</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span>
+
+<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">)</span>
 
@@ -1276,7 +1280,9 @@ Game over. Your secret number was: 37
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="hl"><span class="lnt">13
-</span></span></code></pre></td>
+</span></span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
 <span class="hl">    <span class="n">enclosed_list</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1286,12 +1292,14 @@ Game over. Your secret number was: 37
 
     <span class="k">return</span> <span class="n">get_input</span>
 
-<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;a&#34;</span><span class="p">])</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">)</span>
+<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
 
-<span class="hl"><span class="k">print</span><span class="p">(</span><span class="n">get_input</span><span class="p">())</span> <span class="c1"># &#34;a&#34;</span>
-</span></code></pre></td></tr></table>
+<span class="hl"><span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">)</span>
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_input</span><span class="p">())</span> <span class="c1"># &#34;a&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>The last big concept in this article I want to discuss is <em>polymorphism</em>.</p>
 <p>Let&rsquo;s compare the original code for the game with our final version:</p>
