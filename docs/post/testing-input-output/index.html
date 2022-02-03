@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Using functions to write advanced tests.">
 <meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
-<meta itemprop="wordCount" content="4229">
+<meta itemprop="wordCount" content="4300">
 
 
 
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 31 </span>
         
-          <span class="more-meta"> 4229 words </span>
-          <span class="more-meta"> 20 mins read </span>
+          <span class="more-meta"> 4300 words </span>
+          <span class="more-meta"> 21 mins read </span>
         
       </div>
     </header>
@@ -166,8 +166,8 @@
 <p>Although the more advanced testing approach discussed in this article can be used for all sorts of IO programs (such as making web requests and writing to databases) the example program in this article is a small game that is played in the console.</p>
 <p>This game is the <code>Guess My Number</code> exercise of <code>MITx 6.001x Introduction to Computer Science and Programming Using Python</code>. A client of mine wrote a working program for this exercise but asked me to help him improve his program&rsquo;s structure. This article is based on our coaching sessions.</p>
 <h1 id="the-exercise">The exercise</h1>
-<p>For the <code>Guess My Number</code> exercise you are tasked to program a small game. The game asks you to think of a number between 0 and 100. It guesses a number and asks you to reply with &lsquo;too high&rsquo;, &lsquo;too low&rsquo; or &lsquo;correct&rsquo;. It continues to guess until you answer &lsquo;correct&rsquo;.</p>
-<p>If the user would input <code>h</code>, <code>l</code>, <code>q</code> (an invalid input) and <code>c</code> while playing the game, this is what the console should end up like:</p>
+<p>For the <code>Guess My Number</code> exercise you are tasked to program a small game. The game asks you to think of a number between 0 and 100. It guesses a number and asks you to reply with &lsquo;too high&rsquo; (h), &lsquo;too low&rsquo; (l) or &lsquo;correct&rsquo; (c). It continues to guess until you answer &lsquo;correct&rsquo;.</p>
+<p>After a user has put in <code>h</code>, <code>l</code>, <code>q</code> (an invalid input) and <code>c</code>, this is what the console should look like:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1221,17 +1221,17 @@ Game over. Your secret number was: 37
 <p>It took some effort to get to this point, but writing tests is an investment that might (probably will) pay off and is worth considering!</p>
 <h1 id="nomenclature">Nomenclature</h1>
 <p>In addition to <em>extract function</em> there are more techniques you, dear reader, have encountered in this article.</p>
-<p>A <em>higher order function</em> is a function</p>
+<p>A <em>higher order function</em> is a function that satisfies one or both of the following:</p>
 <ul>
-<li>of which at least one parameter is a function</li>
-<li>that returns a function</li>
+<li>at least one parameter is a function</li>
+<li>it returns a function</li>
 </ul>
-<p>or both. This makes <code>play_game</code> a higher order function as both parameters <code>get_input</code> and <code>put_out</code> are functions. <code>create_get_input</code> is a higher order function because it returns a function.</p>
+<p>This makes <code>play_game</code> a higher order function as both parameters <code>get_input</code> and <code>put_out</code> are functions. <code>create_get_input</code> is a higher order function because it returns a function.</p>
 <p>A function that returns a function can be used to create a <em>closure</em>. After <code>create_get_input</code> has returned <code>get_input</code>, only <code>get_input</code> will ever access the variable <code>inputs</code> (a parameter is a specific kind of variable) because no other part of the program has access to <code>inputs</code> due to the basic rules of scoping. In other words, <code>inputs</code> is &lsquo;enclosed&rsquo; within <code>get_input</code>.</p>
 <p>Creating closures is a way to make functions with dynamic behavior. Only by creating a closure could we dictate that subsequent calls to <code>get_input</code> each return one element of a list in order.</p>
 <p>If you are more experienced you might recognize that you can also use objects with methods, which is true. Those are closures as well. However, the most light-weight way to create a closure is with plain functions.</p>
 <p>Closures can also prevent mistakes. Because only a small function and no other part of the code can access a variable, there is very little opportunity to do something wrong.</p>
-<p>Although <code>inputs</code> is enclosed and is inaccessible to other parts of the code, this particular closure is still not safe. The value contained by <code>inputs</code> is a reference to a mutable list. Other parts of the code can still access and mutate this list if they too have a reference to it. Here is an example:</p>
+<p>Although <code>inputs</code> is enclosed and is inaccessible to other parts of the code, this particular closure is still not safe. The value contained by <code>inputs</code> is a reference to a mutable list. Even without access to <code>inputs</code>, if other parts of the code have a reference to the same list stored in a different variable they can still change the list. Here is an example:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1251,7 +1251,7 @@ Game over. Your secret number was: 37
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">enclosed_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -1264,7 +1264,9 @@ Game over. Your secret number was: 37
 <span class="k">print</span><span class="p">(</span><span class="n">get_input</span><span class="p">())</span> <span class="c1"># &#34;z&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>This is one of the downsides of referred mutable objects. Since Python has no immutable lists by default, instead we could copy <code>inputs</code> to create a new mutable list that no other part of the code has a reference to. This way we can ensure that <code>get_input</code> operates on a list that only it can access.</p>
+</div><p>This is one of the downsides of referred mutable objects. Python, unlike some languages, has no immutable lists by default. If we want to avoid the unsafety of mutable objects we have to do a little extra work.</p>
+<p>As a beginner you might not see why anyone would care about this. Spending a few evenings debugging some weird issue to find out it was caused by mutating referenced objects might change your mind.</p>
+<p>If we immediately create a copy of <code>inputs</code> we have a new object that no other part of the code has a reference to. Only this part of the code can access the list, making it safe again. Eric Normand <a href="https://lispcast.com/what-is-immutability/">calls this</a> the &lsquo;copy-on-write&rsquo; discipline.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1285,10 +1287,10 @@ Game over. Your secret number was: 37
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-<span class="hl">    <span class="n">enclosed_list</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="hl">    <span class="n">safe_list</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">enclosed_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">safe_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -1382,12 +1384,12 @@ Game over. Your secret number was: 37
 </code></pre></td></tr></table>
 </div>
 </div><p>The only difference really is that the original version of the game code called <code>input</code> and <code>print</code> directly whereas the refactored version calls <code>input</code> and <code>print</code> indirectly. We created an <em>indirection</em>.</p>
-<p>The game code now depends only on how whatever is assigned to the parameter <code>get_input</code> is used (call it like a function, without arguments) and how it will behave (each call returns a string). The game code now depends on an abstract expectation, not anything specific that meets this expectation, such as the function <code>print</code>.</p>
+<p>The game code now depends only on how whatever is assigned to the parameter <code>get_input</code> is used (call it like a function, without arguments) and how it will behave (each call returns a string). The game code now depends on an abstract expectation, not anything specific that meets this expectation such as the function <code>print</code>.</p>
 <p>Likewise, the game code depends on an abstract expectation of <code>put_out</code>, no longer specifically <code>print</code> that meets this expectation.</p>
 <p>We can call <code>play_game</code> with <code>input</code> and <code>print</code> as arguments. Both functions satisfy the expectations of the game code. We can also call <code>play_game</code> with other functions, as long as they satisfy the expectations. This is exactly what we do in our tests.</p>
 <p>How the expectations of the game code are met can now take many shapes. Many, poly. Shapes, morphs. Polymorphism.</p>
 <p>Typically polymorphism is explained with interfaces and objects, or classes and instances. These are more elaborate tools that also solve the problem of defining expectations and creating concrete realizations of these expectations.</p>
-<p>Often the simple and familiar function can already be good enough to solve this problem.</p>
+<p>Often the simple and familiar function is adequate for solving this problem.</p>
 <h1 id="progression-in-learning-programming">Progression in learning programming</h1>
 <p>Interfaces and objects (and classes, which are a convenience for using interfaces and objects) are more elaborate solutions to problems that can often (definitely not always) also be solved by a more basic tool: functions. In this article we&rsquo;ve seen two such cases: creating dynamic behavior and polymorphism.</p>
 <p>The way I let my students progress is by first studying the use of functions. Only when functions are no longer adequate to solve the problems at hand do I introduce the more elaborate interfaces and objects. And only after those do I introduce classes.</p>
