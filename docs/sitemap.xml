@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://jeroenvanwijgerden.me/post/simple-testing/</loc>
+    <lastmod>2022-01-19T12:25:58+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://jeroenvanwijgerden.me/post/avoiding-naming/</loc>
     <lastmod>2022-01-17T14:59:47+01:00</lastmod>
     <changefreq>weekly</changefreq>

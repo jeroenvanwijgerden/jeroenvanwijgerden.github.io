@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Testing: simplest way to start - jvw blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Jeroen van Wijgerden" /><meta name="description" content="An introduction with fundamental vocabulary and practical tips." /><meta name="keywords" content="blog, programming, education" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://jeroenvanwijgerden.me/post/simple-testing/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Testing: simplest way to start" />
+<meta property="og:description" content="An introduction with fundamental vocabulary and practical tips." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/simple-testing/" />
+<meta property="article:published_time" content="2022-01-19T12:25:58+01:00" />
+<meta property="article:modified_time" content="2022-01-19T12:25:58+01:00" />
+<meta itemprop="name" content="Testing: simplest way to start">
+<meta itemprop="description" content="An introduction with fundamental vocabulary and practical tips.">
+<meta itemprop="datePublished" content="2022-01-19T12:25:58+01:00" />
+<meta itemprop="dateModified" content="2022-01-19T12:25:58+01:00" />
+<meta itemprop="wordCount" content="1974">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Testing: simplest way to start"/>
+<meta name="twitter:description" content="An introduction with fundamental vocabulary and practical tips."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">jvw@blog:~$</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">jvw@blog:~$</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Testing: simplest way to start</h1>
+      <h3 class="post-summary">An introduction with fundamental vocabulary and practical tips.</h3>
+      <div class="post-meta">
+        <span class="post-time"> 2022 Jan 19 </span>
+        
+          <span class="more-meta"> 1974 words </span>
+          <span class="more-meta"> 10 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#vocabulary">Vocabulary</a></li>
+    <li><a href="#writing-tests">Writing tests</a>
+      <ul>
+        <li><a href="#assertions">Assertions</a></li>
+        <li><a href="#multiple-cases">Multiple cases</a></li>
+      </ul>
+    </li>
+    <li><a href="#closing-words">Closing words</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Recognizable? You&rsquo;re happily programming but after a while you realize you broke something. Which of the many changes caused the problem?</p>
+<p>Or, you finally made your program work and now you don&rsquo;t dare to make any changes (to tidy things up) because that means checking all over again if everything still works. Especially if you have to provide input or read prints this is very time consuming. For such cases I wrote <a href="https://jeroenvanwijgerden.me/post/testing-input-output/">a follow-up</a> to this article.</p>
+<p>These problems start to arise pretty soon in your programming journey, typically when your programs approach 30 or so lines of code. Problems indeed: you&rsquo;re spending time and energy on sleuthing or manually testing, not on improving!</p>
+<p>The solution is writing some additional code that does the testing of your &lsquo;actual&rsquo; code. Run these tests (by running your code as you would normally) each time you make a small change. This way you immediately know if either everything still works or exactly what caused a problem (that last small change).</p>
+<p>If you look up how to test you might be daunted by all the libraries, frameworks and methodologies that you find. However, for a beginner they are probably overkill.</p>
+<p>Instead, let&rsquo;s look at the simplest way to get benefits from writing automated tests. You can test in this way in any langauge, no libraries or frameworks required.</p>
+<p>The next section gives you some vocubulary to make it easier to talk about what we&rsquo;re doing. In the section after that we start writing code.</p>
+<h1 id="vocabulary">Vocabulary</h1>
+<p>A test if a check to verify if something works as expected.</p>
+<p>You have tested your code many times yourself. You wrote a program, ran it and checked if what it printed is what it should have printed.</p>
+<p>If you or another human performs the test it&rsquo;s called a <em>manual test</em>.</p>
+<p>If other code performs the test it&rsquo;s called an <em>automated test</em>.</p>
+<p>Code that does such testing is <em>test code</em>.</p>
+<p>Code that is tested by test code is <em>production code</em>. You might consider this the &lsquo;actual&rsquo; code, the code that makes the program do what you want it to do.</p>
+<p>In testing we look at what code does, not at the code itself. You test the <em>behavior</em> of code, not its <em>structure</em>. Structure is what code is used and how it&rsquo;s organized.</p>
+<p>Behavior is what can be observed from the outside. In a manual test the behavior you typically look at is what the program prints on screen. Other behavior can be things like how fast it runs.</p>
+<p>There is also behavior to be observed inside your program. For example the behavior of a function is what value it will return, given a certain input. This is the basis of the simple testing method which we&rsquo;ll get to shortly.</p>
+<p>Behavior dictates the correctness of code and is very objective. Does the code do what it should do, yes or no? Assuming you actually know what the code should do, but that&rsquo;s out of scope for this article. While learning programming the exercises state clearly what the code should do.</p>
+<p>Structure dictates things like how easy it is to understand the code and how easy it is to change or expand the code. The larger your program becomes the more important it is to have good structure. Compared to behavior the quality of structure is much more subjective.</p>
+<p>Especially as a beginner your first goal is to write code that &lsquo;works&rsquo;. Focus on getting the correct behavior without focussing too much on structure. Don&rsquo;t neglect structure entirely though, because a little structure will help you get to &lsquo;it works!&rsquo; faster.</p>
+<p>After you&rsquo;ve achieved the behavior you want you can change (improve) the structure of your code. Changing structure while keeping behavior the same is called <em>refactoring</em>.</p>
+<h1 id="writing-tests">Writing tests</h1>
+<p>The simple tools we&rsquo;re going to use for our automated tests are <em>assertions</em> and <em>functions</em>. Both are available in all programming languages.</p>
+<p>We&rsquo;re going to look at the following workflow:</p>
+<ul>
+<li>Write code with correct behavior</li>
+<li>Write test code that &lsquo;pins down&rsquo; this behavior
+<ul>
+<li>Wrap the production code in a function</li>
+<li>for each test case
+<ul>
+<li>call that function with case-specific arguments</li>
+<li>assert that the returned value is equal to the expected value</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Refactor the production code
+<ul>
+<li>After each small change, run the test code
+<ul>
+<li>Do this easily with a keybinding!</li>
+</ul>
+</li>
+<li>Test failed? Undo change or investigate</li>
+</ul>
+</li>
+</ul>
+<h2 id="assertions">Assertions</h2>
+<p>Details differ slightly between languages but in general assertions work like this. When running <code>assert something</code>, if <code>something</code> evaluates to the value <code>true</code> of type boolean then nothing happens, otherwise we get a nice big fat error.</p>
+<p>To keep this article easy to read I deliberately chose a code sample that is short, not one that best illustrates when you want to start using automated tests. Please sprinkle some imagination on top of it. You don&rsquo;t need to understand the code sample or <a href="https://adventofcode.com/2015/day/3">the puzzle</a> the code is a solution to.</p>
+<p>A client of mine came to me with the following code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">direction</span> <span class="o">=</span> <span class="s2">&#34;&gt;^^v^&lt;&gt;v&lt;&lt;&lt;v&lt;v^&gt;&gt;v^^^&lt;v&lt;&gt;^^&gt;&lt;^&lt;&lt;^vv&gt;&gt;&gt;^&lt;&lt;^&gt;&gt;&lt;vv&lt;&lt;v^&lt;^^&gt;&lt;&gt;&gt;&gt;&lt;&gt;v&lt;&gt;&lt;&gt;^^&lt;^^^&lt;&gt;&lt;&gt;&gt;vv&gt;vv&gt;v&lt;&lt;^&gt;v&lt;&gt;^&gt;v&lt;v^&lt;&gt;v&gt;&gt;&lt;&gt;^v&lt;&lt;&lt;&lt;v^vv^&gt;&lt;v&gt;v^&gt;&gt;&gt;vv&gt;v^^^&lt;^^&lt;&gt;&gt;v&lt;^^v&lt;&gt;^&lt;vv^^&lt;^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^&lt;&gt;&gt;&gt;&lt;&gt;&lt;vv&gt;&lt;&gt;v&lt;&lt;&lt;&gt;&lt;&gt;&lt;&gt;v&gt;&lt;&lt;&gt;^^^^v&gt;&gt;^&gt;^&lt;v&lt;&lt;vv^^&lt;v&lt;^&lt;^&gt;^^v^^^^^v&lt;&gt;&lt;^v&gt;&lt;&lt;&gt;&lt;^v^&gt;v&lt;&lt;&gt;^&lt;&gt;^^v^&lt;&gt;v&lt;v^&gt;v&gt;^^&lt;vv^v&gt;&lt;^&lt;&gt;^v&lt;&gt;&lt;^&gt;&lt;v^&gt;&lt;&gt;&lt;&gt;&lt;&lt;&lt;&lt;&gt;^vv^&gt;^vvvvv&gt;&lt;&gt;&lt;^&lt;vv^v^v&gt;v&lt;&lt;^&lt;^^v^&lt;&gt;^&lt;vv&gt;&lt;v&lt;v^v&lt;&lt;v&lt;&lt;^^&gt;&gt;^^^v^&gt;v&lt;&gt;&lt;^vv&lt;&lt;^&lt;&gt;v&lt;v&gt;&lt;&gt;&lt;v^^&gt;&lt;v&lt;&gt;^^&gt;^^&gt;v^&gt;^&lt;&lt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;v&gt;&lt;^v&gt;^&gt;&gt;&lt;v^^&lt;^&gt;v&lt;vvvv&lt;&gt;&gt;&gt;&gt;&gt;^v^^&gt;v&lt;v&lt;^&lt;vv&gt;^&gt;^vv^&gt;vv^^v&lt;&lt;^&lt;^^&lt;&gt;v&gt;vv^v&gt;&gt;&lt;&gt;&gt;&gt;v^&gt;^&gt;^^v&lt;&gt;^&lt;v&lt;&lt;&gt;^vv&gt;v^&lt;&lt;v&gt;v&lt;&lt;&gt;&lt;v&gt;^vvv&lt;v&lt;vvv^v&lt;vv&lt;v^^^&gt;v&gt;&lt;&lt;^&lt;&gt;&gt;&lt;v^^&gt;^v^&gt;&gt;^v&lt;^&lt;&gt;&lt;v&lt;&gt;&gt;v^&lt;&gt;&gt;v&lt;&gt;&gt;v^^^&gt;&lt;^&gt;&gt;vvvv&gt;^v&lt;^&gt;&lt;&lt;&gt;&gt;^&lt;&gt;^&gt;vv&gt;&lt;v&lt;&lt;&gt;&gt;^^&gt;v^^^&gt;&lt;^&lt;&lt;^^v&gt;v&lt;^&lt;&lt;&gt;v&gt;^^vvv^v^&gt;v^&lt;&gt;^^&lt;&gt;v^v&gt;v&gt;v&lt;v^&gt;vv&gt;^^v&lt;&gt;v&gt;&gt;^&lt;&gt;&gt;&lt;&gt;v&gt;v^&lt;&lt;vvvv&lt;vvv&gt;&lt;v^&lt;^&gt;^v&lt;&gt;&gt;^&gt;&lt;v&gt;&gt;&lt;&gt;^&lt;v&gt;v&lt;v&gt;vv^&gt;&gt;vvv&lt;&gt;v&gt;v&lt;v^&gt;&gt;^&gt;&gt;v&lt;&lt;&gt;^&lt;&gt;^&lt;&gt;&gt;&gt;^v&lt;&lt;&lt;^&lt;^v&gt;vv^&gt;&gt;&lt;&lt;&gt;&lt;v^&gt;^v^^^v&lt;&gt;^^vv&gt;&lt;&gt;&gt;&lt;&gt;&gt;^&gt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;^&lt;&lt;^v&gt;^^^&lt;&gt;^v^&gt;&lt;&gt;v&lt;&lt;v&gt;vv^&gt;vv&lt;&lt;&gt;&gt;&gt;&lt;&lt;^v^&lt;&gt;v&lt;vv&gt;&gt;&gt;^^&lt;&gt;^&gt;&lt;&lt;^&gt;vv&gt;&gt;^&lt;&lt;v^^vv&lt;&gt;&gt;&gt;&lt;v&gt;v&gt;&lt;^&lt;v&lt;&lt;&gt;&gt;&gt;^^&lt;&gt;&gt;^&lt;^v&gt;&lt;&gt;vv^^^v&gt;vvv&gt;^&gt;&lt;&lt;&gt;^^&gt;^&lt;&lt;v^&lt;v&lt;^v&lt;&lt;&gt;vvv&lt;^&lt;&lt;&gt;^&gt;^v&lt;vv&lt;^&gt;vvv&gt;v&gt;vv^&lt;v^&gt;&lt;&gt;&gt;^vv&lt;^^^vv&gt;&lt;^vv&lt;v^&lt;&gt;&lt;v^vvv&gt;&lt;&lt;^&gt;^^&gt;&lt;v&lt;&lt;vv^&gt;v&lt;vv&lt;v&gt;^&lt;&gt;^v&lt;&lt;&gt;v&lt;v^v^&gt;^&gt;^&gt;v&lt;&lt;^vvv&lt;&lt;&lt;v&gt;^^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;&gt;^&lt;&gt;^&gt;&gt;&gt;v&lt;v&gt;^^&lt;v^&lt;v&lt;&gt;&gt;&gt;vv&gt;^^v&lt;&lt;&gt;&gt;&gt;^^v&gt;&lt;&lt;&lt;v&lt;v&lt;^v&lt;&gt;^^&gt;&lt;v&lt;^v&lt;&lt;v^&gt;&lt;&gt;&lt;^&lt;&gt;&lt;v&lt;^^v&gt;&gt;&gt;&lt;v^^v&lt;&lt;v^&gt;&lt;^&lt;&gt;&lt;&lt;v^&gt;&gt;&lt;^&lt;&gt;v&gt;v^&lt;&gt;&lt;^&lt;v&gt;^v^&gt;^&gt;^vv^&gt;^^&lt;&lt;vv^&gt;vv&lt;^vvv&lt;&gt;&gt;^^&lt;^&gt;v^&gt;^&gt;^&lt;v^&gt;&lt;v&lt;v&gt;&gt;&gt;v&lt;&lt;&lt;&gt;&lt;^v&lt;&lt;&gt;&lt;^&lt;vv^v^^^&gt;v&lt;^^&lt;v^vvv&lt;v&lt;&gt;&lt;v&lt;vv&lt;^vv&lt;&gt;vv&lt;v^&lt;&gt;&gt;vvvvv&lt;&lt;&gt;^v^v&gt;vv&gt;&gt;&gt;vvv^^&lt;^&lt;^&lt;&gt;&lt;&gt;v&lt;v&gt;&gt;&lt;^v&gt;&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;v&gt;^&gt;v&lt;&gt;^&gt;^v&gt;&gt;^&lt;&gt;v^&lt;^&gt;&gt;&lt;&lt;&gt;^&lt;v&gt;^&gt;^^^&gt;^^&lt;v&gt;&gt;&gt;&gt;&lt;&gt;^v^v&gt;&lt;&lt;&lt;&lt;vv^&lt;vv&lt;&gt;vv&gt;v&lt;&gt;v^&lt;v^&gt;v&gt;&lt;&gt;&gt;&gt;v^&lt;&gt;&lt;^vvv&gt;vv^&lt;^&lt;&lt;^&lt;^^v&gt;^&gt;&gt;&gt;v&lt;^&lt;^v^^&lt;^&lt;^&gt;&gt;&gt;&lt;v&gt;vv&gt;^&lt;&lt;&gt;&lt;&gt;^&gt;&gt;v&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&gt;v&lt;&gt;vv^^&gt;^&gt;vvv^v&lt;&lt;^&lt;^^&lt;vv&lt;&gt;^vvv&lt;^^v^vv^&gt;&gt;v&lt;^&gt;^^&lt;v^&lt;&gt;v&lt;^&lt;^vv&gt;v&lt;&lt;vv&gt;vv&gt;^&gt;vvv&gt;&gt;&gt;^^&gt;v&lt;&gt;^v&gt;v^&lt;^&gt;&gt;v&gt;^^v&gt;&gt;&gt;&gt;v^&lt;v&gt;v&lt;^&gt;v&lt;v&lt;&lt;&gt;&gt;^v&lt;^^&lt;v&gt;&lt;^&lt;&gt;&gt;^&lt;&lt;vv^&gt;&gt;v&lt;&lt;v&gt;^v&lt;&gt;&gt;&lt;^&gt;vv&lt;v&lt;^&gt;&gt;^^&lt;vvvvvvvvv&gt;&gt;&gt;v&lt;v&lt;&gt;v^&lt;&gt;&gt;^vv&lt;v^^v&lt;&lt;^vvv^&lt;&lt;^&gt;&lt;&gt;vv&lt;&gt;&lt;&lt;&gt;&gt;v&gt;vv^&gt;&lt;&gt;&gt;^^v^&gt;&gt;v^v^&gt;&lt;&lt;&lt;&gt;&gt;^^&lt;^v&lt;&lt;^&lt;&gt;&gt;&gt;&gt;^&lt;^&gt;v^&gt;&lt;&lt;^&gt;v&lt;^v&lt;^&gt;&gt;^^&lt;&lt;&lt;&lt;&gt;&lt;^&lt;^v^v&lt;&gt;&gt;^v&lt;^&lt;&lt;vv^&lt;&gt;&lt;^^vv&gt;&lt;v^v^v&gt;^&gt;&gt;^&gt;^vv^&gt;^v&lt;v^v&lt;&lt;vvv^&gt;&lt;&gt;&gt;^v^^&gt;&lt;&gt;v&gt;vv&gt;&lt;^&gt;&gt;vv&lt;vvv&lt;&lt;&lt;&lt;^&lt;&gt;vvv^v&lt;v&gt;^&lt;v&lt;^&gt;^&lt;^&lt;v&lt;&gt;&lt;&gt;v^^^^&lt;&lt;vv&lt;^^vv&lt;v&gt;&gt;&lt;&lt;v^&gt;&lt;&gt;&gt;&gt;&lt;v^&gt;^v&gt;&lt;^&gt;^&gt;&lt;vv^&lt;&gt;&lt;^&lt;v&gt;&gt;&lt;&lt;^vv&lt;&gt;&gt;v^&lt;&lt;v&lt;&gt;v&gt;&lt;v&lt;&gt;&lt;&gt;&lt;vv&gt;^&gt;&gt;v^&lt;^&lt;v&gt;^&gt;&lt;&gt;&gt;&gt;&lt;^&gt;&lt;v^v&lt;&gt;&gt;&gt;^^&lt;^&gt;v&lt;v&gt;vvv&lt;&gt;^&lt;&lt;&gt;&lt;v^^&gt;^&gt;&gt;v&lt;^v&gt;^&gt;v&gt;&gt;&gt;vv&gt;v&gt;&gt;v^^^&lt;^&lt;vvv^&lt;&gt;^&gt;^&lt;v^&lt;v^v&gt;v&gt;^&gt;vv&gt;vvv&lt;&gt;v&lt;^&gt;v&gt;^^&gt;&gt;^&lt;vv^^v&gt;v^^^^^v^vv&gt;&lt;^&lt;&gt;&lt;&gt;^&gt;vv&lt;^&gt;&gt;^vvvv^^^&gt;^&lt;vv&gt;^v&lt;&lt;^&gt;&lt;^^&gt;^&lt;&gt;^^&gt;^&lt;&lt;v&lt;^&gt;&gt;&gt;^&gt;&lt;&lt;^^&gt;v^v&gt;&gt;^&gt;vvvv&gt;^^v&gt;&lt;v&gt;&gt;vv&gt;&lt;&lt;&lt;vv&lt;^&gt;v&gt;^^^&lt;v&gt;v^vvv&lt;^&gt;&lt;&lt;^&gt;^&lt;&gt;^&gt;&lt;&lt;&lt;&lt;&lt;v^&lt;&lt;vv^v&gt;^&lt;&gt;v&lt;v&gt;^&gt;^&gt;&gt;&lt;&gt;v^v&lt;^vv^^&gt;vv&lt;&lt;v^v&gt;vv^vvv&lt;&lt;&lt;&lt;&gt;^v&lt;v^^v^v&gt;v&lt;&lt;v&gt;^^&lt;&gt;^vv^^&gt;^&gt;^v^vv^&gt;&gt;v^vv^^&lt;vv&gt;&lt;&lt;v^v^^v&gt;&lt;vv&lt;^vvv&lt;vv^^&lt;&lt;v&gt;v^v^^^^v&lt;^&lt;^&gt;v&gt;^&gt;v&gt;^vv^v^^&lt;v&lt;^vvvv&lt;&lt;&lt;&gt;^&lt;^^^&lt;^^&lt;&gt;^&lt;&gt;&lt;vv&lt;^^&lt;&lt;^&gt;&gt;&gt;&lt;v^vvvv&gt;^&lt;&gt;&gt;^^&gt;v^^v^&lt;&lt;v^^^&lt;&lt;&lt;&gt;&lt;^&lt;v^v^^v&lt;v^&lt;&gt;v&gt;&lt;&lt;v&lt;&gt;^v&gt;v&lt;^&gt;&lt;^&gt;vv^^&lt;vvv&lt;^v&gt;&gt;v&gt;^&lt;&gt;&lt;v^&gt;&lt;^^^&lt;v^&gt;&gt;vv&lt;&lt;&lt;&lt;&lt;^&lt;&gt;^v^v&gt;^vv^&lt;&gt;v&gt;v&lt;^&gt;vv&lt;&lt;^vv&gt;vv&lt;v&lt;&gt;&lt;&gt;&gt;v&gt;&gt;&lt;v&lt;^&lt;^^&gt;&gt;&lt;&lt;v^v&lt;&lt;^&gt;&lt;v&lt;^&lt;vv&lt;v&lt;&lt;vv^&gt;^&lt;&lt;&gt;&lt;^^&gt;^&lt;^&gt;&gt;^&lt;vv&gt;&gt;&lt;v&lt;&lt;vvv&lt;^^v^&gt;^^&lt;^v&gt;^v&lt;v&lt;&gt;v&gt;&lt;v^v^&lt;&lt;^&lt;&gt;&lt;&lt;v&lt;&lt;^v&gt;v&lt;&lt;&gt;&gt;^&gt;v&gt;&gt;v&gt;&gt;v&lt;^&lt;&lt;^&lt;^&gt;&gt;&gt;v&gt;^^^v&gt;&lt;^&gt;^^&gt;&gt;v&lt;&lt;&gt;^v&gt;&lt;v&gt;vvv^vv&lt;&lt;&lt;&gt;vvv&lt;&lt;&gt;^&gt;&gt;&gt;v&lt;v&lt;v^&lt;^&lt;^&gt;^&lt;^&gt;v^^v&lt;^^&lt;v&lt;&gt;v&lt;&gt;&gt;^^&gt;^v^&gt;v&lt;&lt;&lt;&lt;^&lt;&gt;v^&gt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&lt;&lt;v^&lt;^vv&gt;v&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&lt;^&lt;^^&gt;v&lt;&gt;&gt;v&lt;&gt;vv&lt;&lt;^&lt;&lt;&gt;&lt;&lt;^&gt;v^^^vv^&gt;vvvv&gt;&gt;v&gt;v^&gt;&lt;&lt;v&lt;&gt;vv^&lt;&lt;&gt;&lt;&lt;vvv&gt;^&gt;&gt;&gt;^&lt;&lt;&lt;^&lt;^&lt;&lt;v&gt;^&gt;v&lt;&gt;&gt;v&gt;&gt;vv^^&gt;&lt;&lt;&lt;&lt;^^^v&gt;&gt;&lt;&lt;^&gt;&lt;v&gt;&lt;v^^&gt;&lt;v&lt;&lt;v^^v^^v&gt;&gt;v&lt;&gt;&lt;&gt;&lt;&lt;&gt;^&gt;&lt;v&gt;&lt;^&lt;vv&gt;&gt;&lt;^v&lt;&gt;v&lt;vvv&lt;&gt;^&gt;&gt;&lt;v&gt;&gt;v&lt;^&gt;&lt;&lt;v&gt;^&lt;&gt;^v&gt;&lt;^&gt;&lt;^^&lt;v&gt;^&gt;&lt;^^v^&lt;&lt;&gt;&lt;&gt;&gt;^&gt;v^&lt;^v^vv&lt;&gt;&lt;^&gt;vv^&gt;v^vvv^&lt;&gt;&gt;^&gt;&lt;^&lt;^&lt;&gt;^&lt;&lt;v^v&lt;^v&gt;&lt;&gt;^v&lt;v&gt;&gt;^&gt;&gt;^v^vv&gt;&gt;&lt;vv&gt;&lt;v^^&lt;&lt;^v^&lt;&gt;^v&lt;&lt;&gt;^&gt;&lt;^&gt;&gt;&lt;v&gt;&gt;v&lt;&lt;&lt;v^^vv&lt;&gt;^^v&gt;&gt;&gt;&lt;&gt;&lt;&gt;&lt;&lt;v^&lt;&lt;&lt;v^&lt;^^&gt;&lt;v^&gt;v^^vv&lt;v^&lt;&gt;&gt;vv^&lt;^v&lt;&gt;^v&gt;&gt;v^v&gt;v&lt;^^vv&gt;&lt;&gt;^v&lt;&lt;&gt;v^&lt;&gt;v^&gt;&gt;v&gt;vvv&lt;^&gt;&lt;&gt;&lt;^^&gt;^vv^&gt;&gt;v^&gt;^&lt;^^&lt;&gt;&lt;&gt;&gt;&lt;&lt;&gt;^^^&gt;&lt;^v^v&gt;&lt;&lt;&lt;&gt;&lt;&lt;^v^vv&gt;v&gt;&gt;&lt;^&gt;&gt;&gt;&lt;v^&gt;v&lt;v&gt;&lt;&gt;&lt;v^v&lt;&gt;v^^&gt;&gt;v&lt;&lt;&gt;v&gt;v&lt;v&lt;v&lt;^^&lt;&gt;&lt;&gt;v^^&lt;&gt;&gt;v&lt;^v&lt;v&gt;v&lt;&gt;&lt;v&lt;v&gt;^&lt;&lt;&gt;v&gt;vv^^&lt;&gt;&gt;^^^&lt;&gt;^^&gt;^v&gt;v&gt;&gt;&gt;^v^v&gt;&lt;v^^&lt;&gt;&lt;v&gt;^^v^v&lt;^&lt;^^&gt;&lt;&lt;v&lt;^&lt;^&lt;&gt;^&lt;&gt;&gt;&lt;&lt;&gt;^&gt;&gt;^&gt;^^&gt;&lt;v&gt;&lt;&gt;v&lt;&gt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;vv&gt;&gt;&gt;^&gt;&gt;^v&lt;^&gt;v^^^v&lt;&lt;vv&gt;&gt;&lt;&lt;&lt;^&lt;&lt;&lt;&gt;&gt;&gt;&gt;&gt;^&gt;vv&lt;^v^&lt;&gt;^&lt;v^&gt;^v&gt;&lt;v&gt;vvv&lt;&gt;&gt;&gt;^v^^^v&lt;&lt;&lt;&lt;&gt;&gt;^^&lt;vv&lt;^&lt;^^&gt;^&lt;&gt;v&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&gt;&gt;v&lt;^&lt;&gt;^&lt;vvv&lt;^&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^^&gt;^^&lt;&lt;v&lt;v^&gt;^^v^&gt;&gt;&lt;&lt;^vv&gt;&lt;v&gt;^v&gt;&gt;^&lt;v&gt;v&gt;^^&gt;^v&gt;^vvv&lt;&gt;v^v^^&lt;&gt;&lt;vv&gt;vv^&gt;&gt;&gt;&lt;&gt;v&lt;^&gt;&lt;v&lt;v^&lt;&gt;&lt;&lt;&lt;&gt;^v&gt;^v&lt;&lt;&lt;^&gt;^&gt;^&gt;v^v&lt;&lt;&gt;&lt;vvv&lt;&lt;v^^&lt;&gt;&lt;v&gt;^&gt;&gt;&gt;&lt;vv&gt;&gt;&lt;v&gt;&gt;v^&lt;vv&gt;&gt;vv&lt;&lt;^v^v&lt;&lt;&gt;&lt;^v&lt;vv&gt;&gt;&gt;vv&lt;&gt;&gt;&gt;&gt;^vv&gt;v^&lt;&gt;vv&gt;v^v&lt;v^&gt;&lt;v&lt;^^^^^&gt;vv&lt;&gt;&lt;&lt;vvv^&lt;v&gt;&lt;^&lt;vv&gt;&lt;^^^vv^&lt;&gt;^^^^&lt;^&gt;&lt;^&lt;&gt;v^&lt;v^v&lt;&lt;^v&lt;&lt;^^&lt;&gt;&gt;^&lt;v^^&gt;&gt;&gt;vv&lt;vvv&lt;&gt;v&lt;&lt;&gt;&gt;&lt;^vvv^&lt;&lt;^^&lt;&lt;&gt;&gt;&gt;^&lt;&gt;&gt;&gt;v^^&gt;&lt;&gt;&gt;&lt;&lt;&gt;&gt;&lt;v^v&gt;&gt;&gt;&gt;&gt;&gt;&lt;&gt;&gt;&gt;&lt;v^&lt;&lt;vvv^&gt;v&lt;&gt;&gt;v^&lt;&gt;vv&lt;&gt;&lt;^^^^v^&lt;&lt;^&lt;v^vv&gt;&lt;&lt;^^&gt;v&lt;^vvv^v&gt;&gt;v&gt;^&gt;&gt;v&gt;^^&gt;&lt;&lt;v^&lt;&gt;v&lt;&gt;vv&lt;^v^vv&gt;&lt;v&gt;&lt;&lt;vv^v&gt;&gt;v^&gt;&gt;v&lt;^^^&gt;^&gt;&lt;&lt;v&lt;&gt;^&gt;&lt;&gt;v&gt;&gt;&gt;vvv&lt;v&lt;vv&lt;^&gt;&gt;^v&lt;v&gt;^&lt;^^^^^v&gt;&lt;&gt;v&gt;&lt;&gt;v^v^v&lt;v^vv^v&gt;vvvv&lt;&gt;vv&lt;&lt;&lt;vv&lt;v&lt;&lt;&gt;^&lt;^&gt;^^v^&lt;&lt;&gt;^&lt;v&gt;&lt;^&gt;&lt;v&lt;v&lt;&gt;&lt;&lt;&gt;v^&lt;&lt;^&lt;&gt;&lt;vv&gt;v&lt;&lt;^v&gt;&gt;^v&lt;&gt;&lt;v&gt;^&gt;&gt;^^&gt;&lt;&gt;v^&lt;^&lt;vvv^&gt;^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;^v^v&lt;^^^&lt;vv&gt;&gt;&lt;&gt;^^&lt;&lt;v&lt;^&lt;^^&gt;&gt;&gt;v^v&lt;&lt;^^^&lt;v&lt;v&lt;^&lt;&gt;^v&lt;v&gt;&lt;v^vv^^v^^v^^&lt;vv&lt;&gt;^&lt;&gt;&lt;vv^&lt;^v^&lt;&lt;^&gt;&lt;&lt;vvv&gt;^^&lt;^^^&lt;^v&gt;^&gt;^vv&gt;&lt;&lt;&lt;^v&lt;v&gt;vv&gt;v&lt;&gt;v^v&lt;v^&gt;v^&gt;&gt;&gt;v^v&lt;&gt;^v&lt;&lt;&gt;^vv&gt;v&gt;v&gt;v^&lt;^&gt;v^^&lt;^&gt;^^^^vv&gt;^^&gt;&lt;^&gt;vv^&gt;&gt;^^v&gt;&gt;&lt;&lt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^&lt;v&lt;vv^&gt;^^&gt;&lt;&lt;^&gt;&lt;v&gt;v^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;&gt;&lt;v^v&lt;v^&lt;v&lt;vv^v^&lt;&lt;^&lt;vvv&gt;&gt;&gt;&lt;vv&lt;^^&gt;&gt;^&gt;^&gt;&lt;&lt;v^&lt;&gt;&gt;v&gt;v^v^^&gt;&lt;&lt;&gt;vv^v&gt;v^&lt;v&gt;&lt;^&lt;&gt;^^&lt;^&gt;v&gt;^&lt;&gt;&lt;&lt;&lt;v&gt;^&lt;^&lt;^&gt;^&gt;^&gt;^^v^&lt;&lt;^^v^^&lt;^&lt;&gt;&gt;&lt;^&gt;v&gt;&gt;^^&lt;&gt;^^^&lt;&lt;&lt;&lt;v^&gt;^v&lt;^vv&gt;^&lt;&lt;&lt;v&lt;&gt;&lt;&lt;v&lt;&gt;vv&gt;&gt;&gt;v&gt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;v&lt;&lt;&lt;vv&gt;&lt;&gt;^v&gt;v&lt;^&gt;&gt;&lt;^&gt;&lt;&gt;&lt;v&lt;&gt;^v^&gt;^v&gt;^v&lt;&lt;&gt;&lt;&lt;^&lt;&gt;&gt;v&gt;^&gt;&lt;&gt;^&gt;&gt;&lt;&gt;&gt;&lt;^&lt;v^&gt;&lt;v^^&lt;&gt;&lt;v&gt;&lt;^^&gt;^v^^&lt;&gt;v^&lt;v^&lt;^v&lt;v^^^^^v^&lt;&lt;^&gt;^^^&lt;^v&gt;&lt;&gt;^^&lt;&lt;&lt;&gt;&lt;&lt;&lt;&lt;&lt;^^&gt;v^vvvv&gt;v&lt;&gt;&gt;vv&lt;^&gt;^v^&gt;v&lt;^vv^v&lt;&lt;&gt;&lt;&lt;v&gt;v^v&gt;^^&gt;&lt;&gt;&lt;^&lt;v^&gt;v&gt;&lt;vv&gt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;^vv&lt;&gt;v&gt;&gt;v&lt;^v&gt;&gt;&gt;v&lt;v&gt;v&gt;v&gt;^vv&lt;&lt;&gt;^^vv&lt;v&lt;^v^&lt;v&lt;v&gt;vv&lt;&gt;^&lt;^&lt;vv&lt;v^&lt;^v^^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^v&gt;vv^^v&lt;&lt;^^&gt;&lt;&lt;&gt;v^^&lt;&gt;&lt;&gt;&lt;v^^&lt;v^v&gt;^&gt;^&gt;^&gt;v&lt;^&lt;v&gt;^v^^&gt;v&lt;&gt;vvv&lt;^v&lt;v^v&gt;&lt;&lt;v^&gt;&lt;&lt;^^&gt;&lt;^&lt;&lt;v^v^&gt;v&lt;&gt;^&gt;v&gt;&lt;&gt;&lt;v&gt;^&lt;v&lt;v&gt;^&lt;^^^&gt;^v&lt;&lt;&gt;&lt;&lt;&gt;&lt;&gt;vv&gt;v^&lt;&gt;v^&gt;&lt;v^v&lt;v&gt;&lt;&gt;&lt;&lt;v&gt;v&lt;vv&gt;&lt;&lt;v&gt;&gt;v&gt;^&lt;&lt;&lt;&gt;vv&gt;&gt;vvv&gt;^^vv^v^^&lt;^^&lt;&gt;v^^&lt;&gt;v&gt;&gt;^^&gt;^&gt;^&gt;v&gt;&gt;&lt;^&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&gt;&gt;&lt;^&gt;v&lt;&lt;&lt;&lt;&lt;&lt;&lt;^v^v&lt;v^&lt;v^^&gt;^&lt;&gt;&lt;&lt;v&lt;^&gt;v^&gt;v^vv&lt;&lt;^^vv^&gt;&gt;&gt;&gt;^&lt;&gt;v&lt;^v&lt;&gt;v&lt;vv&lt;^&gt;&gt;v^vv&gt;vv&gt;&lt;vv&lt;&lt;^&gt;v&gt;&gt;&lt;vv&gt;&gt;&gt;vv^&lt;&lt;&lt;&lt;vv^&gt;v&lt;&lt;&lt;&lt;^^&gt;^^v^&gt;&lt;&lt;^&lt;v^&gt;v^&gt;^^&lt;v&lt;&gt;vvv^&gt;^&lt;&gt;vvv&lt;v&lt;^^&gt;v^&lt;&lt;v&gt;&gt;&lt;&gt;v&lt;v&lt;&gt;^^&lt;vvv&gt;^&gt;vv&gt;&lt;&gt;&lt;&lt;&lt;^^vv&lt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;&lt;&lt;v&gt;&lt;^vv^&gt;^&lt;^&gt;^^^&lt;&lt;&lt;v&gt;vv^&lt;^&lt;&lt;&gt;^&gt;^&lt;vv&gt;v&gt;&lt;v&lt;&lt;^&gt;&lt;^&gt;^^&lt;vv^v^^&gt;&gt;&gt;&gt;vv^&gt;&lt;^^vv&gt;&lt;&gt;^&lt;v^v&gt;v&lt;vv&gt;v&gt;&lt;&lt;&lt;v&gt;v&lt;v&gt;^&gt;&lt;v^^&gt;&lt;v&gt;v&lt;^v^&gt;&gt;^^&lt;v^&gt;^^&gt;vv&gt;&gt;vv^&gt;&lt;^vv^vv&lt;&lt;^&gt;vv&gt;^v&lt;v&gt;&lt;vv&gt;&lt;v&lt;vvvvv&gt;^^v^v&gt;&lt;v&gt;&gt;&gt;^vv&lt;&gt;v&gt;^^^^&lt;^&gt;&gt;&lt;&gt;^v^^^&gt;v&lt;^^&lt;&lt;^^v&lt;vv&lt;&gt;vvv&lt;^&gt;&gt;&lt;&gt;&lt;^&gt;&gt;^&gt;&lt;^&lt;&gt;v&lt;v&lt;&lt;&gt;&lt;&lt;v&gt;&lt;v^v&lt;&gt;&gt;&lt;^&gt;v&gt;&lt;&lt;v^&lt;v&gt;v&lt;^&lt;vv^v^v^&gt;vvv^^&gt;v&gt;^&lt;vv^&gt;v^v^&lt;&gt;v&gt;^&gt;&gt;vv&gt;&gt;&lt;^^&lt;v&lt;&lt;&gt;^vv&lt;&gt;&lt;&gt;&lt;&lt;^v&lt;v&gt;v&lt;&lt;vv&gt;&lt;&gt;&gt;&lt;^v&lt;v&gt;&gt;v^&gt;vvv^v^&lt;&lt;^&gt;&lt;v&lt;&gt;^vv^&gt;v^&lt;v&lt;^&gt;&gt;v&lt;v&gt;&lt;v&gt;&lt;v&gt;&gt;^&lt;&lt;&lt;v^&lt;&gt;&lt;&lt;&gt;v&gt;^&gt;^^&lt;v&lt;&gt;&gt;^&lt;&gt;^&gt;^&gt;&lt;&lt;&lt;^&lt;&lt;^&lt;&lt;^&gt;^v&gt;&gt;&gt;&lt;vvv&gt;&gt;&lt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&gt;&gt;&gt;^&lt;^v&lt;^&gt;v&lt;&gt;vv&lt;&gt;&lt;&gt;v&gt;&gt;^&gt;&gt;^&gt;vv^^&gt;&lt;&lt;^&lt;v&lt;v&gt;&gt;^^&lt;&lt;^&gt;v&lt;^&gt;&gt;vv&gt;^&lt;&gt;v&gt;&lt;^&gt;v&lt;vv&gt;&gt;&gt;&gt;&gt;&gt;^v&lt;^&lt;&lt;&lt;v^&gt;&lt;vv&lt;&lt;&gt;&gt;vv&lt;&lt;&gt;&lt;v&lt;&gt;&lt;&lt;&lt;v&lt;^&lt;v&lt;&gt;&gt;v&lt;^^^^v^^&lt;^^^&lt;^&lt;vv&gt;&lt;&lt;^&gt;&gt;&lt;&gt;v&lt;&lt;&gt;v&lt;v&lt;&gt;&gt;&gt;&gt;&lt;&gt;v^vv&gt;^&gt;^&gt;&gt;vv^v&lt;v&lt;&lt;&gt;&lt;^v&gt;vv^&gt;&lt;v&lt;&lt;&gt;v^v&lt;^&gt;vv&lt;&lt;^^v&gt;&lt;^&gt;&gt;^^vv&lt;^&lt;&gt;&gt;v^^&gt;&gt;&lt;v&gt;^v&gt;&gt;&gt;^&gt;&gt;v&gt;v&lt;&gt;v&lt;^vv&gt;&lt;&gt;^&lt;&lt;^&gt;vv&gt;&gt;&gt;&lt;&gt;&lt;&gt;v^&gt;&lt;&gt;v^&gt;v&gt;v&gt;&lt;^v&lt;&gt;&lt;v&lt;v&gt;^v&lt;&lt;^vv^&gt;&lt;^^&gt;&gt;&lt;^^^&lt;&lt;&lt;^&gt;v&gt;^v&gt;&gt;&gt;&lt;^&gt;&gt;&lt;^&gt;&gt;&gt;^^^&lt;^&gt;vv&lt;&gt;&lt;&lt;&lt;v^&gt;^&lt;^^&gt;&gt;^^^v^v^v&gt;v&lt;v&gt;&gt;&gt;&gt;&lt;^&gt;&gt;&gt;v&gt;^vv&lt;&lt;^^^&lt;^^vv&gt;v&lt;&lt;&gt;&lt;v&lt;&lt;^^&gt;v&gt;&gt;&lt;&lt;v^^&gt;&lt;^&gt;^&lt;^&gt;^v^&gt;v&gt;&lt;^&lt;^vv&gt;v&gt;&gt;&lt;&gt;^&lt;&lt;vv&lt;&lt;v&gt;v&lt;vv&lt;v&gt;^&gt;^&gt;&gt;&lt;^^&lt;v&gt;^v^v&lt;&gt;&lt;&lt;&gt;vvv&lt;^&lt;v&gt;^&gt;&lt;&gt;^&gt;vvv&gt;&gt;&gt;^&gt;&lt;&lt;&gt;&gt;&lt;v^^&lt;^&lt;&lt;^v&gt;&gt;^v&lt;v&lt;vv&gt;vv^v^&gt;v&lt;&lt;vvv&lt;^^v^v&gt;^&lt;^&gt;&gt;^&gt;v&lt;^&gt;^v&lt;&lt;&gt;&lt;&lt;&lt;^&gt;^&lt;^^^&gt;vv&lt;^^^^vv&lt;v&lt;^^v&lt;&lt;&lt;&lt;v&lt;^v^&lt;&gt;&lt;v&lt;&lt;^&gt;&lt;&lt;&gt;vv&gt;&gt;&gt;&lt;^&lt;^&lt;&gt;&gt;&gt;^&gt;^&gt;&gt;^&lt;&lt;&lt;&lt;&lt;^^v&gt;^&gt;^&lt;&gt;vvv^^&lt;^&gt;&lt;^&gt;^^v&gt;^vv^&gt;&lt;v^&lt;^&lt;&lt;v^&lt;vvv&lt;&lt;^v&lt;&gt;&lt;^&gt;&lt;^&gt;&gt;&gt;v&gt;^v&gt;^&gt;^v&lt;vv^v&gt;&gt;&lt;v&gt;&lt;^&gt;&lt;v^^&gt;v^&gt;^&lt;&gt;&lt;&lt;&gt;&lt;&gt;v&lt;v^&gt;vvv^&gt;^&gt;&gt;v&lt;&gt;^&gt;&lt;^&gt;^&gt;&lt;vvv&gt;^^v^v&gt;v&lt;&gt;^v^&gt;&lt;^&gt;&gt;v&gt;v^&gt;&lt;&lt;&lt;^&gt;&gt;^&lt;&gt;^&lt;&gt;&gt;v&gt;&lt;&gt;&gt;v^&gt;^&gt;^^&lt;&gt;&gt;v^&gt;^&lt;vvvv&lt;^vvvv^&gt;&gt;vv^&lt;v^v&gt;^vv&lt;&gt;v&lt;&gt;^&lt;v&lt;v&gt;v&gt;^^&gt;&lt;^&gt;vv^&lt;^v^&lt;&lt;^&lt;^&lt;&gt;&lt;vv&lt;^v&lt;^v&gt;&lt;&gt;&gt;&gt;^v^&lt;&lt;^&gt;&lt;^&gt;vv&lt;v&gt;v&lt;^&gt;vv^&gt;v&lt;&lt;&lt;&gt;^&lt;&gt;&lt;v&lt;^^^&gt;v&gt;&lt;^^&lt;&gt;^&lt;^&lt;v^vv^&lt;&lt;^&gt;&gt;&lt;&lt;v^v&lt;^vvv&lt;&lt;&lt;&gt;&gt;vvvv^v^^^&gt;v&lt;&gt;&gt;&gt;&lt;&lt;&gt;vvv&lt;&lt;^^^&gt;v&gt;v&gt;&gt;v&lt;&lt;v&lt;v^v^&gt;^^v&gt;^&gt;&lt;^&lt;&gt;&lt;&lt;v^&lt;v&lt;v^^^&gt;&lt;&gt;v^^^&lt;v&gt;vv&lt;&gt;^&gt;^^vv&gt;^&lt;&lt;^v&lt;^v&gt;&lt;v&gt;&gt;&gt;^&gt;&gt;&gt;&lt;^&lt;&lt;&gt;^v&gt;&gt;^&gt;vv&lt;&lt;&lt;v&lt;&gt;^&lt;v&gt;&lt;v^&lt;^&lt;&gt;v&gt;v^^v^&gt;&gt;&lt;&lt;^v&lt;&lt;&lt;&lt;&gt;v&gt;v&gt;v^^&lt;^&gt;&lt;&gt;^^&lt;&lt;&lt;v&gt;vv&lt;&gt;&gt;&gt;^&gt;&gt;v&lt;&gt;&lt;v^&gt;^&lt;&gt;&lt;vv&gt;v&gt;v^v&lt;v^&lt;^&gt;&gt;^&gt;&gt;&lt;&lt;^^&lt;^^v&lt;vv&lt;&gt;&gt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^^&gt;vvv^&lt;vvv&lt;^&gt;vv&gt;&lt;&gt;&gt;&lt;&lt;&lt;^&lt;v^v^^&lt;&lt;^vvv^^&lt;^&lt;&gt;&lt;&lt;&gt;^&lt;^&lt;&gt;&gt;vvv&lt;&gt;^&lt;&gt;v^v&lt;&gt;&lt;&gt;&gt;v^v&gt;&lt;&lt;&gt;&gt;&gt;vvv&gt;v&lt;&gt;^&gt;&gt;^&gt;&lt;^&gt;vv&lt;&lt;&gt;&gt;v&lt;&lt;^&gt;&lt;&gt;v&gt;&gt;^^&lt;v&gt;^&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&lt;vv&lt;^&lt;vv^vv&gt;&lt;&gt;&gt;&gt;&gt;&lt;^&lt;v&gt;^&gt;vv&lt;v&gt;&lt;&gt;^&lt;&gt;vvvvv^vv&lt;&lt;v&lt;&gt;&gt;&gt;^&lt;&lt;&gt;&lt;&gt;^^vvv&gt;&gt;&gt;vv&lt;&lt;^^&gt;&lt;^v^^v&lt;&gt;^^&gt;^&gt;&lt;^&gt;v^^^^v&lt;^&lt;&lt;vv&lt;vv&lt;&gt;vv^^&gt;v^vv&gt;v&gt;&lt;&gt;&gt;vv&gt;^&lt;^&lt;v^v^&gt;&gt;v^v^^v&gt;^&gt;vv^&gt;v&lt;vvvv&lt;^v&lt;^v&gt;^v&gt;^^v&lt;&lt;^&gt;^^&lt;&lt;&gt;^&gt;&lt;^v&gt;&gt;&gt;vv^&gt;^^&gt;vvvv&gt;&gt;v&lt;^&lt;v&gt;^&gt;&gt;&gt;v^&lt;&gt;&lt;^&lt;^^&lt;v&gt;vv^^&gt;&lt;v&gt;v^&lt;&gt;^^^&gt;&gt;&gt;&lt;^^v&gt;v&gt;^&lt;&lt;&gt;^&lt;v^&gt;vvv^&gt;^^^&gt;&lt;v&lt;^&gt;&gt;v&lt;v&gt;&gt;^v&gt;&lt;&lt;&gt;&lt;&lt;&gt;v&lt;^&lt;&lt;&gt;^&gt;&lt;&gt;^&gt;vv&gt;^&lt;v&gt;^^v&lt;&lt;^v^vvv^^&gt;^vv^&lt;^&gt;^&gt;^^v&gt;v^&gt;^&lt;&lt;&gt;&lt;&lt;^&gt;v&gt;&gt;vv^vv&gt;&lt;v&gt;&gt;^&lt;&lt;^&lt;v^^&lt;^&lt;v^^vv^&gt;&lt;^^&lt;^^&gt;&lt;v^^&gt;v^^^&lt;^&lt;&gt;^&lt;&gt;&gt;^v&lt;^vvv^^v^&lt;&gt;&lt;^&gt;&gt;&gt;&gt;&gt;v&gt;&lt;&gt;&lt;&lt;&lt;&gt;vv&lt;^v&gt;&gt;&lt;&lt;&gt;vvv&lt;&gt;&lt;&lt;vv&lt;&lt;&lt;^&gt;v^^&gt;&gt;^&gt;^v&gt;&gt;&lt;&gt;&lt;^^v&lt;&gt;&gt;&lt;&gt;&gt;v^&gt;^&lt;vv&gt;&lt;&lt;&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;&gt;&gt;v&lt;&gt;&lt;^&lt;vv&gt;vv&lt;^v&gt;^&lt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^&gt;&gt;^&lt;&gt;&lt;^&gt;&gt;&lt;&lt;&gt;^&gt;v&gt;^^^v&gt;&gt;^&lt;^^v&gt;&lt;v^v&gt;^&gt;&lt;&lt;&gt;&lt;&gt;&gt;^&gt;&gt;^&lt;&lt;v&lt;&gt;^v&lt;&gt;^&gt;^&lt;v&gt;&gt;vv&gt;^vvv&lt;&lt;v&lt;&lt;^&gt;^&gt;^&lt;&lt;^^&lt;&gt;^^^^vvv&lt;&gt;^vv&lt;vvvvv^^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;v^&lt;&gt;&lt;^&lt;&lt;^&gt;v^^v&lt;&gt;&gt;^vv&lt;&gt;v^^&lt;&gt;&gt;v^vvvvv&lt;&lt;v^&lt;v^^&gt;&gt;&gt;&lt;vvvvv&gt;&gt;&lt;^&gt;vv&gt;v^v^&lt;v&lt;^&gt;^^&gt;&lt;^&gt;^^^^v&lt;&gt;&lt;^v&lt;&lt;&gt;v^&gt;v&gt;&gt;vv&lt;&lt;&gt;^&lt;v^^&gt;vvv&gt;^^&lt;v^&lt;&gt;vv^&gt;&lt;&gt;&gt;&lt;v^^v&lt;&gt;^&gt;&gt;^&gt;v&gt;&lt;&gt;&gt;^^v&gt;^&gt;^&gt;&gt;&gt;^&gt;v&lt;^v&gt;v&gt;^&lt;^^^^^&gt;&gt;v&lt;v&lt;&gt;&gt;v&lt;&lt;^&gt;^&lt;v&lt;&lt;&gt;^^&gt;&gt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^^^vv&lt;&gt;^^&gt;&gt;&lt;&lt;^^&gt;v&gt;vv&gt;vv&gt;v^&gt;^v&gt;v^^&lt;&gt;&gt;&gt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;&gt;v&gt;&lt;&gt;vvv^^v&gt;^^&gt;^vvvv^&gt;^&lt;&gt;^vvvv&gt;&lt;v&gt;&lt;v&lt;&gt;&gt;&gt;&lt;&gt;^&lt;^vv&lt;&gt;^v&lt;^v&lt;&gt;^vvv&lt;&lt;&gt;&gt;&lt;vvv^&gt;&gt;^&gt;&lt;&lt;vv^&lt;v^&gt;^&lt;v&lt;&lt;^^&gt;^^&lt;^^v^&gt;v&lt;&gt;v^v&gt;&lt;&gt;&gt;&lt;v^^&gt;&gt;^vvv&gt;&lt;^vv&gt;v^&lt;^&lt;^v&gt;&gt;v^^&gt;^vvv^&lt;v^^v^^&gt;v&lt;^&lt;&gt;&gt;^&lt;&gt;&gt;&gt;^^&lt;&gt;&lt;^^vv&lt;&gt;^vv^&lt;&gt;&gt;&gt;&gt;^^&lt;&lt;^^&lt;&gt;vv^^&gt;&lt;&gt;^^&lt;v&lt;&lt;v&gt;^&lt;v^^&gt;^v&lt;&gt;&lt;&gt;&lt;&gt;vvv&gt;^v^&gt;&gt;vv&lt;&lt;^v&lt;&lt;&gt;&gt;&lt;v&gt;^&gt;&lt;^&gt;&gt;&gt;^&lt;^&lt;^^&gt;vv^&lt;&lt;^&lt;&gt;&gt;^^&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;v&gt;&gt;v&lt;&lt;vvvv&gt;^v^vv&gt;&gt;&lt;^^&lt;&lt;^&gt;&gt;v&gt;v&lt;^^^&lt;^&gt;&lt;^^vv&gt;^vv&lt;^&lt;vv&lt;&gt;v&gt;&lt;^&lt;&gt;&lt;v&gt;&lt;^^^&gt;&gt;^&lt;&gt;&lt;^&lt;v&gt;&gt;&gt;&gt;v^&lt;v&gt;&gt;&gt;&gt;&gt;v&lt;&gt;&lt;^^&gt;v&lt;^&lt;^&gt;&gt;&lt;v&lt;&gt;^&gt;vv&gt;^^v^v^&lt;&lt;v&lt;&gt;&lt;&lt;&lt;^v^&gt;&lt;&lt;^&lt;&gt;&lt;&lt;&lt;&lt;v&lt;^&gt;&gt;&lt;&lt;&lt;&gt;v&gt;&gt;vv&gt;&lt;vv&lt;&gt;&lt;&lt;^&lt;^&lt;&gt;&lt;vv&gt;^^^^&lt;&gt;v&lt;&lt;&lt;&lt;v&gt;vv&lt;&gt;vv^^^&gt;&gt;&lt;&gt;vv^&gt;&lt;&gt;&gt;^vv&lt;&lt;&gt;&lt;^^vv&lt;&gt;v^&gt;&gt;^&lt;&lt;&gt;^&lt;v^&lt;^&gt;v&lt;</span><span class="s2">&#34;</span>
+<span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+<span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The input from the puzzle description is the very long string <code>&gt;^^v^...</code>. The program prints <code>2592</code>. If I submit this to the puzzle website it tells me it&rsquo;s the right answer. The program has correct behavior.</p>
+<p>I could run the program after each small change I make. If <code>2592</code> is still printed, the change was good. But I have to read pretty carefully and confirm all 4 digits. If this were a program that should print a list of 10 things, manually checking would start to get really tedious.</p>
+<p>Let&rsquo;s try this instead:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="hl"><span class="lnt">16
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">direction</span> <span class="o">=</span> <span class="s2">&#34;&gt;^^v^&lt;&gt;v&lt;&lt;&lt;v&lt;v^&gt;&gt;v^^^&lt;v&lt;&gt;^^&gt;&lt;^&lt;&lt;^vv&gt;&gt;&gt;^&lt;&lt;^&gt;&gt;&lt;vv&lt;&lt;v^&lt;^^&gt;&lt;&gt;&gt;&gt;&lt;&gt;v&lt;&gt;&lt;&gt;^^&lt;^^^&lt;&gt;&lt;&gt;&gt;vv&gt;vv&gt;v&lt;&lt;^&gt;v&lt;&gt;^&gt;v&lt;v^&lt;&gt;v&gt;&gt;&lt;&gt;^v&lt;&lt;&lt;&lt;v^vv^&gt;&lt;v&gt;v^&gt;&gt;&gt;vv&gt;v^^^&lt;^^&lt;&gt;&gt;v&lt;^^v&lt;&gt;^&lt;vv^^&lt;^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^&lt;&gt;&gt;&gt;&lt;&gt;&lt;vv&gt;&lt;&gt;v&lt;&lt;&lt;&gt;&lt;&gt;&lt;&gt;v&gt;&lt;&lt;&gt;^^^^v&gt;&gt;^&gt;^&lt;v&lt;&lt;vv^^&lt;v&lt;^&lt;^&gt;^^v^^^^^v&lt;&gt;&lt;^v&gt;&lt;&lt;&gt;&lt;^v^&gt;v&lt;&lt;&gt;^&lt;&gt;^^v^&lt;&gt;v&lt;v^&gt;v&gt;^^&lt;vv^v&gt;&lt;^&lt;&gt;^v&lt;&gt;&lt;^&gt;&lt;v^&gt;&lt;&gt;&lt;&gt;&lt;&lt;&lt;&lt;&gt;^vv^&gt;^vvvvv&gt;&lt;&gt;&lt;^&lt;vv^v^v&gt;v&lt;&lt;^&lt;^^v^&lt;&gt;^&lt;vv&gt;&lt;v&lt;v^v&lt;&lt;v&lt;&lt;^^&gt;&gt;^^^v^&gt;v&lt;&gt;&lt;^vv&lt;&lt;^&lt;&gt;v&lt;v&gt;&lt;&gt;&lt;v^^&gt;&lt;v&lt;&gt;^^&gt;^^&gt;v^&gt;^&lt;&lt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;v&gt;&lt;^v&gt;^&gt;&gt;&lt;v^^&lt;^&gt;v&lt;vvvv&lt;&gt;&gt;&gt;&gt;&gt;^v^^&gt;v&lt;v&lt;^&lt;vv&gt;^&gt;^vv^&gt;vv^^v&lt;&lt;^&lt;^^&lt;&gt;v&gt;vv^v&gt;&gt;&lt;&gt;&gt;&gt;v^&gt;^&gt;^^v&lt;&gt;^&lt;v&lt;&lt;&gt;^vv&gt;v^&lt;&lt;v&gt;v&lt;&lt;&gt;&lt;v&gt;^vvv&lt;v&lt;vvv^v&lt;vv&lt;v^^^&gt;v&gt;&lt;&lt;^&lt;&gt;&gt;&lt;v^^&gt;^v^&gt;&gt;^v&lt;^&lt;&gt;&lt;v&lt;&gt;&gt;v^&lt;&gt;&gt;v&lt;&gt;&gt;v^^^&gt;&lt;^&gt;&gt;vvvv&gt;^v&lt;^&gt;&lt;&lt;&gt;&gt;^&lt;&gt;^&gt;vv&gt;&lt;v&lt;&lt;&gt;&gt;^^&gt;v^^^&gt;&lt;^&lt;&lt;^^v&gt;v&lt;^&lt;&lt;&gt;v&gt;^^vvv^v^&gt;v^&lt;&gt;^^&lt;&gt;v^v&gt;v&gt;v&lt;v^&gt;vv&gt;^^v&lt;&gt;v&gt;&gt;^&lt;&gt;&gt;&lt;&gt;v&gt;v^&lt;&lt;vvvv&lt;vvv&gt;&lt;v^&lt;^&gt;^v&lt;&gt;&gt;^&gt;&lt;v&gt;&gt;&lt;&gt;^&lt;v&gt;v&lt;v&gt;vv^&gt;&gt;vvv&lt;&gt;v&gt;v&lt;v^&gt;&gt;^&gt;&gt;v&lt;&lt;&gt;^&lt;&gt;^&lt;&gt;&gt;&gt;^v&lt;&lt;&lt;^&lt;^v&gt;vv^&gt;&gt;&lt;&lt;&gt;&lt;v^&gt;^v^^^v&lt;&gt;^^vv&gt;&lt;&gt;&gt;&lt;&gt;&gt;^&gt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;^&lt;&lt;^v&gt;^^^&lt;&gt;^v^&gt;&lt;&gt;v&lt;&lt;v&gt;vv^&gt;vv&lt;&lt;&gt;&gt;&gt;&lt;&lt;^v^&lt;&gt;v&lt;vv&gt;&gt;&gt;^^&lt;&gt;^&gt;&lt;&lt;^&gt;vv&gt;&gt;^&lt;&lt;v^^vv&lt;&gt;&gt;&gt;&lt;v&gt;v&gt;&lt;^&lt;v&lt;&lt;&gt;&gt;&gt;^^&lt;&gt;&gt;^&lt;^v&gt;&lt;&gt;vv^^^v&gt;vvv&gt;^&gt;&lt;&lt;&gt;^^&gt;^&lt;&lt;v^&lt;v&lt;^v&lt;&lt;&gt;vvv&lt;^&lt;&lt;&gt;^&gt;^v&lt;vv&lt;^&gt;vvv&gt;v&gt;vv^&lt;v^&gt;&lt;&gt;&gt;^vv&lt;^^^vv&gt;&lt;^vv&lt;v^&lt;&gt;&lt;v^vvv&gt;&lt;&lt;^&gt;^^&gt;&lt;v&lt;&lt;vv^&gt;v&lt;vv&lt;v&gt;^&lt;&gt;^v&lt;&lt;&gt;v&lt;v^v^&gt;^&gt;^&gt;v&lt;&lt;^vvv&lt;&lt;&lt;v&gt;^^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;&gt;^&lt;&gt;^&gt;&gt;&gt;v&lt;v&gt;^^&lt;v^&lt;v&lt;&gt;&gt;&gt;vv&gt;^^v&lt;&lt;&gt;&gt;&gt;^^v&gt;&lt;&lt;&lt;v&lt;v&lt;^v&lt;&gt;^^&gt;&lt;v&lt;^v&lt;&lt;v^&gt;&lt;&gt;&lt;^&lt;&gt;&lt;v&lt;^^v&gt;&gt;&gt;&lt;v^^v&lt;&lt;v^&gt;&lt;^&lt;&gt;&lt;&lt;v^&gt;&gt;&lt;^&lt;&gt;v&gt;v^&lt;&gt;&lt;^&lt;v&gt;^v^&gt;^&gt;^vv^&gt;^^&lt;&lt;vv^&gt;vv&lt;^vvv&lt;&gt;&gt;^^&lt;^&gt;v^&gt;^&gt;^&lt;v^&gt;&lt;v&lt;v&gt;&gt;&gt;v&lt;&lt;&lt;&gt;&lt;^v&lt;&lt;&gt;&lt;^&lt;vv^v^^^&gt;v&lt;^^&lt;v^vvv&lt;v&lt;&gt;&lt;v&lt;vv&lt;^vv&lt;&gt;vv&lt;v^&lt;&gt;&gt;vvvvv&lt;&lt;&gt;^v^v&gt;vv&gt;&gt;&gt;vvv^^&lt;^&lt;^&lt;&gt;&lt;&gt;v&lt;v&gt;&gt;&lt;^v&gt;&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;v&gt;^&gt;v&lt;&gt;^&gt;^v&gt;&gt;^&lt;&gt;v^&lt;^&gt;&gt;&lt;&lt;&gt;^&lt;v&gt;^&gt;^^^&gt;^^&lt;v&gt;&gt;&gt;&gt;&lt;&gt;^v^v&gt;&lt;&lt;&lt;&lt;vv^&lt;vv&lt;&gt;vv&gt;v&lt;&gt;v^&lt;v^&gt;v&gt;&lt;&gt;&gt;&gt;v^&lt;&gt;&lt;^vvv&gt;vv^&lt;^&lt;&lt;^&lt;^^v&gt;^&gt;&gt;&gt;v&lt;^&lt;^v^^&lt;^&lt;^&gt;&gt;&gt;&lt;v&gt;vv&gt;^&lt;&lt;&gt;&lt;&gt;^&gt;&gt;v&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&gt;v&lt;&gt;vv^^&gt;^&gt;vvv^v&lt;&lt;^&lt;^^&lt;vv&lt;&gt;^vvv&lt;^^v^vv^&gt;&gt;v&lt;^&gt;^^&lt;v^&lt;&gt;v&lt;^&lt;^vv&gt;v&lt;&lt;vv&gt;vv&gt;^&gt;vvv&gt;&gt;&gt;^^&gt;v&lt;&gt;^v&gt;v^&lt;^&gt;&gt;v&gt;^^v&gt;&gt;&gt;&gt;v^&lt;v&gt;v&lt;^&gt;v&lt;v&lt;&lt;&gt;&gt;^v&lt;^^&lt;v&gt;&lt;^&lt;&gt;&gt;^&lt;&lt;vv^&gt;&gt;v&lt;&lt;v&gt;^v&lt;&gt;&gt;&lt;^&gt;vv&lt;v&lt;^&gt;&gt;^^&lt;vvvvvvvvv&gt;&gt;&gt;v&lt;v&lt;&gt;v^&lt;&gt;&gt;^vv&lt;v^^v&lt;&lt;^vvv^&lt;&lt;^&gt;&lt;&gt;vv&lt;&gt;&lt;&lt;&gt;&gt;v&gt;vv^&gt;&lt;&gt;&gt;^^v^&gt;&gt;v^v^&gt;&lt;&lt;&lt;&gt;&gt;^^&lt;^v&lt;&lt;^&lt;&gt;&gt;&gt;&gt;^&lt;^&gt;v^&gt;&lt;&lt;^&gt;v&lt;^v&lt;^&gt;&gt;^^&lt;&lt;&lt;&lt;&gt;&lt;^&lt;^v^v&lt;&gt;&gt;^v&lt;^&lt;&lt;vv^&lt;&gt;&lt;^^vv&gt;&lt;v^v^v&gt;^&gt;&gt;^&gt;^vv^&gt;^v&lt;v^v&lt;&lt;vvv^&gt;&lt;&gt;&gt;^v^^&gt;&lt;&gt;v&gt;vv&gt;&lt;^&gt;&gt;vv&lt;vvv&lt;&lt;&lt;&lt;^&lt;&gt;vvv^v&lt;v&gt;^&lt;v&lt;^&gt;^&lt;^&lt;v&lt;&gt;&lt;&gt;v^^^^&lt;&lt;vv&lt;^^vv&lt;v&gt;&gt;&lt;&lt;v^&gt;&lt;&gt;&gt;&gt;&lt;v^&gt;^v&gt;&lt;^&gt;^&gt;&lt;vv^&lt;&gt;&lt;^&lt;v&gt;&gt;&lt;&lt;^vv&lt;&gt;&gt;v^&lt;&lt;v&lt;&gt;v&gt;&lt;v&lt;&gt;&lt;&gt;&lt;vv&gt;^&gt;&gt;v^&lt;^&lt;v&gt;^&gt;&lt;&gt;&gt;&gt;&lt;^&gt;&lt;v^v&lt;&gt;&gt;&gt;^^&lt;^&gt;v&lt;v&gt;vvv&lt;&gt;^&lt;&lt;&gt;&lt;v^^&gt;^&gt;&gt;v&lt;^v&gt;^&gt;v&gt;&gt;&gt;vv&gt;v&gt;&gt;v^^^&lt;^&lt;vvv^&lt;&gt;^&gt;^&lt;v^&lt;v^v&gt;v&gt;^&gt;vv&gt;vvv&lt;&gt;v&lt;^&gt;v&gt;^^&gt;&gt;^&lt;vv^^v&gt;v^^^^^v^vv&gt;&lt;^&lt;&gt;&lt;&gt;^&gt;vv&lt;^&gt;&gt;^vvvv^^^&gt;^&lt;vv&gt;^v&lt;&lt;^&gt;&lt;^^&gt;^&lt;&gt;^^&gt;^&lt;&lt;v&lt;^&gt;&gt;&gt;^&gt;&lt;&lt;^^&gt;v^v&gt;&gt;^&gt;vvvv&gt;^^v&gt;&lt;v&gt;&gt;vv&gt;&lt;&lt;&lt;vv&lt;^&gt;v&gt;^^^&lt;v&gt;v^vvv&lt;^&gt;&lt;&lt;^&gt;^&lt;&gt;^&gt;&lt;&lt;&lt;&lt;&lt;v^&lt;&lt;vv^v&gt;^&lt;&gt;v&lt;v&gt;^&gt;^&gt;&gt;&lt;&gt;v^v&lt;^vv^^&gt;vv&lt;&lt;v^v&gt;vv^vvv&lt;&lt;&lt;&lt;&gt;^v&lt;v^^v^v&gt;v&lt;&lt;v&gt;^^&lt;&gt;^vv^^&gt;^&gt;^v^vv^&gt;&gt;v^vv^^&lt;vv&gt;&lt;&lt;v^v^^v&gt;&lt;vv&lt;^vvv&lt;vv^^&lt;&lt;v&gt;v^v^^^^v&lt;^&lt;^&gt;v&gt;^&gt;v&gt;^vv^v^^&lt;v&lt;^vvvv&lt;&lt;&lt;&gt;^&lt;^^^&lt;^^&lt;&gt;^&lt;&gt;&lt;vv&lt;^^&lt;&lt;^&gt;&gt;&gt;&lt;v^vvvv&gt;^&lt;&gt;&gt;^^&gt;v^^v^&lt;&lt;v^^^&lt;&lt;&lt;&gt;&lt;^&lt;v^v^^v&lt;v^&lt;&gt;v&gt;&lt;&lt;v&lt;&gt;^v&gt;v&lt;^&gt;&lt;^&gt;vv^^&lt;vvv&lt;^v&gt;&gt;v&gt;^&lt;&gt;&lt;v^&gt;&lt;^^^&lt;v^&gt;&gt;vv&lt;&lt;&lt;&lt;&lt;^&lt;&gt;^v^v&gt;^vv^&lt;&gt;v&gt;v&lt;^&gt;vv&lt;&lt;^vv&gt;vv&lt;v&lt;&gt;&lt;&gt;&gt;v&gt;&gt;&lt;v&lt;^&lt;^^&gt;&gt;&lt;&lt;v^v&lt;&lt;^&gt;&lt;v&lt;^&lt;vv&lt;v&lt;&lt;vv^&gt;^&lt;&lt;&gt;&lt;^^&gt;^&lt;^&gt;&gt;^&lt;vv&gt;&gt;&lt;v&lt;&lt;vvv&lt;^^v^&gt;^^&lt;^v&gt;^v&lt;v&lt;&gt;v&gt;&lt;v^v^&lt;&lt;^&lt;&gt;&lt;&lt;v&lt;&lt;^v&gt;v&lt;&lt;&gt;&gt;^&gt;v&gt;&gt;v&gt;&gt;v&lt;^&lt;&lt;^&lt;^&gt;&gt;&gt;v&gt;^^^v&gt;&lt;^&gt;^^&gt;&gt;v&lt;&lt;&gt;^v&gt;&lt;v&gt;vvv^vv&lt;&lt;&lt;&gt;vvv&lt;&lt;&gt;^&gt;&gt;&gt;v&lt;v&lt;v^&lt;^&lt;^&gt;^&lt;^&gt;v^^v&lt;^^&lt;v&lt;&gt;v&lt;&gt;&gt;^^&gt;^v^&gt;v&lt;&lt;&lt;&lt;^&lt;&gt;v^&gt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&lt;&lt;v^&lt;^vv&gt;v&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&lt;^&lt;^^&gt;v&lt;&gt;&gt;v&lt;&gt;vv&lt;&lt;^&lt;&lt;&gt;&lt;&lt;^&gt;v^^^vv^&gt;vvvv&gt;&gt;v&gt;v^&gt;&lt;&lt;v&lt;&gt;vv^&lt;&lt;&gt;&lt;&lt;vvv&gt;^&gt;&gt;&gt;^&lt;&lt;&lt;^&lt;^&lt;&lt;v&gt;^&gt;v&lt;&gt;&gt;v&gt;&gt;vv^^&gt;&lt;&lt;&lt;&lt;^^^v&gt;&gt;&lt;&lt;^&gt;&lt;v&gt;&lt;v^^&gt;&lt;v&lt;&lt;v^^v^^v&gt;&gt;v&lt;&gt;&lt;&gt;&lt;&lt;&gt;^&gt;&lt;v&gt;&lt;^&lt;vv&gt;&gt;&lt;^v&lt;&gt;v&lt;vvv&lt;&gt;^&gt;&gt;&lt;v&gt;&gt;v&lt;^&gt;&lt;&lt;v&gt;^&lt;&gt;^v&gt;&lt;^&gt;&lt;^^&lt;v&gt;^&gt;&lt;^^v^&lt;&lt;&gt;&lt;&gt;&gt;^&gt;v^&lt;^v^vv&lt;&gt;&lt;^&gt;vv^&gt;v^vvv^&lt;&gt;&gt;^&gt;&lt;^&lt;^&lt;&gt;^&lt;&lt;v^v&lt;^v&gt;&lt;&gt;^v&lt;v&gt;&gt;^&gt;&gt;^v^vv&gt;&gt;&lt;vv&gt;&lt;v^^&lt;&lt;^v^&lt;&gt;^v&lt;&lt;&gt;^&gt;&lt;^&gt;&gt;&lt;v&gt;&gt;v&lt;&lt;&lt;v^^vv&lt;&gt;^^v&gt;&gt;&gt;&lt;&gt;&lt;&gt;&lt;&lt;v^&lt;&lt;&lt;v^&lt;^^&gt;&lt;v^&gt;v^^vv&lt;v^&lt;&gt;&gt;vv^&lt;^v&lt;&gt;^v&gt;&gt;v^v&gt;v&lt;^^vv&gt;&lt;&gt;^v&lt;&lt;&gt;v^&lt;&gt;v^&gt;&gt;v&gt;vvv&lt;^&gt;&lt;&gt;&lt;^^&gt;^vv^&gt;&gt;v^&gt;^&lt;^^&lt;&gt;&lt;&gt;&gt;&lt;&lt;&gt;^^^&gt;&lt;^v^v&gt;&lt;&lt;&lt;&gt;&lt;&lt;^v^vv&gt;v&gt;&gt;&lt;^&gt;&gt;&gt;&lt;v^&gt;v&lt;v&gt;&lt;&gt;&lt;v^v&lt;&gt;v^^&gt;&gt;v&lt;&lt;&gt;v&gt;v&lt;v&lt;v&lt;^^&lt;&gt;&lt;&gt;v^^&lt;&gt;&gt;v&lt;^v&lt;v&gt;v&lt;&gt;&lt;v&lt;v&gt;^&lt;&lt;&gt;v&gt;vv^^&lt;&gt;&gt;^^^&lt;&gt;^^&gt;^v&gt;v&gt;&gt;&gt;^v^v&gt;&lt;v^^&lt;&gt;&lt;v&gt;^^v^v&lt;^&lt;^^&gt;&lt;&lt;v&lt;^&lt;^&lt;&gt;^&lt;&gt;&gt;&lt;&lt;&gt;^&gt;&gt;^&gt;^^&gt;&lt;v&gt;&lt;&gt;v&lt;&gt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;vv&gt;&gt;&gt;^&gt;&gt;^v&lt;^&gt;v^^^v&lt;&lt;vv&gt;&gt;&lt;&lt;&lt;^&lt;&lt;&lt;&gt;&gt;&gt;&gt;&gt;^&gt;vv&lt;^v^&lt;&gt;^&lt;v^&gt;^v&gt;&lt;v&gt;vvv&lt;&gt;&gt;&gt;^v^^^v&lt;&lt;&lt;&lt;&gt;&gt;^^&lt;vv&lt;^&lt;^^&gt;^&lt;&gt;v&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&gt;&gt;v&lt;^&lt;&gt;^&lt;vvv&lt;^&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^^&gt;^^&lt;&lt;v&lt;v^&gt;^^v^&gt;&gt;&lt;&lt;^vv&gt;&lt;v&gt;^v&gt;&gt;^&lt;v&gt;v&gt;^^&gt;^v&gt;^vvv&lt;&gt;v^v^^&lt;&gt;&lt;vv&gt;vv^&gt;&gt;&gt;&lt;&gt;v&lt;^&gt;&lt;v&lt;v^&lt;&gt;&lt;&lt;&lt;&gt;^v&gt;^v&lt;&lt;&lt;^&gt;^&gt;^&gt;v^v&lt;&lt;&gt;&lt;vvv&lt;&lt;v^^&lt;&gt;&lt;v&gt;^&gt;&gt;&gt;&lt;vv&gt;&gt;&lt;v&gt;&gt;v^&lt;vv&gt;&gt;vv&lt;&lt;^v^v&lt;&lt;&gt;&lt;^v&lt;vv&gt;&gt;&gt;vv&lt;&gt;&gt;&gt;&gt;^vv&gt;v^&lt;&gt;vv&gt;v^v&lt;v^&gt;&lt;v&lt;^^^^^&gt;vv&lt;&gt;&lt;&lt;vvv^&lt;v&gt;&lt;^&lt;vv&gt;&lt;^^^vv^&lt;&gt;^^^^&lt;^&gt;&lt;^&lt;&gt;v^&lt;v^v&lt;&lt;^v&lt;&lt;^^&lt;&gt;&gt;^&lt;v^^&gt;&gt;&gt;vv&lt;vvv&lt;&gt;v&lt;&lt;&gt;&gt;&lt;^vvv^&lt;&lt;^^&lt;&lt;&gt;&gt;&gt;^&lt;&gt;&gt;&gt;v^^&gt;&lt;&gt;&gt;&lt;&lt;&gt;&gt;&lt;v^v&gt;&gt;&gt;&gt;&gt;&gt;&lt;&gt;&gt;&gt;&lt;v^&lt;&lt;vvv^&gt;v&lt;&gt;&gt;v^&lt;&gt;vv&lt;&gt;&lt;^^^^v^&lt;&lt;^&lt;v^vv&gt;&lt;&lt;^^&gt;v&lt;^vvv^v&gt;&gt;v&gt;^&gt;&gt;v&gt;^^&gt;&lt;&lt;v^&lt;&gt;v&lt;&gt;vv&lt;^v^vv&gt;&lt;v&gt;&lt;&lt;vv^v&gt;&gt;v^&gt;&gt;v&lt;^^^&gt;^&gt;&lt;&lt;v&lt;&gt;^&gt;&lt;&gt;v&gt;&gt;&gt;vvv&lt;v&lt;vv&lt;^&gt;&gt;^v&lt;v&gt;^&lt;^^^^^v&gt;&lt;&gt;v&gt;&lt;&gt;v^v^v&lt;v^vv^v&gt;vvvv&lt;&gt;vv&lt;&lt;&lt;vv&lt;v&lt;&lt;&gt;^&lt;^&gt;^^v^&lt;&lt;&gt;^&lt;v&gt;&lt;^&gt;&lt;v&lt;v&lt;&gt;&lt;&lt;&gt;v^&lt;&lt;^&lt;&gt;&lt;vv&gt;v&lt;&lt;^v&gt;&gt;^v&lt;&gt;&lt;v&gt;^&gt;&gt;^^&gt;&lt;&gt;v^&lt;^&lt;vvv^&gt;^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;^v^v&lt;^^^&lt;vv&gt;&gt;&lt;&gt;^^&lt;&lt;v&lt;^&lt;^^&gt;&gt;&gt;v^v&lt;&lt;^^^&lt;v&lt;v&lt;^&lt;&gt;^v&lt;v&gt;&lt;v^vv^^v^^v^^&lt;vv&lt;&gt;^&lt;&gt;&lt;vv^&lt;^v^&lt;&lt;^&gt;&lt;&lt;vvv&gt;^^&lt;^^^&lt;^v&gt;^&gt;^vv&gt;&lt;&lt;&lt;^v&lt;v&gt;vv&gt;v&lt;&gt;v^v&lt;v^&gt;v^&gt;&gt;&gt;v^v&lt;&gt;^v&lt;&lt;&gt;^vv&gt;v&gt;v&gt;v^&lt;^&gt;v^^&lt;^&gt;^^^^vv&gt;^^&gt;&lt;^&gt;vv^&gt;&gt;^^v&gt;&gt;&lt;&lt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^&lt;v&lt;vv^&gt;^^&gt;&lt;&lt;^&gt;&lt;v&gt;v^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;&gt;&lt;v^v&lt;v^&lt;v&lt;vv^v^&lt;&lt;^&lt;vvv&gt;&gt;&gt;&lt;vv&lt;^^&gt;&gt;^&gt;^&gt;&lt;&lt;v^&lt;&gt;&gt;v&gt;v^v^^&gt;&lt;&lt;&gt;vv^v&gt;v^&lt;v&gt;&lt;^&lt;&gt;^^&lt;^&gt;v&gt;^&lt;&gt;&lt;&lt;&lt;v&gt;^&lt;^&lt;^&gt;^&gt;^&gt;^^v^&lt;&lt;^^v^^&lt;^&lt;&gt;&gt;&lt;^&gt;v&gt;&gt;^^&lt;&gt;^^^&lt;&lt;&lt;&lt;v^&gt;^v&lt;^vv&gt;^&lt;&lt;&lt;v&lt;&gt;&lt;&lt;v&lt;&gt;vv&gt;&gt;&gt;v&gt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;v&lt;&lt;&lt;vv&gt;&lt;&gt;^v&gt;v&lt;^&gt;&gt;&lt;^&gt;&lt;&gt;&lt;v&lt;&gt;^v^&gt;^v&gt;^v&lt;&lt;&gt;&lt;&lt;^&lt;&gt;&gt;v&gt;^&gt;&lt;&gt;^&gt;&gt;&lt;&gt;&gt;&lt;^&lt;v^&gt;&lt;v^^&lt;&gt;&lt;v&gt;&lt;^^&gt;^v^^&lt;&gt;v^&lt;v^&lt;^v&lt;v^^^^^v^&lt;&lt;^&gt;^^^&lt;^v&gt;&lt;&gt;^^&lt;&lt;&lt;&gt;&lt;&lt;&lt;&lt;&lt;^^&gt;v^vvvv&gt;v&lt;&gt;&gt;vv&lt;^&gt;^v^&gt;v&lt;^vv^v&lt;&lt;&gt;&lt;&lt;v&gt;v^v&gt;^^&gt;&lt;&gt;&lt;^&lt;v^&gt;v&gt;&lt;vv&gt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;^vv&lt;&gt;v&gt;&gt;v&lt;^v&gt;&gt;&gt;v&lt;v&gt;v&gt;v&gt;^vv&lt;&lt;&gt;^^vv&lt;v&lt;^v^&lt;v&lt;v&gt;vv&lt;&gt;^&lt;^&lt;vv&lt;v^&lt;^v^^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^v&gt;vv^^v&lt;&lt;^^&gt;&lt;&lt;&gt;v^^&lt;&gt;&lt;&gt;&lt;v^^&lt;v^v&gt;^&gt;^&gt;^&gt;v&lt;^&lt;v&gt;^v^^&gt;v&lt;&gt;vvv&lt;^v&lt;v^v&gt;&lt;&lt;v^&gt;&lt;&lt;^^&gt;&lt;^&lt;&lt;v^v^&gt;v&lt;&gt;^&gt;v&gt;&lt;&gt;&lt;v&gt;^&lt;v&lt;v&gt;^&lt;^^^&gt;^v&lt;&lt;&gt;&lt;&lt;&gt;&lt;&gt;vv&gt;v^&lt;&gt;v^&gt;&lt;v^v&lt;v&gt;&lt;&gt;&lt;&lt;v&gt;v&lt;vv&gt;&lt;&lt;v&gt;&gt;v&gt;^&lt;&lt;&lt;&gt;vv&gt;&gt;vvv&gt;^^vv^v^^&lt;^^&lt;&gt;v^^&lt;&gt;v&gt;&gt;^^&gt;^&gt;^&gt;v&gt;&gt;&lt;^&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&gt;&gt;&lt;^&gt;v&lt;&lt;&lt;&lt;&lt;&lt;&lt;^v^v&lt;v^&lt;v^^&gt;^&lt;&gt;&lt;&lt;v&lt;^&gt;v^&gt;v^vv&lt;&lt;^^vv^&gt;&gt;&gt;&gt;^&lt;&gt;v&lt;^v&lt;&gt;v&lt;vv&lt;^&gt;&gt;v^vv&gt;vv&gt;&lt;vv&lt;&lt;^&gt;v&gt;&gt;&lt;vv&gt;&gt;&gt;vv^&lt;&lt;&lt;&lt;vv^&gt;v&lt;&lt;&lt;&lt;^^&gt;^^v^&gt;&lt;&lt;^&lt;v^&gt;v^&gt;^^&lt;v&lt;&gt;vvv^&gt;^&lt;&gt;vvv&lt;v&lt;^^&gt;v^&lt;&lt;v&gt;&gt;&lt;&gt;v&lt;v&lt;&gt;^^&lt;vvv&gt;^&gt;vv&gt;&lt;&gt;&lt;&lt;&lt;^^vv&lt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;&lt;&lt;v&gt;&lt;^vv^&gt;^&lt;^&gt;^^^&lt;&lt;&lt;v&gt;vv^&lt;^&lt;&lt;&gt;^&gt;^&lt;vv&gt;v&gt;&lt;v&lt;&lt;^&gt;&lt;^&gt;^^&lt;vv^v^^&gt;&gt;&gt;&gt;vv^&gt;&lt;^^vv&gt;&lt;&gt;^&lt;v^v&gt;v&lt;vv&gt;v&gt;&lt;&lt;&lt;v&gt;v&lt;v&gt;^&gt;&lt;v^^&gt;&lt;v&gt;v&lt;^v^&gt;&gt;^^&lt;v^&gt;^^&gt;vv&gt;&gt;vv^&gt;&lt;^vv^vv&lt;&lt;^&gt;vv&gt;^v&lt;v&gt;&lt;vv&gt;&lt;v&lt;vvvvv&gt;^^v^v&gt;&lt;v&gt;&gt;&gt;^vv&lt;&gt;v&gt;^^^^&lt;^&gt;&gt;&lt;&gt;^v^^^&gt;v&lt;^^&lt;&lt;^^v&lt;vv&lt;&gt;vvv&lt;^&gt;&gt;&lt;&gt;&lt;^&gt;&gt;^&gt;&lt;^&lt;&gt;v&lt;v&lt;&lt;&gt;&lt;&lt;v&gt;&lt;v^v&lt;&gt;&gt;&lt;^&gt;v&gt;&lt;&lt;v^&lt;v&gt;v&lt;^&lt;vv^v^v^&gt;vvv^^&gt;v&gt;^&lt;vv^&gt;v^v^&lt;&gt;v&gt;^&gt;&gt;vv&gt;&gt;&lt;^^&lt;v&lt;&lt;&gt;^vv&lt;&gt;&lt;&gt;&lt;&lt;^v&lt;v&gt;v&lt;&lt;vv&gt;&lt;&gt;&gt;&lt;^v&lt;v&gt;&gt;v^&gt;vvv^v^&lt;&lt;^&gt;&lt;v&lt;&gt;^vv^&gt;v^&lt;v&lt;^&gt;&gt;v&lt;v&gt;&lt;v&gt;&lt;v&gt;&gt;^&lt;&lt;&lt;v^&lt;&gt;&lt;&lt;&gt;v&gt;^&gt;^^&lt;v&lt;&gt;&gt;^&lt;&gt;^&gt;^&gt;&lt;&lt;&lt;^&lt;&lt;^&lt;&lt;^&gt;^v&gt;&gt;&gt;&lt;vvv&gt;&gt;&lt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&gt;&gt;&gt;^&lt;^v&lt;^&gt;v&lt;&gt;vv&lt;&gt;&lt;&gt;v&gt;&gt;^&gt;&gt;^&gt;vv^^&gt;&lt;&lt;^&lt;v&lt;v&gt;&gt;^^&lt;&lt;^&gt;v&lt;^&gt;&gt;vv&gt;^&lt;&gt;v&gt;&lt;^&gt;v&lt;vv&gt;&gt;&gt;&gt;&gt;&gt;^v&lt;^&lt;&lt;&lt;v^&gt;&lt;vv&lt;&lt;&gt;&gt;vv&lt;&lt;&gt;&lt;v&lt;&gt;&lt;&lt;&lt;v&lt;^&lt;v&lt;&gt;&gt;v&lt;^^^^v^^&lt;^^^&lt;^&lt;vv&gt;&lt;&lt;^&gt;&gt;&lt;&gt;v&lt;&lt;&gt;v&lt;v&lt;&gt;&gt;&gt;&gt;&lt;&gt;v^vv&gt;^&gt;^&gt;&gt;vv^v&lt;v&lt;&lt;&gt;&lt;^v&gt;vv^&gt;&lt;v&lt;&lt;&gt;v^v&lt;^&gt;vv&lt;&lt;^^v&gt;&lt;^&gt;&gt;^^vv&lt;^&lt;&gt;&gt;v^^&gt;&gt;&lt;v&gt;^v&gt;&gt;&gt;^&gt;&gt;v&gt;v&lt;&gt;v&lt;^vv&gt;&lt;&gt;^&lt;&lt;^&gt;vv&gt;&gt;&gt;&lt;&gt;&lt;&gt;v^&gt;&lt;&gt;v^&gt;v&gt;v&gt;&lt;^v&lt;&gt;&lt;v&lt;v&gt;^v&lt;&lt;^vv^&gt;&lt;^^&gt;&gt;&lt;^^^&lt;&lt;&lt;^&gt;v&gt;^v&gt;&gt;&gt;&lt;^&gt;&gt;&lt;^&gt;&gt;&gt;^^^&lt;^&gt;vv&lt;&gt;&lt;&lt;&lt;v^&gt;^&lt;^^&gt;&gt;^^^v^v^v&gt;v&lt;v&gt;&gt;&gt;&gt;&lt;^&gt;&gt;&gt;v&gt;^vv&lt;&lt;^^^&lt;^^vv&gt;v&lt;&lt;&gt;&lt;v&lt;&lt;^^&gt;v&gt;&gt;&lt;&lt;v^^&gt;&lt;^&gt;^&lt;^&gt;^v^&gt;v&gt;&lt;^&lt;^vv&gt;v&gt;&gt;&lt;&gt;^&lt;&lt;vv&lt;&lt;v&gt;v&lt;vv&lt;v&gt;^&gt;^&gt;&gt;&lt;^^&lt;v&gt;^v^v&lt;&gt;&lt;&lt;&gt;vvv&lt;^&lt;v&gt;^&gt;&lt;&gt;^&gt;vvv&gt;&gt;&gt;^&gt;&lt;&lt;&gt;&gt;&lt;v^^&lt;^&lt;&lt;^v&gt;&gt;^v&lt;v&lt;vv&gt;vv^v^&gt;v&lt;&lt;vvv&lt;^^v^v&gt;^&lt;^&gt;&gt;^&gt;v&lt;^&gt;^v&lt;&lt;&gt;&lt;&lt;&lt;^&gt;^&lt;^^^&gt;vv&lt;^^^^vv&lt;v&lt;^^v&lt;&lt;&lt;&lt;v&lt;^v^&lt;&gt;&lt;v&lt;&lt;^&gt;&lt;&lt;&gt;vv&gt;&gt;&gt;&lt;^&lt;^&lt;&gt;&gt;&gt;^&gt;^&gt;&gt;^&lt;&lt;&lt;&lt;&lt;^^v&gt;^&gt;^&lt;&gt;vvv^^&lt;^&gt;&lt;^&gt;^^v&gt;^vv^&gt;&lt;v^&lt;^&lt;&lt;v^&lt;vvv&lt;&lt;^v&lt;&gt;&lt;^&gt;&lt;^&gt;&gt;&gt;v&gt;^v&gt;^&gt;^v&lt;vv^v&gt;&gt;&lt;v&gt;&lt;^&gt;&lt;v^^&gt;v^&gt;^&lt;&gt;&lt;&lt;&gt;&lt;&gt;v&lt;v^&gt;vvv^&gt;^&gt;&gt;v&lt;&gt;^&gt;&lt;^&gt;^&gt;&lt;vvv&gt;^^v^v&gt;v&lt;&gt;^v^&gt;&lt;^&gt;&gt;v&gt;v^&gt;&lt;&lt;&lt;^&gt;&gt;^&lt;&gt;^&lt;&gt;&gt;v&gt;&lt;&gt;&gt;v^&gt;^&gt;^^&lt;&gt;&gt;v^&gt;^&lt;vvvv&lt;^vvvv^&gt;&gt;vv^&lt;v^v&gt;^vv&lt;&gt;v&lt;&gt;^&lt;v&lt;v&gt;v&gt;^^&gt;&lt;^&gt;vv^&lt;^v^&lt;&lt;^&lt;^&lt;&gt;&lt;vv&lt;^v&lt;^v&gt;&lt;&gt;&gt;&gt;^v^&lt;&lt;^&gt;&lt;^&gt;vv&lt;v&gt;v&lt;^&gt;vv^&gt;v&lt;&lt;&lt;&gt;^&lt;&gt;&lt;v&lt;^^^&gt;v&gt;&lt;^^&lt;&gt;^&lt;^&lt;v^vv^&lt;&lt;^&gt;&gt;&lt;&lt;v^v&lt;^vvv&lt;&lt;&lt;&gt;&gt;vvvv^v^^^&gt;v&lt;&gt;&gt;&gt;&lt;&lt;&gt;vvv&lt;&lt;^^^&gt;v&gt;v&gt;&gt;v&lt;&lt;v&lt;v^v^&gt;^^v&gt;^&gt;&lt;^&lt;&gt;&lt;&lt;v^&lt;v&lt;v^^^&gt;&lt;&gt;v^^^&lt;v&gt;vv&lt;&gt;^&gt;^^vv&gt;^&lt;&lt;^v&lt;^v&gt;&lt;v&gt;&gt;&gt;^&gt;&gt;&gt;&lt;^&lt;&lt;&gt;^v&gt;&gt;^&gt;vv&lt;&lt;&lt;v&lt;&gt;^&lt;v&gt;&lt;v^&lt;^&lt;&gt;v&gt;v^^v^&gt;&gt;&lt;&lt;^v&lt;&lt;&lt;&lt;&gt;v&gt;v&gt;v^^&lt;^&gt;&lt;&gt;^^&lt;&lt;&lt;v&gt;vv&lt;&gt;&gt;&gt;^&gt;&gt;v&lt;&gt;&lt;v^&gt;^&lt;&gt;&lt;vv&gt;v&gt;v^v&lt;v^&lt;^&gt;&gt;^&gt;&gt;&lt;&lt;^^&lt;^^v&lt;vv&lt;&gt;&gt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^^&gt;vvv^&lt;vvv&lt;^&gt;vv&gt;&lt;&gt;&gt;&lt;&lt;&lt;^&lt;v^v^^&lt;&lt;^vvv^^&lt;^&lt;&gt;&lt;&lt;&gt;^&lt;^&lt;&gt;&gt;vvv&lt;&gt;^&lt;&gt;v^v&lt;&gt;&lt;&gt;&gt;v^v&gt;&lt;&lt;&gt;&gt;&gt;vvv&gt;v&lt;&gt;^&gt;&gt;^&gt;&lt;^&gt;vv&lt;&lt;&gt;&gt;v&lt;&lt;^&gt;&lt;&gt;v&gt;&gt;^^&lt;v&gt;^&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&lt;vv&lt;^&lt;vv^vv&gt;&lt;&gt;&gt;&gt;&gt;&lt;^&lt;v&gt;^&gt;vv&lt;v&gt;&lt;&gt;^&lt;&gt;vvvvv^vv&lt;&lt;v&lt;&gt;&gt;&gt;^&lt;&lt;&gt;&lt;&gt;^^vvv&gt;&gt;&gt;vv&lt;&lt;^^&gt;&lt;^v^^v&lt;&gt;^^&gt;^&gt;&lt;^&gt;v^^^^v&lt;^&lt;&lt;vv&lt;vv&lt;&gt;vv^^&gt;v^vv&gt;v&gt;&lt;&gt;&gt;vv&gt;^&lt;^&lt;v^v^&gt;&gt;v^v^^v&gt;^&gt;vv^&gt;v&lt;vvvv&lt;^v&lt;^v&gt;^v&gt;^^v&lt;&lt;^&gt;^^&lt;&lt;&gt;^&gt;&lt;^v&gt;&gt;&gt;vv^&gt;^^&gt;vvvv&gt;&gt;v&lt;^&lt;v&gt;^&gt;&gt;&gt;v^&lt;&gt;&lt;^&lt;^^&lt;v&gt;vv^^&gt;&lt;v&gt;v^&lt;&gt;^^^&gt;&gt;&gt;&lt;^^v&gt;v&gt;^&lt;&lt;&gt;^&lt;v^&gt;vvv^&gt;^^^&gt;&lt;v&lt;^&gt;&gt;v&lt;v&gt;&gt;^v&gt;&lt;&lt;&gt;&lt;&lt;&gt;v&lt;^&lt;&lt;&gt;^&gt;&lt;&gt;^&gt;vv&gt;^&lt;v&gt;^^v&lt;&lt;^v^vvv^^&gt;^vv^&lt;^&gt;^&gt;^^v&gt;v^&gt;^&lt;&lt;&gt;&lt;&lt;^&gt;v&gt;&gt;vv^vv&gt;&lt;v&gt;&gt;^&lt;&lt;^&lt;v^^&lt;^&lt;v^^vv^&gt;&lt;^^&lt;^^&gt;&lt;v^^&gt;v^^^&lt;^&lt;&gt;^&lt;&gt;&gt;^v&lt;^vvv^^v^&lt;&gt;&lt;^&gt;&gt;&gt;&gt;&gt;v&gt;&lt;&gt;&lt;&lt;&lt;&gt;vv&lt;^v&gt;&gt;&lt;&lt;&gt;vvv&lt;&gt;&lt;&lt;vv&lt;&lt;&lt;^&gt;v^^&gt;&gt;^&gt;^v&gt;&gt;&lt;&gt;&lt;^^v&lt;&gt;&gt;&lt;&gt;&gt;v^&gt;^&lt;vv&gt;&lt;&lt;&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;&gt;&gt;v&lt;&gt;&lt;^&lt;vv&gt;vv&lt;^v&gt;^&lt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^&gt;&gt;^&lt;&gt;&lt;^&gt;&gt;&lt;&lt;&gt;^&gt;v&gt;^^^v&gt;&gt;^&lt;^^v&gt;&lt;v^v&gt;^&gt;&lt;&lt;&gt;&lt;&gt;&gt;^&gt;&gt;^&lt;&lt;v&lt;&gt;^v&lt;&gt;^&gt;^&lt;v&gt;&gt;vv&gt;^vvv&lt;&lt;v&lt;&lt;^&gt;^&gt;^&lt;&lt;^^&lt;&gt;^^^^vvv&lt;&gt;^vv&lt;vvvvv^^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;v^&lt;&gt;&lt;^&lt;&lt;^&gt;v^^v&lt;&gt;&gt;^vv&lt;&gt;v^^&lt;&gt;&gt;v^vvvvv&lt;&lt;v^&lt;v^^&gt;&gt;&gt;&lt;vvvvv&gt;&gt;&lt;^&gt;vv&gt;v^v^&lt;v&lt;^&gt;^^&gt;&lt;^&gt;^^^^v&lt;&gt;&lt;^v&lt;&lt;&gt;v^&gt;v&gt;&gt;vv&lt;&lt;&gt;^&lt;v^^&gt;vvv&gt;^^&lt;v^&lt;&gt;vv^&gt;&lt;&gt;&gt;&lt;v^^v&lt;&gt;^&gt;&gt;^&gt;v&gt;&lt;&gt;&gt;^^v&gt;^&gt;^&gt;&gt;&gt;^&gt;v&lt;^v&gt;v&gt;^&lt;^^^^^&gt;&gt;v&lt;v&lt;&gt;&gt;v&lt;&lt;^&gt;^&lt;v&lt;&lt;&gt;^^&gt;&gt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^^^vv&lt;&gt;^^&gt;&gt;&lt;&lt;^^&gt;v&gt;vv&gt;vv&gt;v^&gt;^v&gt;v^^&lt;&gt;&gt;&gt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;&gt;v&gt;&lt;&gt;vvv^^v&gt;^^&gt;^vvvv^&gt;^&lt;&gt;^vvvv&gt;&lt;v&gt;&lt;v&lt;&gt;&gt;&gt;&lt;&gt;^&lt;^vv&lt;&gt;^v&lt;^v&lt;&gt;^vvv&lt;&lt;&gt;&gt;&lt;vvv^&gt;&gt;^&gt;&lt;&lt;vv^&lt;v^&gt;^&lt;v&lt;&lt;^^&gt;^^&lt;^^v^&gt;v&lt;&gt;v^v&gt;&lt;&gt;&gt;&lt;v^^&gt;&gt;^vvv&gt;&lt;^vv&gt;v^&lt;^&lt;^v&gt;&gt;v^^&gt;^vvv^&lt;v^^v^^&gt;v&lt;^&lt;&gt;&gt;^&lt;&gt;&gt;&gt;^^&lt;&gt;&lt;^^vv&lt;&gt;^vv^&lt;&gt;&gt;&gt;&gt;^^&lt;&lt;^^&lt;&gt;vv^^&gt;&lt;&gt;^^&lt;v&lt;&lt;v&gt;^&lt;v^^&gt;^v&lt;&gt;&lt;&gt;&lt;&gt;vvv&gt;^v^&gt;&gt;vv&lt;&lt;^v&lt;&lt;&gt;&gt;&lt;v&gt;^&gt;&lt;^&gt;&gt;&gt;^&lt;^&lt;^^&gt;vv^&lt;&lt;^&lt;&gt;&gt;^^&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;v&gt;&gt;v&lt;&lt;vvvv&gt;^v^vv&gt;&gt;&lt;^^&lt;&lt;^&gt;&gt;v&gt;v&lt;^^^&lt;^&gt;&lt;^^vv&gt;^vv&lt;^&lt;vv&lt;&gt;v&gt;&lt;^&lt;&gt;&lt;v&gt;&lt;^^^&gt;&gt;^&lt;&gt;&lt;^&lt;v&gt;&gt;&gt;&gt;v^&lt;v&gt;&gt;&gt;&gt;&gt;v&lt;&gt;&lt;^^&gt;v&lt;^&lt;^&gt;&gt;&lt;v&lt;&gt;^&gt;vv&gt;^^v^v^&lt;&lt;v&lt;&gt;&lt;&lt;&lt;^v^&gt;&lt;&lt;^&lt;&gt;&lt;&lt;&lt;&lt;v&lt;^&gt;&gt;&lt;&lt;&lt;&gt;v&gt;&gt;vv&gt;&lt;vv&lt;&gt;&lt;&lt;^&lt;^&lt;&gt;&lt;vv&gt;^^^^&lt;&gt;v&lt;&lt;&lt;&lt;v&gt;vv&lt;&gt;vv^^^&gt;&gt;&lt;&gt;vv^&gt;&lt;&gt;&gt;^vv&lt;&lt;&gt;&lt;^^vv&lt;&gt;v^&gt;&gt;^&lt;&lt;&gt;^&lt;v^&lt;^&gt;v&lt;</span><span class="s2">&#34;</span>
+<span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+<span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+<span class="hl"><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2592</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>If I now make a change, if everything is still OK my console remains empty. If I broke something, I get something like</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Traceback (most recent call last):
+  File &#34;/home/xyz/projects/example.py&#34;, line 16, in &lt;module&gt;
+    assert len(totalSet) == 2592
+AssertionError
+</code></pre></td></tr></table>
+</div>
+</div><p>Very different from an empty console! By using the assertion it becomes much easier to see if a change broke something. When you do get an assertion error you can revert your change or investigate further.</p>
+<p>The test is in the same file as your production code, so to run the test just run the code as you would normally.</p>
+<p>Your IDE or whatever you use to write code in probably has a way to run your code with the press of a single key, or a combination of two keys. If you make it a habit to press that run key whenever you pause to think, you run your tests very frequently and quickly notice it when you introduce a mistake.</p>
+<h2 id="multiple-cases">Multiple cases</h2>
+<p>Very often you want your program to work with different inputs. This is the case for our puzzle as well. For our puzzle, you can only get an input if you log in, and each user gets a unique input.</p>
+<p>We want to test if our code works (and stays working after changes) for multiple different inputs.</p>
+<p>A very time consuming way to do this is to change some values to match the test case and run the file, anew for each test case&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="hl"><span class="lnt">16
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="n">direction</span> <span class="o">=</span> <span class="s2">&#34;^&gt;v&lt;&#34;</span>
+</span><span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+<span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+<span class="hl"><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="hl"><span class="lnt">16
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="n">direction</span> <span class="o">=</span> <span class="s2">&#34;^v^v^v^v^v^v^v&#34;</span>
+</span><span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+<span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+<span class="hl"><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>A better way is to introduce a function:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="hl"><span class="lnt">16
+</span></span><span class="lnt">17
+</span><span class="hl"><span class="lnt">18
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">puzzle_answer</span><span class="p">(</span><span class="n">direction</span><span class="p">):</span>
+</span>  <span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+  <span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+<span class="hl">  <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">)</span>
+</span>
+<span class="hl"><span class="k">assert</span> <span class="n">puzzle_answer</span><span class="p">(</span><span class="s2">&#34;^v^v^v^v^v^v^v&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>We wrapped the production code in a function. What we want to change each test case is now a parameter of the function. The value that we want to assert is returned by the function. A test case is calling the function with a specific argument and asserting the return value.</p>
+<p>We can now easily have multiple test cases:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="hl"><span class="lnt">19
+</span></span><span class="hl"><span class="lnt">20
+</span></span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">puzzle_answer</span><span class="p">(</span><span class="n">direction</span><span class="p">):</span>
+  <span class="n">loc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="n">totalList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">direction</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="k">elif</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="n">totalList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span>
+  <span class="n">totalSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">totalList</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">totalSet</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">puzzle_answer</span><span class="p">(</span><span class="s2">&#34;^v^v^v^v^v^v^v&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="hl"><span class="k">assert</span> <span class="n">puzzle_answer</span><span class="p">(</span><span class="s2">&#34;^&gt;v&lt;&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+</span><span class="hl"><span class="k">assert</span> <span class="n">puzzle_answer</span><span class="p">(</span><span class="s2">&#34;&gt;^^v^&lt;&gt;v&lt;&lt;&lt;v&lt;v^&gt;&gt;v^^^&lt;v&lt;&gt;^^&gt;&lt;^&lt;&lt;^vv&gt;&gt;&gt;^&lt;&lt;^&gt;&gt;&lt;vv&lt;&lt;v^&lt;^^&gt;&lt;&gt;&gt;&gt;&lt;&gt;v&lt;&gt;&lt;&gt;^^&lt;^^^&lt;&gt;&lt;&gt;&gt;vv&gt;vv&gt;v&lt;&lt;^&gt;v&lt;&gt;^&gt;v&lt;v^&lt;&gt;v&gt;&gt;&lt;&gt;^v&lt;&lt;&lt;&lt;v^vv^&gt;&lt;v&gt;v^&gt;&gt;&gt;vv&gt;v^^^&lt;^^&lt;&gt;&gt;v&lt;^^v&lt;&gt;^&lt;vv^^&lt;^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^&lt;&gt;&gt;&gt;&lt;&gt;&lt;vv&gt;&lt;&gt;v&lt;&lt;&lt;&gt;&lt;&gt;&lt;&gt;v&gt;&lt;&lt;&gt;^^^^v&gt;&gt;^&gt;^&lt;v&lt;&lt;vv^^&lt;v&lt;^&lt;^&gt;^^v^^^^^v&lt;&gt;&lt;^v&gt;&lt;&lt;&gt;&lt;^v^&gt;v&lt;&lt;&gt;^&lt;&gt;^^v^&lt;&gt;v&lt;v^&gt;v&gt;^^&lt;vv^v&gt;&lt;^&lt;&gt;^v&lt;&gt;&lt;^&gt;&lt;v^&gt;&lt;&gt;&lt;&gt;&lt;&lt;&lt;&lt;&gt;^vv^&gt;^vvvvv&gt;&lt;&gt;&lt;^&lt;vv^v^v&gt;v&lt;&lt;^&lt;^^v^&lt;&gt;^&lt;vv&gt;&lt;v&lt;v^v&lt;&lt;v&lt;&lt;^^&gt;&gt;^^^v^&gt;v&lt;&gt;&lt;^vv&lt;&lt;^&lt;&gt;v&lt;v&gt;&lt;&gt;&lt;v^^&gt;&lt;v&lt;&gt;^^&gt;^^&gt;v^&gt;^&lt;&lt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;v&gt;&lt;^v&gt;^&gt;&gt;&lt;v^^&lt;^&gt;v&lt;vvvv&lt;&gt;&gt;&gt;&gt;&gt;^v^^&gt;v&lt;v&lt;^&lt;vv&gt;^&gt;^vv^&gt;vv^^v&lt;&lt;^&lt;^^&lt;&gt;v&gt;vv^v&gt;&gt;&lt;&gt;&gt;&gt;v^&gt;^&gt;^^v&lt;&gt;^&lt;v&lt;&lt;&gt;^vv&gt;v^&lt;&lt;v&gt;v&lt;&lt;&gt;&lt;v&gt;^vvv&lt;v&lt;vvv^v&lt;vv&lt;v^^^&gt;v&gt;&lt;&lt;^&lt;&gt;&gt;&lt;v^^&gt;^v^&gt;&gt;^v&lt;^&lt;&gt;&lt;v&lt;&gt;&gt;v^&lt;&gt;&gt;v&lt;&gt;&gt;v^^^&gt;&lt;^&gt;&gt;vvvv&gt;^v&lt;^&gt;&lt;&lt;&gt;&gt;^&lt;&gt;^&gt;vv&gt;&lt;v&lt;&lt;&gt;&gt;^^&gt;v^^^&gt;&lt;^&lt;&lt;^^v&gt;v&lt;^&lt;&lt;&gt;v&gt;^^vvv^v^&gt;v^&lt;&gt;^^&lt;&gt;v^v&gt;v&gt;v&lt;v^&gt;vv&gt;^^v&lt;&gt;v&gt;&gt;^&lt;&gt;&gt;&lt;&gt;v&gt;v^&lt;&lt;vvvv&lt;vvv&gt;&lt;v^&lt;^&gt;^v&lt;&gt;&gt;^&gt;&lt;v&gt;&gt;&lt;&gt;^&lt;v&gt;v&lt;v&gt;vv^&gt;&gt;vvv&lt;&gt;v&gt;v&lt;v^&gt;&gt;^&gt;&gt;v&lt;&lt;&gt;^&lt;&gt;^&lt;&gt;&gt;&gt;^v&lt;&lt;&lt;^&lt;^v&gt;vv^&gt;&gt;&lt;&lt;&gt;&lt;v^&gt;^v^^^v&lt;&gt;^^vv&gt;&lt;&gt;&gt;&lt;&gt;&gt;^&gt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;^&lt;&lt;^v&gt;^^^&lt;&gt;^v^&gt;&lt;&gt;v&lt;&lt;v&gt;vv^&gt;vv&lt;&lt;&gt;&gt;&gt;&lt;&lt;^v^&lt;&gt;v&lt;vv&gt;&gt;&gt;^^&lt;&gt;^&gt;&lt;&lt;^&gt;vv&gt;&gt;^&lt;&lt;v^^vv&lt;&gt;&gt;&gt;&lt;v&gt;v&gt;&lt;^&lt;v&lt;&lt;&gt;&gt;&gt;^^&lt;&gt;&gt;^&lt;^v&gt;&lt;&gt;vv^^^v&gt;vvv&gt;^&gt;&lt;&lt;&gt;^^&gt;^&lt;&lt;v^&lt;v&lt;^v&lt;&lt;&gt;vvv&lt;^&lt;&lt;&gt;^&gt;^v&lt;vv&lt;^&gt;vvv&gt;v&gt;vv^&lt;v^&gt;&lt;&gt;&gt;^vv&lt;^^^vv&gt;&lt;^vv&lt;v^&lt;&gt;&lt;v^vvv&gt;&lt;&lt;^&gt;^^&gt;&lt;v&lt;&lt;vv^&gt;v&lt;vv&lt;v&gt;^&lt;&gt;^v&lt;&lt;&gt;v&lt;v^v^&gt;^&gt;^&gt;v&lt;&lt;^vvv&lt;&lt;&lt;v&gt;^^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;&gt;^&lt;&gt;^&gt;&gt;&gt;v&lt;v&gt;^^&lt;v^&lt;v&lt;&gt;&gt;&gt;vv&gt;^^v&lt;&lt;&gt;&gt;&gt;^^v&gt;&lt;&lt;&lt;v&lt;v&lt;^v&lt;&gt;^^&gt;&lt;v&lt;^v&lt;&lt;v^&gt;&lt;&gt;&lt;^&lt;&gt;&lt;v&lt;^^v&gt;&gt;&gt;&lt;v^^v&lt;&lt;v^&gt;&lt;^&lt;&gt;&lt;&lt;v^&gt;&gt;&lt;^&lt;&gt;v&gt;v^&lt;&gt;&lt;^&lt;v&gt;^v^&gt;^&gt;^vv^&gt;^^&lt;&lt;vv^&gt;vv&lt;^vvv&lt;&gt;&gt;^^&lt;^&gt;v^&gt;^&gt;^&lt;v^&gt;&lt;v&lt;v&gt;&gt;&gt;v&lt;&lt;&lt;&gt;&lt;^v&lt;&lt;&gt;&lt;^&lt;vv^v^^^&gt;v&lt;^^&lt;v^vvv&lt;v&lt;&gt;&lt;v&lt;vv&lt;^vv&lt;&gt;vv&lt;v^&lt;&gt;&gt;vvvvv&lt;&lt;&gt;^v^v&gt;vv&gt;&gt;&gt;vvv^^&lt;^&lt;^&lt;&gt;&lt;&gt;v&lt;v&gt;&gt;&lt;^v&gt;&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;v&gt;^&gt;v&lt;&gt;^&gt;^v&gt;&gt;^&lt;&gt;v^&lt;^&gt;&gt;&lt;&lt;&gt;^&lt;v&gt;^&gt;^^^&gt;^^&lt;v&gt;&gt;&gt;&gt;&lt;&gt;^v^v&gt;&lt;&lt;&lt;&lt;vv^&lt;vv&lt;&gt;vv&gt;v&lt;&gt;v^&lt;v^&gt;v&gt;&lt;&gt;&gt;&gt;v^&lt;&gt;&lt;^vvv&gt;vv^&lt;^&lt;&lt;^&lt;^^v&gt;^&gt;&gt;&gt;v&lt;^&lt;^v^^&lt;^&lt;^&gt;&gt;&gt;&lt;v&gt;vv&gt;^&lt;&lt;&gt;&lt;&gt;^&gt;&gt;v&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&gt;v&lt;&gt;vv^^&gt;^&gt;vvv^v&lt;&lt;^&lt;^^&lt;vv&lt;&gt;^vvv&lt;^^v^vv^&gt;&gt;v&lt;^&gt;^^&lt;v^&lt;&gt;v&lt;^&lt;^vv&gt;v&lt;&lt;vv&gt;vv&gt;^&gt;vvv&gt;&gt;&gt;^^&gt;v&lt;&gt;^v&gt;v^&lt;^&gt;&gt;v&gt;^^v&gt;&gt;&gt;&gt;v^&lt;v&gt;v&lt;^&gt;v&lt;v&lt;&lt;&gt;&gt;^v&lt;^^&lt;v&gt;&lt;^&lt;&gt;&gt;^&lt;&lt;vv^&gt;&gt;v&lt;&lt;v&gt;^v&lt;&gt;&gt;&lt;^&gt;vv&lt;v&lt;^&gt;&gt;^^&lt;vvvvvvvvv&gt;&gt;&gt;v&lt;v&lt;&gt;v^&lt;&gt;&gt;^vv&lt;v^^v&lt;&lt;^vvv^&lt;&lt;^&gt;&lt;&gt;vv&lt;&gt;&lt;&lt;&gt;&gt;v&gt;vv^&gt;&lt;&gt;&gt;^^v^&gt;&gt;v^v^&gt;&lt;&lt;&lt;&gt;&gt;^^&lt;^v&lt;&lt;^&lt;&gt;&gt;&gt;&gt;^&lt;^&gt;v^&gt;&lt;&lt;^&gt;v&lt;^v&lt;^&gt;&gt;^^&lt;&lt;&lt;&lt;&gt;&lt;^&lt;^v^v&lt;&gt;&gt;^v&lt;^&lt;&lt;vv^&lt;&gt;&lt;^^vv&gt;&lt;v^v^v&gt;^&gt;&gt;^&gt;^vv^&gt;^v&lt;v^v&lt;&lt;vvv^&gt;&lt;&gt;&gt;^v^^&gt;&lt;&gt;v&gt;vv&gt;&lt;^&gt;&gt;vv&lt;vvv&lt;&lt;&lt;&lt;^&lt;&gt;vvv^v&lt;v&gt;^&lt;v&lt;^&gt;^&lt;^&lt;v&lt;&gt;&lt;&gt;v^^^^&lt;&lt;vv&lt;^^vv&lt;v&gt;&gt;&lt;&lt;v^&gt;&lt;&gt;&gt;&gt;&lt;v^&gt;^v&gt;&lt;^&gt;^&gt;&lt;vv^&lt;&gt;&lt;^&lt;v&gt;&gt;&lt;&lt;^vv&lt;&gt;&gt;v^&lt;&lt;v&lt;&gt;v&gt;&lt;v&lt;&gt;&lt;&gt;&lt;vv&gt;^&gt;&gt;v^&lt;^&lt;v&gt;^&gt;&lt;&gt;&gt;&gt;&lt;^&gt;&lt;v^v&lt;&gt;&gt;&gt;^^&lt;^&gt;v&lt;v&gt;vvv&lt;&gt;^&lt;&lt;&gt;&lt;v^^&gt;^&gt;&gt;v&lt;^v&gt;^&gt;v&gt;&gt;&gt;vv&gt;v&gt;&gt;v^^^&lt;^&lt;vvv^&lt;&gt;^&gt;^&lt;v^&lt;v^v&gt;v&gt;^&gt;vv&gt;vvv&lt;&gt;v&lt;^&gt;v&gt;^^&gt;&gt;^&lt;vv^^v&gt;v^^^^^v^vv&gt;&lt;^&lt;&gt;&lt;&gt;^&gt;vv&lt;^&gt;&gt;^vvvv^^^&gt;^&lt;vv&gt;^v&lt;&lt;^&gt;&lt;^^&gt;^&lt;&gt;^^&gt;^&lt;&lt;v&lt;^&gt;&gt;&gt;^&gt;&lt;&lt;^^&gt;v^v&gt;&gt;^&gt;vvvv&gt;^^v&gt;&lt;v&gt;&gt;vv&gt;&lt;&lt;&lt;vv&lt;^&gt;v&gt;^^^&lt;v&gt;v^vvv&lt;^&gt;&lt;&lt;^&gt;^&lt;&gt;^&gt;&lt;&lt;&lt;&lt;&lt;v^&lt;&lt;vv^v&gt;^&lt;&gt;v&lt;v&gt;^&gt;^&gt;&gt;&lt;&gt;v^v&lt;^vv^^&gt;vv&lt;&lt;v^v&gt;vv^vvv&lt;&lt;&lt;&lt;&gt;^v&lt;v^^v^v&gt;v&lt;&lt;v&gt;^^&lt;&gt;^vv^^&gt;^&gt;^v^vv^&gt;&gt;v^vv^^&lt;vv&gt;&lt;&lt;v^v^^v&gt;&lt;vv&lt;^vvv&lt;vv^^&lt;&lt;v&gt;v^v^^^^v&lt;^&lt;^&gt;v&gt;^&gt;v&gt;^vv^v^^&lt;v&lt;^vvvv&lt;&lt;&lt;&gt;^&lt;^^^&lt;^^&lt;&gt;^&lt;&gt;&lt;vv&lt;^^&lt;&lt;^&gt;&gt;&gt;&lt;v^vvvv&gt;^&lt;&gt;&gt;^^&gt;v^^v^&lt;&lt;v^^^&lt;&lt;&lt;&gt;&lt;^&lt;v^v^^v&lt;v^&lt;&gt;v&gt;&lt;&lt;v&lt;&gt;^v&gt;v&lt;^&gt;&lt;^&gt;vv^^&lt;vvv&lt;^v&gt;&gt;v&gt;^&lt;&gt;&lt;v^&gt;&lt;^^^&lt;v^&gt;&gt;vv&lt;&lt;&lt;&lt;&lt;^&lt;&gt;^v^v&gt;^vv^&lt;&gt;v&gt;v&lt;^&gt;vv&lt;&lt;^vv&gt;vv&lt;v&lt;&gt;&lt;&gt;&gt;v&gt;&gt;&lt;v&lt;^&lt;^^&gt;&gt;&lt;&lt;v^v&lt;&lt;^&gt;&lt;v&lt;^&lt;vv&lt;v&lt;&lt;vv^&gt;^&lt;&lt;&gt;&lt;^^&gt;^&lt;^&gt;&gt;^&lt;vv&gt;&gt;&lt;v&lt;&lt;vvv&lt;^^v^&gt;^^&lt;^v&gt;^v&lt;v&lt;&gt;v&gt;&lt;v^v^&lt;&lt;^&lt;&gt;&lt;&lt;v&lt;&lt;^v&gt;v&lt;&lt;&gt;&gt;^&gt;v&gt;&gt;v&gt;&gt;v&lt;^&lt;&lt;^&lt;^&gt;&gt;&gt;v&gt;^^^v&gt;&lt;^&gt;^^&gt;&gt;v&lt;&lt;&gt;^v&gt;&lt;v&gt;vvv^vv&lt;&lt;&lt;&gt;vvv&lt;&lt;&gt;^&gt;&gt;&gt;v&lt;v&lt;v^&lt;^&lt;^&gt;^&lt;^&gt;v^^v&lt;^^&lt;v&lt;&gt;v&lt;&gt;&gt;^^&gt;^v^&gt;v&lt;&lt;&lt;&lt;^&lt;&gt;v^&gt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&lt;&lt;v^&lt;^vv&gt;v&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&lt;^&lt;^^&gt;v&lt;&gt;&gt;v&lt;&gt;vv&lt;&lt;^&lt;&lt;&gt;&lt;&lt;^&gt;v^^^vv^&gt;vvvv&gt;&gt;v&gt;v^&gt;&lt;&lt;v&lt;&gt;vv^&lt;&lt;&gt;&lt;&lt;vvv&gt;^&gt;&gt;&gt;^&lt;&lt;&lt;^&lt;^&lt;&lt;v&gt;^&gt;v&lt;&gt;&gt;v&gt;&gt;vv^^&gt;&lt;&lt;&lt;&lt;^^^v&gt;&gt;&lt;&lt;^&gt;&lt;v&gt;&lt;v^^&gt;&lt;v&lt;&lt;v^^v^^v&gt;&gt;v&lt;&gt;&lt;&gt;&lt;&lt;&gt;^&gt;&lt;v&gt;&lt;^&lt;vv&gt;&gt;&lt;^v&lt;&gt;v&lt;vvv&lt;&gt;^&gt;&gt;&lt;v&gt;&gt;v&lt;^&gt;&lt;&lt;v&gt;^&lt;&gt;^v&gt;&lt;^&gt;&lt;^^&lt;v&gt;^&gt;&lt;^^v^&lt;&lt;&gt;&lt;&gt;&gt;^&gt;v^&lt;^v^vv&lt;&gt;&lt;^&gt;vv^&gt;v^vvv^&lt;&gt;&gt;^&gt;&lt;^&lt;^&lt;&gt;^&lt;&lt;v^v&lt;^v&gt;&lt;&gt;^v&lt;v&gt;&gt;^&gt;&gt;^v^vv&gt;&gt;&lt;vv&gt;&lt;v^^&lt;&lt;^v^&lt;&gt;^v&lt;&lt;&gt;^&gt;&lt;^&gt;&gt;&lt;v&gt;&gt;v&lt;&lt;&lt;v^^vv&lt;&gt;^^v&gt;&gt;&gt;&lt;&gt;&lt;&gt;&lt;&lt;v^&lt;&lt;&lt;v^&lt;^^&gt;&lt;v^&gt;v^^vv&lt;v^&lt;&gt;&gt;vv^&lt;^v&lt;&gt;^v&gt;&gt;v^v&gt;v&lt;^^vv&gt;&lt;&gt;^v&lt;&lt;&gt;v^&lt;&gt;v^&gt;&gt;v&gt;vvv&lt;^&gt;&lt;&gt;&lt;^^&gt;^vv^&gt;&gt;v^&gt;^&lt;^^&lt;&gt;&lt;&gt;&gt;&lt;&lt;&gt;^^^&gt;&lt;^v^v&gt;&lt;&lt;&lt;&gt;&lt;&lt;^v^vv&gt;v&gt;&gt;&lt;^&gt;&gt;&gt;&lt;v^&gt;v&lt;v&gt;&lt;&gt;&lt;v^v&lt;&gt;v^^&gt;&gt;v&lt;&lt;&gt;v&gt;v&lt;v&lt;v&lt;^^&lt;&gt;&lt;&gt;v^^&lt;&gt;&gt;v&lt;^v&lt;v&gt;v&lt;&gt;&lt;v&lt;v&gt;^&lt;&lt;&gt;v&gt;vv^^&lt;&gt;&gt;^^^&lt;&gt;^^&gt;^v&gt;v&gt;&gt;&gt;^v^v&gt;&lt;v^^&lt;&gt;&lt;v&gt;^^v^v&lt;^&lt;^^&gt;&lt;&lt;v&lt;^&lt;^&lt;&gt;^&lt;&gt;&gt;&lt;&lt;&gt;^&gt;&gt;^&gt;^^&gt;&lt;v&gt;&lt;&gt;v&lt;&gt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;vv&gt;&gt;&gt;^&gt;&gt;^v&lt;^&gt;v^^^v&lt;&lt;vv&gt;&gt;&lt;&lt;&lt;^&lt;&lt;&lt;&gt;&gt;&gt;&gt;&gt;^&gt;vv&lt;^v^&lt;&gt;^&lt;v^&gt;^v&gt;&lt;v&gt;vvv&lt;&gt;&gt;&gt;^v^^^v&lt;&lt;&lt;&lt;&gt;&gt;^^&lt;vv&lt;^&lt;^^&gt;^&lt;&gt;v&lt;^&lt;&lt;&lt;&gt;&gt;&lt;&gt;&gt;v&lt;^&lt;&gt;^&lt;vvv&lt;^&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^^&gt;^^&lt;&lt;v&lt;v^&gt;^^v^&gt;&gt;&lt;&lt;^vv&gt;&lt;v&gt;^v&gt;&gt;^&lt;v&gt;v&gt;^^&gt;^v&gt;^vvv&lt;&gt;v^v^^&lt;&gt;&lt;vv&gt;vv^&gt;&gt;&gt;&lt;&gt;v&lt;^&gt;&lt;v&lt;v^&lt;&gt;&lt;&lt;&lt;&gt;^v&gt;^v&lt;&lt;&lt;^&gt;^&gt;^&gt;v^v&lt;&lt;&gt;&lt;vvv&lt;&lt;v^^&lt;&gt;&lt;v&gt;^&gt;&gt;&gt;&lt;vv&gt;&gt;&lt;v&gt;&gt;v^&lt;vv&gt;&gt;vv&lt;&lt;^v^v&lt;&lt;&gt;&lt;^v&lt;vv&gt;&gt;&gt;vv&lt;&gt;&gt;&gt;&gt;^vv&gt;v^&lt;&gt;vv&gt;v^v&lt;v^&gt;&lt;v&lt;^^^^^&gt;vv&lt;&gt;&lt;&lt;vvv^&lt;v&gt;&lt;^&lt;vv&gt;&lt;^^^vv^&lt;&gt;^^^^&lt;^&gt;&lt;^&lt;&gt;v^&lt;v^v&lt;&lt;^v&lt;&lt;^^&lt;&gt;&gt;^&lt;v^^&gt;&gt;&gt;vv&lt;vvv&lt;&gt;v&lt;&lt;&gt;&gt;&lt;^vvv^&lt;&lt;^^&lt;&lt;&gt;&gt;&gt;^&lt;&gt;&gt;&gt;v^^&gt;&lt;&gt;&gt;&lt;&lt;&gt;&gt;&lt;v^v&gt;&gt;&gt;&gt;&gt;&gt;&lt;&gt;&gt;&gt;&lt;v^&lt;&lt;vvv^&gt;v&lt;&gt;&gt;v^&lt;&gt;vv&lt;&gt;&lt;^^^^v^&lt;&lt;^&lt;v^vv&gt;&lt;&lt;^^&gt;v&lt;^vvv^v&gt;&gt;v&gt;^&gt;&gt;v&gt;^^&gt;&lt;&lt;v^&lt;&gt;v&lt;&gt;vv&lt;^v^vv&gt;&lt;v&gt;&lt;&lt;vv^v&gt;&gt;v^&gt;&gt;v&lt;^^^&gt;^&gt;&lt;&lt;v&lt;&gt;^&gt;&lt;&gt;v&gt;&gt;&gt;vvv&lt;v&lt;vv&lt;^&gt;&gt;^v&lt;v&gt;^&lt;^^^^^v&gt;&lt;&gt;v&gt;&lt;&gt;v^v^v&lt;v^vv^v&gt;vvvv&lt;&gt;vv&lt;&lt;&lt;vv&lt;v&lt;&lt;&gt;^&lt;^&gt;^^v^&lt;&lt;&gt;^&lt;v&gt;&lt;^&gt;&lt;v&lt;v&lt;&gt;&lt;&lt;&gt;v^&lt;&lt;^&lt;&gt;&lt;vv&gt;v&lt;&lt;^v&gt;&gt;^v&lt;&gt;&lt;v&gt;^&gt;&gt;^^&gt;&lt;&gt;v^&lt;^&lt;vvv^&gt;^&gt;^&lt;&lt;&lt;&lt;&gt;vv&gt;^v^v&lt;^^^&lt;vv&gt;&gt;&lt;&gt;^^&lt;&lt;v&lt;^&lt;^^&gt;&gt;&gt;v^v&lt;&lt;^^^&lt;v&lt;v&lt;^&lt;&gt;^v&lt;v&gt;&lt;v^vv^^v^^v^^&lt;vv&lt;&gt;^&lt;&gt;&lt;vv^&lt;^v^&lt;&lt;^&gt;&lt;&lt;vvv&gt;^^&lt;^^^&lt;^v&gt;^&gt;^vv&gt;&lt;&lt;&lt;^v&lt;v&gt;vv&gt;v&lt;&gt;v^v&lt;v^&gt;v^&gt;&gt;&gt;v^v&lt;&gt;^v&lt;&lt;&gt;^vv&gt;v&gt;v&gt;v^&lt;^&gt;v^^&lt;^&gt;^^^^vv&gt;^^&gt;&lt;^&gt;vv^&gt;&gt;^^v&gt;&gt;&lt;&lt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^&lt;v&lt;vv^&gt;^^&gt;&lt;&lt;^&gt;&lt;v&gt;v^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;&gt;&lt;v^v&lt;v^&lt;v&lt;vv^v^&lt;&lt;^&lt;vvv&gt;&gt;&gt;&lt;vv&lt;^^&gt;&gt;^&gt;^&gt;&lt;&lt;v^&lt;&gt;&gt;v&gt;v^v^^&gt;&lt;&lt;&gt;vv^v&gt;v^&lt;v&gt;&lt;^&lt;&gt;^^&lt;^&gt;v&gt;^&lt;&gt;&lt;&lt;&lt;v&gt;^&lt;^&lt;^&gt;^&gt;^&gt;^^v^&lt;&lt;^^v^^&lt;^&lt;&gt;&gt;&lt;^&gt;v&gt;&gt;^^&lt;&gt;^^^&lt;&lt;&lt;&lt;v^&gt;^v&lt;^vv&gt;^&lt;&lt;&lt;v&lt;&gt;&lt;&lt;v&lt;&gt;vv&gt;&gt;&gt;v&gt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;v&lt;&lt;&lt;vv&gt;&lt;&gt;^v&gt;v&lt;^&gt;&gt;&lt;^&gt;&lt;&gt;&lt;v&lt;&gt;^v^&gt;^v&gt;^v&lt;&lt;&gt;&lt;&lt;^&lt;&gt;&gt;v&gt;^&gt;&lt;&gt;^&gt;&gt;&lt;&gt;&gt;&lt;^&lt;v^&gt;&lt;v^^&lt;&gt;&lt;v&gt;&lt;^^&gt;^v^^&lt;&gt;v^&lt;v^&lt;^v&lt;v^^^^^v^&lt;&lt;^&gt;^^^&lt;^v&gt;&lt;&gt;^^&lt;&lt;&lt;&gt;&lt;&lt;&lt;&lt;&lt;^^&gt;v^vvvv&gt;v&lt;&gt;&gt;vv&lt;^&gt;^v^&gt;v&lt;^vv^v&lt;&lt;&gt;&lt;&lt;v&gt;v^v&gt;^^&gt;&lt;&gt;&lt;^&lt;v^&gt;v&gt;&lt;vv&gt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;^vv&lt;&gt;v&gt;&gt;v&lt;^v&gt;&gt;&gt;v&lt;v&gt;v&gt;v&gt;^vv&lt;&lt;&gt;^^vv&lt;v&lt;^v^&lt;v&lt;v&gt;vv&lt;&gt;^&lt;^&lt;vv&lt;v^&lt;^v^^&gt;&lt;&lt;&gt;^&gt;&gt;&lt;^v&gt;vv^^v&lt;&lt;^^&gt;&lt;&lt;&gt;v^^&lt;&gt;&lt;&gt;&lt;v^^&lt;v^v&gt;^&gt;^&gt;^&gt;v&lt;^&lt;v&gt;^v^^&gt;v&lt;&gt;vvv&lt;^v&lt;v^v&gt;&lt;&lt;v^&gt;&lt;&lt;^^&gt;&lt;^&lt;&lt;v^v^&gt;v&lt;&gt;^&gt;v&gt;&lt;&gt;&lt;v&gt;^&lt;v&lt;v&gt;^&lt;^^^&gt;^v&lt;&lt;&gt;&lt;&lt;&gt;&lt;&gt;vv&gt;v^&lt;&gt;v^&gt;&lt;v^v&lt;v&gt;&lt;&gt;&lt;&lt;v&gt;v&lt;vv&gt;&lt;&lt;v&gt;&gt;v&gt;^&lt;&lt;&lt;&gt;vv&gt;&gt;vvv&gt;^^vv^v^^&lt;^^&lt;&gt;v^^&lt;&gt;v&gt;&gt;^^&gt;^&gt;^&gt;v&gt;&gt;&lt;^&gt;&gt;&lt;&gt;&gt;^&lt;&lt;&gt;&gt;&lt;^&gt;v&lt;&lt;&lt;&lt;&lt;&lt;&lt;^v^v&lt;v^&lt;v^^&gt;^&lt;&gt;&lt;&lt;v&lt;^&gt;v^&gt;v^vv&lt;&lt;^^vv^&gt;&gt;&gt;&gt;^&lt;&gt;v&lt;^v&lt;&gt;v&lt;vv&lt;^&gt;&gt;v^vv&gt;vv&gt;&lt;vv&lt;&lt;^&gt;v&gt;&gt;&lt;vv&gt;&gt;&gt;vv^&lt;&lt;&lt;&lt;vv^&gt;v&lt;&lt;&lt;&lt;^^&gt;^^v^&gt;&lt;&lt;^&lt;v^&gt;v^&gt;^^&lt;v&lt;&gt;vvv^&gt;^&lt;&gt;vvv&lt;v&lt;^^&gt;v^&lt;&lt;v&gt;&gt;&lt;&gt;v&lt;v&lt;&gt;^^&lt;vvv&gt;^&gt;vv&gt;&lt;&gt;&lt;&lt;&lt;^^vv&lt;v^&lt;v&lt;&gt;v&lt;&gt;&gt;&lt;&lt;v&gt;&lt;^vv^&gt;^&lt;^&gt;^^^&lt;&lt;&lt;v&gt;vv^&lt;^&lt;&lt;&gt;^&gt;^&lt;vv&gt;v&gt;&lt;v&lt;&lt;^&gt;&lt;^&gt;^^&lt;vv^v^^&gt;&gt;&gt;&gt;vv^&gt;&lt;^^vv&gt;&lt;&gt;^&lt;v^v&gt;v&lt;vv&gt;v&gt;&lt;&lt;&lt;v&gt;v&lt;v&gt;^&gt;&lt;v^^&gt;&lt;v&gt;v&lt;^v^&gt;&gt;^^&lt;v^&gt;^^&gt;vv&gt;&gt;vv^&gt;&lt;^vv^vv&lt;&lt;^&gt;vv&gt;^v&lt;v&gt;&lt;vv&gt;&lt;v&lt;vvvvv&gt;^^v^v&gt;&lt;v&gt;&gt;&gt;^vv&lt;&gt;v&gt;^^^^&lt;^&gt;&gt;&lt;&gt;^v^^^&gt;v&lt;^^&lt;&lt;^^v&lt;vv&lt;&gt;vvv&lt;^&gt;&gt;&lt;&gt;&lt;^&gt;&gt;^&gt;&lt;^&lt;&gt;v&lt;v&lt;&lt;&gt;&lt;&lt;v&gt;&lt;v^v&lt;&gt;&gt;&lt;^&gt;v&gt;&lt;&lt;v^&lt;v&gt;v&lt;^&lt;vv^v^v^&gt;vvv^^&gt;v&gt;^&lt;vv^&gt;v^v^&lt;&gt;v&gt;^&gt;&gt;vv&gt;&gt;&lt;^^&lt;v&lt;&lt;&gt;^vv&lt;&gt;&lt;&gt;&lt;&lt;^v&lt;v&gt;v&lt;&lt;vv&gt;&lt;&gt;&gt;&lt;^v&lt;v&gt;&gt;v^&gt;vvv^v^&lt;&lt;^&gt;&lt;v&lt;&gt;^vv^&gt;v^&lt;v&lt;^&gt;&gt;v&lt;v&gt;&lt;v&gt;&lt;v&gt;&gt;^&lt;&lt;&lt;v^&lt;&gt;&lt;&lt;&gt;v&gt;^&gt;^^&lt;v&lt;&gt;&gt;^&lt;&gt;^&gt;^&gt;&lt;&lt;&lt;^&lt;&lt;^&lt;&lt;^&gt;^v&gt;&gt;&gt;&lt;vvv&gt;&gt;&lt;&lt;&lt;&lt;v&gt;&gt;&gt;&gt;&gt;&gt;&gt;^&lt;^v&lt;^&gt;v&lt;&gt;vv&lt;&gt;&lt;&gt;v&gt;&gt;^&gt;&gt;^&gt;vv^^&gt;&lt;&lt;^&lt;v&lt;v&gt;&gt;^^&lt;&lt;^&gt;v&lt;^&gt;&gt;vv&gt;^&lt;&gt;v&gt;&lt;^&gt;v&lt;vv&gt;&gt;&gt;&gt;&gt;&gt;^v&lt;^&lt;&lt;&lt;v^&gt;&lt;vv&lt;&lt;&gt;&gt;vv&lt;&lt;&gt;&lt;v&lt;&gt;&lt;&lt;&lt;v&lt;^&lt;v&lt;&gt;&gt;v&lt;^^^^v^^&lt;^^^&lt;^&lt;vv&gt;&lt;&lt;^&gt;&gt;&lt;&gt;v&lt;&lt;&gt;v&lt;v&lt;&gt;&gt;&gt;&gt;&lt;&gt;v^vv&gt;^&gt;^&gt;&gt;vv^v&lt;v&lt;&lt;&gt;&lt;^v&gt;vv^&gt;&lt;v&lt;&lt;&gt;v^v&lt;^&gt;vv&lt;&lt;^^v&gt;&lt;^&gt;&gt;^^vv&lt;^&lt;&gt;&gt;v^^&gt;&gt;&lt;v&gt;^v&gt;&gt;&gt;^&gt;&gt;v&gt;v&lt;&gt;v&lt;^vv&gt;&lt;&gt;^&lt;&lt;^&gt;vv&gt;&gt;&gt;&lt;&gt;&lt;&gt;v^&gt;&lt;&gt;v^&gt;v&gt;v&gt;&lt;^v&lt;&gt;&lt;v&lt;v&gt;^v&lt;&lt;^vv^&gt;&lt;^^&gt;&gt;&lt;^^^&lt;&lt;&lt;^&gt;v&gt;^v&gt;&gt;&gt;&lt;^&gt;&gt;&lt;^&gt;&gt;&gt;^^^&lt;^&gt;vv&lt;&gt;&lt;&lt;&lt;v^&gt;^&lt;^^&gt;&gt;^^^v^v^v&gt;v&lt;v&gt;&gt;&gt;&gt;&lt;^&gt;&gt;&gt;v&gt;^vv&lt;&lt;^^^&lt;^^vv&gt;v&lt;&lt;&gt;&lt;v&lt;&lt;^^&gt;v&gt;&gt;&lt;&lt;v^^&gt;&lt;^&gt;^&lt;^&gt;^v^&gt;v&gt;&lt;^&lt;^vv&gt;v&gt;&gt;&lt;&gt;^&lt;&lt;vv&lt;&lt;v&gt;v&lt;vv&lt;v&gt;^&gt;^&gt;&gt;&lt;^^&lt;v&gt;^v^v&lt;&gt;&lt;&lt;&gt;vvv&lt;^&lt;v&gt;^&gt;&lt;&gt;^&gt;vvv&gt;&gt;&gt;^&gt;&lt;&lt;&gt;&gt;&lt;v^^&lt;^&lt;&lt;^v&gt;&gt;^v&lt;v&lt;vv&gt;vv^v^&gt;v&lt;&lt;vvv&lt;^^v^v&gt;^&lt;^&gt;&gt;^&gt;v&lt;^&gt;^v&lt;&lt;&gt;&lt;&lt;&lt;^&gt;^&lt;^^^&gt;vv&lt;^^^^vv&lt;v&lt;^^v&lt;&lt;&lt;&lt;v&lt;^v^&lt;&gt;&lt;v&lt;&lt;^&gt;&lt;&lt;&gt;vv&gt;&gt;&gt;&lt;^&lt;^&lt;&gt;&gt;&gt;^&gt;^&gt;&gt;^&lt;&lt;&lt;&lt;&lt;^^v&gt;^&gt;^&lt;&gt;vvv^^&lt;^&gt;&lt;^&gt;^^v&gt;^vv^&gt;&lt;v^&lt;^&lt;&lt;v^&lt;vvv&lt;&lt;^v&lt;&gt;&lt;^&gt;&lt;^&gt;&gt;&gt;v&gt;^v&gt;^&gt;^v&lt;vv^v&gt;&gt;&lt;v&gt;&lt;^&gt;&lt;v^^&gt;v^&gt;^&lt;&gt;&lt;&lt;&gt;&lt;&gt;v&lt;v^&gt;vvv^&gt;^&gt;&gt;v&lt;&gt;^&gt;&lt;^&gt;^&gt;&lt;vvv&gt;^^v^v&gt;v&lt;&gt;^v^&gt;&lt;^&gt;&gt;v&gt;v^&gt;&lt;&lt;&lt;^&gt;&gt;^&lt;&gt;^&lt;&gt;&gt;v&gt;&lt;&gt;&gt;v^&gt;^&gt;^^&lt;&gt;&gt;v^&gt;^&lt;vvvv&lt;^vvvv^&gt;&gt;vv^&lt;v^v&gt;^vv&lt;&gt;v&lt;&gt;^&lt;v&lt;v&gt;v&gt;^^&gt;&lt;^&gt;vv^&lt;^v^&lt;&lt;^&lt;^&lt;&gt;&lt;vv&lt;^v&lt;^v&gt;&lt;&gt;&gt;&gt;^v^&lt;&lt;^&gt;&lt;^&gt;vv&lt;v&gt;v&lt;^&gt;vv^&gt;v&lt;&lt;&lt;&gt;^&lt;&gt;&lt;v&lt;^^^&gt;v&gt;&lt;^^&lt;&gt;^&lt;^&lt;v^vv^&lt;&lt;^&gt;&gt;&lt;&lt;v^v&lt;^vvv&lt;&lt;&lt;&gt;&gt;vvvv^v^^^&gt;v&lt;&gt;&gt;&gt;&lt;&lt;&gt;vvv&lt;&lt;^^^&gt;v&gt;v&gt;&gt;v&lt;&lt;v&lt;v^v^&gt;^^v&gt;^&gt;&lt;^&lt;&gt;&lt;&lt;v^&lt;v&lt;v^^^&gt;&lt;&gt;v^^^&lt;v&gt;vv&lt;&gt;^&gt;^^vv&gt;^&lt;&lt;^v&lt;^v&gt;&lt;v&gt;&gt;&gt;^&gt;&gt;&gt;&lt;^&lt;&lt;&gt;^v&gt;&gt;^&gt;vv&lt;&lt;&lt;v&lt;&gt;^&lt;v&gt;&lt;v^&lt;^&lt;&gt;v&gt;v^^v^&gt;&gt;&lt;&lt;^v&lt;&lt;&lt;&lt;&gt;v&gt;v&gt;v^^&lt;^&gt;&lt;&gt;^^&lt;&lt;&lt;v&gt;vv&lt;&gt;&gt;&gt;^&gt;&gt;v&lt;&gt;&lt;v^&gt;^&lt;&gt;&lt;vv&gt;v&gt;v^v&lt;v^&lt;^&gt;&gt;^&gt;&gt;&lt;&lt;^^&lt;^^v&lt;vv&lt;&gt;&gt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^^&gt;vvv^&lt;vvv&lt;^&gt;vv&gt;&lt;&gt;&gt;&lt;&lt;&lt;^&lt;v^v^^&lt;&lt;^vvv^^&lt;^&lt;&gt;&lt;&lt;&gt;^&lt;^&lt;&gt;&gt;vvv&lt;&gt;^&lt;&gt;v^v&lt;&gt;&lt;&gt;&gt;v^v&gt;&lt;&lt;&gt;&gt;&gt;vvv&gt;v&lt;&gt;^&gt;&gt;^&gt;&lt;^&gt;vv&lt;&lt;&gt;&gt;v&lt;&lt;^&gt;&lt;&gt;v&gt;&gt;^^&lt;v&gt;^&gt;^&lt;&lt;&gt;&gt;&lt;^&lt;&lt;vv&lt;^&lt;vv^vv&gt;&lt;&gt;&gt;&gt;&gt;&lt;^&lt;v&gt;^&gt;vv&lt;v&gt;&lt;&gt;^&lt;&gt;vvvvv^vv&lt;&lt;v&lt;&gt;&gt;&gt;^&lt;&lt;&gt;&lt;&gt;^^vvv&gt;&gt;&gt;vv&lt;&lt;^^&gt;&lt;^v^^v&lt;&gt;^^&gt;^&gt;&lt;^&gt;v^^^^v&lt;^&lt;&lt;vv&lt;vv&lt;&gt;vv^^&gt;v^vv&gt;v&gt;&lt;&gt;&gt;vv&gt;^&lt;^&lt;v^v^&gt;&gt;v^v^^v&gt;^&gt;vv^&gt;v&lt;vvvv&lt;^v&lt;^v&gt;^v&gt;^^v&lt;&lt;^&gt;^^&lt;&lt;&gt;^&gt;&lt;^v&gt;&gt;&gt;vv^&gt;^^&gt;vvvv&gt;&gt;v&lt;^&lt;v&gt;^&gt;&gt;&gt;v^&lt;&gt;&lt;^&lt;^^&lt;v&gt;vv^^&gt;&lt;v&gt;v^&lt;&gt;^^^&gt;&gt;&gt;&lt;^^v&gt;v&gt;^&lt;&lt;&gt;^&lt;v^&gt;vvv^&gt;^^^&gt;&lt;v&lt;^&gt;&gt;v&lt;v&gt;&gt;^v&gt;&lt;&lt;&gt;&lt;&lt;&gt;v&lt;^&lt;&lt;&gt;^&gt;&lt;&gt;^&gt;vv&gt;^&lt;v&gt;^^v&lt;&lt;^v^vvv^^&gt;^vv^&lt;^&gt;^&gt;^^v&gt;v^&gt;^&lt;&lt;&gt;&lt;&lt;^&gt;v&gt;&gt;vv^vv&gt;&lt;v&gt;&gt;^&lt;&lt;^&lt;v^^&lt;^&lt;v^^vv^&gt;&lt;^^&lt;^^&gt;&lt;v^^&gt;v^^^&lt;^&lt;&gt;^&lt;&gt;&gt;^v&lt;^vvv^^v^&lt;&gt;&lt;^&gt;&gt;&gt;&gt;&gt;v&gt;&lt;&gt;&lt;&lt;&lt;&gt;vv&lt;^v&gt;&gt;&lt;&lt;&gt;vvv&lt;&gt;&lt;&lt;vv&lt;&lt;&lt;^&gt;v^^&gt;&gt;^&gt;^v&gt;&gt;&lt;&gt;&lt;^^v&lt;&gt;&gt;&lt;&gt;&gt;v^&gt;^&lt;vv&gt;&lt;&lt;&lt;&gt;&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;&gt;&gt;v&lt;&gt;&lt;^&lt;vv&gt;vv&lt;^v&gt;^&lt;&lt;&lt;&lt;v&lt;^&lt;&lt;^^&gt;&gt;^&lt;&gt;&lt;^&gt;&gt;&lt;&lt;&gt;^&gt;v&gt;^^^v&gt;&gt;^&lt;^^v&gt;&lt;v^v&gt;^&gt;&lt;&lt;&gt;&lt;&gt;&gt;^&gt;&gt;^&lt;&lt;v&lt;&gt;^v&lt;&gt;^&gt;^&lt;v&gt;&gt;vv&gt;^vvv&lt;&lt;v&lt;&lt;^&gt;^&gt;^&lt;&lt;^^&lt;&gt;^^^^vvv&lt;&gt;^vv&lt;vvvvv^^&gt;^^&lt;^&gt;&gt;&gt;&lt;&gt;v^&lt;&gt;&lt;^&lt;&lt;^&gt;v^^v&lt;&gt;&gt;^vv&lt;&gt;v^^&lt;&gt;&gt;v^vvvvv&lt;&lt;v^&lt;v^^&gt;&gt;&gt;&lt;vvvvv&gt;&gt;&lt;^&gt;vv&gt;v^v^&lt;v&lt;^&gt;^^&gt;&lt;^&gt;^^^^v&lt;&gt;&lt;^v&lt;&lt;&gt;v^&gt;v&gt;&gt;vv&lt;&lt;&gt;^&lt;v^^&gt;vvv&gt;^^&lt;v^&lt;&gt;vv^&gt;&lt;&gt;&gt;&lt;v^^v&lt;&gt;^&gt;&gt;^&gt;v&gt;&lt;&gt;&gt;^^v&gt;^&gt;^&gt;&gt;&gt;^&gt;v&lt;^v&gt;v&gt;^&lt;^^^^^&gt;&gt;v&lt;v&lt;&gt;&gt;v&lt;&lt;^&gt;^&lt;v&lt;&lt;&gt;^^&gt;&gt;&lt;&lt;^&gt;&lt;&gt;v&lt;&gt;^^^vv&lt;&gt;^^&gt;&gt;&lt;&lt;^^&gt;v&gt;vv&gt;vv&gt;v^&gt;^v&gt;v^^&lt;&gt;&gt;&gt;&lt;&lt;v&gt;&lt;v&lt;&lt;&gt;&gt;v&gt;&lt;&gt;vvv^^v&gt;^^&gt;^vvvv^&gt;^&lt;&gt;^vvvv&gt;&lt;v&gt;&lt;v&lt;&gt;&gt;&gt;&lt;&gt;^&lt;^vv&lt;&gt;^v&lt;^v&lt;&gt;^vvv&lt;&lt;&gt;&gt;&lt;vvv^&gt;&gt;^&gt;&lt;&lt;vv^&lt;v^&gt;^&lt;v&lt;&lt;^^&gt;^^&lt;^^v^&gt;v&lt;&gt;v^v&gt;&lt;&gt;&gt;&lt;v^^&gt;&gt;^vvv&gt;&lt;^vv&gt;v^&lt;^&lt;^v&gt;&gt;v^^&gt;^vvv^&lt;v^^v^^&gt;v&lt;^&lt;&gt;&gt;^&lt;&gt;&gt;&gt;^^&lt;&gt;&lt;^^vv&lt;&gt;^vv^&lt;&gt;&gt;&gt;&gt;^^&lt;&lt;^^&lt;&gt;vv^^&gt;&lt;&gt;^^&lt;v&lt;&lt;v&gt;^&lt;v^^&gt;^v&lt;&gt;&lt;&gt;&lt;&gt;vvv&gt;^v^&gt;&gt;vv&lt;&lt;^v&lt;&lt;&gt;&gt;&lt;v&gt;^&gt;&lt;^&gt;&gt;&gt;^&lt;^&lt;^^&gt;vv^&lt;&lt;^&lt;&gt;&gt;^^&gt;&lt;&gt;&lt;&lt;v&gt;^^&lt;v&gt;&gt;v&lt;&lt;vvvv&gt;^v^vv&gt;&gt;&lt;^^&lt;&lt;^&gt;&gt;v&gt;v&lt;^^^&lt;^&gt;&lt;^^vv&gt;^vv&lt;^&lt;vv&lt;&gt;v&gt;&lt;^&lt;&gt;&lt;v&gt;&lt;^^^&gt;&gt;^&lt;&gt;&lt;^&lt;v&gt;&gt;&gt;&gt;v^&lt;v&gt;&gt;&gt;&gt;&gt;v&lt;&gt;&lt;^^&gt;v&lt;^&lt;^&gt;&gt;&lt;v&lt;&gt;^&gt;vv&gt;^^v^v^&lt;&lt;v&lt;&gt;&lt;&lt;&lt;^v^&gt;&lt;&lt;^&lt;&gt;&lt;&lt;&lt;&lt;v&lt;^&gt;&gt;&lt;&lt;&lt;&gt;v&gt;&gt;vv&gt;&lt;vv&lt;&gt;&lt;&lt;^&lt;^&lt;&gt;&lt;vv&gt;^^^^&lt;&gt;v&lt;&lt;&lt;&lt;v&gt;vv&lt;&gt;vv^^^&gt;&gt;&lt;&gt;vv^&gt;&lt;&gt;&gt;^vv&lt;&lt;&gt;&lt;^^vv&lt;&gt;v^&gt;&gt;^&lt;&lt;&gt;^&lt;v^&lt;^&gt;v&lt;</span><span class="s2">&#34;</span>
+</span>       <span class="p">)</span> <span class="o">==</span> <span class="mi">2592</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There you have it, the simplest way to add automated tests. As you start writing more complicated programs, eventually this way of testing will no longer be powerful enough. That being said, even senior professionals use this form of testing in small informal projects.</p>
+<p>Probably the first case you&rsquo;ll encounter as a beginner in which this form of testing no longer works nicely is when the desired behavior of your program involves processing user input and printing to the console, such as for small games. In <a href="https://jeroenvanwijgerden.me/post/testing-input-output/">a follow-up article</a> I build upon the way of testing described here to tackle such more complicated programs.</p>
+<h1 id="closing-words">Closing words</h1>
+<p>Testing is a very large topic within programming. Hopefully I succeeded in protecting you, dear presumed beginner, from drowning in advanced tools and concepts while still providig you with useful new information.</p>
+<p>To tease you with some of interesting things the world of testing has to offer:</p>
+<p>Some programmers swear by first starting with a failing test and only then writing production code that makes the test pass. This is called &lsquo;test driven development&rsquo;.</p>
+<p>Some programmers see tests as documentation. When they try to understand a codebase they first study the tests to observe what its behavior is, before diving into its structure.</p>
+<p>Some programmers use testing as a means to gain confidence in their product. However, legendary Edsger Dijkstra famously said &ldquo;Program testing can be used to show the presence of bugs, but never to show their absence!&rdquo;. So how to test in such a way to still be confident?</p>
+<p>Some programmers prefer to test only at the very edges of their system, some prefer to also test at checkpoints within their system to obtain more detailed information. This is a game of preventing so called brittle tests (tests that depend more on structure than they should) with smart architecture.</p>
+<p>Some programmers&hellip; yes, on most things programmers have not reached a consensus. Perhaps the only two things that come close are that naming is hard and go-to statements are considered harmful.</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/testing-input-output/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Testing Input &amp; Output</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/avoiding-naming/">
+            <span class="next-text nav-default">How to name: don&#39;t</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/jeroenvanwijgerden/" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.linkedin.com/in/jeroen-van-wijgerden-0168ab7a/" class="iconfont icon-linkedin" title="linkedin"></a>
+  <a href="https://jeroenvanwijgerden.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span> - </span>
+    <span>Jeroen van Wijgerden</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
