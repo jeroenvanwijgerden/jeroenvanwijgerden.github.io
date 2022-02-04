@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Using functions to write advanced tests.">
 <meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
-<meta itemprop="wordCount" content="4113">
+<meta itemprop="wordCount" content="4120">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 31 </span>
         
-          <span class="more-meta"> 4113 words </span>
+          <span class="more-meta"> 4120 words </span>
           <span class="more-meta"> 20 mins read </span>
         
       </div>
@@ -1184,9 +1184,9 @@ Game over. Your secret number was: 37
 <h2 id="closure">Closure</h2>
 <p>Each time we call <code>get_input</code> a scope is created and then destroyed. And yet there is coordinated behavior between calls: each consequtive call returns the next string from the same list. How is this possible?</p>
 <p>Each call to <code>get_input</code> operates on the same state that exists beyond any call to <code>get_input</code>. In this case the variable <code>inputs</code>, which is a parameter of the function <code>create_get_input</code>. <code>inputs</code> is not part of the scope of <code>get_input</code> so it is &lsquo;kept alive&rsquo; after a call to <code>get_input</code> has completed.</p>
-<p>A <em>closure</em> is a function that has coordinated behavior between individual calls. This is done by having the closure make use of state beyond its own scope.</p>
+<p>A <em>closure</em> is a function that accesses state that is maintained beyond the lifetime of calls to this function. This is typically used to create coordinated behavior between individual calls to this function.</p>
 <p>I want to say many things about closures. However, to maintain focus I decided to put that in a future article.</p>
-<p>If you are more experienced you might recognize that to achieve this coordinated behavior you can also use objects with methods. Indeed you can. Those are closures as well. However, in this case creating closures with functions is adequate.</p>
+<p>If you are more experienced you might recognize that to achieve this coordinated behavior you can also use objects with methods. Indeed you can. You could say methods are closures. However, in this case creating closures with functions is adequate.</p>
 <h2 id="polymorphism">Polymorphism</h2>
 <p>Let&rsquo;s compare the original code for playing a game with our final version:</p>
 <div class="highlight"><div class="chroma">
