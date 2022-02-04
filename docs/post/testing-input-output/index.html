@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Using functions to write advanced tests.">
 <meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
-<meta itemprop="wordCount" content="4300">
+<meta itemprop="wordCount" content="4113">
 
 
 
@@ -134,8 +134,8 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 31 </span>
         
-          <span class="more-meta"> 4300 words </span>
-          <span class="more-meta"> 21 mins read </span>
+          <span class="more-meta"> 4113 words </span>
+          <span class="more-meta"> 20 mins read </span>
         
       </div>
     </header>
@@ -150,11 +150,17 @@
     <li><a href="#automating-checking-the-output">Automating checking the output</a>
       <ul>
         <li><a href="#the-return-value-method">The return value method</a></li>
-        <li><a href="#the-output-parameter-method">The output parameter method</a></li>
+        <li><a href="#the-parameter-method">The parameter method</a></li>
       </ul>
     </li>
-    <li><a href="#nomenclature">Nomenclature</a></li>
-    <li><a href="#progression-in-learning-programming">Progression in learning programming</a></li>
+    <li><a href="#vocabulary">Vocabulary</a>
+      <ul>
+        <li><a href="#higher-order-function">Higher order function</a></li>
+        <li><a href="#closure">Closure</a></li>
+        <li><a href="#polymorphism">Polymorphism</a></li>
+      </ul>
+    </li>
+    <li><a href="#closing-words">Closing words</a></li>
   </ul>
 </nav>
   </div>
@@ -162,7 +168,7 @@
     <div class="post-content">
       <p>In <a href="https://jeroenvanwijgerden.me/post/simple-testing/">a previous article</a> I wrote about what testing is, why automated tests help improve your code and I showed the simplest way to start writing automated test in any language.</p>
 <p>In this article I&rsquo;ll build upon that simple approach to show a more advanced one. Although the previous article will give you more detail, this article can be read stand-alone.</p>
-<p>I refactor and extend 23 lines of code in small and clear steps, using nothing more than the familiar concept of a function, to end up with a version that is automatically tested in a nice way. Only at the very end do I reveal how what you&rsquo;ve seen have secretly been perhaps not so daunting advanced concepts: higher order functions, closures and polymorphism.</p>
+<p>I refactor and extend 23 lines of code in small and clear steps, using nothing more than the familiar concept of a function, to end up with a version that is automatically tested in a nice way. At the very end I briefly discuss how what you&rsquo;ve seen is related to some more advanced topics : higher order functions, closures and polymorphism.</p>
 <p>Although the more advanced testing approach discussed in this article can be used for all sorts of IO programs (such as making web requests and writing to databases) the example program in this article is a small game that is played in the console.</p>
 <p>This game is the <code>Guess My Number</code> exercise of <code>MITx 6.001x Introduction to Computer Science and Programming Using Python</code>. A client of mine wrote a working program for this exercise but asked me to help him improve his program&rsquo;s structure. This article is based on our coaching sessions.</p>
 <h1 id="the-exercise">The exercise</h1>
@@ -259,69 +265,11 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </div>
 </div><p>My client&rsquo;s goal was to change (hopefully improve!) the program&rsquo;s structure while keeping the program&rsquo;s behavior the same.</p>
 <p>In this article I&rsquo;ll show how we first pinned down the program&rsquo;s behavior with automated tests. Having done that we were able to make changes to the structure without having to spend time and energy on manually checking if the behavior had remained the same.</p>
-<p>First we&rsquo;ll focus on automating the input. We&rsquo;ll still have to manually verify the behavior by looking at what is printed in the console. Automating checking the output will come afterwards.</p>
+<p>First we&rsquo;ll focus on automating the input. We&rsquo;ll still have to manually verify the behavior by looking at what is printed in the console. Automatically checking the output will come afterwards.</p>
 <h1 id="automating-the-input">Automating the input</h1>
-<p>Let&rsquo;s apply the first step of the simple testing method: wrap the code in a function and call that function.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
-</span></span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="hl"><span class="lnt">26
-</span></span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">play_game</span><span class="p">():</span>
-</span>    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
-
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
-
-    <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
-        <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-        
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
-
-        <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
-        
-        <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
-            <span class="k">break</span>
-        <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
-            <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
-        <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
-            <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
-
-<span class="hl"><span class="n">play_game</span><span class="p">()</span>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>The purpose of wrapping the to-be-tested code in a function is so that we can have multiple test cases by calling the function multiple times, each time with different arguments.</p>
-<p>What will be different each test case? The input to the program. So the input to the program should become a parameter of our function.</p>
+<p>Let&rsquo;s look at line 13 of the code: <code>answer = input()</code>. <code>input</code> is a standard Python function. Calling it halts the program until a user types something in the console and hits the enter key. Whatever was typed is returned as a string.</p>
+<p>We want to use the game code for two purposes: to manually play the game and to test the code automatically. Calling <code>input</code> triggers a manual action so we can&rsquo;t use <code>input</code> for testing.</p>
+<p>Because we want to call the game code multiple times (for playing and for testing) we wrap it in a function. Next we want to decide per call to this function if we use <code>input</code> (for playing) or a different function (for testing). To accomplish this we replace <code>input</code> with the newly introduced parameter <code>get_input</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="hl"><span class="lnt"> 1
@@ -396,7 +344,8 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="n">play_game</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Let&rsquo;s use the <code>l</code>, <code>h</code>, <code>q</code>, <code>c</code> example of before as our first case. What should the behavior of the function <code>get_input_automated</code> be? The first time <code>get_input</code> is called it should return <code>&quot;l&quot;</code>, the second time <code>&quot;h&quot;</code>, the third time <code>&quot;q&quot;</code> and the fourth time <code>&quot;c&quot;</code>.</p>
+</div><p>Very important is that our <code>play_game</code> function should not be able to notice any difference between <code>input</code> and <code>get_input_automated</code>! Before we replaced <code>input</code> with a parameter, what did the game code expect of <code>input</code>? That it is a function that can be called without arguments and that every call to it returns a string. These expectation must also be met by <code>get_input_automated</code>.</p>
+<p>Let&rsquo;s use the <code>l</code>, <code>h</code>, <code>q</code>, <code>c</code> example of before as our first case. What should the behavior of the function <code>get_input_automated</code> be? The first time <code>get_input</code> is called it should return <code>&quot;l&quot;</code>, the second time <code>&quot;h&quot;</code>, the third time <code>&quot;q&quot;</code> and the fourth time <code>&quot;c&quot;</code>.</p>
 <p>To achieve this behavior we can use a list and the function <code>pop</code>. <code>inputs.pop(0)</code> removes the first element from the list <code>inputs</code> and returns that removed element.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -549,7 +498,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="hl"><span class="c1"># play_game(input)</span>
 </span></code></pre></td></tr></table>
 </div>
-</div><p>Note that playing a manual game is currently disabled (commented out) on line 35. When running this code, we see a full game being printed in the console, without us having to provide input manually. Automation achieved!</p>
+</div><p>Note that playing a manual game is currently commented out on line 35. If we run this code we see a full game being printed in the console, without us having to provide input manually.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -578,7 +527,8 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 Game over. Your secret number was: 37
 </code></pre></td></tr></table>
 </div>
-</div><p>What if we want multiple test cases? Let&rsquo;s say we want to also automate the case in which the player inputs <code>l</code> followed by <code>c</code>. We could do something like this:</p>
+</div><p>Take a few moments to appreciate how cool this is. Automation achieved!</p>
+<p>What if we want multiple test cases? Let&rsquo;s say we want to also automate the case in which the player inputs <code>l</code> followed by <code>c</code>. We could do something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -606,7 +556,7 @@ Game over. Your secret number was: 37
 </code></pre></td></tr></table>
 </div>
 </div><p>This structure could be improved. It repeats names a lot (three per test case) and if you squint a little you&rsquo;ll see that lines 1-3 and 5-7 are almost duplicates.</p>
-<p>Apart from their names, <code>get_inputs_h_l_q_c</code> and <code>get_inputs_l_c</code> only differ in one aspect: which list they <code>pop</code> from. We can make a function that has the list to <code>pop</code> from as a parameter and returns a function that <code>pop</code>s from this list.</p>
+<p>Apart from their names, <code>get_inputs_h_l_q_c</code> and <code>get_inputs_l_c</code> only differ in one aspect: which list they <code>pop</code> from. We can create a function that has the list to <code>pop</code> from as a parameter and returns a function that <code>pop</code>s from this list.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="hl"><span class="lnt"> 1
@@ -642,7 +592,7 @@ Game over. Your secret number was: 37
 </code></pre></td></tr></table>
 </div>
 </div><p>Removing duplication by refactoring in this way is called <em>extract function</em>.</p>
-<p>We can clean this up further in two more small refactoring steps:</p>
+<p>We can clean this up further by <em>inlining</em>: replacing variables by the values assigned to them.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -787,7 +737,7 @@ Game over. Your secret number was: 37
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="c1"># something</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>We&rsquo;ll first try this method. Afterwards we&rsquo;ll try something new which is perhaps tidier when testing programs with actual output.</p>
+</div><p>We&rsquo;ll first try this method. Afterwards we&rsquo;ll try something new which is tidier when testing these kinds of programs.</p>
 <h2 id="the-return-value-method">The return value method</h2>
 <p>What should <code>play_game</code> return so we can verify it behaves correctly? If we test <code>play_game</code> manually we look at the lines that are printed to the console. So let&rsquo;s make <code>play_game</code> not only print but also return those lines as a list of strings. We can then have an automated test as follows:</p>
 <div class="highlight"><div class="chroma">
@@ -951,13 +901,14 @@ Game over. Your secret number was: 37
 <span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Although this approach does work, it is not so nice because now we&rsquo;re always doing something we don&rsquo;t want. When playing a manual game we collect strings for no reason, although perhaps we could live with this. A true sin, however, is that in a test we still print.</p>
-<p>Waste of resources aside, when first running the tests and finally the manual game, when we start our manual game the console already contains a bunch of prints that have nothing to do with our current playing session! Zero stars, thumbs down, money back.</p>
+</div><p>Although this approach does work, it is not so nice because now we&rsquo;re always doing something we don&rsquo;t want. When playing a manual game we collect strings for no reason. Although perhaps we could live with this. A true sin, however, is that in a test we still print.</p>
+<p>Waste of resources aside, if we first run the tests and finally the manual game the console will already contains a bunch of prints that have nothing to do with our current playing session! Zero stars, thumbs down, money back.</p>
 <p>In all seriousness, if the output of our program was not printing to a console but let&rsquo;s say writing to a database, we don&rsquo;t want every single one of our tests to actually write to a database.</p>
 <p>For our game we could clear the console after the tests but it is nicer to prevent the issue by not printing in the tests.</p>
 <p>Next I&rsquo;ll show a new approach that no longer has the wrapping function return a value and will no longer print in the tests.</p>
-<h2 id="the-output-parameter-method">The output parameter method</h2>
-<p>We made the input a parameter because we want different ways of inputting for playing and for testing. Similarly, we can refactor the way of outputting (the way we put out) to be a parameter as well.</p>
+<h2 id="the-parameter-method">The parameter method</h2>
+<p>We made the input a parameter because we want different ways of inputting for playing and for testing. Similarly, we can refactor the way of outputting to be a parameter as well.</p>
+<p>Within <code>play_game</code>, let&rsquo;s replace <code>print</code> the new parameter <code>put_out</code>. We also add <code>print</code> as a second argument to calls to <code>play_game.</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="hl"><span class="lnt"> 1
@@ -1041,6 +992,8 @@ Game over. Your secret number was: 37
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Just as when we made the input a parameter, this refactor does not change any behavior so we still have not automated checking the output.</p>
+<p>Now we create an alternative to <code>print</code> to use for testing. Let&rsquo;s name this function <code>put_out</code>. What did <code>play_game</code> expect of <code>print</code>? That it is a function that can be called with a string as argument, any number of times. <code>put_out</code> will also have to meet this expectation.</p>
+<p>Before we asserted a list of strings returned by <code>play_game</code>. Now we&rsquo;ll assert the list <code>messages_put_out</code> that is filled by <code>put_out</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1075,8 +1028,7 @@ Game over. Your secret number was: 37
 <span class="p">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><code>messages_put_out</code> is created outside of the scope of <code>put_out</code> not only so each call to <code>put_out</code> appends to the same list, but also so we can actually access the list outside of the function scope, at line 7.</p>
-<p>If we do this for multiple test cases we get duplication similar to before:</p>
+</div><p>If we do this for multiple test cases we get duplication similar to before:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1123,7 +1075,7 @@ Game over. Your secret number was: 37
 <span class="p">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>The duplication is similar to before but not quite the same. Regardless, we can still extract to function and obtain our final result:</p>
+</div><p>Again we have some duplication. This time the <code>assert</code> is part of the duplication. If we extract to function, <code>assert</code> should become part of the function. Doing so results in the new function <code>test</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">26
@@ -1219,92 +1171,24 @@ Game over. Your secret number was: 37
 </div><p>Both test cases will run and pass (lines 44 and 58) and afterwards a manual game will be started (line 68). The tests did not print anything and our game starts in a clean console!</p>
 <p>Now we have solidly pinned down the original program&rsquo;s behavior with automated tests without printing to the console. Only in our manual game do we print to the console, which is what we want. We can now fully focus on changing the structure of our original program, which has become the body of <code>play_game</code>, without having to spend any time or energy on checking if we broke anything.</p>
 <p>It took some effort to get to this point, but writing tests is an investment that might (probably will) pay off and is worth considering!</p>
-<h1 id="nomenclature">Nomenclature</h1>
-<p>In addition to <em>extract function</em> there are more techniques you, dear reader, have encountered in this article.</p>
+<h1 id="vocabulary">Vocabulary</h1>
+<p>There are names for some things we&rsquo;ve seen in this article. Let&rsquo;s go over them.</p>
+<h2 id="higher-order-function">Higher order function</h2>
 <p>A <em>higher order function</em> is a function that satisfies one or both of the following:</p>
 <ul>
 <li>at least one parameter is a function</li>
 <li>it returns a function</li>
 </ul>
 <p>This makes <code>play_game</code> a higher order function as both parameters <code>get_input</code> and <code>put_out</code> are functions. <code>create_get_input</code> is a higher order function because it returns a function.</p>
-<p>A function that returns a function can be used to create a <em>closure</em>. After <code>create_get_input</code> has returned <code>get_input</code>, only <code>get_input</code> will ever access the variable <code>inputs</code> (a parameter is a specific kind of variable) because no other part of the program has access to <code>inputs</code> due to the basic rules of scoping. In other words, <code>inputs</code> is &lsquo;enclosed&rsquo; within <code>get_input</code>.</p>
-<p>Creating closures is a way to make functions with dynamic behavior. Only by creating a closure could we dictate that subsequent calls to <code>get_input</code> each return one element of a list in order.</p>
-<p>If you are more experienced you might recognize that you can also use objects with methods, which is true. Those are closures as well. However, the most light-weight way to create a closure is with plain functions.</p>
-<p>Closures can also prevent mistakes. Because only a small function and no other part of the code can access a variable, there is very little opportunity to do something wrong.</p>
-<p>Although <code>inputs</code> is enclosed and is inaccessible to other parts of the code, this particular closure is still not safe. The value contained by <code>inputs</code> is a reference to a mutable list. Even without access to <code>inputs</code>, if other parts of the code have a reference to the same list stored in a different variable they can still change the list. Here is an example:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">get_input</span>
-
-<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span>
-
-<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
-
-<span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">get_input</span><span class="p">())</span> <span class="c1"># &#34;z&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>This is one of the downsides of referred mutable objects. Python, unlike some languages, has no immutable lists by default. If we want to avoid the unsafety of mutable objects we have to do a little extra work.</p>
-<p>As a beginner you might not see why anyone would care about this. Spending a few evenings debugging some weird issue to find out it was caused by mutating referenced objects might change your mind.</p>
-<p>If we immediately create a copy of <code>inputs</code> we have a new object that no other part of the code has a reference to. Only this part of the code can access the list, making it safe again. Eric Normand <a href="https://lispcast.com/what-is-immutability/">calls this</a> the &lsquo;copy-on-write&rsquo; discipline.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="hl"><span class="lnt"> 2
-</span></span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="hl"><span class="lnt">13
-</span></span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-<span class="hl">    <span class="n">safe_list</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span>
-    <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">safe_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">get_input</span>
-
-<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span>
-
-<span class="n">get_input</span> <span class="o">=</span> <span class="n">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
-
-<span class="hl"><span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">)</span>
-</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input</span><span class="p">())</span> <span class="c1"># &#34;a&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>The last big concept in this article I want to discuss is <em>polymorphism</em>.</p>
-<p>Let&rsquo;s compare the original code for the game with our final version:</p>
+<p>A function <code>get_input</code> returned by <code>create_get_input</code> has dynamic behavior. Each time we call it, it returns a different value. We control exactly what this dynamic behavior is: each time return the next string from a list.</p>
+<h2 id="closure">Closure</h2>
+<p>Each time we call <code>get_input</code> a scope is created and then destroyed. And yet there is coordinated behavior between calls: each consequtive call returns the next string from the same list. How is this possible?</p>
+<p>Each call to <code>get_input</code> operates on the same state that exists beyond any call to <code>get_input</code>. In this case the variable <code>inputs</code>, which is a parameter of the function <code>create_get_input</code>. <code>inputs</code> is not part of the scope of <code>get_input</code> so it is &lsquo;kept alive&rsquo; after a call to <code>get_input</code> has completed.</p>
+<p>A <em>closure</em> is a function that has coordinated behavior between individual calls. This is done by having the closure make use of state beyond its own scope.</p>
+<p>I want to say many things about closures. However, to maintain focus I decided to put that in a future article.</p>
+<p>If you are more experienced you might recognize that to achieve this coordinated behavior you can also use objects with methods. Indeed you can. Those are closures as well. However, in this case creating closures with functions is adequate.</p>
+<h2 id="polymorphism">Polymorphism</h2>
+<p>Let&rsquo;s compare the original code for playing a game with our final version:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1384,17 +1268,15 @@ Game over. Your secret number was: 37
 </code></pre></td></tr></table>
 </div>
 </div><p>The only difference really is that the original version of the game code called <code>input</code> and <code>print</code> directly whereas the refactored version calls <code>input</code> and <code>print</code> indirectly. We created an <em>indirection</em>.</p>
-<p>The game code now depends only on how whatever is assigned to the parameter <code>get_input</code> is used (call it like a function, without arguments) and how it will behave (each call returns a string). The game code now depends on an abstract expectation, not anything specific that meets this expectation such as the function <code>print</code>.</p>
-<p>Likewise, the game code depends on an abstract expectation of <code>put_out</code>, no longer specifically <code>print</code> that meets this expectation.</p>
+<p>Originally the game code depended specifically on the function <code>input</code>. Now it depends on the abstract expectation that <code>get_input</code> is any function that can be called without arguments and each time will return a string. Likewise, the game code depends on an abstract expectation of <code>put_out</code>.</p>
 <p>We can call <code>play_game</code> with <code>input</code> and <code>print</code> as arguments. Both functions satisfy the expectations of the game code. We can also call <code>play_game</code> with other functions, as long as they satisfy the expectations. This is exactly what we do in our tests.</p>
 <p>How the expectations of the game code are met can now take many shapes. Many, poly. Shapes, morphs. Polymorphism.</p>
 <p>Typically polymorphism is explained with interfaces and objects, or classes and instances. These are more elaborate tools that also solve the problem of defining expectations and creating concrete realizations of these expectations.</p>
-<p>Often the simple and familiar function is adequate for solving this problem.</p>
-<h1 id="progression-in-learning-programming">Progression in learning programming</h1>
-<p>Interfaces and objects (and classes, which are a convenience for using interfaces and objects) are more elaborate solutions to problems that can often (definitely not always) also be solved by a more basic tool: functions. In this article we&rsquo;ve seen two such cases: creating dynamic behavior and polymorphism.</p>
-<p>The way I let my students progress is by first studying the use of functions. Only when functions are no longer adequate to solve the problems at hand do I introduce the more elaborate interfaces and objects. And only after those do I introduce classes.</p>
-<p>What I see often in curricula is a reverse order. Classes and instance-objects first, then seperate interfaces, later but likely never closures. In my experience students have a much tougher time with this progression.</p>
-<p>I believe almost all students learn more effectively if they start with basic elements and build towards elaborate and powerful tools. If they encounter a more difficult problem and see that their basic tool is no longer sufficient, they quickly grasp why the more elaborate tool exists and what it does.</p>
+<p>Often the simple and familiar function is adequate for solving this problem. Moreso, in my experience students who first obtain a strong understanding of functions and closures have an easy time when they later learn about interfaces and classes.</p>
+<h1 id="closing-words">Closing words</h1>
+<p>Very many difficulties in programming arise because it matters when or how many times certain code runs. The more you write your code in such a way that it no longer matter when or how many times it runs, the fewer of these problems you&rsquo;ll see.</p>
+<p>In this article we saw an example of this phenomenon. Orginially our game code printed in the console. It matters how many time this code runs because we don&rsquo;t want to see prints that have nothing to do with our current playing session.</p>
+<p>After we refactored in such a way that we could run the game code without printing, it no longer mattered how many times we ran it and we could run it many times (once for each test case) without having to worry.</p>
 
     </div>
 
