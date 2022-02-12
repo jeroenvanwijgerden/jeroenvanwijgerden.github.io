@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Thoughts on the shape and optionality of data.">
 <meta itemprop="datePublished" content="2022-02-09T11:21:27+01:00" />
 <meta itemprop="dateModified" content="2022-02-09T11:21:27+01:00" />
-<meta itemprop="wordCount" content="1790">
+<meta itemprop="wordCount" content="1788">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 09 </span>
         
-          <span class="more-meta"> 1790 words </span>
+          <span class="more-meta"> 1788 words </span>
           <span class="more-meta"> 9 mins read </span>
         
       </div>
@@ -237,12 +237,12 @@ ship        of User require name,        address
 <p>The duplication is also gone. Sure, name is repeated a couple of times, but we can no longer make mismatching mistakes. Let&rsquo;s say we want to change name to full_name. All instances of name have to be replaced with full_name at the same time, or we would get an error.</p>
 <p>To actually implement this seperation of shape and provision you might have to get a little creative, depending on the language you&rsquo;re using.</p>
 <h1 id="besides-programming">Besides programming</h1>
-<p>Here&rsquo;s an example of that&rsquo;s not directly related to programming.</p>
-<p>I once worked for a big player in the medical domain. Besides engineering, I was part of a team that specialized in modelling medical data using the FHIR industry standard. The second major purpose of this team was to represent our company in the ongoing development of FHIR, a collaboration of many organizations from all over the world.</p>
+<p>Here&rsquo;s an example that&rsquo;s not directly related to programming.</p>
+<p>I once worked for a big player in the medical domain. Besides engineering, I was part of a team that specialized in modeling medical data using the FHIR industry standard. The second major purpose of this team was to represent our company in the ongoing development of FHIR, a collaboration of many organizations from all over the world.</p>
 <p>FHIR offers an extensive collection of &lsquo;resources&rsquo;, the building blocks to model with. <a href="http://hl7.org/fhir/R4/medicationrequest.html">MedicationRequest</a> is such a resource. Among other things, what is specified are a resource&rsquo;s fields, their types and their cardinality.</p>
 <p>One of MedicationRequest&rsquo;s fields is <code>doNotPerform</code> of type boolean. It&rsquo;s cardinality is <code>0..1</code>, zero or one, meaning optional. Cardinalities like <code>0..*</code> also specify optionality. Shape and optionality combined.</p>
 <p>Different organizations contribute to refining these resources by sharing and discussing use-cases for them. Fields, types and cardinalities are adjusted to meet the needs.</p>
-<p>As medicine in practised differently is different parts of the world, the only way to have a resource accomodate all (or at least many) use-cases is to weaken restrictions, for examply by making things optional.</p>
+<p>Medicine is practised differently in different parts of the world. The only way to have a resource accomodate all (or at least many) use-cases is to weaken restrictions, for examply by making things optional.</p>
 <p>After a while, for certain use-cases resources were found to not be specific enough. For the particular case of requesting medication in the United States the spec for the MedicationRequest resource had to be more constrained to be of proper use.</p>
 <p>To overcome this friction FHIR introduced the notion of a <a href="hl7.org/fhir/profiling.html">profile</a>: <code>a set of constraints on a resource</code>. <a href="http://hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html">US Core</a> is a profile for MedicationRequest.</p>
 <p>Resources are similar to the <code>User: name, email, address (optional)</code> of before. The specification, including both shape and optionality was made to accomodate so many different use-cases that for particular use-cases the spec is no longer specific enough.</p>
