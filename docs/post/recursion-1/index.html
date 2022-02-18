@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A case study of finding paths in trees.">
 <meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
-<meta itemprop="wordCount" content="5921">
+<meta itemprop="wordCount" content="5942">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 16 </span>
         
-          <span class="more-meta"> 5921 words </span>
+          <span class="more-meta"> 5942 words </span>
           <span class="more-meta"> 28 mins read </span>
         
       </div>
@@ -517,7 +517,7 @@
                 
         <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">child_paths</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">child_paths</span><span class="p">:</span>
             <span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
             <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
@@ -1821,7 +1821,8 @@ et cetera
 </div><p>Because it&rsquo;s so simple to switch between orders, you could easily add a parameter to let a caller decide the order.</p>
 <p>Only for this algorithm (no in-place mutation, tail-recursive) is changing between depth-first and breadth-first so simple. In the other versions of <code>all_complete_paths</code> covered in this article the depth-first order is much more baked into the core.</p>
 <h1 id="out-of-memory">Out of memory</h1>
-<p>Note that with tail recursion you prevent stack overflows but can still cause an overall memory overflow. In our factorial example, <code>product</code> might become too large. Regardless, tail recursion is still useful because typically it&rsquo;s much easier to overflow the stack than the rest of your memory.</p>
+<p>Tail recursion is useful because it prevents stack overflows but it isn&rsquo;t bulletproof. Tail-recursive implementations can still grow too large for memory.</p>
+<p>To make our branching pathfinding algorithms tail-recursive we introduced a pile of plans. The pile of plans grows proportionally to the dept of the tree. If the tree is extremely large, you will run out of memory. This happened to me while working on <a href="https://jeroenvanwijgerden.me/post/dice-of-war/">some statistics</a>.</p>
 <h1 id="a-note-on-testing">A note on testing</h1>
 <p>In the beginning of this article I described the behavior of <code>all_complete_paths(1)</code> with the following <a href="https://jeroenvanwijgerden.me/post/simple-testing/">test</a>:</p>
 <div class="highlight"><div class="chroma">
