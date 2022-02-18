@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tail recursion for branching problems - jvw blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Jeroen van Wijgerden" /><meta name="description" content="A case study of finding paths in trees." /><meta name="keywords" content="blog, programming, education" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://jeroenvanwijgerden.me/post/recursion-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Tail recursion for branching problems" />
+<meta property="og:description" content="A case study of finding paths in trees." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/recursion-1/" />
+<meta property="article:published_time" content="2022-02-16T13:10:35+01:00" />
+<meta property="article:modified_time" content="2022-02-16T13:10:35+01:00" />
+<meta itemprop="name" content="Tail recursion for branching problems">
+<meta itemprop="description" content="A case study of finding paths in trees.">
+<meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
+<meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
+<meta itemprop="wordCount" content="5921">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tail recursion for branching problems"/>
+<meta name="twitter:description" content="A case study of finding paths in trees."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">jvw@blog:~$</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">jvw@blog:~$</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Tail recursion for branching problems</h1>
+      <h3 class="post-summary">A case study of finding paths in trees.</h3>
+      <div class="post-meta">
+        <span class="post-time"> 2022 Feb 16 </span>
+        
+          <span class="more-meta"> 5921 words </span>
+          <span class="more-meta"> 28 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tail-recursion">Tail recursion</a>
+      <ul>
+        <li><a href="#recipe">Recipe</a></li>
+        <li><a href="#hide-details">Hide details</a></li>
+      </ul>
+    </li>
+    <li><a href="#finding-paths">Finding paths</a>
+      <ul>
+        <li><a href="#first-approach">First approach</a>
+          <ul>
+            <li><a href="#tail-recursive">Tail-recursive</a></li>
+          </ul>
+        </li>
+        <li><a href="#second-approach">Second approach</a>
+          <ul>
+            <li><a href="#tail-recursive-1">Tail-recursive</a></li>
+            <li><a href="#dangerous-optimization">Dangerous optimization</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#depth-vs-breadth">Depth vs. breadth</a></li>
+    <li><a href="#out-of-memory">Out of memory</a></li>
+    <li><a href="#a-note-on-testing">A note on testing</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Recently one of my clients asked me for help in learning about graphs. As graphs are a particularly favorite topic of mine I took on this challenge with zeal and alacrity. In our ensuing sessions we touched upon some interesting topics regarding recursion, which inspired me to write this article.</p>
+<p>I assume you, dear reader, are already somewhat familiar with recursion. Nevertheless, I begin this article with a brief recap of a classic recursive solution: calculating a factorial.</p>
+<p>Then I introduce the what and why of tail recursion and how to modify regular recusion to tail recursion.</p>
+<p>The meat of this article is a discussion of how to use regular recursion and tail recursion to solve branching problems. The particular branching problem I use as an exmaple is finding paths in a tree.</p>
+<p>I discuss not one but two different approaches to finding paths in trees. One involves mutation and is more performant. The other involves immutability and is less performant but more flexible.</p>
+<h1 id="tail-recursion">Tail recursion</h1>
+<p>This is a typical recursive implementation of factorial:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 24 = 4 * 3 * 2 * 1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If we perform the call <code>fac(4)</code>, this is what the simplified evalation diagram looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| fac(4)
+|               | fac(3)
+|               |               | fac(2)
+|               |               |               | fac(1)
+|               |               |               | return: 1
+|               |               | return: 2 * 1
+|               | return: 3 * 2
+| return: 4 * 6 
+</code></pre></td></tr></table>
+</div>
+</div><p>At the moment the deepest recursive step, <code>fac(1)</code>, is evaluated, all other recursive steps are still on hold. This means that at some point all recursive steps exist on &lsquo;the stack&rsquo; (part of your RAM) at the same time. If your recursion is very deep - you have many recursive steps - you could cause a stack overflow which crashes your program.</p>
+<p>A step must be kept alive for the full duration of the next step, because after the next step there&rsquo;s still work to do: multiplying the result by <code>n</code>.</p>
+<p>Luckily there&rsquo;s a solution: tail recursion.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">product</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 6 = 3 * 2 * 1</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| fac(3, 1)
+|           | fac(2, 3)
+|           |           | fac(1, 6)
+|           |           | return: 6
+|           | return: 6
+| return: 6
+</code></pre></td></tr></table>
+</div>
+</div><p>The difference is that the last thing that happens in a step is no longer the multiplication but the recursive call. Nothing needs to happen after the recursive call: all information is passed to the next step, so the current step can safely die. At any point in time, only a single step needs to ever be on the stack. No more stack overflows.</p>
+<p>But wait a minute, isn&rsquo;t returning a value the last thing that happens in a step? Indeed it is. But look in the evaluation diagram: all calls return the exact same value. If a compiler is smart it can recognize tail recursion and perform some trickery to just return whatever the final recursive step returns and immediately kill off intermediate steps after they&rsquo;ve made their recursive call.</p>
+<p>So, tail recursion is a way to enable very deep recursion. You only have to bother with it if you expect your calculations to stretch the limit of your hardware.</p>
+<h2 id="recipe">Recipe</h2>
+<p>In tail recursion, at each step we add to an accumulative result and pass it on to the next step. So we need to introduce a new parameter to the recursive function and think of a good initial value. In our base-case we finally return the accumulative.</p>
+<p>Let&rsquo;s take another look at or tail-recursive <code>fac</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">product</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 6 = 3 * 2 * 1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The accumulative information is the product of all <code>n</code>s so far. <code>product</code> is now a parameter of <code>fac</code> and in each step we accumulate the <code>n</code> of that particular step to <code>product</code> via multiplication. A good initial value for this product is <code>1</code>, because <code>1 * n = n</code>.</p>
+<h2 id="hide-details">Hide details</h2>
+<p>To do tail recursion we must introduce a new parameter. This has two downsides. One, we have to update all calls to <code>fac</code>. Two, we now expose details that are only relevant to the inner workings of the recursion. When I want the factorial of <code>3</code>, I shouldn&rsquo;t have to worry about passing a <code>1</code>!</p>
+<p>Luckily there are ways to circumvent these problems. I&rsquo;ll briefly show three and discuss a fourth in more detail. Your favorite language will support at least one of them.</p>
+<p>Some languages, like Python, allow you to specify a default value for a parameter:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">product</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>You could make an accessor function that hides the details of how to kick off the recursion:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac_recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">product</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fac_recur</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fac_recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Instead of two outer functions, you could create an outer and an inner function:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+ 
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">product</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">fac_recur</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">fac_recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fac</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Finally, all tail-recursive functions can trivially be written as a while-loop:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">product</span>
+
+    <span class="k">return</span> <span class="n">product</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Invert the condition of the base-case in your recursive function to obtain the condition of the while-loop. Instead of passing arguments, reassign values to variables outside the scope of the while-loop.</p>
+<p>The smart trickery that some compilers do to optimize tail recursion is indeed to rewrite them as while-loops.</p>
+<h1 id="finding-paths">Finding paths</h1>
+<p>Graphs are a fundamental tool for modeling data and one of the first things you want to do with a graph is find paths in it. Before we get started, first some vocabulary.</p>
+<p>A graph is a collection of things (vertices, singular: vertex) and relationships between these things (edges). Typically a graph is visualized as circles with arrows between them.</p>
+<p>We&rsquo;re going to look at a specific kind of graph: a tree. A tree is a directed (the arrows point in one direction), acyclic graph where each vertex can have multiple children but only one parent. The root is the only vertex without a parent. If a vertex has no children it&rsquo;s called a leaf.</p>
+<p>Finding paths in trees involves fewer edge-cases because trees don&rsquo;t have cycles and its vertices have only one parent. This makes the code easier to read. However, the techniques you&rsquo;ll see in this article can be used for any graph related algorithm on any type of graph; indeed, not even necessarily for graph problems but for any type of branching problem.</p>
+<p>Soon I&rsquo;ll go over what I mean by <em>branching problem</em> and why it requires special attention with regards to tail recursion.</p>
+<p>As an aside, trees form the very foundation of programming. A program is a tree of instructions and the scope hierarchy is also a tree.</p>
+<p>This is the tree we&rsquo;ll be working with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
+ │     │
+ │     └───⟶(5)
+ │
+ └───⟶(3)──⟶(6)
+       │
+       └───⟶(7)
+</code></pre></td></tr></table>
+</div>
+</div><p>Modeled as an adjacency list:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="p">,</span><span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="p">,</span><span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    <span class="p">,</span><span class="mi">4</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">,</span><span class="mi">5</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">,</span><span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">,</span><span class="mi">7</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Our goal is to write the function <code>all_complete_paths</code> that returns all complete paths starting at a given vertex, like so:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">6</span><span class="p">]]</span>
+<span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span>   <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>I start with an approach implemented first with regular recursion followed by tail recursion. Afterwards I discuss a second approach, again implemented with both regular and tail recursion, that is more performant but has requires extra attention to detail.</p>
+<p>After both approaches are covered I briefly discuss how the first and lesser performant approach is more flexible.</p>
+<h2 id="first-approach">First approach</h2>
+<p>Let&rsquo;s first specify our task. In each step we are given a vertex and we should return a list of paths. A path is a list of vertices. So we return a list of lists of vertices.</p>
+<p>Now the approach. First we think about our base-case. When should our recursion end? When the given vertex is a leaf. From a leaf <code>v</code> there is but a single path: <code>[v]</code>. But we should return a list of paths, so for a leaf we return <code>[[v]]</code>.</p>
+<p>Up next is the recursive step. Given a <code>v</code> that is not a leaf, we should obtain the result of a recursive call and somehow add information to it to create the result of this current step.</p>
+<p>The crux is that within the current step for <code>v</code>, we might have to do multiple recursive calls, one for each child of <code>v</code>. Alright, now the time-travelling magic of writing recursive functions: let&rsquo;s assume our function <code>all_complete_paths</code> already works. We can call it for a child to obtain all paths starting at that child. If we do this for all children we have all paths that end at a leaf and stop right before <code>v</code>. To obtain all paths that start at <code>v</code>, all we have to do is add <code>v</code> to the front of all of these child-paths.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">child_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="n">child</span><span class="p">):</span>
+                <span class="n">child_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">child_paths</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">paths</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">v</span><span class="p">]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Calling <code>all_complete_paths(1)</code> leads to the following simplified evaluation diagram:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| v: 1
+|                        | v: 2
+|                        |              | v: 4
+|                        |              |   
+|                        |              | return: [[4]]
+|                        |              
+|                        |              | v: 5
+|                        |              | 
+|                        |              | return: [[5]]
+|                        | child_paths:
+|                        | [[4], [5]]
+|                        | 
+|                        | return:
+|                        |  [[2, 4],
+|                        |   [2, 5]]
+|  
+|                        | v: 3
+|                        |              | v: 6
+|                        |              |   
+|                        |              | return: [[6]]
+|                        |              
+|                        |              | v: 7
+|                        |              | 
+|                        |              | return: [[7]]
+|                        | child_paths:
+|                        | [[6], [7]]
+|                        | 
+|                        | return:
+|                        |  [[3, 6],
+|                        |   [3, 7]]
+| child_paths:
+| [[2, 4], [2, 5],
+|  [3, 6], [3, 7]]
+|
+| return:
+| [[1, 2, 4], [1, 2, 5],
+|  [1, 3, 6], [1, 3, 7]]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tail-recursive">Tail-recursive</h3>
+<p>Whereas <code>fac</code> had a single recursive call each step, here a step can have multiple recursive calls. This makes <code>fac</code> linear and <code>all_complete_paths</code> branching.</p>
+<p>The strategy we&rsquo;ve seen to go from non-tail recursion to tail recursion is to pass along information to the next step by introducing a new parameter. Even if we apply that strategy to a branching problem like this, after the first recursive call there is still work left to do: making the second recursive call. Clearly this strategy isn&rsquo;t sufficient for branching problems.</p>
+<p>Branching problems can be made tail-recursive, however. Try to think of a solution before you continue reading.</p>
+<p>In a branching step we want to do multiple things: there are multiple plans. Specifically, we want to do something for each child. However, these plans are also put into action: a recursive call is made for each child. Unfortunately in tail recursion we can only make one recursive call.</p>
+<p>What we must do is seperate creating plans from putting a plan into action. We can let a step produce two plans, because producing plans does not involve making recursive calls. These plans are then passed to the next step using a single recursive call.</p>
+<p>The next step can then take one plan from the pile of plans. Putting this one plan into action involves either 1) adding to the accumulating result, or 2) producing more plans. Taking action no longer involves making a recursive call. The recursive call is used only to pass along the pile of plans and the accumuatling result.</p>
+<p>If a plan describes a base-case, the action is to only add to the accumulating result. A plan was taken from the pile and no new plans were added: the pile of plan shrinks.</p>
+<p>If a step can no longer take a plan from the pile because the pile is empty, the overall recursive process is complete and the accumulating result can be returned as the final result.</p>
+<p>Let&rsquo;s go over the specific approach for our path finding. A plan is a path-under-construction and we look at the last vertex in that path.</p>
+<p>If that last vertex is a leaf, we hit our base-case and add the path to a list of complete paths.</p>
+<p>If it&rsquo;s not a leaf it has children and we construct a new path-under-construction for each child. We do this by adding the child to the end of the current path. Be careful here: if you&rsquo;re working with mutable lists, you need to make a copy of the current path before adding a child. If you don&rsquo;t you will add both children to the same path, which is wrong.</p>
+<p>Our plans, or paths-under-construction (plural) are kept in the parameter <code>incomplete_paths</code>. Initially the only path-under-construction (singular) we know is <code>[v]</code> so the initial value for <code>incomplete_paths</code> should be <code>[[v]]</code>.</p>
+<p>The accumulative result is the list of completed paths <code>completed_paths</code>. Its initial value is <code>[]</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
+        <span class="c1"># remove a plan from the pile</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="n">last_vertex</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">children</span>    <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">last_vertex</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">children</span><span class="p">:</span> <span class="c1"># non-base-case</span>
+            <span class="c1"># add to the pile of plans</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="n">new_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># prevent mutation bugs</span>
+                <span class="n">new_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+                <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_path</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># base-case</span>
+            <span class="c1"># add to the accumulating result</span>
+            <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># no more plans: accumulating result is final result</span>
+        <span class="k">return</span> <span class="n">complete_paths</span>
+
+
+<span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">recur</span><span class="p">([[</span><span class="n">v</span><span class="p">]],</span> <span class="p">[])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that we sort of have two base-cases now. One for our specific recusive problem: when we reached a leaf. The other is the base-case for our general strategy: when the pile of plans is empty.</p>
+<p>Here follows in detail what happens if we call <code>all_complete_paths(1)</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+----------------------------------
+incomplete_paths   : [[1]]
+complete_paths     : []
+taken from
+  incomplete_paths : [1]
+last vertex        : 1
+children           : [2, 3]
+added to
+  incomplete_paths : [[1, 2], [1, 3]]
+----------------------------------
+
+
+recursive call #2
+----------------------------------
+incomplete_paths   : [[1, 2],
+                      [1, 3]]
+complete_paths     : []
+taken from
+  incomplete_paths : [1, 3]
+last vertex        : 3
+children           : [6, 7]
+added to
+  incomplete_paths : [[1, 3, 6], [1, 3, 7]]
+----------------------------------
+
+
+recursive call #3
+----------------------------------
+incomplete_paths   :  [[1, 2],
+                       [1, 3, 6],
+                       [1, 3, 7]]
+complete_paths     : []
+taken from
+  incomplete_paths : [1, 3, 7]
+last vertex        : 7
+children           : []
+added to
+  complete_paths   : [1, 3, 7]
+----------------------------------
+
+
+recursive call #4
+----------------------------------
+incomplete_paths   : [[1, 2],
+                      [1, 3, 6]]
+complete_paths     : [[1, 3, 7]]
+taken from
+  incomplete_paths : [1, 3, 6]
+last vertex        : 6
+children           : []
+added to
+  complete_paths   : [1, 3, 6]
+----------------------------------
+
+
+recursive call #5
+----------------------------------
+incomplete_paths   : [[1, 2]]
+complete_paths     : [[1, 3, 7],
+                      [1, 3, 6]]
+taken from
+  incomplete_paths : [1, 2]
+last vertex        : 2
+children           : [4, 5]
+added to
+  incomplete_paths : [[1, 2, 4], [1, 2, 5]]
+----------------------------------
+
+
+recursive call #6
+----------------------------------
+incomplete_paths   : [[1, 2, 4],
+                      [1, 2, 5]]
+complete_paths     : [[1, 3, 7],
+                      [1, 3, 6]]
+taken from
+  incomplete_paths : [1, 2, 5]
+last vertex        : 5
+children           : []
+added to
+  complete_paths   : [1, 2, 5]
+----------------------------------
+
+
+recursive call #7
+----------------------------------
+incomplete_paths   : [[1, 2, 4]]
+complete_paths     : [[1, 3, 7],
+                      [1, 3, 6],
+                      [1, 2, 5]]
+taken from
+  incomplete_paths : [1, 2, 4]
+last vertex        : 4
+children           : []
+added to
+  complete_paths   : [1, 2, 4]
+----------------------------------
+
+
+recursive call #8
+----------------------------------
+incomplete_paths   : []
+complete_paths     : [[1, 3, 7],
+                      [1, 3, 6],
+                      [1, 2, 5],
+                      [1, 2, 4]]
+incomplete_paths empty,
+final result is complete_paths
+----------------------------------
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="second-approach">Second approach</h2>
+<p>fundamentally different: this is fron to back. if reached back, there is no more going to front. rather, not focussed around returning something, focussed on doing something at end.</p>
+<p>not suitable to have returning something baked in, because steps don&rsquo;t want ot return. Instead of having a parameter for accumulating result, have a parameter to do something.</p>
+<p>Can use it to print, collect in a result, or do whatever.</p>
+<p>The first non-tail-recursive approach was, for a vertex <code>v</code>, to find all complete paths starting at the children of <code>v</code> and then add <code>v</code> to the front of each of these paths.</p>
+<p>This is an entirely different approach. In a step we have, in addition to <code>v</code>, the &lsquo;path so far&rsquo;. We add <code>v</code> to it. If <code>v</code> is a leaf we hit our base-case and we add the path (now with <code>v</code> at the end) to our list of complete paths. If <code>v</code> is not a leaf we make a recursive call for each child, passing along the path that is now extended with <code>v</code>.</p>
+<p>This approach works because each step is given a <code>v</code> and the path that stops right before <code>v</code>: the path from the root up to and including the parent of <code>v</code>.</p>
+<p>You might notice that it is actually quite similar to the tail-recursive solution we saw earlier: a path is extended with <code>v</code> and in some way passed to a next step.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+  <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+  <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+  <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+      <span class="n">all_complete_paths</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+
+<span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There are a couple of problems with this implementation.</p>
+<p>Most obviously, nothing is ever returned. This is due to the very nature of this approach. A step only sets up the right circumstance for the next step: it doesn&rsquo;t do anything with the result of the next step.</p>
+<p>Trying to force an implementation that doesn&rsquo;t fit the approach is asking for complexity and headaches. So instead of returning values let&rsquo;s think of something else.</p>
+<p>The only reason we would want a <code>return</code> somewhere is to extract the result from our recursion. However, instead of extracting the value from our recursion we can let the recursion place its result in something that lives outside of the recursion. We can accomplish this by removing <code>complete_paths</code> as a parameter of the recursion function and instead have it live outside the scope of the recursive function.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">recur</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+  <span class="n">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now at least we can access the result of the recursion. However, if we run <code>all_complete_paths(2)</code> we get some weird behavior:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+|
+| append 2 to path
+| path: [2]
+|                     | recur(4, [2])
+|                     | 
+|                     | append 4 to path
+|                     | path: [2, 4]
+|                     | 
+|                     | append copy of path to complete_paths
+|                     | complete_paths: [[2, 4]]
+|
+| path is now [2, 4]!
+|
+|                     | recur(5, [2, 4])
+|                     | 
+|                     | append 5 to path
+|                     | path: [2, 4, 5]
+|                     | complete_paths: [[2, 4, 5]]
+|                     | 
+|                     | append copy of path to complete_paths
+|                     | complete_paths: [[2, 4, 5], [2, 4, 5]]
+|
+</code></pre></td></tr></table>
+</div>
+</div><p>The trouble is caused by <code>path</code> being the same mutable list in each of the recursive steps. This mutability causes trouble in two ways. One, it makes the contents of <code>complete_paths</code> change. Two, the second child of a vertex is given a path that is made &lsquo;dirty&rsquo; by the first child.</p>
+<p>We fix the first problem by not appending <code>path</code> to <code>complete_paths</code>, but a copy of <code>path</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="hl"><span class="lnt">13
+</span></span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">recur</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+<span class="hl">      <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+</span>
+  <span class="n">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We can fix the second problem in two ways. Either each step gets its own copy of <code>path</code>, or each step &lsquo;cleans up&rsquo; its mutation to <code>path</code>.</p>
+<p>To give each step its own copy, a step can either copy the path it&rsquo;s given, or create a copy to give the next steps. Both options are fine. Let&rsquo;s go for immediately copying the given path:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="hl"><span class="lnt"> 5
+</span></span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="hl">    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span>    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">recur</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+  <span class="n">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we&rsquo;re making a copy of path at line 5 anyway, you might feel safe to remove the copy on line 14. I&rsquo;ve had my fair share of mutation bugs so I&rsquo;m keeping it there. Who knows you will refactor this code a little at some point and the copying starts to matter again. I&rsquo;m happy I usually work in a language were everything is immutable by default so I don&rsquo;t have to worry about such things.</p>
+<p>Below is a new simplified evaluation diagram of performing the call <code>all_complete_paths(2)</code>. The three unique copies, one for each step, are marked as <code>path</code>, <code>path'</code> and <code>path''</code>. Mutation bugs solved, <code>complete_paths</code> is what we want it to be!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+| 
+| path: []
+| append 2 to path
+| path: [2]
+|                     | recur(4, [2])
+|                     | 
+|                     | path&#39;: [2]
+|                     | append 4 to path&#39;
+|                     | path&#39;: [2, 4]
+|                     | 
+|                     | append copy of path&#39; to complete_paths
+|                     | complete_paths: [[2, 4]]
+|
+|                     | recur(5, [2])
+|                     | 
+|                     | path&#39;&#39;: [2]
+|                     | append 5 to path&#39;&#39;
+|                     | path&#39;&#39;: [2, 5]
+|                     | 
+|                     | append copy of path&#39;&#39; to complete_paths
+|                     | complete_paths: [[2, 4], [2, 5]]
+|
+</code></pre></td></tr></table>
+</div>
+</div><p>Instead of giving each step its own copy of <code>path</code>, we can &lsquo;clean up&rsquo; the mutation to <code>path</code> as the very last thing we do in each step:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="hl"><span class="lnt">15
+</span></span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">recur</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="hl">    <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># undo path.append(v) at line 5</span>
+</span>
+  <span class="n">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If we now call <code>all_complete_paths(2)</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+|
+| append 2 to path
+| path: [2]
+|                     | recur(4, [2])
+|                     | 
+|                     | append 4 to path
+|                     | path: [2, 4]
+|                     | 
+|                     | append copy of path to complete_paths
+|                     | complete_paths: [[2, 4]]
+|                     | 
+|                     | remove 4 from path
+|                     | path: [2]
+|
+| path is [2] again
+|
+|                     | recur(5, [2])
+|                     | 
+|                     | append 5 to path
+|                     | path: [2, 5]
+|                     | 
+|                     | append copy of path to complete_paths
+|                     | complete_paths: [[2, 4], [2, 5]]
+|                     | 
+|                     | remove 5 from path
+|                     | path: [2]
+| remove 2 from path
+| path: []
+</code></pre></td></tr></table>
+</div>
+</div><p>As you can see, the cleanup implementation also brings <code>complete_paths</code> to our desired state.</p>
+<p>This cleanup version of <code>all_complete_paths</code> is the fastest we&rsquo;ve seen so far because instead of making additional copies it mutates in place.</p>
+<p>Let&rsquo;s take a look at how to turn this into tail recursion.</p>
+<h3 id="tail-recursive-1">Tail-recursive</h3>
+<p>Like before, instead of making two recursive calls, in a step we take one plan from the pile (here which vertex <code>v</code> we should process next) and either contribute to our result (<code>complete_paths</code>) or add new plans (the children of <code>v</code>) to the pile.</p>
+<p>Note that the recursive call (line 19) now happens after removing <code>v</code> from the path, making the recursive call the last thing that happens in a step, thus satisfying the condition for tail recursion.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="hl"><span class="lnt"> 4
+</span></span><span class="hl"><span class="lnt"> 5
+</span></span><span class="hl"><span class="lnt"> 6
+</span></span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="hl"><span class="lnt">13
+</span></span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="hl"><span class="lnt">19
+</span></span><span class="lnt">20
+</span><span class="hl"><span class="lnt">21
+</span></span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="hl">  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+</span><span class="hl">    <span class="k">if</span> <span class="n">vs</span><span class="p">:</span>
+</span><span class="hl">      <span class="n">v</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span>
+      <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+      <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+<span class="hl">        <span class="n">vs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+</span>      <span class="k">else</span><span class="p">:</span>
+        <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+      <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="hl">      <span class="n">recur</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+</span>
+<span class="hl">  <span class="n">recur</span><span class="p">([</span><span class="n">v</span><span class="p">],</span> <span class="p">[])</span>
+</span>
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If we call <code>all_complete_paths(1)</code> we get:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+----------------------------------
+complete_paths : []
+vs   : [1]
+path : []
+v    : 1
+vs   : []
+path : [1]
+children : [2, 3]
+vs : [2, 3]
+path : []
+----------------------------------
+
+
+recursive call #2
+----------------------------------
+complete_paths : []
+vs   : [2, 3]
+path : []
+</code></pre></td></tr></table>
+</div>
+</div><p>Woe! <code>1</code> was removed from <code>path</code> too early. It should be removed from <code>path</code> only after all of its children have been processed. But how are we supposed to make that happen in tail recursion, where going to the next step is the last thing that happens?</p>
+<p>The order of when things happen is decided by our pile of plans. In a step, instead of only adding plans to process children, we also include a plan to eventually clean up the mutation we did in this step. So now we have two types of plans, either a plan to clean up mutation or to process a vertex. We only clean up if we encounter a plan that says so.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="hl"><span class="lnt"> 6
+</span></span><span class="lnt"> 7
+</span><span class="hl"><span class="lnt"> 8
+</span></span><span class="hl"><span class="lnt"> 9
+</span></span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="hl"><span class="lnt">14
+</span></span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">plans</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">plans</span><span class="p">:</span>
+<span class="hl">      <span class="n">plan</span> <span class="o">=</span> <span class="n">plans</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span>
+<span class="hl">      <span class="k">if</span> <span class="n">plan</span> <span class="o">==</span> <span class="s2">&#34;clean up&#34;</span><span class="p">:</span>
+</span><span class="hl">        <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span>      <span class="k">else</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">plan</span>
+
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="hl">        <span class="n">plans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;clean up&#34;</span><span class="p">)</span>
+</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+          <span class="n">plans</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+      <span class="n">recur</span><span class="p">(</span><span class="n">plans</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+  <span class="n">recur</span><span class="p">([</span><span class="n">v</span><span class="p">],</span> <span class="p">[])</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+----------------------------------
+complete_paths : []
+plans : [1]
+path  : []
+plan  : 1
+plans : []
+v     : 1
+path  : [1]
+plans : [&#34;clean up&#34;]
+children : [2, 3]
+plans : [&#34;clean up&#34;, 2, 3]
+----------------------------------
+
+
+recursive call #2
+----------------------------------
+complete_paths : []
+plans : [&#34;clean up&#34;, 2, 3]
+path  : [1]
+plan  : 3
+plans : [&#34;clean up&#34;, 2]
+v     : 3
+path  : [1, 3]
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;]
+children : [6, 7]
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6, 7]
+----------------------------------
+
+
+recursive call #3
+----------------------------------
+complete_paths : []
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6, 7]
+path  : [1, 3]
+plan  : 7
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6]
+v     : 7
+path  : [1, 3, 7]
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6, &#34;clean up&#34;]
+children : []
+complete_paths : [[1, 3, 7]]
+----------------------------------
+
+recursive call #4
+----------------------------------
+complete_paths : []
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6, &#34;clean up&#34;]
+path  : [1, 3, 7]
+plan  : &#34;clean up&#34;
+plans : [&#34;clean up&#34;, 2, &#34;clean up&#34;, 6]
+path  : [1, 3]
+----------------------------------
+
+et cetera
+</code></pre></td></tr></table>
+</div>
+</div><p>In this particular approach, not only do we not care about return values, we also deliberately work with in-place mutation. Making recursive calls and passing parameters feels a bit superfluous.</p>
+<p>We saw in the beginning of this article that tail recursion can be written as a loop. Let&rsquo;s see what that looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="hl"><span class="lnt"> 3
+</span></span><span class="hl"><span class="lnt"> 4
+</span></span><span class="lnt"> 5
+</span><span class="hl"><span class="lnt"> 6
+</span></span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="hl">  <span class="n">plans</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+</span><span class="hl">  <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+</span>
+<span class="hl">  <span class="k">while</span> <span class="n">plans</span><span class="p">:</span>
+</span>    <span class="n">plan</span> <span class="o">=</span> <span class="n">plans</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">plan</span> <span class="o">==</span> <span class="s2">&#34;clean up&#34;</span><span class="p">:</span>
+      <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">v</span> <span class="o">=</span> <span class="n">plan</span>
+
+      <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+      <span class="n">plans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;clean up&#34;</span><span class="p">)</span>
+
+      <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">plans</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+  <span class="k">return</span> <span class="n">complete_paths</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="dangerous-optimization">Dangerous optimization</h3>
+<p>Assuming you work with mutable lists, there might be cases where you don&rsquo;t necessarily need to copy a complete path.</p>
+<p>Let&rsquo;s say that sometimes you need the paths for further computation, other times you only want to print them. Only if you collect the paths it&rsquo;s truly necessary to make a copy. For printing, you don&rsquo;t need to copy.</p>
+<p>How to support both cases with maximal code reuse?</p>
+<p>We can extract traversing the paths to a function <code>traverse_paths</code>, and have a parameter <code>f</code> which is a function that is called each time a complete path is found. The actual path, not a copy, is passed as an argument to <code>f</code>. In <code>f</code> you can decide whether to copy or not.</p>
+<p>Note that the integrity of the passed path is vital to the continued operation of <code>traverse_paths</code>. Exposing the mutable path to <code>f</code> is EXTREMELY dangerous. It sends shivers down my spine. I&rsquo;m dead serious. I recommend to not do this.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="hl"><span class="lnt">21
+</span></span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="hl"><span class="lnt">27
+</span></span><span class="hl"><span class="lnt">28
+</span></span><span class="lnt">29
+</span><span class="hl"><span class="lnt">30
+</span></span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="hl"><span class="lnt">36
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">traverse_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+</span>  <span class="n">plans</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">while</span> <span class="n">plans</span><span class="p">:</span>
+    <span class="n">plan</span> <span class="o">=</span> <span class="n">plans</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">plan</span> <span class="o">==</span> <span class="s2">&#34;clean up&#34;</span><span class="p">:</span>
+      <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">v</span> <span class="o">=</span> <span class="n">plan</span>
+
+      <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+      <span class="n">plans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;clean up&#34;</span><span class="p">)</span>
+
+      <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+        <span class="n">plans</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+<span class="hl">        <span class="n">f</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span>
+
+<span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+  <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
+  
+<span class="hl">  <span class="k">def</span> <span class="nf">collect_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span><span class="hl">    <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+</span>
+<span class="hl">  <span class="n">traverse_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">collect_path</span><span class="p">)</span>
+</span>
+  <span class="k">return</span> <span class="n">complete_paths</span>
+
+
+<span class="c1"># printing without copying</span>
+<span class="hl"><span class="n">traverse_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">print</span><span class="p">)</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>To make it safe again, you could pass a copy of <code>path</code> to <code>f</code>, but that defeats to purpose of extracting to <code>traverse_paths</code>. Then you might as well write <code>print(all_complete_paths(1))</code>. I just wanted to take the opportunity to show a higher order function (in this case, a function that has another function as a parameter).</p>
+<h1 id="depth-vs-breadth">Depth vs. breadth</h1>
+<p>The mutate-and-cleanup version of <code>all_complete_paths</code> might be the fastest, but it isn&rsquo;t as flexible.</p>
+<p>Let&rsquo;s take our first tail-recursive algorithm and print the last vertex of the path we process in each step:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="hl"><span class="lnt"> 6
+</span></span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="n">last_vertex</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="hl">        <span class="k">print</span><span class="p">(</span><span class="n">last_vertex</span><span class="p">)</span>
+</span>        <span class="n">children</span>    <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">last_vertex</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="n">new_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">new_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+                <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_path</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">complete_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">complete_paths</span>
+
+<span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">recur</span><span class="p">([[</span><span class="n">v</span><span class="p">]],</span> <span class="p">[])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Calling <code>all_complete_paths(1)</code> will print <code>1 3 7 6 2 5 4</code>.</p>
+<p>If we take another look at our tree</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
+ │     │
+ │     └───⟶(5)
+ │
+ └───⟶(3)──⟶(6)
+       │
+       └───⟶(7)
+</code></pre></td></tr></table>
+</div>
+</div><p>we see that the vertices are printed in so called depth-first order. The algorithm first tries to go deeper in the tree. Note that <code>1 2 4 5 3 6 7</code> would also be depth-first.</p>
+<p>The opposite of depth-first is breadth-first. In a breadth-first order all vertices at the same depth are processed before the vertices of the next depth. Example of breadth-first orders for this tree are <code>1 2 3 4 5 6 7</code> and <code>1 3 2 7 6 5 4</code>.</p>
+<p>Sometimes it can be useful to traverse vertices in breadth-fist order instead of depth-first order. For example if you have an infinitely large tree and you want the first 1000 vertices in it.</p>
+<p>Spend a moment to think of how to change the code such that the vertices are printed in breadth-first order instead of depth-first.</p>
+<p>The solution is elegantly simple. Taking the last plan from the pile causes the algorithm to be depth-first. Taking the first plan will cause it to be breadth-first:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
+<span class="hl">        <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># pop from the front</span>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Because it&rsquo;s so simple to switch between orders, you could easily add a parameter to let a caller decide the order.</p>
+<p>Only for this algorithm (no in-place mutation, tail-recursive) is changing between depth-first and breadth-first so simple. In the other versions of <code>all_complete_paths</code> covered in this article the depth-first order is much more baked into the core.</p>
+<h1 id="out-of-memory">Out of memory</h1>
+<p>Note that with tail recursion you prevent stack overflows but can still cause an overall memory overflow. In our factorial example, <code>product</code> might become too large. Regardless, tail recursion is still useful because typically it&rsquo;s much easier to overflow the stack than the rest of your memory.</p>
+<h1 id="a-note-on-testing">A note on testing</h1>
+<p>In the beginning of this article I described the behavior of <code>all_complete_paths(1)</code> with the following <a href="https://jeroenvanwijgerden.me/post/simple-testing/">test</a>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, some of the various implementations of <code>all_complete_paths</code> we&rsquo;ve seen might yield the same paths but in a different order. This test would fail for those particular implementations.</p>
+<p>You might not really care about the order, as long as all the paths are there. Then you can test against a set instead of a list:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">{[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Unfortunately, in some languages including Python it&rsquo;s impossible to create sets of lists. The above code will cause an error. Depending on your language you might have to write a small helper function:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">contain_same_elements</span><span class="p">(</span>
+  <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/maybe-not/">
+            <span class="next-text nav-default">Maybe Not: notes</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/jeroenvanwijgerden/" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.linkedin.com/in/jeroen-van-wijgerden-0168ab7a/" class="iconfont icon-linkedin" title="linkedin"></a>
+  <a href="https://jeroenvanwijgerden.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span> - </span>
+    <span>Jeroen van Wijgerden</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
