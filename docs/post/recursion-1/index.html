@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A case study of finding paths in trees.">
 <meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
-<meta itemprop="wordCount" content="5942">
+<meta itemprop="wordCount" content="5876">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 16 </span>
         
-          <span class="more-meta"> 5942 words </span>
+          <span class="more-meta"> 5876 words </span>
           <span class="more-meta"> 28 mins read </span>
         
       </div>
@@ -174,11 +174,11 @@
   </div>
 </div>
     <div class="post-content">
-      <p>Recently one of my clients asked me for help in learning about graphs. As graphs are a particularly favorite topic of mine I took on this challenge with zeal and alacrity. In our ensuing sessions we touched upon some interesting topics regarding recursion, which inspired me to write this article.</p>
+      <p>Recently one of my clients asked me for help in learning about graphs. As graphs are a particular favorite topic of mine I took on this challenge with zeal and alacrity. In our ensuing sessions we touched upon some interesting topics regarding recursion, which inspired me to write this article.</p>
 <p>I assume you, dear reader, are already somewhat familiar with recursion. Nevertheless, I begin this article with a brief recap of a classic recursive solution: calculating a factorial.</p>
-<p>Then I introduce the what and why of tail recursion and how to modify regular recusion to tail recursion.</p>
-<p>The meat of this article is a discussion of how to use regular recursion and tail recursion to solve branching problems. The particular branching problem I use as an exmaple is finding paths in a tree.</p>
-<p>I discuss not one but two different approaches to finding paths in trees. One involves mutation and is more performant. The other involves immutability and is less performant but more flexible.</p>
+<p>Then I introduce the what and why of tail recursion and how to modify regular recursion to tail recursion.</p>
+<p>The meat of this article is a discussion of how to use regular recursion and tail recursion to solve branching problems. The particular branching problem I use as an example is finding paths in a tree.</p>
+<p>I discuss not one but two different approaches to finding paths in trees. The first is more flexible, the second is more performant.</p>
 <h1 id="tail-recursion">Tail recursion</h1>
 <p>This is a typical recursive implementation of factorial:</p>
 <div class="highlight"><div class="chroma">
@@ -203,7 +203,7 @@
 <span class="n">fac</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 24 = 4 * 3 * 2 * 1</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>If we perform the call <code>fac(4)</code>, this is what the simplified evalation diagram looks like:</p>
+</div><p>If we perform the call <code>fac(4)</code>, this is what the simplified evaluation diagram looks like:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -226,7 +226,7 @@
 | return: 4 * 6 
 </code></pre></td></tr></table>
 </div>
-</div><p>At the moment the deepest recursive step, <code>fac(1)</code>, is evaluated, all other recursive steps are still on hold. This means that at some point all recursive steps exist on &lsquo;the stack&rsquo; (part of your RAM) at the same time. If your recursion is very deep - you have many recursive steps - you could cause a stack overflow which crashes your program.</p>
+</div><p>When the deepest recursive step, <code>fac(1)</code>, is evaluated, all other recursive steps are still on hold. This means that at some point all recursive steps exist on &lsquo;the stack&rsquo; (part of your RAM) at the same time. If your recursion is very deep - you have many recursive steps - you could cause a stack overflow which crashes your program.</p>
 <p>A step must be kept alive for the full duration of the next step, because after the next step there&rsquo;s still work to do: multiplying the result by <code>n</code>.</p>
 <p>Luckily there&rsquo;s a solution: tail recursion.</p>
 <div class="highlight"><div class="chroma">
@@ -410,8 +410,8 @@
 <h1 id="finding-paths">Finding paths</h1>
 <p>Graphs are a fundamental tool for modeling data and one of the first things you want to do with a graph is find paths in it. Before we get started, first some vocabulary.</p>
 <p>A graph is a collection of things (vertices, singular: vertex) and relationships between these things (edges). Typically a graph is visualized as circles with arrows between them.</p>
-<p>We&rsquo;re going to look at a specific kind of graph: a tree. A tree is a directed (the arrows point in one direction), acyclic graph where each vertex can have multiple children but only one parent. The root is the only vertex without a parent. If a vertex has no children it&rsquo;s called a leaf.</p>
-<p>Finding paths in trees involves fewer edge-cases because trees don&rsquo;t have cycles and its vertices have only one parent. This makes the code easier to read. However, the techniques you&rsquo;ll see in this article can be used for any graph related algorithm on any type of graph; indeed, not even necessarily for graph problems but for any type of branching problem.</p>
+<p>We&rsquo;re going to look at a specific kind of graph: a tree. A tree is directed, meaning the arrows point in one direction. It is also acyclic, meaning no path in the tree crosses over itself. Each vertex can have multiple children but only one parent. The root is the only vertex without a parent. If a vertex has no children it&rsquo;s called a leaf.</p>
+<p>I chose to use trees for the examples because finding paths in trees involves very few edge-cases. This makes the code easier to read. However, the techniques you&rsquo;ll see in this article can be used for any graph related algorithm on any type of graph; indeed, not even necessarily for graph problems but for any type of branching problem.</p>
 <p>Soon I&rsquo;ll go over what I mean by <em>branching problem</em> and why it requires special attention with regards to tail recursion.</p>
 <p>As an aside, trees form the very foundation of programming. A program is a tree of instructions and the scope hierarchy is also a tree.</p>
 <p>This is the tree we&rsquo;ll be working with:</p>
@@ -480,7 +480,7 @@
 <h2 id="first-approach">First approach</h2>
 <p>Let&rsquo;s first specify our task. In each step we are given a vertex and we should return a list of paths. A path is a list of vertices. So we return a list of lists of vertices.</p>
 <p>Now the approach. First we think about our base-case. When should our recursion end? When the given vertex is a leaf. From a leaf <code>v</code> there is but a single path: <code>[v]</code>. But we should return a list of paths, so for a leaf we return <code>[[v]]</code>.</p>
-<p>Up next is the recursive step. Given a <code>v</code> that is not a leaf, we should obtain the result of a recursive call and somehow add information to it to create the result of this current step.</p>
+<p>Up next is the recursive step. Given a <code>v</code> that is not a leaf, we should obtain the result of the next step (by making a a recursive call) and somehow add information to it to create the result of the current step.</p>
 <p>The crux is that within the current step for <code>v</code>, we might have to do multiple recursive calls, one for each child of <code>v</code>. Alright, now the time-travelling magic of writing recursive functions: let&rsquo;s assume our function <code>all_complete_paths</code> already works. We can call it for a child to obtain all paths starting at that child. If we do this for all children we have all paths that end at a leaf and stop right before <code>v</code>. To obtain all paths that start at <code>v</code>, all we have to do is add <code>v</code> to the front of all of these child-paths.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -612,11 +612,11 @@
 <p>The strategy we&rsquo;ve seen to go from non-tail recursion to tail recursion is to pass along information to the next step by introducing a new parameter. Even if we apply that strategy to a branching problem like this, after the first recursive call there is still work left to do: making the second recursive call. Clearly this strategy isn&rsquo;t sufficient for branching problems.</p>
 <p>Branching problems can be made tail-recursive, however. Try to think of a solution before you continue reading.</p>
 <p>In a branching step we want to do multiple things: there are multiple plans. Specifically, we want to do something for each child. However, these plans are also put into action: a recursive call is made for each child. Unfortunately in tail recursion we can only make one recursive call.</p>
-<p>What we must do is seperate creating plans from putting a plan into action. We can let a step produce two plans, because producing plans does not involve making recursive calls. These plans are then passed to the next step using a single recursive call.</p>
-<p>The next step can then take one plan from the pile of plans. Putting this one plan into action involves either 1) adding to the accumulating result, or 2) producing more plans. Taking action no longer involves making a recursive call. The recursive call is used only to pass along the pile of plans and the accumuatling result.</p>
-<p>If a plan describes a base-case, the action is to only add to the accumulating result. A plan was taken from the pile and no new plans were added: the pile of plan shrinks.</p>
+<p>What we must do is separate creating plans from putting a plan into action. We can let a step produce two plans, because producing plans does not involve making recursive calls. These plans are then passed to the next step using a single recursive call.</p>
+<p>The next step can then take one plan from the pile of plans. Putting this one plan into action involves either 1) adding to the accumulating result, or 2) producing more plans. Taking action no longer involves making a recursive call. The recursive call is used only to pass along the pile of plans and the accumulating result.</p>
+<p>If a plan describes a base-case, the action is to only add to the accumulating result. A plan was taken from the pile and no new plans were added: the pile of plans shrinks.</p>
 <p>If a step can no longer take a plan from the pile because the pile is empty, the overall recursive process is complete and the accumulating result can be returned as the final result.</p>
-<p>Let&rsquo;s go over the specific approach for our path finding. A plan is a path-under-construction and we look at the last vertex in that path.</p>
+<p>Let&rsquo;s go over the specific approach for our pathfinding. A plan is a path-under-construction and we look at the last vertex in that path.</p>
 <p>If that last vertex is a leaf, we hit our base-case and add the path to a list of complete paths.</p>
 <p>If it&rsquo;s not a leaf it has children and we construct a new path-under-construction for each child. We do this by adding the child to the end of the current path. Be careful here: if you&rsquo;re working with mutable lists, you need to make a copy of the current path before adding a child. If you don&rsquo;t you will add both children to the same path, which is wrong.</p>
 <p>Our plans, or paths-under-construction (plural) are kept in the parameter <code>incomplete_paths</code>. Initially the only path-under-construction (singular) we know is <code>[v]</code> so the initial value for <code>incomplete_paths</code> should be <code>[[v]]</code>.</p>
@@ -683,7 +683,7 @@
     <span class="k">return</span> <span class="n">recur</span><span class="p">([[</span><span class="n">v</span><span class="p">]],</span> <span class="p">[])</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Note that we sort of have two base-cases now. One for our specific recusive problem: when we reached a leaf. The other is the base-case for our general strategy: when the pile of plans is empty.</p>
+</div><p>Note that we sort of have two base-cases now. One for our specific recursive problem: when we reached a leaf. The other is the base-case for our general strategy: when the pile of plans is empty.</p>
 <p>Here follows in detail what happens if we call <code>all_complete_paths(1)</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -912,9 +912,6 @@ final result is complete_paths
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="second-approach">Second approach</h2>
-<p>fundamentally different: this is fron to back. if reached back, there is no more going to front. rather, not focussed around returning something, focussed on doing something at end.</p>
-<p>not suitable to have returning something baked in, because steps don&rsquo;t want ot return. Instead of having a parameter for accumulating result, have a parameter to do something.</p>
-<p>Can use it to print, collect in a result, or do whatever.</p>
 <p>The first non-tail-recursive approach was, for a vertex <code>v</code>, to find all complete paths starting at the children of <code>v</code> and then add <code>v</code> to the front of each of these paths.</p>
 <p>This is an entirely different approach. In a step we have, in addition to <code>v</code>, the &lsquo;path so far&rsquo;. We add <code>v</code> to it. If <code>v</code> is a leaf we hit our base-case and we add the path (now with <code>v</code> at the end) to our list of complete paths. If <code>v</code> is not a leaf we make a recursive call for each child, passing along the path that is now extended with <code>v</code>.</p>
 <p>This approach works because each step is given a <code>v</code> and the path that stops right before <code>v</code>: the path from the root up to and including the parent of <code>v</code>.</p>
@@ -1134,7 +1131,7 @@ final result is complete_paths
   <span class="k">return</span> <span class="n">complete_paths</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Now we&rsquo;re making a copy of path at line 5 anyway, you might feel safe to remove the copy on line 14. I&rsquo;ve had my fair share of mutation bugs so I&rsquo;m keeping it there. Who knows you will refactor this code a little at some point and the copying starts to matter again. I&rsquo;m happy I usually work in a language were everything is immutable by default so I don&rsquo;t have to worry about such things.</p>
+</div><p>Now we&rsquo;re making a copy of path at line 5 anyway, you might feel safe to remove the copy on line 14. I&rsquo;ve had my fair share of mutation bugs so I&rsquo;m keeping it there. Who knows you will refactor this code a little at some point and the copying starts to matter again. I&rsquo;m happy I usually work in a language where everything is immutable by default so I don&rsquo;t have to worry about such things.</p>
 <p>Below is a new simplified evaluation diagram of performing the call <code>all_complete_paths(2)</code>. The three unique copies, one for each step, are marked as <code>path</code>, <code>path'</code> and <code>path''</code>. Mutation bugs solved, <code>complete_paths</code> is what we want it to be!</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1640,7 +1637,7 @@ et cetera
 <p>Let&rsquo;s say that sometimes you need the paths for further computation, other times you only want to print them. Only if you collect the paths it&rsquo;s truly necessary to make a copy. For printing, you don&rsquo;t need to copy.</p>
 <p>How to support both cases with maximal code reuse?</p>
 <p>We can extract traversing the paths to a function <code>traverse_paths</code>, and have a parameter <code>f</code> which is a function that is called each time a complete path is found. The actual path, not a copy, is passed as an argument to <code>f</code>. In <code>f</code> you can decide whether to copy or not.</p>
-<p>Note that the integrity of the passed path is vital to the continued operation of <code>traverse_paths</code>. Exposing the mutable path to <code>f</code> is EXTREMELY dangerous. It sends shivers down my spine. I&rsquo;m dead serious. I recommend to not do this.</p>
+<p>Note that the integrity of the passed path is vital to the continued operation of <code>traverse_paths</code>. Exposing the mutable path to <code>f</code> is EXTREMELY dangerous. It sends shivers down my spine. I&rsquo;m dead serious. I recommend that you don&rsquo;t do this.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="hl"><span class="lnt"> 1
@@ -1719,7 +1716,7 @@ et cetera
 <span class="hl"><span class="n">traverse_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">print</span><span class="p">)</span>
 </span></code></pre></td></tr></table>
 </div>
-</div><p>To make it safe again, you could pass a copy of <code>path</code> to <code>f</code>, but that defeats to purpose of extracting to <code>traverse_paths</code>. Then you might as well write <code>print(all_complete_paths(1))</code>. I just wanted to take the opportunity to show a higher order function (in this case, a function that has another function as a parameter).</p>
+</div><p>To make it safe again, you could pass a copy of <code>path</code> to <code>f</code>, but that defeats the purpose of extracting to <code>traverse_paths</code>. Then you might as well write <code>print(all_complete_paths(1))</code>. I just wanted to take the opportunity to show a higher order function (in this case, a function that has another function as a parameter).</p>
 <h1 id="depth-vs-breadth">Depth vs. breadth</h1>
 <p>The mutate-and-cleanup version of <code>all_complete_paths</code> might be the fastest, but it isn&rsquo;t as flexible.</p>
 <p>Let&rsquo;s take our first tail-recursive algorithm and print the last vertex of the path we process in each step:</p>
@@ -1801,9 +1798,9 @@ et cetera
        └───⟶(7)
 </code></pre></td></tr></table>
 </div>
-</div><p>we see that the vertices are printed in so called depth-first order. The algorithm first tries to go deeper in the tree. Note that <code>1 2 4 5 3 6 7</code> would also be depth-first.</p>
-<p>The opposite of depth-first is breadth-first. In a breadth-first order all vertices at the same depth are processed before the vertices of the next depth. Example of breadth-first orders for this tree are <code>1 2 3 4 5 6 7</code> and <code>1 3 2 7 6 5 4</code>.</p>
-<p>Sometimes it can be useful to traverse vertices in breadth-fist order instead of depth-first order. For example if you have an infinitely large tree and you want the first 1000 vertices in it.</p>
+</div><p>we see that the vertices are printed in so-called depth-first order. The algorithm first tries to go deeper in the tree. Note that <code>1 2 4 5 3 6 7</code> would also be depth-first.</p>
+<p>The opposite of depth-first is breadth-first. In a breadth-first order all vertices at the same depth are processed before the vertices of the next depth. Examples of breadth-first orders for this tree are <code>1 2 3 4 5 6 7</code> and <code>1 3 2 7 6 5 4</code>.</p>
+<p>Sometimes it can be useful to traverse vertices in breadth-first order instead of depth-first order. For example if you have an infinitely large tree and you want the first 1000 vertices in it.</p>
 <p>Spend a moment to think of how to change the code such that the vertices are printed in breadth-first order instead of depth-first.</p>
 <p>The solution is elegantly simple. Taking the last plan from the pile causes the algorithm to be depth-first. Taking the first plan will cause it to be breadth-first:</p>
 <div class="highlight"><div class="chroma">
@@ -1822,7 +1819,7 @@ et cetera
 <p>Only for this algorithm (no in-place mutation, tail-recursive) is changing between depth-first and breadth-first so simple. In the other versions of <code>all_complete_paths</code> covered in this article the depth-first order is much more baked into the core.</p>
 <h1 id="out-of-memory">Out of memory</h1>
 <p>Tail recursion is useful because it prevents stack overflows but it isn&rsquo;t bulletproof. Tail-recursive implementations can still grow too large for memory.</p>
-<p>To make our branching pathfinding algorithms tail-recursive we introduced a pile of plans. The pile of plans grows proportionally to the dept of the tree. If the tree is extremely large, you will run out of memory. This happened to me while working on <a href="https://jeroenvanwijgerden.me/post/dice-of-war/">some statistics</a>.</p>
+<p>To make our branching pathfinding algorithms tail-recursive we introduced a pile of plans. The pile of plans grows proportionally to the depth of the tree. If the tree is extremely large, you will run out of memory. This happened to me while working on <a href="https://jeroenvanwijgerden.me/post/dice-of-war/">some statistics</a>.</p>
 <h1 id="a-note-on-testing">A note on testing</h1>
 <p>In the beginning of this article I described the behavior of <code>all_complete_paths(1)</code> with the following <a href="https://jeroenvanwijgerden.me/post/simple-testing/">test</a>:</p>
 <div class="highlight"><div class="chroma">
