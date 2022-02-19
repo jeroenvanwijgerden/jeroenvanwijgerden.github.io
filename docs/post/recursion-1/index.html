@@ -274,7 +274,7 @@
 <p>So, tail recursion is a way to enable very deep recursion. You only have to bother with it if you expect your calculations to stretch the limit of your hardware.</p>
 <h2 id="recipe">Recipe</h2>
 <p>In tail recursion, at each step we add to an accumulative result and pass it on to the next step. So we need to introduce a new parameter to the recursive function and think of a good initial value. In our base-case we finally return the accumulative.</p>
-<p>Let&rsquo;s take another look at or tail-recursive <code>fac</code>:</p>
+<p>Let&rsquo;s take another look at our tail-recursive <code>fac</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
