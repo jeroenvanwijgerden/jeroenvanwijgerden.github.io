@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A case study of finding paths in trees.">
 <meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
-<meta itemprop="wordCount" content="5876">
+<meta itemprop="wordCount" content="5900">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 16 </span>
         
-          <span class="more-meta"> 5876 words </span>
+          <span class="more-meta"> 5900 words </span>
           <span class="more-meta"> 28 mins read </span>
         
       </div>
@@ -156,6 +156,7 @@
         <li><a href="#first-approach">First approach</a>
           <ul>
             <li><a href="#tail-recursive">Tail-recursive</a></li>
+            <li><a href="#probability-tree">Probability tree</a></li>
           </ul>
         </li>
         <li><a href="#second-approach">Second approach</a>
@@ -911,7 +912,9 @@ final result is complete_paths
 ----------------------------------
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="second-approach">Second approach</h2>
+</div><h3 id="probability-tree">Probability tree</h3>
+<p>In <a href="https://jeroenvanwijgerden.me/post/glass-bridge/">another article</a> I use this tail-recursive approach (written as a while-loop) to calculate the probabilities of people surviving a deadly game.</p>
+<h2 id="second-approach">Second approach</h2>
 <p>The first non-tail-recursive approach was, for a vertex <code>v</code>, to find all complete paths starting at the children of <code>v</code> and then add <code>v</code> to the front of each of these paths.</p>
 <p>This is an entirely different approach. In a step we have, in addition to <code>v</code>, the &lsquo;path so far&rsquo;. We add <code>v</code> to it. If <code>v</code> is a leaf we hit our base-case and we add the path (now with <code>v</code> at the end) to our list of complete paths. If <code>v</code> is not a leaf we make a recursive call for each child, passing along the path that is now extended with <code>v</code>.</p>
 <p>This approach works because each step is given a <code>v</code> and the path that stops right before <code>v</code>: the path from the root up to and including the parent of <code>v</code>.</p>

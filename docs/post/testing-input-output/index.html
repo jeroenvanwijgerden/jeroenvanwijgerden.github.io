@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Using functions to write advanced tests.">
 <meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
-<meta itemprop="wordCount" content="4120">
+<meta itemprop="wordCount" content="4125">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Jan 31 </span>
         
-          <span class="more-meta"> 4120 words </span>
+          <span class="more-meta"> 4125 words </span>
           <span class="more-meta"> 20 mins read </span>
         
       </div>
@@ -200,14 +200,14 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span>Is your secret number 25?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="hl">l
-</span>Is your secret number 37?
+</span>Is your secret number 38?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="hl">q
 </span>Sorry, I did not understand your input.
-Is your secret number 37?
+Is your secret number 38?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="hl">c
-</span>Game over. Your secret number was: 37
+</span>Game over. Your secret number was: 38
 </code></pre></td></tr></table>
 </div>
 </div><p>Below is the code my client came to me with. Manual testing verifies that &lsquo;it works&rsquo;, meaning the program&rsquo;s behavior is correct.</p>
@@ -247,7 +247,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
     <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -310,7 +310,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
 <span class="hl">        <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
@@ -471,7 +471,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
         <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
@@ -519,12 +519,12 @@ Is your secret number 50?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 Is your secret number 25?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
-Is your secret number 37?
+Is your secret number 38?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 Sorry, I did not understand your input.
-Is your secret number 37?
+Is your secret number 38?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
-Game over. Your secret number was: 37
+Game over. Your secret number was: 38
 </code></pre></td></tr></table>
 </div>
 </div><p>Take a few moments to appreciate how cool this is. Automation achieved!</p>
@@ -577,7 +577,7 @@ Game over. Your secret number was: 37
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
 </span><span class="hl">    <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-</span><span class="hl">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="hl">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span><span class="hl">    
 </span><span class="hl">    <span class="k">return</span> <span class="n">get_input</span>
 </span>
@@ -610,7 +610,7 @@ Game over. Your secret number was: 37
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -635,7 +635,7 @@ Game over. Your secret number was: 37
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -696,7 +696,7 @@ Game over. Your secret number was: 37
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
         <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
@@ -715,7 +715,7 @@ Game over. Your secret number was: 37
 
 <span class="hl"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
 </span><span class="hl">    <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-</span><span class="hl">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span class="hl">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span><span class="hl">    
 </span><span class="hl">    <span class="k">return</span> <span class="n">get_input</span>
 </span>
@@ -870,7 +870,7 @@ Game over. Your secret number was: 37
 
 <span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -880,12 +880,12 @@ Game over. Your secret number was: 37
 </span><span class="hl">        <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
 </span><span class="hl">        <span class="s1">&#39;Is your secret number 25?&#39;</span><span class="p">,</span>
 </span><span class="hl">        <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
-</span><span class="hl">        <span class="s1">&#39;Is your secret number 37?&#39;</span><span class="p">,</span>
+</span><span class="hl">        <span class="s1">&#39;Is your secret number 38?&#39;</span><span class="p">,</span>
 </span><span class="hl">        <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
 </span><span class="hl">        <span class="s1">&#39;Sorry, I did not understand your input.&#39;</span><span class="p">,</span>
-</span><span class="hl">        <span class="s1">&#39;Is your secret number 37?&#39;</span><span class="p">,</span>
+</span><span class="hl">        <span class="s1">&#39;Is your secret number 38?&#39;</span><span class="p">,</span>
 </span><span class="hl">        <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
-</span><span class="hl">        <span class="s1">&#39;Game over. Your secret number was: 37&#39;</span>
+</span><span class="hl">        <span class="s1">&#39;Game over. Your secret number was: 38&#39;</span>
 </span><span class="p">]</span>
 
 <span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="p">[</span>
@@ -980,7 +980,7 @@ Game over. Your secret number was: 37
 
 <span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -1127,7 +1127,7 @@ Game over. Your secret number was: 37
 
 <span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">get_input</span>
 
@@ -1139,7 +1139,7 @@ Game over. Your secret number was: 37
 </span><span class="hl">
 </span><span class="hl">    <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">put_out</span><span class="p">)</span>
 </span><span class="hl">
-</span><span class="hl">    <span class="k">assert</span> <span class="n">messages_put_out</span> <span class="o">=</span> <span class="n">expected_messages_put_out</span>
+</span><span class="hl">    <span class="k">assert</span> <span class="n">messages_put_out</span> <span class="o">==</span> <span class="n">expected_messages_put_out</span>
 </span><span class="hl">
 </span><span class="hl"><span class="n">test</span><span class="p">([</span><span class="s2">&#34;h&#34;</span><span class="p">,</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;q&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">],</span> <span class="p">[</span>
 </span><span class="hl">    <span class="s1">&#39;Please think of a number between 0 and 100!&#39;</span><span class="p">,</span>
@@ -1147,12 +1147,12 @@ Game over. Your secret number was: 37
 </span><span class="hl">    <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
 </span><span class="hl">    <span class="s1">&#39;Is your secret number 25?&#39;</span><span class="p">,</span>
 </span><span class="hl">    <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
-</span><span class="hl">    <span class="s1">&#39;Is your secret number 37?&#39;</span><span class="p">,</span>
+</span><span class="hl">    <span class="s1">&#39;Is your secret number 38?&#39;</span><span class="p">,</span>
 </span><span class="hl">    <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
 </span><span class="hl">    <span class="s1">&#39;Sorry, I did not understand your input.&#39;</span><span class="p">,</span>
-</span><span class="hl">    <span class="s1">&#39;Is your secret number 37?&#39;</span><span class="p">,</span>
+</span><span class="hl">    <span class="s1">&#39;Is your secret number 38?&#39;</span><span class="p">,</span>
 </span><span class="hl">    <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
-</span><span class="hl">    <span class="s1">&#39;Game over. Your secret number was: 37&#39;</span>
+</span><span class="hl">    <span class="s1">&#39;Game over. Your secret number was: 38&#39;</span>
 </span><span class="hl"><span class="p">])</span>
 </span><span class="hl">
 </span><span class="hl"><span class="n">test</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">],</span> <span class="p">[</span>
@@ -1214,7 +1214,7 @@ Game over. Your secret number was: 37
 
 <span class="o">...</span>
     
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
