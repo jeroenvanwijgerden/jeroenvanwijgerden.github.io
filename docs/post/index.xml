@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Jeroen van Wijgerden</copyright>
-    <lastBuildDate>Wed, 16 Feb 2022 13:10:35 +0100</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Feb 2022 13:15:02 +0100</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Maintain vs. Derive</title>
+      <link>https://jeroenvanwijgerden.me/post/maintain-derive/</link>
+      <pubDate>Fri, 18 Feb 2022 13:15:02 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/maintain-derive/</guid>
+      <description>Different approach, simpler program.</description>
+    </item>
+    
     <item>
       <title>Tail recursion for branching problems</title>
       <link>https://jeroenvanwijgerden.me/post/recursion-1/</link>
