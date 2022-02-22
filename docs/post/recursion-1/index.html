@@ -49,7 +49,7 @@
 <meta itemprop="description" content="A case study of finding paths in trees.">
 <meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
-<meta itemprop="wordCount" content="5900">
+<meta itemprop="wordCount" content="5902">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 16 </span>
         
-          <span class="more-meta"> 5900 words </span>
+          <span class="more-meta"> 5902 words </span>
           <span class="more-meta"> 28 mins read </span>
         
       </div>
@@ -954,7 +954,7 @@ final result is complete_paths
 </div><p>There are a couple of problems with this implementation.</p>
 <p>Most obviously, nothing is ever returned. This is due to the very nature of this approach. A step only sets up the right circumstance for the next step: it doesn&rsquo;t do anything with the result of the next step.</p>
 <p>Trying to force an implementation that doesn&rsquo;t fit the approach is asking for complexity and headaches. So instead of returning values let&rsquo;s think of something else.</p>
-<p>The only reason we would want a <code>return</code> somewhere is to extract the result from our recursion. However, instead of extracting the value from our recursion we can let the recursion place its result in something that lives outside of the recursion. We can accomplish this by removing <code>complete_paths</code> as a parameter of the recursion function and instead have it live outside the scope of the recursive function.</p>
+<p>The only reason we would want a <code>return</code> somewhere is to extract the result from our recursion. However, instead of extracting the value from our recursion via <code>return</code>, we can let the recursion place its result in something that lives outside of the recursion. We can accomplish this by removing <code>complete_paths</code> as a parameter of the recursion function and instead have it live outside the scope of the recursive function.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
