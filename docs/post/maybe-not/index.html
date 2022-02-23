@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Thoughts on the shape and optionality of data.">
 <meta itemprop="datePublished" content="2022-02-09T11:21:27+01:00" />
 <meta itemprop="dateModified" content="2022-02-09T11:21:27+01:00" />
-<meta itemprop="wordCount" content="1788">
+<meta itemprop="wordCount" content="1799">
 
 
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 09 </span>
         
-          <span class="more-meta"> 1788 words </span>
+          <span class="more-meta"> 1799 words </span>
           <span class="more-meta"> 9 mins read </span>
         
       </div>
@@ -165,7 +165,7 @@
 <p>He also phrases this sentiment in a way that can be more easily used as general wisdom:
 <strong><em>&ldquo;Like all design things, this is just what was wrong: two things were combined that shouldn&rsquo;t have been combined.&quot;</em></strong></p>
 <p>Despite its title, the talk isn&rsquo;t about the Maybe type being bad, although some good-natured shots are fired. Hickey uses a particular way in which Maybe is used to illustrate a point. Rather, the main topic of the talk is the friction caused by combining shape and provision and possible solutions.</p>
-<p>We end with two more minor topics that Hickey mentions: &lsquo;openness&rsquo; of specification and describing functions instead of data.</p>
+<p>We end with two more minor topics that Hickey mentions: &lsquo;openness&rsquo; of specification and that types give useful information but all information you want.</p>
 <h1 id="context">Context</h1>
 <p>An important piece of context is that Hickey talks about software of a particular nature:</p>
 <p><strong><em>&ldquo;Part of the idea of [my solution] is that you can make systems that you can change - that you can enhance - over time. That is the game. Saying today that you can do X or Y, that is not enough. Every program changes. Every program grows. You need the ability to talk about type-like things in ways that are compatible with program evolution.&quot;</em></strong></p>
@@ -191,7 +191,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email, address (optional)
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email (optional), address (optional)
 
 create_user requires User
 ship        requires User
@@ -214,11 +214,11 @@ create_user requires User_create_form
 ship        requires User_ship_form
 </code></pre></td></tr></table>
 </div>
-</div><p>In the first case, we have code reuse and can see that both create_user and ship want to talk about user data. However, there is friction. ship requires an address, but for create_user address is optional. To accomodate create_user, the User description is no longer a nice description of the data that ship needs.</p>
-<p>In the second case both create_user and ship have fitting descriptions of the data they need. However, we have some duplication (users have names) which in larger descriptions becomes error prone. Also, the communication that both functionalities share a common interest, users, is weaker.</p>
+</div><p>In the first case, we have code reuse and can see that both <code>create_user</code> and <code>ship</code> want to talk about a <code>User</code>. However, there is friction. <code>ship</code> requires an address, but for <code>create_user</code> address is optional. To accomodate <code>create_user</code>, the <code>User</code> description is no longer a nice description of the data that <code>ship</code> needs.</p>
+<p>In the second case both <code>create_user</code> and <code>ship</code> have fitting descriptions of the data they need. However, we have some duplication (users have names) which in larger descriptions becomes error prone. Also, the communication that both functionalities share a common interest, <code>User</code>s, is much weaker.</p>
 <p><strong><em>&ldquo;Not being able to reuse, it&rsquo;s a recipe for error. If you have to define car and I have to define car, well, maybe you&rsquo;ll call it &lsquo;make&rsquo; and &lsquo;model&rsquo; and I call it &lsquo;brand&rsquo; and &lsquo;model&rsquo;. An now we&rsquo;ve got not connection where we absolutely should have had a connection.&quot;</em></strong></p>
 <p>The problem is that the shape of data is general, but which parts of the data are required changes per use-case. <strong><em>&ldquo;Optionality is context-dependant.&quot;</em></strong> In both examples shape and optionality are defined together, causing friction.</p>
-<p>If we could somehow generally describe a User and per case put a &lsquo;requirement mask&rsquo; over it, it could look something like this:</p>
+<p>If we could somehow generally describe a <code>User</code> and per case put a &lsquo;requirement mask&rsquo; over it, it could look something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -233,18 +233,18 @@ create_user of User require name, email, address optional
 ship        of User require name,        address
 </code></pre></td></tr></table>
 </div>
-</div><p>Now it is clear that both functionalities talk about the same type of data, users, while also specifying exactly what they need.</p>
-<p>The duplication is also gone. Sure, name is repeated a couple of times, but we can no longer make mismatching mistakes. Let&rsquo;s say we want to change name to full_name. All instances of name have to be replaced with full_name at the same time, or we would get an error.</p>
+</div><p>Now it is clear that both functionalities talk about the same type of data, <code>User</code>s, while also specifying exactly what they need.</p>
+<p>The duplication is also gone. Sure, name is repeated a couple of times, but we can no longer make mismatching mistakes. Let&rsquo;s say we want to change <code>name</code> to <code>full_name</code>. All instances of <code>name</code> have to be replaced with <code>full_name</code> at the same time, or we would get an error.</p>
 <p>To actually implement this seperation of shape and provision you might have to get a little creative, depending on the language you&rsquo;re using.</p>
 <h1 id="besides-programming">Besides programming</h1>
 <p>Here&rsquo;s an example that&rsquo;s not directly related to programming.</p>
 <p>I once worked for a big player in the medical domain. Besides engineering, I was part of a team that specialized in modeling medical data using the FHIR industry standard. The second major purpose of this team was to represent our company in the ongoing development of FHIR, a collaboration of many organizations from all over the world.</p>
-<p>FHIR offers an extensive collection of &lsquo;resources&rsquo;, the building blocks to model with. <a href="http://hl7.org/fhir/R4/medicationrequest.html">MedicationRequest</a> is such a resource. Among other things, what is specified are a resource&rsquo;s fields, their types and their cardinality.</p>
-<p>One of MedicationRequest&rsquo;s fields is <code>doNotPerform</code> of type boolean. It&rsquo;s cardinality is <code>0..1</code>, zero or one, meaning optional. Cardinalities like <code>0..*</code> also specify optionality. Shape and optionality combined.</p>
+<p>FHIR offers an extensive collection of &lsquo;resources&rsquo;, the building blocks to model with. <a href="http://hl7.org/fhir/R4/medicationrequest.html">MedicationRequest</a> is such a resource. Among other things, what is specified are a resource&rsquo;s fields, including their types and cardinalities.</p>
+<p>One of MedicationRequest&rsquo;s fields is <code>doNotPerform</code> of type boolean. Its cardinality is <code>0..1</code>, zero or one, meaning optional. Any cardinality like like <code>0..*</code> specifies optionality. Shape and optionality combined.</p>
 <p>Different organizations contribute to refining these resources by sharing and discussing use-cases for them. Fields, types and cardinalities are adjusted to meet the needs.</p>
 <p>Medicine is practised differently in different parts of the world. The only way to have a resource accomodate all (or at least many) use-cases is to weaken restrictions, for examply by making things optional.</p>
 <p>After a while, for certain use-cases resources were found to not be specific enough. For the particular case of requesting medication in the United States the spec for the MedicationRequest resource had to be more constrained to be of proper use.</p>
-<p>To overcome this friction FHIR introduced the notion of a <a href="hl7.org/fhir/profiling.html">profile</a>: <code>a set of constraints on a resource</code>. <a href="http://hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html">US Core</a> is a profile for MedicationRequest.</p>
+<p>To overcome this friction FHIR introduced the notion of a <a href="hl7.org/fhir/profiling.html">profile</a>: <code>a set of constraints on a resource</code>. <a href="http://hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html">US Core</a> is an example of a profile for MedicationRequest.</p>
 <p>Resources are similar to the <code>User: name, email, address (optional)</code> of before. The specification, including both shape and optionality was made to accomodate so many different use-cases that for particular use-cases the spec is no longer specific enough.</p>
 <p>A profile is similar to the &lsquo;requirement mask&rsquo; of before. Making shape and optionality more orthogonal decreased friction.</p>
 <h1 id="openness">Openness</h1>
