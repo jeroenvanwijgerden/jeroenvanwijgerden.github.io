@@ -920,7 +920,7 @@ Guess a letter:
 <p>Luckily there are techniques to do derivation that ensure a derivative is calculated only once. Two examples are <a href="https://clojuredocs.org/clojure.core/memoize">memoization</a> and <a href="https://mobx.js.org/getting-started">capturing dependencies</a>.</p>
 <p>That being said, as long as they&rsquo;re still fast enough, plain functions are preferable because they are familiar and easy to use.</p>
 <h2 id="bad-fit">Bad fit</h2>
-<p>You can&rsquo;t overzealously use the derivation approach. For some tasks derivation just doesn&rsquo;t fit well.</p>
+<p>You shouldn&rsquo;t overzealously use the derivation approach. For some tasks derivation just doesn&rsquo;t fit well.</p>
 <p>Let&rsquo;s take a look at the program featured in a <a href="https://jeroenvanwijgerden.me/post/testing-input-output/">different article</a>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1045,7 +1045,7 @@ Guess a letter:
     <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
         <span class="k">break</span>
-<span class="hl">    <span class="k">elif</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span> <span class="ow">or</span> <span class="n">answers</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span>
+<span class="hl">    <span class="k">elif</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span> <span class="ow">or</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span>
 </span><span class="hl">        <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </span>    <span class="k">else</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
@@ -1058,7 +1058,7 @@ Guess a letter:
 <p>For almost everyone, learning how to program is very difficult and takes a very long time. Much longer than 100 days. Reducing complexity is a way to free up your mind. This makes learning less strenuous, more effective. In my experience, introducing students early on to techniques that reduce complexity is an investment that eventually pays off greatly.</p>
 <p>The prerequisite for the derivation approach is a familiarity of calling and writing functions. A familiarity of calling functions should be taught very early, as students call functions (like <code>print</code>, <code>input</code> and <code>round</code>) right from the beginning. Learning how to write functions should also be taught early, among many reasons because it will help them better understand calling functions.</p>
 <p>Also, as we&rsquo;ve seen, the inherent complexity of the tasks should be just high enough. The hangman game is a good fit. The guess the number game would be too early.</p>
-<p>So in believe the derivation approach should be taught as soon as a student starts working on tasks with the level of complexity of the hangman game. By then they should have had ample practise with creating functions.</p>
+<p>So I believe the derivation approach should be taught as soon as a student starts working on tasks with the level of complexity of the hangman game. By then they should have had ample practice with creating functions.</p>
 <p>A good stepping stone would be to introduce the extraction method first. The extraction method is useful earlier, when the tasks are still too simple for the derivation approach. Both extraction and derivation create somewhat isolated tasks (functions to write), which helps students incrementally solve a large problem.</p>
 <h1 id="summary">Summary</h1>
 <p>Being aware of which information in your program is canonical and which is derived enables you to choose between a maintenance approach and a derivation approach.</p>
