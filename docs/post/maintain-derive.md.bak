@@ -1,0 +1,519 @@
+---
+title: "Maintain vs. Derive"
+date: 2022-02-18T13:15:02+01:00
+summary: "Different approach, simpler program."
+draft: true
+---
+
+© 2022 - Jeroen van Wijgerden. A timestamped permanent record of this article can be found in the free, public and independent [Internet Archive](https://archive.org/).
+
+Benefit of teacher with engineering experience: can see how good practises in the large can be applied in the small.
+
+Maintenance. Must be done whenever required, or risk desync. Can choose an entirely different approach: derivation.
+
+If you want to try out the techniques in this article on your own code, I suggest you first pin down the behavior of your program with a test. That way you don't have to spend time manually checking if everything still works after you make a change. I describe how to easily do that in [another article]({{< ref "/content/post/simple-testing.md" >}}).
+
+# The assignment
+The inspiration for this article is a recent session with one of my clients. She had been working on the hangman exercise of Angela Yu's 100 Days of Code.
+
+The exercise is divided into parts. Each part lets her code her way towards the next fixed checkpoint in a 'fill in the blanks' fashion. The final checkpoint is a working hangman game. Below is her code. For the sake of brevity I stripped some parts.
+
+```python
+chosen_word = "monkey"
+word_length = len(chosen_word)
+
+end_of_game = False
+lives       = 6
+
+display      = []
+past_guesses = []
+
+for _ in range(word_length):
+    display += "_"
+
+while not end_of_game:
+  print(f"{' '.join(display)}")
+  print(f"lives: {lives}")
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.")
+
+  else:
+    for position in range(word_length):
+      letter = chosen_word[position]
+      if letter == guess:
+          display[position] = letter 
+
+    past_guesses += guess
+
+    if guess not in chosen_word:
+      print(f"Sorry, '{guess}' is not in the word.")
+      lives -= 1
+    
+    if lives == 0:
+      end_of_game = True
+      print(f"You lose. The word was {chosen_word}.")
+
+  if "_" not in display:
+      end_of_game = True
+      print("You win! Well played.")
+```
+Playing the game looks like this:
+```
+_ _ _ _ _ _
+lives: 6
+Guess a letter: o
+
+_ o _ _ _ _
+lives: 6
+Guess a letter: x
+Sorry, 'x' is not in the word.
+
+_ o _ _ _ _
+lives: 5
+Guess a letter: o
+You already guessed 'o'.
+
+_ o _ _ _ _
+lives: 5
+Guess a letter: 
+```
+
+# From maintaince to derivation
+
+The purpose of a program is to create the right effects, such as printing characters on screen. To get to the right effects, a program creates, reads and maintains information.
+
+What do I mean by maintain? In our hangman program the initial value for `lives` is 6. If during the game we make a wrong guess, the information that we have 6 lives is no longer valid. We need to do some maintenance. This happens at line 32:
+```python {linenostart=32}
+lives -= 1
+```
+
+I want to discuss several pieces of information that are captured in our hangman program. Here are their semantics and the relevant lines of code:
+
+|semantics                     |captured in|initialized|read|maintained|
+|-----------------------------------|-|-|-|-|
+|the to-be-guessed word|`chosen_word`|1|24,30,36|never|
+|the end of the game has been reached|`end_of_game`|4|13|35, 39|
+|the amount of lives left|`lives`|6|15,34|32|
+|the characters to display|`display`|7,10,11|14,38|23,24,25,26|
+|the guessed letters|`past_guesses`|8|19|28|
+
+If you think about it, some pieces of information can be derived from others. For each I describe in plain English how it can be derived and also a function that a beginner might write based on this description.
+
+`lives` can be derived from `chosen_word` and `past_guesses`. The amount of lives left is six minus the amount of unique letters in `past_guesses` that are not in `chosen_word`.
+
+```python
+def lives():
+  unique_guesses = set(past_guesses)
+  num_wrong_guesses = 0
+
+  for guess in unique_guesses:
+    if guess not in chosen_word:
+      num_wrong_guesses += 1
+
+  return 6 - num_wrong_guesses
+```
+
+`end_of_game` can be derived from `lives`, `chosen_word` and `past_guesses`. The end of the game is reached if `lives` is zero, or all letters in `chosen_word` are also in `past_guesses`.
+
+```python
+def end_of_game():
+  all_letters_guessed = True
+
+  for letter in chosen_word:
+    if letter not in past_guesses:
+      all_letters_guessed = False
+
+  return lives() == 0 or all_letters_guessed
+```
+
+`display` can be derived from `chosen_word` and `past_guesses`. If a letter in `chosen_word` is also in `past_guesses` then display it, otherwise display the character `_`.
+
+```python
+def display():
+  characters_to_display = []
+
+  for letter in chosen_word:
+    if letter in past_guesses:
+      characters_to_display.append(letter)
+    else:
+      characters_to_display.append("_")
+
+  return characters_to_display
+```
+Let's take a look at the main game logic of our program. I highlighted the code that maintains `lives`, `end_of_game` and `display`.
+
+```python {linenostart=13,hl_lines=["11-14",20,23,27]}
+while not end_of_game:
+  print(f"{' '.join(display)}")
+  print(f"lives: {lives}")
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.") 
+
+  else:
+    for position in range(word_length):
+      letter = chosen_word[position]
+      if letter == guess:
+          display[position] = letter 
+
+    past_guesses += guess
+
+    if guess not in chosen_word:
+      print(f"Sorry, '{guess}' is not in the word.")
+      lives -= 1
+    
+    if lives == 0:
+      end_of_game = True
+      print(f"You lose. The word was {chosen_word}.")
+
+  if "_" not in display:
+      end_of_game = True
+      print("You win! Well played.")
+```
+Because we now have a deriving function for each of these pieces of information, we can simply replace their reads with function calls (`end_of_game` becomes `end_of_game()`, et cetera) and completely remove their maintenance code:
+
+```python {linenostart=13,hl_lines=[]}
+while not end_of_game():
+  print(f"{' '.join(display())}")
+  print(f"lives: {lives()}")
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.") 
+
+  else:
+    past_guesses += guess
+
+    if guess not in chosen_word:
+      print(f"Sorry, '{guess}' is not in the word.")
+    
+    if lives() == 0:
+      print(f"You lose. The word was {chosen_word}.")
+
+  if "_" not in display():
+      print("You win! Well played.")
+```
+Because of these changes the code has improved for multiple reasons. There are also some downsides. Soon we'll discuss in more detail the pros and cons of changing the approach from maintenance to derivation.
+
+Now that we use derivation functions for `lives`, `end_of_game` and `display` instead of values that we have to maintain, we can also remove their initialization code.
+
+You've probably spotted other things that can be improved. However, to keep the point of this article clear let's not make any more changes.
+
+Below is the result. If you run it you'll see that the game is exactly the same as before.
+```python
+chosen_word = "monkey"
+past_guesses = []
+
+
+def lives():
+  unique_guesses = set(past_guesses)
+  num_wrong_guesses = 0
+
+  for guess in unique_guesses:
+    if guess not in chosen_word:
+      num_wrong_guesses += 1
+
+  return 6 - num_wrong_guesses
+
+
+def end_of_game():
+  all_letters_guessed = True
+
+  for letter in chosen_word:
+    if letter not in past_guesses:
+      all_letters_guessed = False
+
+  return lives() == 0 or all_letters_guessed
+
+
+def display():
+  characters_to_display = []
+
+  for letter in chosen_word:
+    if letter in past_guesses:
+      characters_to_display.append(letter)
+    else:
+      characters_to_display.append("_")
+
+  return characters_to_display
+
+
+while not end_of_game():
+  print(f"{' '.join(display())}")
+  print(f"lives: {lives()}")
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.") 
+
+  else:
+    past_guesses += guess
+
+    if guess not in chosen_word:
+      print(f"Sorry, '{guess}' is not in the word.")
+    
+    if lives() == 0:
+      print(f"You lose. The word was {chosen_word}.")
+
+  if "_" not in display():
+      print("You win! Well played.")
+```
+This technique of using derivation functions instead of maintaining variables can't be used for `chosen_word` and `past_guesses` because they cannot be derived. If information cannot be derived it is called canonical information.
+
+Derived information can be derived not only from canonical information but also from other derived information. For example, `end_of_game` is derived from `lives`, which is also derived.
+
+The important difference between the two kinds of information is that canonical information must be maintained but for derived information you can choose between maintaining and deriving.
+
+Now that you are aware and want to make an informed choice, let's go over advantages and disadvantages.
+
+# Pros and cons
+
+I will compare the maintenance approach to the derivation approach from the perspectives of complexity and performance.
+
+Afterwards I show an example of a task that might seem like a good fit for the derivation approach, but actually is a better fit for the maintenance approach.
+
+I want to note that this hangman program is just but barely large enough to be a good example. Using a larger program as an example could perhaps make the points more clear, but would be too large to discuss in an article. I had to strike a balance. Keep that in mind when you read the coming argumentation.
+
+## Complexity
+
+With complexity I mean the degree to which things are entwined, woven together. Universally in programming complexity is regarded as bad. Simplicity is good. Rich Hickey [speaks about this](https://www.youtube.com/watch?v=LKtk3HCgTa8&t=59s)  in more detail.
+
+I will discuss how having gone from a maintenance approach to a derivation approach has made our hangman program less complex and what has improved from a practical point of view. 
+
+### Code that does one thing
+
+We made the main game loop simpler by taking out from it, untangling it from, code that maintains `lives`, `chosen_word` and `past_guesses`. The fact that this maintenance code is not inherently relevant to the main game loop is proven by the fact that the main game loop without any of this maintenance code works just fine.
+
+Now that code that is not inherently relevant to the main game loop has been removed from it, when we look at the main game loop there is less code to read but everything that's relevant is still there. This makes the code easier to understand.
+
+There is another technique to improve the readability of code by reducing it. However, it is less impactful than derivation and can be used on top of or without derivation. I discuss it [a little further on]({{< ref "#extraction" >}}).
+
+### Peak complexity
+
+We made the main game loop less complex, but we introduced some new complexity. For example, we went from
+```python
+lives = 6
+lives -= 1
+```
+to
+```python
+def lives():
+  unique_guesses = set(past_guesses)
+  num_wrong_guesses = 0
+
+  for guess in unique_guesses:
+    if guess not in chosen_word:
+      num_wrong_guesses += 1
+
+  return 6 - num_wrong_guesses
+```
+Although individual aspects have become more complex, the most complex thing in the program has become less complex. The peak complexity has been lowered.
+
+To assign some arbitrary numbers, let's say in the original code the complexity of `lives` was 1 and the complexity of the main game loop was 4. After introducing derivation, the complexity of `lives` became 2 but the complexity of the the main game loop became 3. By introducing derivation, we reduced the peak complexity from 4 to 3.
+
+Your ability to create or understand an entire program is determined by the peak complexity of the program. To be able to jump over all hurdles, you have to be able to jump over the tallest hurdle.
+
+### All in one place
+
+In a maintenance approach, information is initialized in one place and maintained in another. For example, `lives = 6` happens at line 5 and `lines -= 1` happens at line 32.
+
+Initialization might even happen on multiple places, like with `display`: lines 7, 10 and 11.
+
+Maintenance of the same information might be necessary in multiple places. In our hangman program the maintenance for `end_of_game = True` happens in two different places. Larger programs might have even more places that are further removed from each other.
+
+For both reading and making changes, having something smeared over multiple places has downsides. To read, you have to hunt down all the places and piece them together in your mind. To make a change, you have to hunt down all places and hope you didn't forget any. Many bugs happen this way!
+
+In the derivation approach, information is obtained from a single place: the derivation function. If you want to know how a piece of information is obtained or change how it's obtained, you have to look only in that one place.
+
+### Extraction
+
+Being able to remove maintenance code makes the remaning code more readable. Another way to make code more readable is to hide details behind a function call. This is called 'extracting to a function'. Robert Martin [provides more detail](https://youtu.be/7EmboKQH8lM?t=2724).
+
+Extraction is orthogonal to choosing between maintenance or derivation. You can do a maintenance approach with or without extraction and you can do a derivation approach with or without extraction.
+
+Maintenance approach, before extraction:
+```python {linenostart=13, hl_lines=[2,3,"11-15"]}
+while not end_of_game:
+  print(f"{' '.join(display)}")
+  print(f"lives: {lives}")
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.") 
+
+  else:
+    for position in range(word_length):
+      letter = chosen_word[position]
+      if letter == guess:
+          display[position] = letter
+```
+
+After extraction:
+```python {linenostart=13, hl_lines=[1,2,3,"6-10",14,22]}
+def render():
+  print(f"{' '.join(display)}")
+  print(f"lives: {lives}")
+
+
+def maintain_display():
+  for position in range(word_length):
+      letter = chosen_word[position]
+      if letter == guess:
+          display[position] = letter
+
+
+while not end_of_game:
+  render()
+
+  guess = input("Guess a letter: ").lower()
+  
+  if guess in past_guesses:
+    print(f"You already guessed '{guess}'.") 
+
+  else:
+    maintain_display()
+```
+Before I show an example of extraction in combination with derivation I want to point something out.
+
+After extraction the code has indeed become more consise. A for loop is now hidden behind `maintain_display()`. If you want to look up the details of how `display` is maintained you can explore the insides of the `maintain_display` function.
+
+However, `maintain_display()` is still in the main game loop. In a derivation approach that call would also be gone. Derivation has a stronger impact.
+
+The shrink your code even more, combine both derivation and extraction:
+```python {linenostart=16}
+def end_of_game():
+  all_letters_guessed = True
+
+  for letter in chosen_word:
+    if letter not in past_guesses:
+      all_letters_guessed = False
+
+  return lives() == 0 or all_letters_guessed
+```
+And after extraction:
+```python {linenostart=16,hl_lines=["1-8",12]}
+def word_is_guessed():
+  all_letters_guessed = True
+
+  for letter in chosen_word:
+    if letter not in past_guesses:
+      all_letters_guessed = False
+
+  return all_letters_guessed
+
+
+def end_of_game():
+  return lives() == 0 or word_is_guessed()
+```
+
+## Performance
+
+Deriving is slower than maintaining by reassigning variables. If we look at `lives`, in the maintenance approach we have
+```python
+lives -= 1
+```
+whereas in the derivation approach we have
+```python
+def lives():
+  unique_guesses = set(past_guesses)
+  num_wrong_guesses = 0
+
+  for guess in unique_guesses:
+    if guess not in chosen_word:
+      num_wrong_guesses += 1
+
+  return 6 - num_wrong_guesses
+```
+Although this beginner-level implementation of `lives()` is particularly slow, even an optimal implementation will always be slower than `lives -= 1`.
+
+Despite being slower, in most cases it is still fast enough. Worry about performance only when it actually becomes a problem. Non-specialists and beginners are unlikely to work on problems that necessitate performance optimizations.
+
+Even specialists who are particularly interested in performance often find a decrease in complexity to be worth some loss of performance. Pragmatic game programmer Jonathan Blow [had the following to say](https://youtu.be/8dinUbg2h70?t=369):
+
+**_"We make massively complicated systems to get that performance boost and it breaks all the time. My focus was on robust. What is the most robust thing? It's not any of these things concocted with the mindset of being tricky. Tricky means complicated, usually."_**
+
+In the example we've seen the derivation approach was implemented with plain functions. Using functions this way makes deriving especially slow because the derivative is calculated each time the function is called.
+
+Luckily there are techniques to do derivation that ensure a derivative is calculated only once. Two examples are [memoization](https://clojuredocs.org/clojure.core/memoize) and [capturing dependencies](https://mobx.js.org/getting-started).
+
+That being said, plain functions are almost always preferable because they are familiar, easy to use and fast enough.
+
+## Bad fit
+
+then example of when not to use: testing IO program.
+[another article]({{< ref "/content/post/testing-input-output.md" >}})
+
+```python
+low = 0
+high = 100
+keep_going = True
+
+print("Please think of a number between 0 and 100!")
+
+while keep_going:
+    guess = round((low + high) / 2)
+    
+    print("Is your secret number " + str(guess) + "?")
+    print("Enter 'h', 'l' or 'c'.")
+
+    answer = input()
+    
+    if (answer == "c"):
+        print("Game over. Your secret number was: " + str(guess))
+        break
+    elif (answer == "h"):
+        high = guess
+    elif (answer == "l"):
+        low = guess
+    else:
+        print("Sorry, I did not understand your input.")
+```
+
+# Teaching perspective
+
+yu's approach is incrementing in complexity. Each stage makes expands on the same thnig, makes it more complex.
+
+a good question is: what will be more beneficial to a beginner?
+when to introduce this style?
+
+initial hunch is: asap. Because makes implementation reflect approach better. Less headache, more oversight, more focus. Finicking about imperitavely can still happen in an isolated case, such as here building the display string.
+
+Why not taught this way?
+
+different 'seperate into parts'.
+shopping list style
+start with thinking about entire approach.
+
+create stuff for missing bits later.
+
+could be that student can't think of entire approach.
+not ready for problem yet.
+practise more on slightly less difficult problems.
+
+very common phenomenon is that students report **_"When I do an exercise I sort of get it and when I see the solution I understand it. But when I have to start from scratch I can't, I don't even know where to begin."_**
+
+in my opinion not ready et. Do more exercises. There aren't any... that's clearly a point of improvement for the curriculum.
+
+calling functions you do very early on, use functions in standard library of langauge right from the beginning.
+
+highly valuable to learn creating your own functions very early.
+
+Function are not scary. Functions are your friend.
+
+# Summary
+
+Being aware of which information in your program is canonical and which is derived enables you to choose between a maintenance approach and a derivation approach.
+
+A deriviation approach results in less complexity but also lesser performance. In most cases this loss of performance is worth the decrease in complexity.
+
+Even if a program deals with derived information, sometimes a maintenance approach is a better fit to the task. This is especially likely when there a but few pieces of information.
+
+The simplest way to implement a derivation approach is with functions. For a piece of derived information, create a function that calculates and returns it. Call this function whenever you need the derived information.

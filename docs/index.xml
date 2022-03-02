@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jvw blog</title>
+    <link>https://jeroenvanwijgerden.me/</link>
+    <description>Recent content on jvw blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Jeroen van Wijgerden</copyright>
+    <lastBuildDate>Fri, 18 Feb 2022 13:15:02 +0100</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Maintain vs. Derive</title>
+      <link>https://jeroenvanwijgerden.me/post/maintain-derive/</link>
+      <pubDate>Fri, 18 Feb 2022 13:15:02 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/maintain-derive/</guid>
+      <description>Different approach, simpler program.</description>
+    </item>
+    
+    <item>
+      <title>Tail recursion for branching problems</title>
+      <link>https://jeroenvanwijgerden.me/post/recursion-1/</link>
+      <pubDate>Wed, 16 Feb 2022 13:10:35 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/recursion-1/</guid>
+      <description>A case study of finding paths in trees.</description>
+    </item>
+    
+    <item>
+      <title>Maybe Not: notes</title>
+      <link>https://jeroenvanwijgerden.me/post/maybe-not/</link>
+      <pubDate>Wed, 09 Feb 2022 11:21:27 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/maybe-not/</guid>
+      <description>Thoughts on the shape and optionality of data.</description>
+    </item>
+    
+    <item>
+      <title>Testing Input &amp; Output</title>
+      <link>https://jeroenvanwijgerden.me/post/testing-input-output/</link>
+      <pubDate>Mon, 31 Jan 2022 12:51:04 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/testing-input-output/</guid>
+      <description>Using functions to write advanced tests.</description>
+    </item>
+    
+    <item>
+      <title>Testing: simplest way to start</title>
+      <link>https://jeroenvanwijgerden.me/post/simple-testing/</link>
+      <pubDate>Wed, 19 Jan 2022 12:25:58 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/simple-testing/</guid>
+      <description>An introduction with fundamental vocabulary and practical tips.</description>
+    </item>
+    
+    <item>
+      <title>How to name: don&#39;t</title>
+      <link>https://jeroenvanwijgerden.me/post/avoiding-naming/</link>
+      <pubDate>Mon, 17 Jan 2022 14:59:47 +0100</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/avoiding-naming/</guid>
+      <description>Naming is difficult so avoid it where possible.</description>
+    </item>
+    
+    <item>
+      <title>The Glass Bridge of Demise</title>
+      <link>https://jeroenvanwijgerden.me/post/glass-bridge/</link>
+      <pubDate>Wed, 29 Sep 2021 16:53:00 +0200</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/glass-bridge/</guid>
+      <description>A primer on calculating probabilities with graphs.</description>
+    </item>
+    
+    <item>
+      <title>Let slip the dice of war</title>
+      <link>https://jeroenvanwijgerden.me/post/dice-of-war/</link>
+      <pubDate>Fri, 17 Sep 2021 13:37:31 +0200</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/dice-of-war/</guid>
+      <description>A computer-aided analysis of the probabilities of battle outcomes in the game &lt;em&gt;RISK&lt;/em&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
