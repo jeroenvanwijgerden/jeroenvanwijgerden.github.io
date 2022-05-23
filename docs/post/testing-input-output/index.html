@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0 with theme even" />
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
 
 
 <link rel="canonical" href="https://jeroenvanwijgerden.me/post/testing-input-output/" />
@@ -35,26 +35,22 @@
 
 
 
-<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link href="/sass/main.min.73a16dbde6a62a981cd59aa9f7134ab7f4754eaeada17c518019751aac38eb72.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Testing Input &amp; Output" />
 <meta property="og:description" content="Using functions to write advanced tests." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jeroenvanwijgerden.me/post/testing-input-output/" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/testing-input-output/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-31T12:51:04+01:00" />
 <meta property="article:modified_time" content="2022-01-31T12:51:04+01:00" />
+
 <meta itemprop="name" content="Testing Input &amp; Output">
-<meta itemprop="description" content="Using functions to write advanced tests.">
-<meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
+<meta itemprop="description" content="Using functions to write advanced tests."><meta itemprop="datePublished" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="dateModified" content="2022-01-31T12:51:04+01:00" />
 <meta itemprop="wordCount" content="4125">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Testing Input &amp; Output"/>
 <meta name="twitter:description" content="Using functions to write advanced tests."/>
 
@@ -176,7 +172,7 @@
 <p>After a user has put in <code>h</code>, <code>l</code>, <code>q</code> (an invalid input) and <code>c</code>, this is what the console should look like:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="hl"><span class="lnt"> 4
@@ -193,7 +189,7 @@
 </span></span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">Please think of a number between 0 and 100!
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Please think of a number between 0 and 100!
 Is your secret number 50?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <span class="hl">h
@@ -213,7 +209,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </div><p>Below is the code my client came to me with. Manual testing verifies that &lsquo;it works&rsquo;, meaning the program&rsquo;s behavior is correct.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -238,29 +234,29 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
     <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
         <span class="k">break</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
         <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
         <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>My client&rsquo;s goal was to change (hopefully improve!) the program&rsquo;s structure while keeping the program&rsquo;s behavior the same.</p>
@@ -272,7 +268,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <p>Because we want to call the game code multiple times (for playing and for testing) we wrap it in a function. Next we want to decide per call to this function if we use <code>input</code> (for playing) or a different function (for testing). To accomplish this we replace <code>input</code> with the newly introduced parameter <code>get_input</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
 </span></span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -300,30 +296,30 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="hl"><span class="lnt">26
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
 </span>    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
 <span class="hl">        <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
 </span>        
         <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
             <span class="k">break</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
             <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
             <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 
 <span class="hl"><span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </span></code></pre></td></tr></table>
@@ -332,13 +328,13 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <p>Indeed, nothing has changed: we haven&rsquo;t automated anything yet. <code>play_game(input)</code> is a manual run of the game. We want to call <code>play_game</code> with a different function as argument such that the input is automated. We want to do something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">26
+<pre tabindex="0" class="chroma"><code><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_input_automated</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_input_automated</span><span class="p">():</span>
     <span class="c1"># something</span>
 
 <span class="n">play_game</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">)</span>
@@ -349,7 +345,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 <p>To achieve this behavior we can use a list and the function <code>pop</code>. <code>inputs.pop(0)</code> removes the first element from the list <code>inputs</code> and returns that removed element.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -362,23 +358,23 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;l&#34;, &#34;h&#34;, &#34;q&#34;, &#34;c&#34;]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;l&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;h&#34;, &#34;q&#34;, &#34;c&#34;]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;h&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;q&#34;, &#34;c&#34;]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;q&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;c&#34;]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;c&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># []</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;l&#34;, &#34;h&#34;, &#34;q&#34;, &#34;c&#34;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;l&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;h&#34;, &#34;q&#34;, &#34;c&#34;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;q&#34;, &#34;c&#34;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;q&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># [&#34;c&#34;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#  &#34;c&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>        <span class="c1"># []</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>We can implement <code>get_input_automated</code> as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -388,20 +384,20 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
 <span class="k">def</span> <span class="nf">get_input_automated</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;l&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;q&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;c&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;l&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;q&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;c&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Note that it is crucial <code>inputs</code> is created <em>outside</em> the scope of <code>get_input_automated</code>. If it were created <em>inside</em> we would get different behavior:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="hl"><span class="lnt">2
 </span></span><span class="lnt">3
 </span><span class="lnt">4
@@ -411,20 +407,20 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_input_automated</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_input_automated</span><span class="p">():</span>
 <span class="hl">    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
 </span>    <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_input_automated</span><span class="p">())</span> <span class="c1"># &#34;h&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>If <code>inputs</code> is created inside the scope of <code>get_input_automated</code>, a new list is created each time <code>get_input_automated</code> is called. But we don&rsquo;t want that. We want all calls to <code>get_input_automated</code> to take from the same list. To accomplish that we seperate creating the list from calling <code>get_input_automated</code> by creating the list outside the scope of <code>get_input_automated</code>. Shortly we&rsquo;ll look at how to do this a bit more nicely but for now let&rsquo;s add it to our program:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -461,30 +457,30 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span></span><span class="hl"><span class="lnt">35
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
     <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
         <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
         
         <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
             <span class="k">break</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
             <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
             <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 
 <span class="hl"><span class="c1"># tests</span>
 </span>
@@ -501,7 +497,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </div><p>Note that playing a manual game is currently commented out on line 35. If we run this code we see a full game being printed in the console, without us having to provide input manually.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -514,7 +510,7 @@ Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">Please think of a number between 0 and 100!
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Please think of a number between 0 and 100!
 Is your secret number 50?
 Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.
 Is your secret number 25?
@@ -531,7 +527,7 @@ Game over. Your secret number was: 38
 <p>What if we want multiple test cases? Let&rsquo;s say we want to also automate the case in which the player inputs <code>l</code> followed by <code>c</code>. We could do something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -543,7 +539,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs_h_l_q_c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">inputs_h_l_q_c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
 <span class="k">def</span> <span class="nf">get_inputs_h_l_q_c</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">inputs_l_h_q_c</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -559,7 +555,7 @@ Game over. Your secret number was: 38
 <p>Apart from their names, <code>get_inputs_h_l_q_c</code> and <code>get_inputs_l_c</code> only differ in one aspect: which list they <code>pop</code> from. We can create a function that has the list to <code>pop</code> from as a parameter and returns a function that <code>pop</code>s from this list.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
 </span></span><span class="hl"><span class="lnt"> 2
 </span></span><span class="hl"><span class="lnt"> 3
 </span></span><span class="hl"><span class="lnt"> 4
@@ -575,7 +571,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
 </span><span class="hl">    <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
 </span><span class="hl">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span><span class="hl">    
@@ -595,7 +591,7 @@ Game over. Your secret number was: 38
 <p>We can clean this up further by <em>inlining</em>: replacing variables by the values assigned to them.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -608,7 +604,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
@@ -623,7 +619,7 @@ Game over. Your secret number was: 38
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -633,7 +629,7 @@ Game over. Your secret number was: 38
 </span></span><span class="hl"><span class="lnt">8
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
@@ -646,7 +642,7 @@ Game over. Your secret number was: 38
 </div><p>The complete code so far looks like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -686,30 +682,30 @@ Game over. Your secret number was: 38
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
     <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
     <span class="k">while</span> <span class="n">keep_going</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
         <span class="n">answer</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">()</span>
         
         <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
             <span class="k">break</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
             <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
             <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 
 <span class="c1"># tests</span>
 
@@ -731,10 +727,10 @@ Game over. Your secret number was: 38
 <p>In our current situation that would look something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="c1"># something</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="c1"># something</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>We&rsquo;ll first try this method. Afterwards we&rsquo;ll try something new which is tidier when testing these kinds of programs.</p>
@@ -742,7 +738,7 @@ Game over. Your secret number was: 38
 <p>What should <code>play_game</code> return so we can verify it behaves correctly? If we test <code>play_game</code> manually we look at the lines that are printed to the console. So let&rsquo;s make <code>play_game</code> not only print but also return those lines as a list of strings. We can then have an automated test as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -752,7 +748,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="p">[</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">]))</span> <span class="o">==</span> <span class="p">[</span>
         <span class="s1">&#39;Please think of a number between 0 and 100!&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Is your secret number 50?&#39;</span><span class="p">,</span>
         <span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">,</span>
@@ -765,7 +761,7 @@ Game over. Your secret number was: 38
 </div><p>We can replace <code>print</code> with a different function named  <code>print_and_archive</code>. Given a message the function will both print it and <code>append</code> it to the list named <code>printed</code>. Ultimately <code>play_game</code> returns <code>printed</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="hl"><span class="lnt"> 2
 </span></span><span class="hl"><span class="lnt"> 3
 </span></span><span class="hl"><span class="lnt"> 4
@@ -833,16 +829,16 @@ Game over. Your secret number was: 38
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">):</span>
 <span class="hl">    <span class="n">printed</span> <span class="o">=</span> <span class="p">[]</span>
 </span><span class="hl">    
 </span><span class="hl">    <span class="k">def</span> <span class="nf">print_and_archive</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
 </span><span class="hl">        <span class="n">printed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class="hl">        <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="hl">        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </span>
     <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="hl">    <span class="n">print_and_archive</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 </span>
@@ -911,7 +907,7 @@ Game over. Your secret number was: 38
 <p>Within <code>play_game</code>, let&rsquo;s replace <code>print</code> the new parameter <code>put_out</code>. We also add <code>print</code> as a second argument to calls to <code>play_game.</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
 </span></span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -951,10 +947,10 @@ Game over. Your secret number was: 38
 </span><span class="hl"><span class="lnt">38
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">,</span> <span class="n">put_out</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">,</span> <span class="n">put_out</span><span class="p">):</span>
 </span>    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">keep_going</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">keep_going</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="hl">    <span class="n">put_out</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 </span>
@@ -984,8 +980,8 @@ Game over. Your secret number was: 38
     
     <span class="k">return</span> <span class="n">get_input</span>
 
-<span class="hl"><span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]),</span> <span class="k">print</span><span class="p">)</span>
-</span><span class="hl"><span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]),</span> <span class="k">print</span><span class="p">)</span>
+<span class="hl"><span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]),</span> <span class="nb">print</span><span class="p">)</span>
+</span><span class="hl"><span class="n">play_game</span><span class="p">(</span><span class="n">create_get_input</span><span class="p">([</span><span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]),</span> <span class="nb">print</span><span class="p">)</span>
 </span>
 <span class="c1"># manual game</span>
 <span class="hl"><span class="c1"># play_game(input, print)</span>
@@ -996,7 +992,7 @@ Game over. Your secret number was: 38
 <p>Before we asserted a list of strings returned by <code>play_game</code>. Now we&rsquo;ll assert the list <code>messages_put_out</code> that is filled by <code>put_out</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1012,7 +1008,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">messages_put_out</span> <span class="o">=</span> <span class="p">[]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">messages_put_out</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">def</span> <span class="nf">put_out</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
     <span class="n">messages_put_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
@@ -1031,7 +1027,7 @@ Game over. Your secret number was: 38
 </div><p>If we do this for multiple test cases we get duplication similar to before:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1053,7 +1049,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">messages_put_out_h_l_q_c</span> <span class="o">=</span> <span class="p">[]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">messages_put_out_h_l_q_c</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">def</span> <span class="nf">put_out_h_l_q_c</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
     <span class="n">messages_put_out_h_l_q_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
@@ -1078,7 +1074,7 @@ Game over. Your secret number was: 38
 </div><p>Again we have some duplication. This time the <code>assert</code> is part of the duplication. If we extract to function, <code>assert</code> should become part of the function. Doing so results in the new function <code>test</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">26
+<pre tabindex="0" class="chroma"><code><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
@@ -1123,7 +1119,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">68
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># tests</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># tests</span>
 
 <span class="k">def</span> <span class="nf">create_get_input</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
@@ -1165,7 +1161,7 @@ Game over. Your secret number was: 38
 </span><span class="hl"><span class="p">])</span>
 </span>
 <span class="c1"># manual game</span>
-<span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="k">print</span><span class="p">)</span>
+<span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">print</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Both test cases will run and pass (lines 44 and 58) and afterwards a manual game will be started (line 68). The tests did not print anything and our game starts in a clean console!</p>
@@ -1191,7 +1187,7 @@ Game over. Your secret number was: 38
 <p>Let&rsquo;s compare the original code for playing a game with our final version:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1208,26 +1204,26 @@ Game over. Your secret number was: 38
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">...</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">...</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
 <span class="o">...</span>
     
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
     
     <span class="o">...</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
     <span class="o">...</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1247,7 +1243,7 @@ Game over. Your secret number was: 38
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">,</span> <span class="n">put_out</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">play_game</span><span class="p">(</span><span class="n">get_input</span><span class="p">,</span> <span class="n">put_out</span><span class="p">):</span>
     <span class="o">...</span>
 
     <span class="n">put_out</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
@@ -1264,7 +1260,7 @@ Game over. Your secret number was: 38
         <span class="o">...</span>
             <span class="n">put_out</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 
-<span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="k">print</span><span class="p">)</span>
+<span class="n">play_game</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">print</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>The only difference really is that the original version of the game code called <code>input</code> and <code>print</code> directly whereas the refactored version calls <code>input</code> and <code>print</code> indirectly. We created an <em>indirection</em>.</p>
@@ -1347,7 +1343,7 @@ Game over. Your secret number was: 38
 
 
 
-<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

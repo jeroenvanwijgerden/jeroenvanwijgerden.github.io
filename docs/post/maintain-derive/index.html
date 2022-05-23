@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0 with theme even" />
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
 
 
 <link rel="canonical" href="https://jeroenvanwijgerden.me/post/maintain-derive/" />
@@ -35,26 +35,22 @@
 
 
 
-<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link href="/sass/main.min.73a16dbde6a62a981cd59aa9f7134ab7f4754eaeada17c518019751aac38eb72.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Maintain vs. Derive" />
 <meta property="og:description" content="Different approach, simpler program." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jeroenvanwijgerden.me/post/maintain-derive/" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/maintain-derive/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-18T13:15:02+01:00" />
 <meta property="article:modified_time" content="2022-02-18T13:15:02+01:00" />
+
 <meta itemprop="name" content="Maintain vs. Derive">
-<meta itemprop="description" content="Different approach, simpler program.">
-<meta itemprop="datePublished" content="2022-02-18T13:15:02+01:00" />
+<meta itemprop="description" content="Different approach, simpler program."><meta itemprop="datePublished" content="2022-02-18T13:15:02+01:00" />
 <meta itemprop="dateModified" content="2022-02-18T13:15:02+01:00" />
 <meta itemprop="wordCount" content="3336">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Maintain vs. Derive"/>
 <meta name="twitter:description" content="Different approach, simpler program."/>
 
@@ -174,7 +170,7 @@
 <p>The inspiration for this article is a recent session with one of my clients. She had been working on the hangman exercise of Angela Yu&rsquo;s 100 Days of Code. Below is her code. For the sake of brevity I stripped some parts.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -216,10 +212,10 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">chosen_word</span> <span class="o">=</span> <span class="s2">&#34;monkey&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">chosen_word</span> <span class="o">=</span> <span class="s2">&#34;monkey&#34;</span>
 <span class="n">word_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chosen_word</span><span class="p">)</span>
 
-<span class="n">end_of_game</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">end_of_game</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">lives</span>       <span class="o">=</span> <span class="mi">6</span>
 
 <span class="n">display</span>      <span class="o">=</span> <span class="p">[]</span>
@@ -229,13 +225,13 @@
     <span class="n">display</span> <span class="o">+=</span> <span class="s2">&#34;_&#34;</span>
 
 <span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display)}&#34;</span><span class="p">)</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives}&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span>
 
   <span class="k">else</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">word_length</span><span class="p">):</span>
@@ -246,22 +242,22 @@
     <span class="n">past_guesses</span> <span class="o">+=</span> <span class="n">guess</span>
 
     <span class="k">if</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Sorry, &#39;{guess}&#39; is not in the word.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sorry, &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39; is not in the word.&#34;</span><span class="p">)</span>
       <span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
     
     <span class="k">if</span> <span class="n">lives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">end_of_game</span> <span class="o">=</span> <span class="bp">True</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You lose. The word was {chosen_word}.&#34;</span><span class="p">)</span>
+      <span class="n">end_of_game</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You lose. The word was </span><span class="si">{</span><span class="n">chosen_word</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="s2">&#34;_&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">display</span><span class="p">:</span>
-      <span class="n">end_of_game</span> <span class="o">=</span> <span class="bp">True</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
+      <span class="n">end_of_game</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Playing the game looks like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -280,7 +276,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">_ _ _ _ _ _
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">_ _ _ _ _ _
 lives: 6
 Guess a letter: o
 
@@ -304,10 +300,10 @@ Guess a letter:
 <p>What do I mean by maintain? In our hangman program the initial value for <code>lives</code> is 6. If during the game we make a wrong guess, the information that we have 6 lives is no longer valid. We need to do some maintenance. This happens at line 32:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">32
+<pre tabindex="0" class="chroma"><code><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>I want to discuss several pieces of information that are captured in our hangman program. Here are their semantics and the relevant lines of code:</p>
@@ -363,7 +359,7 @@ Guess a letter:
 <p><code>lives</code> can be derived from <code>chosen_word</code> and <code>past_guesses</code>. The amount of lives left is six minus the amount of unique letters in <code>past_guesses</code> that are not in <code>chosen_word</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -373,7 +369,7 @@ Guess a letter:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
   <span class="n">num_wrong_guesses</span> <span class="o">=</span> <span class="mi">0</span>
 
   <span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
@@ -386,7 +382,7 @@ Guess a letter:
 </div><p><code>end_of_game</code> can be derived from <code>lives</code>, <code>chosen_word</code> and <code>past_guesses</code>. The end of the game is reached if <code>lives</code> is zero, or all letters in <code>chosen_word</code> are also in <code>past_guesses</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -396,12 +392,12 @@ Guess a letter:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">end_of_game</span><span class="p">():</span>
-  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">True</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">end_of_game</span><span class="p">():</span>
+  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">True</span>
 
   <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">False</span>
+      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">False</span>
 
   <span class="k">return</span> <span class="n">lives</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">all_letters_guessed</span>
 </code></pre></td></tr></table>
@@ -409,7 +405,7 @@ Guess a letter:
 </div><p><code>display</code> can be derived from <code>chosen_word</code> and <code>past_guesses</code>. If a letter in <code>chosen_word</code> is also in <code>past_guesses</code> then display it, otherwise display the character <code>_</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -421,7 +417,7 @@ Guess a letter:
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">display</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">display</span><span class="p">():</span>
   <span class="n">characters_to_display</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
@@ -436,7 +432,7 @@ Guess a letter:
 </div><p>Let&rsquo;s take a look at the main game logic of our program. I highlighted the code that maintains <code>lives</code>, <code>end_of_game</code> and <code>display</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">13
+<pre tabindex="0" class="chroma"><code><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
@@ -466,14 +462,14 @@ Guess a letter:
 </span></span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display)}&#34;</span><span class="p">)</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives}&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span> 
 
   <span class="k">else</span><span class="p">:</span>
 <span class="hl">    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">word_length</span><span class="p">):</span>
@@ -484,23 +480,23 @@ Guess a letter:
     <span class="n">past_guesses</span> <span class="o">+=</span> <span class="n">guess</span>
 
     <span class="k">if</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Sorry, &#39;{guess}&#39; is not in the word.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sorry, &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39; is not in the word.&#34;</span><span class="p">)</span>
 <span class="hl">      <span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
 </span>    
     <span class="k">if</span> <span class="n">lives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="hl">      <span class="n">end_of_game</span> <span class="o">=</span> <span class="bp">True</span>
-</span>      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You lose. The word was {chosen_word}.&#34;</span><span class="p">)</span>
+<span class="hl">      <span class="n">end_of_game</span> <span class="o">=</span> <span class="kc">True</span>
+</span>      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You lose. The word was </span><span class="si">{</span><span class="n">chosen_word</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="s2">&#34;_&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">display</span><span class="p">:</span>
-<span class="hl">      <span class="n">end_of_game</span> <span class="o">=</span> <span class="bp">True</span>
-</span>      <span class="k">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
+<span class="hl">      <span class="n">end_of_game</span> <span class="o">=</span> <span class="kc">True</span>
+</span>      <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Because we now have a deriving function for each of these pieces of information, we can simply replace their reads with function calls (<code>end_of_game</code> becomes <code>end_of_game()</code>, et cetera) and completely remove their maintenance code.</p>
 <p>(Before you make changes, you might want to write <a href="https://jeroenvanwijgerden.me/post/simple-testing/">a test</a> first.)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">13
+<pre tabindex="0" class="chroma"><code><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
@@ -522,26 +518,26 @@ Guess a letter:
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">():</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display())}&#34;</span><span class="p">)</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives()}&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">():</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">())</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span> 
 
   <span class="k">else</span><span class="p">:</span>
     <span class="n">past_guesses</span> <span class="o">+=</span> <span class="n">guess</span>
 
     <span class="k">if</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Sorry, &#39;{guess}&#39; is not in the word.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sorry, &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39; is not in the word.&#34;</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">lives</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You lose. The word was {chosen_word}.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You lose. The word was </span><span class="si">{</span><span class="n">chosen_word</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="s2">&#34;_&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">display</span><span class="p">():</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Because of these changes the code has improved for multiple reasons. There are also some downsides. We&rsquo;ll go over them soon.</p>
@@ -550,7 +546,7 @@ Guess a letter:
 <p>Below is the result. If you run it you&rsquo;ll see that the game is exactly the same as before.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -608,7 +604,7 @@ Guess a letter:
 </span><span class="lnt">56
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">chosen_word</span> <span class="o">=</span> <span class="s2">&#34;monkey&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">chosen_word</span> <span class="o">=</span> <span class="s2">&#34;monkey&#34;</span>
 <span class="n">past_guesses</span> <span class="o">=</span> <span class="p">[]</span>
 
 
@@ -623,11 +619,11 @@ Guess a letter:
 
 
 <span class="k">def</span> <span class="nf">end_of_game</span><span class="p">():</span>
-  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">True</span>
+  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">True</span>
 
   <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">False</span>
+      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">False</span>
 
   <span class="k">return</span> <span class="n">lives</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">all_letters_guessed</span>
 
@@ -645,25 +641,25 @@ Guess a letter:
 
 
 <span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">():</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display())}&#34;</span><span class="p">)</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives()}&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">())</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span> 
 
   <span class="k">else</span><span class="p">:</span>
     <span class="n">past_guesses</span> <span class="o">+=</span> <span class="n">guess</span>
 
     <span class="k">if</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Sorry, &#39;{guess}&#39; is not in the word.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sorry, &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39; is not in the word.&#34;</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">lives</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You lose. The word was {chosen_word}.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You lose. The word was </span><span class="si">{</span><span class="n">chosen_word</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="s2">&#34;_&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">display</span><span class="p">():</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;You win! Well played.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>This technique of using derivation functions instead of maintaining variables can&rsquo;t be used for <code>chosen_word</code> and <code>past_guesses</code> because they cannot be derived. If information cannot be derived it is called canonical information.</p>
@@ -685,18 +681,18 @@ Guess a letter:
 <p>We made the main game loop less complex, but we introduced some new complexity. For example, we went from</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">=</span> <span class="mi">6</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>to</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -706,7 +702,7 @@ Guess a letter:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
   <span class="n">num_wrong_guesses</span> <span class="o">=</span> <span class="mi">0</span>
 
   <span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
@@ -731,7 +727,7 @@ Guess a letter:
 <p>Maintenance approach, before extraction:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">13
+<pre tabindex="0" class="chroma"><code><span class="lnt">13
 </span><span class="hl"><span class="lnt">14
 </span></span><span class="hl"><span class="lnt">15
 </span></span><span class="lnt">16
@@ -747,14 +743,14 @@ Guess a letter:
 </span></span><span class="hl"><span class="lnt">26
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">:</span>
-<span class="hl">  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display)}&#34;</span><span class="p">)</span>
-</span><span class="hl">  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives}&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="ow">not</span> <span class="n">end_of_game</span><span class="p">:</span>
+<span class="hl">  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span><span class="hl">  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 </span>
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span> 
 
   <span class="k">else</span><span class="p">:</span>
 <span class="hl">    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">word_length</span><span class="p">):</span>
@@ -766,7 +762,7 @@ Guess a letter:
 </div><p>After extraction:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt">13
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt">13
 </span></span><span class="hl"><span class="lnt">14
 </span></span><span class="hl"><span class="lnt">15
 </span></span><span class="lnt">16
@@ -790,9 +786,9 @@ Guess a letter:
 </span><span class="hl"><span class="lnt">34
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">render</span><span class="p">():</span>
-</span><span class="hl">  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{&#39; &#39;.join(display)}&#34;</span><span class="p">)</span>
-</span><span class="hl">  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;lives: {lives}&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">render</span><span class="p">():</span>
+</span><span class="hl">  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span><span class="hl">  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;lives: </span><span class="si">{</span><span class="n">lives</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 </span>
 
 <span class="hl"><span class="k">def</span> <span class="nf">maintain_display</span><span class="p">():</span>
@@ -808,7 +804,7 @@ Guess a letter:
   <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Guess a letter: &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
   
   <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;You already guessed &#39;{guess}&#39;.&#34;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;You already guessed &#39;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">&#39;.&#34;</span><span class="p">)</span> 
 
   <span class="k">else</span><span class="p">:</span>
 <span class="hl">    <span class="n">maintain_display</span><span class="p">()</span>
@@ -820,7 +816,7 @@ Guess a letter:
 <p>The shrink code even more, apply both derivation and extraction:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">16
+<pre tabindex="0" class="chroma"><code><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
@@ -830,12 +826,12 @@ Guess a letter:
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">end_of_game</span><span class="p">():</span>
-  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">True</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">end_of_game</span><span class="p">():</span>
+  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">True</span>
 
   <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">False</span>
+      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">False</span>
 
   <span class="k">return</span> <span class="n">lives</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">all_letters_guessed</span>
 </code></pre></td></tr></table>
@@ -843,7 +839,7 @@ Guess a letter:
 </div><p>After extraction:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt">16
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt">16
 </span></span><span class="hl"><span class="lnt">17
 </span></span><span class="hl"><span class="lnt">18
 </span></span><span class="hl"><span class="lnt">19
@@ -857,12 +853,12 @@ Guess a letter:
 </span><span class="hl"><span class="lnt">27
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">word_is_guessed</span><span class="p">():</span>
-</span><span class="hl">  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">True</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">word_is_guessed</span><span class="p">():</span>
+</span><span class="hl">  <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">True</span>
 </span><span class="hl">
 </span><span class="hl">  <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">chosen_word</span><span class="p">:</span>
 </span><span class="hl">    <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
-</span><span class="hl">      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="hl">      <span class="n">all_letters_guessed</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span class="hl">
 </span><span class="hl">  <span class="k">return</span> <span class="n">all_letters_guessed</span>
 </span>
@@ -875,16 +871,16 @@ Guess a letter:
 <p>Deriving is slower than maintaining by reassigning variables. If we look at <code>lives</code>, in the maintenance approach we have</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">lives</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>whereas in the derivation approach we have</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -894,7 +890,7 @@ Guess a letter:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lives</span><span class="p">():</span>
   <span class="n">num_wrong_guesses</span> <span class="o">=</span> <span class="mi">0</span>
 
   <span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">past_guesses</span><span class="p">:</span>
@@ -916,7 +912,7 @@ Guess a letter:
 <p>Let&rsquo;s take a look at the program featured in a <a href="https://jeroenvanwijgerden.me/post/testing-input-output/">different article</a>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -940,34 +936,34 @@ Guess a letter:
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">guess</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
         <span class="k">break</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span><span class="p">):</span>
         <span class="n">high</span> <span class="o">=</span> <span class="n">guess</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">):</span>
         <span class="n">low</span> <span class="o">=</span> <span class="n">guess</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Both <code>high</code> and <code>low</code> are maintained, at lines 18 and 20 respectively. Instead, they could be derived from the previous answers. Actually, <code>guess</code> is derived from <code>high</code> and <code>low</code>, so let&rsquo;s say <code>guess</code> is derived from the previous answers. Let&rsquo;s try out a derivation approach by storing all answers and deriving <code>guess</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
 </span></span><span class="lnt"> 2
 </span><span class="hl"><span class="lnt"> 3
 </span></span><span class="hl"><span class="lnt"> 4
@@ -1005,7 +1001,7 @@ Guess a letter:
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
 </span>
 <span class="hl"><span class="k">def</span> <span class="nf">derive_guess</span><span class="p">():</span> 
 </span><span class="hl">  <span class="n">high</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1023,24 +1019,24 @@ Guess a letter:
 </span><span class="hl">  <span class="k">return</span> <span class="n">current_guess</span>
 </span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Please think of a number between 0 and 100!&#34;</span><span class="p">)</span>
 
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Is your secret number &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;?&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Enter &#39;h&#39;, &#39;l&#39; or &#39;c&#39;.&#34;</span><span class="p">)</span>
 
 <span class="hl">    <span class="n">guess</span> <span class="o">=</span> <span class="n">derive_guess</span><span class="p">()</span>
 </span>
     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;c&#34;</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Game over. Your secret number was: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
         <span class="k">break</span>
 <span class="hl">    <span class="k">elif</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;h&#34;</span> <span class="ow">or</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span>
 </span><span class="hl">        <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </span>    <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, I did not understand your input.&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>The change doesn&rsquo;t feel right to me. The original maintenance approach was clear enough. I get the impression the change made things less clear.</p>
@@ -1123,7 +1119,7 @@ Guess a letter:
 
 
 
-<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

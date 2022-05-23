@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0 with theme even" />
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
 
 
 <link rel="canonical" href="https://jeroenvanwijgerden.me/post/maybe-not/" />
@@ -35,26 +35,22 @@
 
 
 
-<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link href="/sass/main.min.73a16dbde6a62a981cd59aa9f7134ab7f4754eaeada17c518019751aac38eb72.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Maybe Not: notes" />
 <meta property="og:description" content="Thoughts on the shape and optionality of data." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jeroenvanwijgerden.me/post/maybe-not/" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/maybe-not/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-09T11:21:27+01:00" />
 <meta property="article:modified_time" content="2022-02-09T11:21:27+01:00" />
+
 <meta itemprop="name" content="Maybe Not: notes">
-<meta itemprop="description" content="Thoughts on the shape and optionality of data.">
-<meta itemprop="datePublished" content="2022-02-09T11:21:27+01:00" />
+<meta itemprop="description" content="Thoughts on the shape and optionality of data."><meta itemprop="datePublished" content="2022-02-09T11:21:27+01:00" />
 <meta itemprop="dateModified" content="2022-02-09T11:21:27+01:00" />
 <meta itemprop="wordCount" content="1800">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Maybe Not: notes"/>
 <meta name="twitter:description" content="Thoughts on the shape and optionality of data."/>
 
@@ -185,13 +181,13 @@
 <p>One spec to rule them all:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email (optional), address (optional)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email (optional), address (optional)
 
 create_user requires User
 ship        requires User
@@ -200,14 +196,14 @@ ship        requires User
 </div><p>or one for each use-case:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">User_create_form: name, email, address (optional)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">User_create_form: name, email, address (optional)
 User_ship_form  : name,        address
 
 create_user requires User_create_form
@@ -221,13 +217,13 @@ ship        requires User_ship_form
 <p>If we could somehow generally describe a <code>User</code> and per case put a &lsquo;requirement mask&rsquo; over it, it could look something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email, address
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">User: name, email, address
 
 create_user of User require name, email, address optional
 ship        of User require name,        address
@@ -264,14 +260,14 @@ ship        of User require name,        address
 <p>If we do one spec for all, we got something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">result: a (optional), b (optional), c (optional)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">result: a (optional), b (optional), c (optional)
 
 add_a: result -&gt; result
 add_b: result -&gt; result
@@ -282,7 +278,7 @@ add_c: result -&gt; result
 <p>We can also do one spec per step:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -292,7 +288,7 @@ add_c: result -&gt; result
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">initial: empty
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">initial: empty
 after_a: a
 after_b: a, b    (or, extend after_a with b)
 final  : a, b, c (or, extend after_b with c)
@@ -379,7 +375,7 @@ add_c: after_c -&gt; final
 
 
 
-<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

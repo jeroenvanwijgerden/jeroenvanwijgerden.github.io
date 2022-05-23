@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.80.0 with theme even" />
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
 
 
 <link rel="canonical" href="https://jeroenvanwijgerden.me/post/recursion-1/" />
@@ -35,26 +35,22 @@
 
 
 
-<link href="/sass/main.min.759c05c2511fcb3cb6b0909ad02d585f521f7a6246a534d3924c333c2c5a70e8.css" rel="stylesheet">
+<link href="/sass/main.min.73a16dbde6a62a981cd59aa9f7134ab7f4754eaeada17c518019751aac38eb72.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="Tail recursion for branching problems" />
 <meta property="og:description" content="A case study of finding paths in trees." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jeroenvanwijgerden.me/post/recursion-1/" />
+<meta property="og:url" content="https://jeroenvanwijgerden.me/post/recursion-1/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-16T13:10:35+01:00" />
 <meta property="article:modified_time" content="2022-02-16T13:10:35+01:00" />
+
 <meta itemprop="name" content="Tail recursion for branching problems">
-<meta itemprop="description" content="A case study of finding paths in trees.">
-<meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
+<meta itemprop="description" content="A case study of finding paths in trees."><meta itemprop="datePublished" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="dateModified" content="2022-02-16T13:10:35+01:00" />
 <meta itemprop="wordCount" content="5902">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tail recursion for branching problems"/>
 <meta name="twitter:description" content="A case study of finding paths in trees."/>
 
@@ -184,7 +180,7 @@
 <p>This is a typical recursive implementation of factorial:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -194,7 +190,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
  
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">1</span>
@@ -207,7 +203,7 @@
 </div><p>If we perform the call <code>fac(4)</code>, this is what the simplified evaluation diagram looks like:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -217,7 +213,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| fac(4)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| fac(4)
 |               | fac(3)
 |               |               | fac(2)
 |               |               |               | fac(1)
@@ -232,7 +228,7 @@
 <p>Luckily there&rsquo;s a solution: tail recursion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -242,7 +238,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
  
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">product</span>
@@ -254,7 +250,7 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -262,7 +258,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| fac(3, 1)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| fac(3, 1)
 |           | fac(2, 3)
 |           |           | fac(1, 6)
 |           |           | return: 6
@@ -278,7 +274,7 @@
 <p>Let&rsquo;s take another look at our tail-recursive <code>fac</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -288,7 +284,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
  
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">product</span>
@@ -305,7 +301,7 @@
 <p>Some languages, like Python, allow you to specify a default value for a parameter:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -315,7 +311,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
  
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">product</span>
@@ -328,7 +324,7 @@
 </div><p>You could make an accessor function that hides the details of how to kick off the recursion:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -341,7 +337,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac_recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac_recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
  
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">product</span>
@@ -357,7 +353,7 @@
 </div><p>Instead of two outer functions, you could create an outer and an inner function:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -370,7 +366,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
  
         <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
@@ -386,7 +382,7 @@
 </div><p>Finally, all tail-recursive functions can trivially be written as a while-loop:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -396,7 +392,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span>
     
     <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -418,7 +414,7 @@
 <p>This is the tree we&rsquo;ll be working with:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -427,7 +423,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
  │     │
  │     └───⟶(5)
  │
@@ -439,7 +435,7 @@
 </div><p>Modeled as an adjacency list:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -450,7 +446,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">tree</span> <span class="o">=</span> <span class="p">{</span>
      <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
     <span class="p">,</span><span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
     <span class="p">,</span><span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
@@ -464,13 +460,13 @@
 </div><p>Our goal is to write the function <code>all_complete_paths</code> that returns all complete paths starting at a given vertex, like so:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">6</span><span class="p">]]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">6</span><span class="p">]]</span>
 <span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span>   <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
                                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
@@ -485,7 +481,7 @@
 <p>The crux is that within the current step for <code>v</code>, we might have to do multiple recursive calls, one for each child of <code>v</code>. Alright, now the time-travelling magic of writing recursive functions: let&rsquo;s assume our function <code>all_complete_paths</code> already works. We can call it for a child to obtain all paths starting at that child. If we do this for all children we have all paths that end at a leaf and stop right before <code>v</code>. To obtain all paths that start at <code>v</code>, all we have to do is add <code>v</code> to the front of all of these child-paths.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -506,7 +502,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
@@ -530,7 +526,7 @@
 </div><p>Calling <code>all_complete_paths(1)</code> leads to the following simplified evaluation diagram:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -569,7 +565,7 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| v: 1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| v: 1
 |                        | v: 2
 |                        |              | v: 4
 |                        |              |   
@@ -624,7 +620,7 @@
 <p>The accumulative result is the list of completed paths <code>completed_paths</code>. Its initial value is <code>[]</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -654,7 +650,7 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
         <span class="c1"># remove a plan from the pile</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
@@ -688,7 +684,7 @@
 <p>Here follows in detail what happens if we call <code>all_complete_paths(1)</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -800,7 +796,7 @@
 </span><span class="lnt">110
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
 ----------------------------------
 incomplete_paths   : [[1]]
 complete_paths     : []
@@ -921,7 +917,7 @@ final result is complete_paths
 <p>You might notice that it is actually quite similar to the tail-recursive solution we saw earlier: a path is extended with <code>v</code> and in some way passed to a next step.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -936,7 +932,7 @@ final result is complete_paths
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
   <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
   <span class="n">children</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
@@ -957,7 +953,7 @@ final result is complete_paths
 <p>The only reason we would want a <code>return</code> somewhere is to extract the result from our recursion. However, instead of extracting the value from our recursion via <code>return</code>, we can let the recursion place its result in something that lives outside of the recursion. We can accomplish this by removing <code>complete_paths</code> as a parameter of the recursion function and instead have it live outside the scope of the recursive function.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -976,7 +972,7 @@ final result is complete_paths
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -998,7 +994,7 @@ final result is complete_paths
 </div><p>Now at least we can access the result of the recursion. However, if we run <code>all_complete_paths(2)</code> we get some weird behavior:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1023,7 +1019,7 @@ final result is complete_paths
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
 |
 | append 2 to path
 | path: [2]
@@ -1052,7 +1048,7 @@ final result is complete_paths
 <p>We fix the first problem by not appending <code>path</code> to <code>complete_paths</code>, but a copy of <code>path</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1071,7 +1067,7 @@ final result is complete_paths
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -1094,7 +1090,7 @@ final result is complete_paths
 <p>To give each step its own copy, a step can either copy the path it&rsquo;s given, or create a copy to give the next steps. Both options are fine. Let&rsquo;s go for immediately copying the given path:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1114,7 +1110,7 @@ final result is complete_paths
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -1138,7 +1134,7 @@ final result is complete_paths
 <p>Below is a new simplified evaluation diagram of performing the call <code>all_complete_paths(2)</code>. The three unique copies, one for each step, are marked as <code>path</code>, <code>path'</code> and <code>path''</code>. Mutation bugs solved, <code>complete_paths</code> is what we want it to be!</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1163,7 +1159,7 @@ final result is complete_paths
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
 | 
 | path: []
 | append 2 to path
@@ -1191,7 +1187,7 @@ final result is complete_paths
 </div><p>Instead of giving each step its own copy of <code>path</code>, we can &lsquo;clean up&rsquo; the mutation to <code>path</code> as the very last thing we do in each step:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1212,7 +1208,7 @@ final result is complete_paths
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -1236,7 +1232,7 @@ final result is complete_paths
 </div><p>If we now call <code>all_complete_paths(2)</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1267,7 +1263,7 @@ final result is complete_paths
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">| recur(2, [])
 |
 | append 2 to path
 | path: [2]
@@ -1306,7 +1302,7 @@ final result is complete_paths
 <p>Note that the recursive call (line 19) now happens after removing <code>v</code> from the path, making the recursive call the last thing that happens in a step, thus satisfying the condition for tail recursion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="hl"><span class="lnt"> 4
@@ -1331,7 +1327,7 @@ final result is complete_paths
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="hl">  <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -1359,7 +1355,7 @@ final result is complete_paths
 </div><p>If we call <code>all_complete_paths(1)</code> we get:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1380,7 +1376,7 @@ final result is complete_paths
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
 ----------------------------------
 complete_paths : []
 vs   : [1]
@@ -1405,7 +1401,7 @@ path : []
 <p>The order of when things happen is decided by our pile of plans. In a step, instead of only adding plans to process children, we also include a plan to eventually clean up the mutation we did in this step. So now we have two types of plans, either a plan to clean up mutation or to process a vertex. We only clean up if we encounter a plan that says so.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1434,7 +1430,7 @@ path : []
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">plans</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
@@ -1465,7 +1461,7 @@ path : []
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1522,7 +1518,7 @@ path : []
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">recursive call #1
 ----------------------------------
 complete_paths : []
 plans : [1]
@@ -1583,7 +1579,7 @@ et cetera
 <p>We saw in the beginning of this article that tail recursion can be written as a loop. Let&rsquo;s see what that looks like:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="hl"><span class="lnt"> 3
 </span></span><span class="hl"><span class="lnt"> 4
@@ -1609,7 +1605,7 @@ et cetera
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">all_complete_paths</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
   <span class="n">complete_paths</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="hl">  <span class="n">plans</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
 </span><span class="hl">  <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1643,7 +1639,7 @@ et cetera
 <p>Note that the integrity of the passed path is vital to the continued operation of <code>traverse_paths</code>. Exposing the mutable path to <code>f</code> is EXTREMELY dangerous. It sends shivers down my spine. I&rsquo;m dead serious. I recommend that you don&rsquo;t do this.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="hl"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
 </span></span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1681,7 +1677,7 @@ et cetera
 </span><span class="hl"><span class="lnt">36
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">traverse_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="hl"><span class="k">def</span> <span class="nf">traverse_paths</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
 </span>  <span class="n">plans</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
   <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -1716,7 +1712,7 @@ et cetera
 
 
 <span class="c1"># printing without copying</span>
-<span class="hl"><span class="n">traverse_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">print</span><span class="p">)</span>
+<span class="hl"><span class="n">traverse_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">print</span><span class="p">)</span>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>To make it safe again, you could pass a copy of <code>path</code> to <code>f</code>, but that defeats the purpose of extracting to <code>traverse_paths</code>. Then you might as well write <code>print(all_complete_paths(1))</code>. I just wanted to take the opportunity to show a higher order function (in this case, a function that has another function as a parameter).</p>
@@ -1725,7 +1721,7 @@ et cetera
 <p>Let&rsquo;s take our first tail-recursive algorithm and print the last vertex of the path we process in each step:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1752,12 +1748,12 @@ et cetera
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
         <span class="n">last_vertex</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="hl">        <span class="k">print</span><span class="p">(</span><span class="n">last_vertex</span><span class="p">)</span>
+<span class="hl">        <span class="nb">print</span><span class="p">(</span><span class="n">last_vertex</span><span class="p">)</span>
 </span>        <span class="n">children</span>    <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">last_vertex</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
@@ -1783,7 +1779,7 @@ et cetera
 <p>If we take another look at our tree</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1792,7 +1788,7 @@ et cetera
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(1)──⟶(2)──⟶(4)
  │     │
  │     └───⟶(5)
  │
@@ -1808,12 +1804,12 @@ et cetera
 <p>The solution is elegantly simple. Taking the last plan from the pile causes the algorithm to be depth-first. Taking the first plan will cause it to be breadth-first:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="hl"><span class="lnt">3
 </span></span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">incomplete_paths</span><span class="p">,</span> <span class="n">complete_paths</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">incomplete_paths</span><span class="p">:</span>
 <span class="hl">        <span class="n">path</span> <span class="o">=</span> <span class="n">incomplete_paths</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># pop from the front</span>
 </span></code></pre></td></tr></table>
@@ -1827,11 +1823,11 @@ et cetera
 <p>In the beginning of this article I described the behavior of <code>all_complete_paths(1)</code> with the following <a href="https://jeroenvanwijgerden.me/post/simple-testing/">test</a>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
                                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
 </code></pre></td></tr></table>
 </div>
@@ -1839,25 +1835,25 @@ et cetera
 <p>You might not really care about the order, as long as all the paths are there. Then you can test against a set instead of a list:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">{[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">{[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
                                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Unfortunately, in some languages including Python it&rsquo;s impossible to create sets of lists. The above code will cause an error. Depending on your language you might have to write a small helper function:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">contain_same_elements</span><span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">assert</span> <span class="n">contain_same_elements</span><span class="p">(</span>
   <span class="n">all_complete_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
   <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
@@ -1934,7 +1930,7 @@ et cetera
 
 
 
-<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 
