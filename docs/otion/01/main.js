@@ -32414,27 +32414,25 @@
     var g;
     new EditorView({
         parent: div,
-        doc: "Otion01 {\n\nRuleProgram\n= RuleInstruction*\n\nRuleInstruction\n= RuleInstructionRender | RuleInstructionSteps\n\nRuleInstructionRender\n= \"[\"  \"render\"  \"]\"\n\nRuleInstructionSteps\n= \"[\"  \"steps\"*  integer  \"]\"\n\ninteger\n= \"-\"?  digit+\n\n}",
+        doc: "RuleProgram\n= RuleInstruction*\n\nRuleInstruction\n= RuleInstructionRender | RuleInstructionSteps\n\nRuleInstructionRender\n= \"[\"  \"render\"  \"]\"\n\nRuleInstructionSteps\n= \"[\"  \"steps\"  integer  \"]\"\n\ninteger\n= \"-\"?  digit+",
         extensions: [
             keymap.of([indentWithTab]),
             EditorView.updateListener.of(function (update) {
-                if (update.docChanged) {
-                    update.changes.iterChanges(function (fromA, toA, _fromB, _toB, inserted) {
-                        Array.from(inserted.iter()).join("");
-                    });
-                }
+                // if (update.docChanged) {
+                //     update.changes.iterChanges((fromA, toA, _fromB, _toB, inserted) => {
+                //         const replacement = Array.from(inserted.iter()).join("")
+                //     })
+                // }
             }),
             lintGutter(),
             linter(function (view) {
                 try {
-                    g = ohm.exports.grammar(view.state.doc.sliceString(0));
-                    globalThis.g = g;
+                    g = ohm.exports.grammar("Otion01{\n" + view.state.doc.sliceString(0) + "\n}");
                 }
                 catch (e) {
-                    globalThis.grammarLintException = e;
                     return [{
-                            from: e.interval.startIdx,
-                            to: e.interval.endIdx,
+                            from: e.interval.startIdx - 9,
+                            to: e.interval.endIdx - 9,
                             severity: "error",
                             message: e.shortMessage
                         }];
@@ -32485,13 +32483,11 @@
         buttonRemove.onclick = function () {
             div.parentElement.removeChild(div);
         };
-        {
-            var select = document.createElement("select");
-            div.appendChild(select);
-            for (var _i = 0, _a = Object.keys(g.rules).filter(function (r) { return !(r == "RuleProgram" || r == "RuleInstruction"); }); _i < _a.length; _i++) {
-                var rule = _a[_i];
-                select.add(new Option(rule));
-            }
+        var selectRule = document.createElement("select");
+        div.appendChild(selectRule);
+        for (var _i = 0, _a = Object.keys(g.rules).filter(function (r) { return !(r == "RuleProgram" || r == "RuleInstruction"); }); _i < _a.length; _i++) {
+            var rule = _a[_i];
+            selectRule.add(new Option(rule));
         }
         {
             var select_1 = document.createElement("select");
@@ -32501,13 +32497,14 @@
                 select_1.add(new Option(i + " instruction"));
             }
             select_1.onchange = function (e) {
+                var rule = selectRule.value;
                 if (select_1.value == "steps instruction") {
                     var label = document.createElement("label");
                     label.textContent = "number of steps:";
                     div.appendChild(label);
                     var select_2 = document.createElement("select");
                     div.appendChild(select_2);
-                    g.rules.RuleInstructionSteps.body.factors.forEach(function (el, idx) {
+                    g.rules[rule].body.factors.forEach(function (el, idx) {
                         select_2.add(new Option(el.source.contents, idx));
                     });
                 }
