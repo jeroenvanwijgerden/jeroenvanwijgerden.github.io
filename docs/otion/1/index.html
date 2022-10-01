@@ -60,13 +60,23 @@
     #console {
         height: 256px;
         padding: 4px;
-        background-color: #000000;
+        background-color: #eed;
 
         font-family: monospace;
         font-size: 12pt;
-        color: #ffffff;
+        color: #000;
 
         overflow: scroll
+    }
+
+    .menu {
+        background-color: #d3d3d3;
+        min-height: 10px;
+    }
+
+    #grid {
+        border: none;
+        margin: 0;
     }
 
     table, td, tr {
@@ -101,10 +111,21 @@
         <div id="t">
             <div id="codemirror"></div>
         </div>
-        <div id="console-menu">
-            <button id="button-clear">Clear</button>
+        <div style="display: flex;">
+            <div style="flex: 1;">
+                <div class="menu">
+                    <button id="console-button-clear">Clear</button>
+                </div>
+                <div id="console"></div>
+            </div>
+            <div style="">
+                <div class="menu">
+                    <button id="grid-button-clear">Clear</button>
+                    <span id="mouse-info" style="float:right;">Mouse not on grid</span>
+                </div>
+                <canvas id="grid" height="256" width="256"></div>
+            </div>
         </div>
-        <div id="console"></div>
     </div>
     <div id="trace">
         <table id="table">
