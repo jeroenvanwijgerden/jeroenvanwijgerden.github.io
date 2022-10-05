@@ -57,16 +57,22 @@
     #codemirror {
     }
 
-    #console {
+    #console-container {
         height: 128px;
         padding: 4px;
         background-color: #000000;
 
         font-family: monospace;
-        font-size: 12pt;
+        
         color: #ffffff;
 
         overflow: scroll
+    }
+
+    #console {
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
     }
 
     table, td, tr {
@@ -109,7 +115,7 @@
         <div id="console-menu">
             <button id="button-clear">Clear</button>
         </div>
-        <div id="console"></div>
+        <div id="console-container"><pre id="console"></pre></div>
     </div>
     <div id="trace">
         <table id="table">

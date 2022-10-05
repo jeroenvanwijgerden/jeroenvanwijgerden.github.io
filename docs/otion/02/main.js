@@ -5802,7 +5802,8 @@
   var CheckError = /** @class */ (function (_super) {
       __extends(CheckError, _super);
       function CheckError(source, message, relatedSource) {
-          var _this = _super.call(this) || this;
+          var _this = _super.call(this, message) || this;
+          Object.setPrototypeOf(_this, CheckError.prototype);
           _this.source = source;
           _this.message = message;
           if (relatedSource)
@@ -33458,6 +33459,33 @@
       executionMode = ExecutionMode.Step;
       stack = __spreadArray([], stepper.stack, true);
   }
+  function getLoCForError(source) {
+      var lines = matcher.getInput().split("\n");
+      var line = lines[0];
+      var lineNr = 1;
+      var countBeforeLine = 0;
+      var count = line.length + 1;
+      for (var _i = 0, _a = lines.slice(1); _i < _a.length; _i++) {
+          var l = _a[_i];
+          if (count > source.startIdx)
+              break;
+          countBeforeLine = count;
+          line = l;
+          lineNr++;
+          count += line.length + 1;
+      }
+      var idxOnLine = source.startIdx - countBeforeLine;
+      var errLength = source.endIdx - source.startIdx;
+      return [lineNr, line + "\n" + new Array(idxOnLine).fill(" ").join("") + (idxOnLine + errLength > line.length ? "^..." : new Array(errLength).fill("^").join(""))];
+  }
+  function printRuntimeError(error) {
+      console.log(error.source);
+      var _a = getLoCForError(error.source), nr = _a[0], m = _a[1];
+      print("Runtime error:");
+      print(error.message);
+      print("on line " + nr + ":");
+      print(m);
+  }
   buttonStep.onclick = function (e) {
       if (executionMode == ExecutionMode.Auto)
           return;
@@ -33466,8 +33494,16 @@
           enterStepMode();
       }
       if (stepper.hasNextStep()) {
-          for (var _i = 0, _a = stepper.performNextStep(); _i < _a.length; _i++) {
-              var result = _a[_i];
+          var results = void 0;
+          try {
+              results = stepper.performNextStep();
+          }
+          catch (error) {
+              printRuntimeError(error);
+              return;
+          }
+          for (var _i = 0, results_1 = results; _i < results_1.length; _i++) {
+              var result = results_1[_i];
               if (result instanceof PushResult) {
                   stack.push(result.evaluation);
                   if (stackDepthBits.length < stack.length) {
@@ -33498,10 +33534,17 @@
   function runBatchOfSteps(stepper, numSteps) {
       for (var i = 0; i < numSteps; i++) {
           if (stepper.hasNextStep()) {
-              var result = stepper.performNextStep();
-              for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
-                  var x = result_1[_i];
-                  if (x instanceof BreakpointResult) {
+              var results = void 0;
+              try {
+                  results = stepper.performNextStep();
+              }
+              catch (error) {
+                  printRuntimeError(error);
+                  return;
+              }
+              for (var _i = 0, results_2 = results; _i < results_2.length; _i++) {
+                  var result = results_2[_i];
+                  if (result instanceof BreakpointResult) {
                       enterStepMode();
                       highlightTraceStack();
                       addTraceRow("");
@@ -33515,13 +33558,14 @@
       }
       runBatchOfStepsTimeout = setTimeout(function () { return runBatchOfSteps(stepper, stepsPerChunk); });
   }
+  var ideConsoleContainer = document.getElementById("console-container");
   var ideConsole = document.getElementById("console");
   document.getElementById("button-clear").onclick = function () {
       ideConsole.innerText = '';
   };
   function print(s) {
       ideConsole.innerText += s + "\n";
-      ideConsole.scrollTo({ top: ideConsole.scrollHeight });
+      ideConsoleContainer.scrollTo({ top: ideConsole.scrollHeight });
   }
   var runBatchOfStepsTimeout;
   buttonReset.onclick = function () {

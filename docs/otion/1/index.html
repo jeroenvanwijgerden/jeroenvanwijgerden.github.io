@@ -57,17 +57,26 @@
     #codemirror {
     }
 
-    #console {
+    #console-container {
         height: 256px;
         padding: 4px;
         background-color: #eed;
 
         font-family: monospace;
-        font-size: 12pt;
+        
         color: #000;
 
         overflow: scroll
     }
+
+    #console {
+        width: 340px;
+        height: 100%;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+        overflow-x: scroll;
+    }    
 
     .menu {
         background-color: #d3d3d3;
@@ -117,7 +126,7 @@
                     <span>Console</span>
                     <button id="console-button-clear">Clear</button>
                 </div>
-                <div id="console"></div>
+                <div id="console-container"><pre id="console"></pre></div>
             </div>
             <div id="grid-container" tabindex="1">
                 <div class="menu">
