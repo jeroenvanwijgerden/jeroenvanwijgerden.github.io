@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Jeroen van Wijgerden</copyright>
-    <lastBuildDate>Fri, 18 Feb 2022 13:15:02 +0100</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Oct 2022 16:52:21 +0200</lastBuildDate><atom:link href="https://jeroenvanwijgerden.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Een verhaal rondom 5 november</title>
+      <link>https://jeroenvanwijgerden.me/post/5-november/</link>
+      <pubDate>Thu, 27 Oct 2022 16:52:21 +0200</pubDate>
+      
+      <guid>https://jeroenvanwijgerden.me/post/5-november/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Maintain vs. Derive</title>
       <link>https://jeroenvanwijgerden.me/post/maintain-derive/</link>

@@ -37,13 +37,6 @@
         margin: 0px;
     }
 
-    #grammar-menu {
-        border-top: 1px solid black;
-        height: 100px;
-        background-color: #d3d3d3;
-        overflow-y:scroll;
-    }
-
     #menu {
         background-color: #d3d3d3;
         min-height: 10px;
@@ -54,25 +47,26 @@
         min-height: 10px;
     }
 
+    #t {
+        /* display: flex;
+	    flex-direction: column;
+	    align-items: stretch;
+        flex: 1; */
+    }
+
     #codemirror {
     }
 
-    #console-container {
-        height: 128px;
+    #console {
+        height: 256px;
         padding: 4px;
         background-color: #000000;
 
         font-family: monospace;
-        
+        font-size: 12pt;
         color: #ffffff;
 
         overflow: scroll
-    }
-
-    #console {
-        font-size: 10pt;
-        margin: 0;
-        padding: 0;
     }
 
     table, td, tr {
@@ -90,20 +84,13 @@
         overflow-wrap: break-word;
         width: 170px;
         height: 20px;
+        background-color: greenyellow;
     }
 </style>
 
 <body>
     <div id="ide">
-        <div id="grammar"></div>
-        <div id="grammar-menu">
-            <div>
-                <button id="button-add-rule-instruction-mapping">add</button>
-                <button id="button-apply">apply</button>
-            </div>
-            <div id="mappings" style="overflow-y:scroll;"></div>
-        </div>
-        <div id="menu" style="border-top: 1px solid black;">
+        <div id="menu">
             <button id="button-halt">Halt</button>
             <button id="button-step">Step</button>
             <button id="button-reset">Reset</button>
@@ -111,11 +98,13 @@
             <input id="input-steps-per-chunk" type="number" min="1" max="10000" value="8192">
             <button id="button-set-steps-per-chunk">Set</button>
         </div>
-        <div id="codemirror"></div>
+        <div id="t">
+            <div id="codemirror"></div>
+        </div>
         <div id="console-menu">
             <button id="button-clear">Clear</button>
         </div>
-        <div id="console-container"><pre id="console"></pre></div>
+        <div id="console"></div>
     </div>
     <div id="trace">
         <table id="table">
