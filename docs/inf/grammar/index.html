@@ -1,0 +1,119 @@
+<!doctype html>
+<meta charset=utf8>
+
+<style>
+    html,
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cm-editor .cm-content {
+        font-family: monospace;
+        font-size: 12pt;
+    }
+
+    .cm-lineNumbers {
+        font-family: monospace;
+        font-size: 12pt;
+    }
+
+    #main {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
+
+    #grammar {
+        width: 600px;
+    }
+
+    #left {
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #right {
+        flex-grow: 1;
+        height: 100%;
+        overflow: auto;
+        background-color: #eed;
+    }
+
+    #description {
+        padding: 4px;
+        margin-top: 12px;
+        max-width: 60ch;
+    }
+
+    #tests {
+        flex-grow: 1;
+        background-color: #ccc;
+        padding: 8px;
+        overflow: auto;
+    }
+
+    .test-case {
+        font-family: monospace;
+        margin-top: 16px;
+        
+    }
+
+    .test-case span {
+        display: inline-block;
+    }
+
+    .test-case .code {
+        display: block;
+        background-color: white;
+        margin-bottom: 4px;
+    }
+
+    .result span {
+        width: 16ch;
+        margin-right: 1ch;
+    }
+
+    .match {
+        background-color: cyan;
+    }
+
+    .no-match {
+        background-color: orange;
+    }
+
+    .fail {
+        background-color: red;
+    }
+
+    .pass {
+        background-color: greenyellow;
+    }
+
+    select {
+        font-size: 16pt;
+        margin: 4px;
+    }
+
+</style>
+
+<body>
+    <div id="main">
+        <div id="left">
+            <div id="grammar"></div>
+            <div id="tests">
+                
+            </div>
+        </div>
+        <div id="right">
+            <span style="font-size: 16pt; margin: 4px;">Opdracht <select id="select"></select></span>
+            <div id="description">
+                Foo
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="main.js"></script>
