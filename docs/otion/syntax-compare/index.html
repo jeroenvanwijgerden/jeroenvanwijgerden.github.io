@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset=utf8>
+
+<style>
+    html,
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menu {
+      flex-grow: 0;
+      flex-shrink: 0;
+      background-color: #444;
+    }
+
+    #editors {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .gutter {
+        background-color: #888;
+    }
+
+    .gutter-horizontal {
+        cursor: col-resize;
+    }
+
+    .gutter-vertical {
+        cursor: row-resize;
+    }
+
+    .cm-editor .cm-content {
+        font-family: monospace;
+        font-size: 14pt;
+    }
+
+    .cm-lineNumbers {
+        font-family: monospace;
+        font-size: 14pt;
+    }
+
+    .codemirror-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+    }
+
+    .codemirror {
+        display: flex;
+
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+
+<body>
+  <div id="menu">
+    <select id="selector">
+      
+    </select>
+  </div>
+  
+  <div id="editors">
+    <div id="otion1">
+      <div class="codemirror-wrapper">
+        <div class="codemirror" id="codemirror-otion1"></div>
+      </div>
+    </div>
+    <div id="otion2">
+      <div class="codemirror-wrapper">
+        <div class="codemirror" id="codemirror-otion2"></div>
+      </div>
+    </div>
+    <div id="otion3">
+      <div class="codemirror-wrapper">
+        <div class="codemirror" id="codemirror-otion3"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="main.js"></script>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<meta charset=utf8>
+
+<style>
+    html,
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+    }
+
+    #left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #right {
+        color: #fefefe;
+        background-color: #222;
+    }
+
+    .gutter {
+        background-color: #888;
+    }
+
+    .gutter-horizontal {
+        cursor: col-resize;
+    }
+
+    .gutter-vertical {
+        cursor: row-resize;
+    }
+
+    .cm-editor .cm-content {
+        font-family: monospace;
+        font-size: 12pt;
+    }
+
+    .cm-lineNumbers {
+        font-family: monospace;
+        font-size: 12pt;
+    }
+
+
+
+    #code-editor {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+    }
+
+    #menu {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    #button-run {
+        width: 7ch;
+    }
+
+    #menu button {
+        font-family: monospace;
+        padding: 0 0.5ch 0 0.5ch;
+        text-align: center;
+    }
+
+    #execution-status {
+        border-radius: 5px;
+        text-align: center;
+        display: inline-block;
+        font-family: monospace;
+        width: 8ch;
+        padding: 0 0.5ch 0 0.5ch;
+    }
+
+    #codemirror {
+        display: flex;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    #trace {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #io {
+        display: flex;
+
+        overflow: hidden;
+        /* needed to prevent console from growing, despite it having overflow: scroll */
+    }
+
+    #console-container {
+        color: #000;
+
+        flex-grow: 1;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow-x: hidden;
+    }
+
+    #console-menu {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    #console {
+        width: 100%;
+        flex-grow: 1;
+        overflow: auto;
+        background-color: #222;
+        color: #fefefe;
+        font-size: 12pt;
+    }
+
+    #console pre {
+        margin: 0;
+        margin-left: 0.5ch;
+        display: block;
+    }
+
+    .empty {
+        content: "\200b";
+    }
+
+    .prompt {
+        width: 100%;
+        background-color: #252;
+    }
+
+    .prompt textarea {
+        box-sizing: border-box;
+        width: 100%;
+        outline: none;
+        height: 1.5em;
+        resize: none;
+        margin-bottom: 8px;
+        padding-left: 0.5ch;
+        padding-right: 0.5ch;
+    }
+
+
+
+    .menu {
+        background-color: #d3d3d3;
+        min-height: 10px;
+    }
+
+    #toggle-grid {
+        width: 6px;
+        cursor: pointer;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    #grid-container {
+        flex-grow: 0;
+        flex-shrink: 0;
+
+
+        background-color: #d3d3d3;
+        overflow: hidden;
+    }
+
+    #grid {
+        border: none;
+        margin: 0;
+    }
+
+    table,
+    td,
+    tr {
+        margin: 0px;
+        padding: 0px;
+        border-spacing: 0px;
+    }
+
+    tr {}
+
+    td {
+        color: black;
+        padding: 5px;
+        overflow-wrap: break-word;
+        width: 170px;
+        height: 20px;
+        background-color: greenyellow;
+    }
+
+    #examples {
+        width: 75px;
+        overflow: hidden;
+    }
+</style>
+
+<body>
+    <div id="left">
+        <div id="menu" class="menu">
+            <select id="examples"></select>
+            <button id="button-toggle-editor-settings">Settings</button>
+            <span id="editor-settings" hidden="true">
+                <input id="input-steps-per-chunk" type="number" min="1000" max="10000" value="8192">
+                <button id="button-set-steps-per-chunk">Set</button>
+            </span>
+
+            <span style="float:right;">
+                <span id="execution-status"></span>
+                <button id="button-run">Run</button>
+                <button id="button-halt">Pause</button>
+                <button id="button-reset">Reset</button>
+                <button id="button-step">Step</button>
+            </span>
+        </div>
+        <div id="code-editor">
+            <div id="codemirror"></div>
+        </div>
+        <div id="io">
+            <div id="console-container">
+                <div id="console-menu" class="menu">
+                    <span>Console</span>
+                    <button id="console-button-clear">Clear</button>
+                </div>
+                <div id="console">
+                    <pre id="console-lines"></pre>
+                    <div id="console-run"></div>
+                </div>
+            </div>
+            <div id="toggle-grid" class="gutter"></div>
+            <div id="grid-container" tabindex="0" style="flex-grow: 0;">
+                <div class="menu">
+                    <span>Grid</span>
+                    <button id="grid-button-clear">Clear</button>
+                    <span id="mouse-info" style="float:right;">Mouse not on grid</span>
+                </div>
+                <canvas id="grid" height="256" width="256"></canvas>
+                <div>
+                    <span>Override input<input id="toggle-override-input" autocomplete="off" type="checkbox"></input></span>
+                    <div id="override-input">
+                        <span>Mouse position</span>
+                        <br>
+                        <span>x</span><input id="override-mouse-position-x" autocomplete="off" type="number" min="0" max="15" value="0"></input>
+                        <br>
+                        <span>y</span><input id="override-mouse-position-y" autocomplete="off" type="number" min="0" max="15" value="0"></input>
+                        <br>
+                        <span>Mouse on grid<input id="checkbox-override-mouse-on-grid" autocomplete="off" type="checkbox" value="0"></input></span> 
+                        <br>
+                        <span>Mouse down<input id="checkbox-override-mouse-down" autocomplete="off" type="checkbox" value="0"></input></span> 
+                        <br>
+                        <span>Keys down<button id="button-add-override-key-down">Add</button></span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="right">
+        <div id="trace">
+            <table id="table">
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
