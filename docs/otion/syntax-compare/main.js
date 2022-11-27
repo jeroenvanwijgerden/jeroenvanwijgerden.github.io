@@ -24526,11 +24526,11 @@
         var n = _a[0];
         var option = document.createElement("option");
         option.textContent = n;
-        option.onclick = function () {
-            loadSnippets(i);
-        };
         selector.appendChild(option);
     });
+    selector.onchange = function () {
+        loadSnippets(selector.selectedIndex);
+    };
     function loadSnippets(i) {
         var _a = snippets[i]; _a[0]; var o1 = _a[1], o2 = _a[2], o3 = _a[3];
         for (var _i = 0, _b = [[o1, editor1], [o2, editor2], [o3, editor3]]; _i < _b.length; _i++) {
