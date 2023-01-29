@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+      background-color: #0f0f0f;
+    }
+
+    #main {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+
+      display: grid;
+      grid-gap: 12px;
+      grid-auto-columns: min-content;
+
+      width: fit-content;
+      height: fit-content;
+    }
+
+    canvas:focus {
+      outline: none;
+    }
+
+    canvas {
+
+      border: 1px solid #888;
+      background-color: #181818;
+    }
+
+    #xz {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+
+    #iso-front {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    #iso-back {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    #xy {
+      grid-column: 3;
+      grid-row: 1 /span 2;
+    }
+
+    #zy {
+      grid-column: 4;
+      grid-row: 1 /span 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+
+    <canvas id="xz" tabIndex="0" width="468" height="468"></canvas>
+
+    <canvas id="iso-front" width="227" height="436"></canvas>
+    <canvas id="iso-back" width="227" height="436"></canvas>
+
+    <canvas id="xy" tabIndex="0" width="468" height="918"></canvas>
+    <canvas id="zy" tabIndex="0" width="468" height="918"></canvas>
+  </div>
+  <script src="three.min.js"></script>
+  <script>
+
+    // Bug: if two points have same coordinates, finding mirror becomes undeterministic.
+
+    const threeCanvas = document.getElementById('iso-back')
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(20, threeCanvas.width / threeCanvas.height, 0.1, 1500);
+
+
+    const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas });
+    renderer.setSize(threeCanvas.width, threeCanvas.height);
+
+    let piece = null;
+    let pieceRotation = 0;
+
+    {
+      const light = new THREE.AmbientLight(0x808080);
+      scene.add(light);
+    }
+
+    {
+      const light = new THREE.PointLight(0xffffff, 3, 200);
+      light.position.set(-10, 120, 70);
+
+      scene.add(light);
+    }
+
+    
+
+    camera.position.x = 0;
+    camera.position.z = 1000;
+    camera.position.y = 220;
+
+    camera.zoom = 2.6
+    camera.updateProjectionMatrix()
+
+    camera.lookAt(new THREE.Vector3(0, 50, 0))
+
+
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      pieceRotation += 0.006;
+      if (piece) piece.rotation.y = pieceRotation;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+
+    // pixels per mm
+    const PIXELS_PER_MM = 9;
+
+    const vertices = []
+    // a triangle is an array with 3 elements,
+    // each an index of a vertex.
+    const triangles = []
+
+    function derefVertex(i) {
+      return i == null ? null : vertices[i]
+    }
+
+    function findVertex(f) {
+      const i = vertices.findIndex(f)
+      return i == -1 ? null : i
+    }
+
+    function rayCastVertex({ x, y, z }) {
+      return findVertex(v => v &&
+        (!x || x == v.x) &&
+        (!y || y == v.y) &&
+        (!z || z == v.z)
+      )
+    }
+
+    function getMirror(i) {
+      let v = derefVertex(i)
+
+      return findVertex(u =>
+        u &&
+        v.x == -u.x &&
+        v.y == u.y &&
+        v.z == u.z
+      )
+    }
+
+    function addVertex(v) {
+      const i = vertices.findIndex(v => v == null)
+
+      if (i == -1) {
+        vertices.push(v)
+        return vertices.length - 1
+      } else {
+        vertices[i] = v
+        return i
+      }
+    }
+
+    function removeVertex(i) {
+      if (i == vertices.length - 1) {
+        vertices.pop()
+      } else {
+        vertices[i] = null;
+      }
+    }
+
+    // returns [array, Map<old, new>]
+    function defragmentVertices() {
+      const m = new Map()
+
+      const defragmented = []
+
+      vertices.forEach((v, i) => {
+        if (v) {
+          defragmented.push(v)
+          m.set(i, defragmented.length - 1)
+        }
+      })
+
+      return [defragmented, m]
+    }
+
+    function serialize() {
+      let [d, m] = defragmentVertices()
+      return {
+        vertices : d,
+        triangles : triangles.map(t=>t.map(i=>m.get(i)))
+      }
+    }
+
+    let canvases = []
+
+    const drawAll = () => {
+      canvases.forEach(c => c.draw())
+
+      scene.remove(piece)
+
+      const [defragmented, m] = defragmentVertices()
+
+      const geom = new THREE.Geometry()
+
+      for (const { x, y, z } of defragmented) {
+        geom.vertices.push(new THREE.Vector3(x, y, z))
+      }
+
+      geom.faces = []
+
+      for (const t of triangles) {
+        const [i1, i2, i3] = t.map(i => m.get(i))
+
+        geom.faces.push(new THREE.Face3(i1, i2, i3));
+        geom.faces.push(new THREE.Face3(i3, i2, i1));
+      }
+      
+      geom.computeFaceNormals();
+
+      piece = new THREE.Mesh(geom, new THREE.MeshLambertMaterial({ color: 0x966f33 }));
+      
+      scene.add(piece);
+    }
+
+
+    const vertexDrawSize = 8
+
+    // idle, dragging, triangle
+    let state = 'idle'
+
+    let draggedVertex = null
+
+    const centerLine = 0
+
+    function isCenterLine(x) {
+      return x == centerLine
+    }
+
+    function isCenterLineVertex(v) {
+      return isCenterLine(v.x)
+    }
+
+    function mirror(x) {
+      return centerLine - (x - centerLine)
+    }
+
+    let triangleBuffer = []
+
+    function addTriangle(triangle) {
+      triangles.push(triangle)
+    }
+
+    function removeTriangles(...indices) {
+      const s = new Set(indices)
+
+      let i = 0;
+      while (i < triangles.length) {
+        const [i1, i2, i3] = triangles[i]
+        if (s.has(i1) || s.has(i2) || s.has(i3)) {
+          triangles.splice(i, 1)
+          continue;
+        }
+
+        i = i + 1;
+      }
+    }
+
+    const keysDown = {}
+
+    document.body.addEventListener('keydown', e => {
+      keysDown[e.code] = true
+
+      if (state == 'idle' && keysDown['KeyT']) {
+        state = 'triangle'
+      }
+    })
+
+    document.body.addEventListener('keyup', e => {
+      delete keysDown[e.code]
+
+      if (state == 'triangle' && !keysDown['KeyT']) {
+        state = 'idle'
+        triangleBuffer = []
+        drawAll()
+      }
+    })
+
+    class Canvas {
+
+      constructor(canvas) {
+        this.canvas = canvas
+        this.ctx = canvas.getContext('2d')
+
+        this.canvas.addEventListener('mousedown', e => this.mousedown(e))
+        this.canvas.addEventListener('mousemove', e => this.mousemove(e))
+
+        this.canvas.addEventListener('mouseup', _e => {
+          if (state == 'dragging') {
+            state = 'idle'
+          }
+        })
+      }
+
+      // abstract
+      canvasToWorld({ x, y }) {
+        throw 'abstract method'
+      }
+
+      // abstract
+      worldToCanvas({ x, y, z }) {
+        throw 'abstract method'
+      }
+
+      eventToWorld(e) {
+        return this.canvasToWorld({ x: e.offsetX - 1, y: e.offsetY - 2 })
+      }
+
+      mousedown(e) {
+        const p = this.eventToWorld(e)
+
+        let vertex = rayCastVertex(p);
+
+        if (state == 'idle') {
+          if (vertex != null) {
+            if (keysDown['KeyD']) {
+              const mirror = getMirror(vertex)
+
+              removeVertex(vertex)
+              removeVertex(mirror)
+
+              removeTriangles(vertex, mirror)
+            } else if (keysDown['KeyC']) {
+              const mirror = getMirror(vertex)
+              removeTriangles(vertex, mirror)
+            }
+            else {
+              state = 'dragging'
+              draggedVertex = vertex
+            }
+
+          }
+          // Create new vertex
+          else {
+            const v = {
+              x: p.x || 0,
+              y: p.y || 50,
+              z: p.z || 0
+            }
+
+            addVertex(v)
+
+            if (!isCenterLineVertex(v)) {
+              const mirrorV = {
+                x: mirror(v.x),
+                y: v.y,
+                z: v.z
+              }
+
+              addVertex(mirrorV)
+            }
+
+          }
+        } else if (state == 'triangle' && vertex != null) {
+          if (triangleBuffer.length == 2) {
+            triangleBuffer.push(vertex)
+            const triangle = triangleBuffer
+            addTriangle(triangle)
+
+            // // do not add mirror triangle in a single case:
+            // // a mirror pair and a center-line vertex
+
+            // function check(v1, v2, v3) {
+            //   return (isCenterLineVertex(v1) &&
+            //     mirrors.get(v2) == v3) ||
+            //     (v1.x * v2.x != -1)
+            // }
+
+            // const noMirrorTriangle =
+            //   check(triangleBuffer[0], triangleBuffer[1], triangleBuffer[2]) ||
+            //   check(triangleBuffer[1], triangleBuffer[2], triangleBuffer[0]) ||
+            //   check(triangleBuffer[2], triangleBuffer[0], triangleBuffer[1])
+
+            // if (!noMirrorTriangle) {
+            //   triangles.add(new Set(triangleBuffer.map(v =>
+            //     mirrors.get(v) || v
+            //   )))
+            // }
+
+            triangleBuffer = []
+
+          } else {
+            triangleBuffer.push(vertex)
+          }
+        }
+
+        drawAll()
+      }
+
+      mousemove(e) {
+        if (state != 'dragging') return
+
+        const p = this.eventToWorld(e)
+
+        const mirror = getMirror(draggedVertex)
+
+        const dV = derefVertex(draggedVertex)
+        const dMirror = derefVertex(mirror)
+
+        for (const k in p) {
+          if (k == 'x') {
+            const newXSameSideCenterLine = dV.x < centerLine == p.x < centerLine
+
+            if (!isCenterLineVertex(dV) && !isCenterLine(p.x) && newXSameSideCenterLine) {
+              dV.x = p.x;
+            }
+          } else {
+            dV[k] = p[k]
+          }
+
+          if (dMirror) {
+            dMirror[k] = dV[k] * (k == 'x' ? -1 : 1)
+          }
+        }
+
+        drawAll()
+      }
+
+      drawLine(v1, v2) {
+        let c1 = this.worldToCanvas(v1)
+        let c2 = this.worldToCanvas(v2)
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(c1.x, c1.y);
+        this.ctx.lineTo(c2.x, c2.y);
+        this.ctx.stroke();
+      }
+
+      renderGrid(horDim, horDimMin, horDimMax, vertDim, vertDimMin, vertDimMax) {
+        this.ctx.lineWidth = 1;
+        const normal = '#444'
+        const five = '#666'
+        const ten = '#999'
+
+        for (let x = horDimMin; x <= horDimMax; x++) {
+          if (x > horDimMin && x < horDimMax) {
+            if (x % 10 == 0) {
+              this.ctx.strokeStyle = ten
+            } else if (x % 5 == 0) {
+              this.ctx.strokeStyle = five
+            } else {
+              this.ctx.strokeStyle = normal
+            }
+          } else {
+            this.ctx.strokeStyle = normal
+          }
+
+          const v1 = {}
+          v1[horDim] = x
+          v1[vertDim] = vertDimMin
+
+          const v2 = {}
+          v2[horDim] = x
+          v2[vertDim] = vertDimMax
+
+          this.drawLine(v1, v2)
+        }
+
+        for (let y = vertDimMin; y <= vertDimMax; y++) {
+          if (y > vertDimMin && y < vertDimMax) {
+            if (y % 10 == 0) {
+              this.ctx.strokeStyle = ten
+            } else if (y % 5 == 0) {
+              this.ctx.strokeStyle = five
+            } else {
+              this.ctx.strokeStyle = normal
+            }
+          } else {
+            this.ctx.strokeStyle = normal
+          }
+
+          const v1 = {}
+          v1[horDim] = horDimMin
+          v1[vertDim] = y
+
+          const v2 = {}
+          v2[horDim] = horDimMax
+          v2[vertDim] = y
+
+          this.drawLine(v1, v2)
+        }
+      }
+
+      // abstract
+      renderGridAbstract() {
+        throw 'abstract method'
+      }
+
+      draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+        this.renderGridAbstract()
+
+        this.ctx.lineWidth = 2
+        this.ctx.strokeStyle = '#e0e0e0'
+        for (const t of triangles) {
+
+          const [v1, v2, v3] = t.map(derefVertex)
+
+          this.drawLine(v1, v2)
+          this.drawLine(v2, v3)
+          this.drawLine(v3, v1)
+        }
+
+        this.ctx.fillStyle = '#cd9900'
+        for (const v of vertices) {
+          if (v == null) continue;
+
+          const { x, y } = this.worldToCanvas(v)
+
+          this.ctx.fillRect(x - vertexDrawSize / 2, y - vertexDrawSize / 2, vertexDrawSize, vertexDrawSize)
+        }
+
+        this.ctx.fillStyle = 'red'
+        for (const v of triangleBuffer) {
+          const { x, y } = this.worldToCanvas(derefVertex(v))
+
+          this.ctx.fillRect(x - vertexDrawSize / 2, y - vertexDrawSize / 2, vertexDrawSize, vertexDrawSize)
+        }
+      }
+    }
+
+    class CanvasXY extends Canvas {
+      constructor(canvas) {
+        super(canvas)
+      }
+
+      // abstract
+      canvasToWorld({ x, y }) {
+        const dis = this
+        return {
+          x: Math.round((x - PIXELS_PER_MM) / PIXELS_PER_MM) - 25,
+          y: Math.round((dis.canvas.height - y - PIXELS_PER_MM) / PIXELS_PER_MM),
+        }
+      }
+
+      // abstract
+      worldToCanvas({ x, y, z }) {
+        return {
+          x: (x + 25 + 1) * PIXELS_PER_MM,
+          y: this.canvas.height - (y + 1) * PIXELS_PER_MM
+        }
+      }
+
+      // abstract
+      renderGridAbstract() {
+        this.renderGrid('x', -25, 25, 'y', 0, 100)
+
+        this.ctx.strokeStyle = '#ccc'
+        this.ctx.lineWidth = 1;
+        this.drawLine({ x: 0, y: 0 }, { x: 0, y: 100 })
+      }
+    }
+
+    class CanvasZY extends Canvas {
+      constructor(canvas) {
+        super(canvas)
+      }
+
+      canvasToWorld({ x, y }) {
+        return {
+          z: Math.round((x - PIXELS_PER_MM) / PIXELS_PER_MM) - 25,
+          y: Math.round((this.canvas.height - y - PIXELS_PER_MM) / PIXELS_PER_MM),
+        }
+      }
+
+      worldToCanvas({ x, y, z }) {
+        return {
+          x: (z + 25 + 1) * PIXELS_PER_MM,
+          y: this.canvas.height - (y + 1) * PIXELS_PER_MM
+        }
+      }
+
+      renderGridAbstract() {
+        this.renderGrid('z', -25, 25, 'y', 0, 100)
+
+        this.ctx.strokeStyle = '#ccc'
+        this.ctx.lineWidth = 1;
+        this.drawLine({ z: 0, y: 0 }, { z: 0, y: 100 })
+      }
+    }
+
+    class CanvasXZ extends Canvas {
+      constructor(canvas) {
+        super(canvas)
+      }
+
+      // abstract
+      canvasToWorld({ x, y }) {
+        return {
+          x: Math.round((x - PIXELS_PER_MM) / PIXELS_PER_MM) - 25,
+          z: Math.round((this.canvas.height - y - PIXELS_PER_MM) / PIXELS_PER_MM) - 25,
+        }
+      }
+
+      // abstract
+      worldToCanvas({ x, y, z }) {
+        return {
+          x: (x + 25 + 1) * PIXELS_PER_MM,
+          y: this.canvas.height - (z + 25 + 1) * PIXELS_PER_MM
+        }
+      }
+
+      // abstract
+      renderGridAbstract() {
+        this.renderGrid('x', -25, 25, 'z', -25, 25)
+
+        this.ctx.strokeStyle = '#ccc'
+        this.ctx.lineWidth = 1;
+        this.drawLine({ x: 0, z: -25 }, { x: 0, z: 25 })
+        this.drawLine({ x: -25, z: 0 }, { x: 25, z: 0 })
+      }
+    }
+
+    canvases = [
+      new CanvasXY(document.getElementById("xy")),
+      new CanvasZY(document.getElementById("zy")),
+      new CanvasXZ(document.getElementById("xz"))
+    ]
+
+    drawAll()
+
+  </script>
+</body>
+
+</html>
