@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Viewport</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <span id="measurements"></span>
+</body>
+<script>
+  function update() {
+    document.getElementById('measurements').innerHTML = window.innerWidth + ' x ' + window.innerHeight;
+  }
+
+  addEventListener('resize', update);
+
+  update()
+</script>
+
+</html>
