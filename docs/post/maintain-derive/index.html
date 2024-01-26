@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Maintain vs. Derive">
 <meta itemprop="description" content="Different approach, simpler program."><meta itemprop="datePublished" content="2022-02-18T13:15:02+01:00" />
 <meta itemprop="dateModified" content="2022-02-18T13:15:02+01:00" />
-<meta itemprop="wordCount" content="3336">
+<meta itemprop="wordCount" content="3380">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Maintain vs. Derive"/>
 <meta name="twitter:description" content="Different approach, simpler program."/>
@@ -130,7 +130,7 @@
       <div class="post-meta">
         <span class="post-time"> 2022 Feb 18 </span>
         
-          <span class="more-meta"> 3336 words </span>
+          <span class="more-meta"> 3380 words </span>
           <span class="more-meta"> 16 mins read </span>
         
       </div>
@@ -904,6 +904,8 @@ Guess a letter:
 <p>Despite being slower, in most cases it is still fast enough. Worry about performance only when it actually becomes a problem. Non-specialists and beginners are unlikely to work on problems that necessitate performance optimizations.</p>
 <p>Even specialists who are particularly interested in performance often find a decrease in complexity to be worth some loss of performance. Pragmatic game programmer Jonathan Blow <a href="https://youtu.be/8dinUbg2h70?t=369">had the following to say</a>:</p>
 <p><strong><em>&ldquo;We make massively complicated systems to get that performance boost and it breaks all the time. My focus was on robust. What is the most robust thing? It&rsquo;s not any of these things concocted with the mindset of being tricky. Tricky means complicated, usually.&quot;</em></strong></p>
+<p>Way back in 1972 the legendary Edsger Dijkstra <a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html">stated</a>:</p>
+<p><strong><em>The competent programmer is fully aware of the strictly limited size of his own skull; therefore he approaches the programming task in full humility, and among other things he avoids clever tricks like the plague.</em></strong></p>
 <p>In the example we&rsquo;ve seen the derivation approach was implemented with plain functions. Using functions this way makes deriving especially slow because the derivative is calculated each time the function is called.</p>
 <p>Luckily there are techniques to do derivation that ensure a derivative is calculated only once. Two examples are <a href="https://clojuredocs.org/clojure.core/memoize">memoization</a> and <a href="https://mobx.js.org/getting-started">capturing dependencies</a>.</p>
 <p>That being said, as long as they&rsquo;re still fast enough, plain functions are preferable because they are familiar and easy to use.</p>
@@ -1060,11 +1062,7 @@ Guess a letter:
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/5-november/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Een verhaal rondom 5 november</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
+        
         <a class="next" href="/post/recursion-1/">
             <span class="next-text nav-default">Tail recursion for branching problems</span>
             <span class="next-text nav-mobile">Next</span>
@@ -1105,7 +1103,7 @@ Guess a letter:
   <span class="copyright-year">
     &copy; 
     2021 - 
-    2023<span> - </span>
+    2024<span> - </span>
     <span>Jeroen van Wijgerden</span>
   </span>
 </div>
